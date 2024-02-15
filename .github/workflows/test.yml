@@ -1,0 +1,29 @@
+name: Ruby Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Execute Tests
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+
+    - name: Build & test
+      run: |
+        gem install bundler:2.3.6
+        bundle config set --local path 'vendor/bundle'
+        bundle install
+        API_USERNAME='${{ secrets.API_USERNAME }}' API_PASSWORD='${{ secrets.API_PASSWORD }}' bundle exec rspec

@@ -1,0 +1,38 @@
+name: Ruby Gem
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    name: Build + Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    
+    - name: Run Integration Tests
+      run: |
+        gem install bundler:2.3.6
+        bundle config set --local path 'vendor/bundle'
+        bundle install
+        USERNAME='${{ secrets.API_USERNAME }}' PASSWORD='${{ secrets.API_PASSWORD }}' bundle exec rspec
+    
+    - name: Publish to RubyGems
+      run: |
+        mkdir -p $HOME/.gem
+        touch $HOME/.gem/credentials
+        chmod 0600 $HOME/.gem/credentials
+        printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+        gem build avalara_sdk.gemspec
+        gem push *.gem
+      env:
+        GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
