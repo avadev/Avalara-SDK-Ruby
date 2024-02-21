@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    avalara_sdk (2.4.26)
+    avalara_sdk (0.0.1)
       faraday (~> 1.0, >= 1.0.1)
 
 GEM
@@ -15,7 +15,7 @@ GEM
     debase-ruby_core_source (0.10.16)
     diff-lcs (1.5.0)
     dotenv (2.7.6)
-    faraday (1.10.0)
+    faraday (1.10.3)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -40,7 +40,7 @@ GEM
     faraday-retry (1.0.3)
     jaro_winkler (1.5.4)
     method_source (1.0.0)
-    multipart-post (2.2.3)
+    multipart-post (2.4.0)
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
@@ -84,6 +84,8 @@ GEM
 
 PLATFORMS
   x64-mingw32
+  x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   avalara_sdk!
