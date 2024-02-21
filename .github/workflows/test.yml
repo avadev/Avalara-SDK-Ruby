@@ -21,9 +21,20 @@ jobs:
         with:
           ruby-version: 2.6.x
 
+      - name: Retrieve bearer token
+        id: get_bearer_token
+        run: |
+          response=$(curl -X POST ${{secrets.OKTA_ACCESS_TOKEN_URL}}/connect/token \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            -d "grant_type=client_credentials&client_id=${{secrets.OKTA_CLIENT_ID}}&client_secret=${{secrets.OKTA_CLIENT_SECRET}}")
+          token=$(echo $response | jq -r '.access_token')
+          echo "BEARER_TOKEN=${token}" >> $GITHUB_ENV
+
       - name: Build & test
         run: |
           gem install bundler:2.3.6
           bundle config set --local path 'vendor/bundle'
           bundle install
-          API_USERNAME='${{ secrets.API_USERNAME }}' API_PASSWORD='${{ secrets.API_PASSWORD }}' bundle exec rspec
+          bundle exec rspec
+        env:
+          BEARER_TOKEN: ${{ env.BEARER_TOKEN }}
