@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Set up Ruby 2.6
+      - name: Set up Ruby Versions
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
