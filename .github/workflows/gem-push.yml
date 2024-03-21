@@ -13,26 +13,53 @@ jobs:
       packages: write
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby 2.6
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.6.x
-    
-    - name: Run Integration Tests
-      run: |
-        gem install bundler:2.3.6
-        bundle config set --local path 'vendor/bundle'
-        bundle install
-        USERNAME='${{ secrets.API_USERNAME }}' PASSWORD='${{ secrets.API_PASSWORD }}' bundle exec rspec
-    
-    - name: Publish to RubyGems
-      run: |
-        mkdir -p $HOME/.gem
-        touch $HOME/.gem/credentials
-        chmod 0600 $HOME/.gem/credentials
-        printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem build avalara_sdk.gemspec
-        gem push *.gem
-      env:
-        GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
+      - uses: actions/checkout@v2
+      - name: Set env
+        run: |
+          echo "VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Print Version
+        run: |
+          echo $VERSION
+          echo ${{ env.VERSION }}
+      - name: Set up Ruby 2.6
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+
+      - name: Retrieve bearer token
+        id: get_bearer_token
+        run: |
+          response=$(curl -X POST ${{secrets.OKTA_ACCESS_TOKEN_URL}}/connect/token \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            -d "grant_type=client_credentials&client_id=${{secrets.OKTA_CLIENT_ID}}&client_secret=${{secrets.OKTA_CLIENT_SECRET}}")
+          token=$(echo $response | jq -r '.access_token')
+          echo "BEARER_TOKEN=${token}" >> $GITHUB_ENV
+
+      - name: Run Integration Tests
+        run: |
+          gem install bundler:2.3.6
+          bundle config set --local path 'vendor/bundle'
+          bundle install
+          bundle exec rspec
+
+      - name: Update Ruby SDK version
+        run: |
+          sed -i "s/VERSION = '[0-9]*\.[0-9]*\.[0-9]*'/VERSION = '${{ env.VERSION }}'/g" ./lib/avalara_sdk/version.rb
+
+      - name: Update resources
+        uses: test-room-7/action-update-file@v1
+        with:
+          file-path: ./lib/avalara_sdk/version.rb
+          commit-msg: Commit Nuget Package
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to RubyGems
+        run: |
+          mkdir -p $HOME/.gem
+          touch $HOME/.gem/credentials
+          chmod 0600 $HOME/.gem/credentials
+          printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
+          gem build avalara_sdk.gemspec
+          gem push *.gem
+        env:
+          GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_AUTH_TOKEN}}"
