@@ -15,7 +15,7 @@ module AvalaraSdk::EInvoicing
     module AvalaraSdk::EInvoicing::V1
       # Format and version used when inputting the data
   class InputDataFormats
-    # Invoice format
+    # Document format
     attr_accessor :format
 
     attr_accessor :versions

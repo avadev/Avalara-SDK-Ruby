@@ -27,7 +27,7 @@ module AvalaraSdk::EInvoicing
     attr_accessor :path
 
     # Namespace of this field
-    attr_accessor :name_space
+    attr_accessor :namespace
 
     # Field name
     attr_accessor :field_name
@@ -62,7 +62,7 @@ module AvalaraSdk::EInvoicing
         :'field_id' => :'fieldId',
         :'applicable_document_roots' => :'applicableDocumentRoots',
         :'path' => :'path',
-        :'name_space' => :'nameSpace',
+        :'namespace' => :'namespace',
         :'field_name' => :'fieldName',
         :'example_or_fixed_value' => :'exampleOrFixedValue',
         :'accepted_values' => :'acceptedValues',
@@ -88,7 +88,7 @@ module AvalaraSdk::EInvoicing
         :'field_id' => :'String',
         :'applicable_document_roots' => :'Array<Object>',
         :'path' => :'String',
-        :'name_space' => :'String',
+        :'namespace' => :'String',
         :'field_name' => :'String',
         :'example_or_fixed_value' => :'String',
         :'accepted_values' => :'Object',
@@ -141,8 +141,8 @@ module AvalaraSdk::EInvoicing
         self.path = attributes[:'path']
       end
 
-      if attributes.key?(:'name_space')
-        self.name_space = attributes[:'name_space']
+      if attributes.key?(:'namespace')
+        self.namespace = attributes[:'namespace']
       end
 
       if attributes.key?(:'field_name')
@@ -212,7 +212,7 @@ module AvalaraSdk::EInvoicing
           field_id == o.field_id &&
           applicable_document_roots == o.applicable_document_roots &&
           path == o.path &&
-          name_space == o.name_space &&
+          namespace == o.namespace &&
           field_name == o.field_name &&
           example_or_fixed_value == o.example_or_fixed_value &&
           accepted_values == o.accepted_values &&
@@ -234,7 +234,7 @@ module AvalaraSdk::EInvoicing
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, field_id, applicable_document_roots, path, name_space, field_name, example_or_fixed_value, accepted_values, documentation_link, description, is_segment, required_for, conditional_for, not_used_for, optional_for].hash
+      [id, field_id, applicable_document_roots, path, namespace, field_name, example_or_fixed_value, accepted_values, documentation_link, description, is_segment, required_for, conditional_for, not_used_for, optional_for].hash
     end
 
     # Builds the object from hash

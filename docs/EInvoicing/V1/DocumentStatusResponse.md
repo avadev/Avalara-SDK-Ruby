@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | The unique ID for this document | [optional] |
-| **status** | **String** | Status of the transaction: &lt;br&gt; &#39;Pending&#39; &lt;br&gt; &#39;Failed&#39; &lt;br&gt; &#39;Complete&#39; | [optional] |
+| **status** | **String** | Status of the document | [optional] |
 | **events** | [**Array&lt;StatusEvent&gt;**](StatusEvent.md) |  | [optional] |
 
 ## Example
@@ -14,7 +14,7 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::DocumentStatusResponse.new(
-  id: 2022-01-008572,
+  id: 52f60401-44d0-4667-ad47-4afe519abb53,
   status: Complete,
   events: null
 )
