@@ -320,7 +320,7 @@ module AvalaraSdk::EInvoicing
 
       # Fetch the inbound document from a tax authority
       # This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param fetch_documents_request [FetchDocumentsRequest]       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param document_fetch_request [DocumentFetchRequest]       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
       # @return [DocumentFetch]
       def fetch_documents(request_parameters)
         data, _status_code, _headers = fetch_documents_with_http_info(request_parameters)
@@ -331,7 +331,7 @@ module AvalaraSdk::EInvoicing
       # This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
           
       # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param fetch_documents_request [FetchDocumentsRequest]     
+      # @param document_fetch_request [DocumentFetchRequest]     
       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
       # @return [Array<(DocumentFetch, Integer, Hash)>] DocumentFetch data, response status code and response headers
       def fetch_documents_with_http_info(request_parameters)
@@ -339,15 +339,15 @@ module AvalaraSdk::EInvoicing
         required_scopes = ''
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
-        fetch_documents_request = request_parameters.get_fetch_documents_request()
+        document_fetch_request = request_parameters.get_document_fetch_request()
         x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling DocumentsApi.fetch_documents"
         end
-        # verify the required parameter 'fetch_documents_request' is set
-        if @api_client.config.client_side_validation && fetch_documents_request.nil?
-          fail ArgumentError, "Missing the required parameter 'fetch_documents_request' when calling DocumentsApi.fetch_documents"
+        # verify the required parameter 'document_fetch_request' is set
+        if @api_client.config.client_side_validation && document_fetch_request.nil?
+          fail ArgumentError, "Missing the required parameter 'document_fetch_request' when calling DocumentsApi.fetch_documents"
         end
         # resource path
         local_var_path = '/einvoicing/documents/$fetch'
@@ -376,7 +376,7 @@ module AvalaraSdk::EInvoicing
         form_params = {}
 
         # http body (model)
-        post_body =  @api_client.object_to_http_body(fetch_documents_request) || {}
+        post_body =  @api_client.object_to_http_body(document_fetch_request) || {}
 
         # return_type
         return_type = 'DocumentFetch'
@@ -756,13 +756,13 @@ module AvalaraSdk::EInvoicing
     # Represents the Request object for the FetchDocuments API
     #
     # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  FetchDocumentsRequest $fetch_documents_request fetch_documents_request (required)
+    # @param  DocumentFetchRequest $document_fetch_request document_fetch_request (required)
     # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
     #
     class FetchDocumentsRequest
         attr_accessor :avalara_version
 
-        attr_accessor :fetch_documents_request
+        attr_accessor :document_fetch_request
 
         attr_accessor :x_avalara_client
 
@@ -777,12 +777,12 @@ module AvalaraSdk::EInvoicing
             @avalara_version = avalara_version
         end
 
-        def get_fetch_documents_request()
-            return @fetch_documents_request
+        def get_document_fetch_request()
+            return @document_fetch_request
         end
 
-        def set_fetch_documents_request(fetch_documents_request)
-            @fetch_documents_request = fetch_documents_request
+        def set_document_fetch_request(document_fetch_request)
+            @document_fetch_request = document_fetch_request
         end
 
         def get_x_avalara_client()
