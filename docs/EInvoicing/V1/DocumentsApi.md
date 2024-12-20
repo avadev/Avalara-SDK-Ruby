@@ -379,7 +379,7 @@ api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
 avalara_version = '1.2' # String | The HTTP Header meant to specify the version of the API intended to be used
 metadata = AvalaraSdk::EInvoicing::V1::SubmitDocumentMetadata.new({workflow_id: 'partner-einvoicing', data_format: 'ubl-invoice', data_format_version: '2.1', country_code: 'SA', country_mandate: 'SA-Phase1-B2B'}) # SubmitDocumentMetadata | 
-data = { ... } # Object | The document to be submitted, as indicated by the metadata fields 'dataFormat' and 'dataFormatVersion'
+data = 'data_example' # String | The document to be submitted, as indicated by the metadata fields 'dataFormat' and 'dataFormatVersion'
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client' # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
 }
@@ -417,7 +417,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used |  |
 | **metadata** | [**SubmitDocumentMetadata**](SubmitDocumentMetadata.md) |  |  |
-| **data** | [**Object**](Object.md) | The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39; |  |
+| **data** | **String** | The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39; |  |
 | **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] |
 
 ### Return type

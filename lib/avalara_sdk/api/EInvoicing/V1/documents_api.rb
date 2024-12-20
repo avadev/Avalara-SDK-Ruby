@@ -605,7 +605,7 @@ module AvalaraSdk::EInvoicing
 
       # Submits a document to Avalara E-Invoicing API
       # When a UBL document is sent to this endpoint, it generates a document in the required format as mandated by the specified country. Additionally, it initiates the workflow to transmit the generated document to the relevant tax authority, if necessary.<br><br>The response from the endpoint contains a unique document ID, which can be used to request the status of the document and verify if it was successfully accepted at the destination.<br><br>Furthermore, the unique ID enables the download of a copy of the generated document for reference purposes.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param metadata [SubmitDocumentMetadata]       # @param data [Object] The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39;      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param metadata [SubmitDocumentMetadata]       # @param data [String] The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39;      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
       # @return [DocumentSubmitResponse]
       def submit_document(request_parameters)
         data, _status_code, _headers = submit_document_with_http_info(request_parameters)
@@ -617,7 +617,7 @@ module AvalaraSdk::EInvoicing
           
       # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
       # @param metadata [SubmitDocumentMetadata]     
-      # @param data [Object] The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39;    
+      # @param data [String] The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39;    
       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
       # @return [Array<(DocumentSubmitResponse, Integer, Hash)>] DocumentSubmitResponse data, response status code and response headers
       def submit_document_with_http_info(request_parameters)
@@ -954,7 +954,7 @@ module AvalaraSdk::EInvoicing
     #
     # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
     # @param  SubmitDocumentMetadata $metadata metadata (required)
-    # @param  Object $data The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39; (required)
+    # @param  String $data The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39; (required)
     # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
     #
     class SubmitDocumentRequest
