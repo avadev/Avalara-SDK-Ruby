@@ -3,7 +3,7 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
+SDK Version : 24.12.0
 
 
 =end
@@ -14,10 +14,10 @@ require 'time'
 module AvalaraSdk::EInvoicing
     module AvalaraSdk::EInvoicing::V1
       class Mandate
-    # Mandate UUID
+    # The `mandateId` is comprised of the country code, mandate type, and the network or regulation type (for example, AU-B2G-PEPPOL). Keep in mind the following when specifying a `mandateId`. - A country can have multiple mandate types (B2C, B2B, B2G). - A entity/company can opt in for multiple mandates. - A `mandateId` is the combination of country + mandate type + network/regulation.
     attr_accessor :mandate_id
 
-    # Country mandate name
+    # **[LEGACY]** This field is retained for backward compatibility. It is recommended to use `mandateId` instead. The `countryMandate` similar to the `mandateId` is comprised of the country code, mandate type, and the network or regulation type (for example, AU-B2G-PEPPOL). 
     attr_accessor :country_mandate
 
     # Country code

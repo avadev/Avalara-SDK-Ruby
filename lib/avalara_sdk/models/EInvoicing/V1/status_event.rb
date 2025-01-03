@@ -3,7 +3,7 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
+SDK Version : 24.12.0
 
 
 =end
@@ -21,11 +21,19 @@ module AvalaraSdk::EInvoicing
     # A message describing the status event
     attr_accessor :message
 
+    #  The type of number or acknowledgement returned by the tax authority (if applicable). For example, it could be an identification key, acknowledgement code, or any other relevant identifier.
+    attr_accessor :response_key
+
+    # The corresponding value associated with the response key. This value is provided by the tax authority in response to the event.
+    attr_accessor :response_value
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'event_date_time' => :'eventDateTime',
-        :'message' => :'message'
+        :'message' => :'message',
+        :'response_key' => :'responseKey',
+        :'response_value' => :'responseValue'
       }
     end
 
@@ -38,13 +46,17 @@ module AvalaraSdk::EInvoicing
     def self.openapi_types
       {
         :'event_date_time' => :'String',
-        :'message' => :'String'
+        :'message' => :'String',
+        :'response_key' => :'String',
+        :'response_value' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'response_key',
+        :'response_value'
       ])
     end
 
@@ -70,6 +82,14 @@ module AvalaraSdk::EInvoicing
       if attributes.key?(:'message')
         self.message = attributes[:'message']
       end
+
+      if attributes.key?(:'response_key')
+        self.response_key = attributes[:'response_key']
+      end
+
+      if attributes.key?(:'response_value')
+        self.response_value = attributes[:'response_value']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -93,7 +113,9 @@ module AvalaraSdk::EInvoicing
       return true if self.equal?(o)
       self.class == o.class &&
           event_date_time == o.event_date_time &&
-          message == o.message
+          message == o.message &&
+          response_key == o.response_key &&
+          response_value == o.response_value
     end
 
     # @see the `==` method
@@ -105,7 +127,7 @@ module AvalaraSdk::EInvoicing
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [event_date_time, message].hash
+      [event_date_time, message, response_key, response_value].hash
     end
 
     # Builds the object from hash

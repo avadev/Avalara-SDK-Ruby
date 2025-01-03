@@ -3,7 +3,7 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
+SDK Version : 24.12.0
 
 
 =end
@@ -21,7 +21,7 @@ module AvalaraSdk::EInvoicing
     # The date and time when the document was processed, displayed in the format YYYY-MM-DDThh:mm:ss
     attr_accessor :process_date_time
 
-    # The transaction status: <br> 'Pending' <br> 'Failed' <br> 'Complete'
+    # The Document status
     attr_accessor :status
 
     # The name of the supplier in the transaction
@@ -30,25 +30,31 @@ module AvalaraSdk::EInvoicing
     # The name of the customer in the transaction
     attr_accessor :customer_name
 
-    # The invoice document number
+    # The document type
+    attr_accessor :document_type
+
+    # The document version
+    attr_accessor :document_version
+
+    # The document number
     attr_accessor :document_number
 
-    # The invoice issue date
+    # The document issue date
     attr_accessor :document_date
 
-    # The invoice direction, where issued = `out` and received = `in`
+    # The document direction, where issued = `out` and received = `in`
     attr_accessor :flow
 
-    # The two-letter ISO-3166 country code for the country where the e-invoice is being submitted
+    # The two-letter ISO-3166 country code for the country where the document is being submitted
     attr_accessor :country_code
 
     # The e-invoicing mandate for the specified country
     attr_accessor :country_mandate
 
-    # The interface where the invoice data is sent
+    # The interface where the document is sent
     attr_accessor :interface
 
-    # The invoice recipient based on the interface
+    # The document recipient based on the interface
     attr_accessor :receiver
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -59,6 +65,8 @@ module AvalaraSdk::EInvoicing
         :'status' => :'status',
         :'supplier_name' => :'supplierName',
         :'customer_name' => :'customerName',
+        :'document_type' => :'documentType',
+        :'document_version' => :'documentVersion',
         :'document_number' => :'documentNumber',
         :'document_date' => :'documentDate',
         :'flow' => :'flow',
@@ -82,6 +90,8 @@ module AvalaraSdk::EInvoicing
         :'status' => :'String',
         :'supplier_name' => :'String',
         :'customer_name' => :'String',
+        :'document_type' => :'String',
+        :'document_version' => :'String',
         :'document_number' => :'String',
         :'document_date' => :'String',
         :'flow' => :'String',
@@ -131,6 +141,14 @@ module AvalaraSdk::EInvoicing
 
       if attributes.key?(:'customer_name')
         self.customer_name = attributes[:'customer_name']
+      end
+
+      if attributes.key?(:'document_type')
+        self.document_type = attributes[:'document_type']
+      end
+
+      if attributes.key?(:'document_version')
+        self.document_version = attributes[:'document_version']
       end
 
       if attributes.key?(:'document_number')
@@ -187,6 +205,8 @@ module AvalaraSdk::EInvoicing
           status == o.status &&
           supplier_name == o.supplier_name &&
           customer_name == o.customer_name &&
+          document_type == o.document_type &&
+          document_version == o.document_version &&
           document_number == o.document_number &&
           document_date == o.document_date &&
           flow == o.flow &&
@@ -205,7 +225,7 @@ module AvalaraSdk::EInvoicing
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, process_date_time, status, supplier_name, customer_name, document_number, document_date, flow, country_code, country_mandate, interface, receiver].hash
+      [id, process_date_time, status, supplier_name, customer_name, document_type, document_version, document_number, document_date, flow, country_code, country_mandate, interface, receiver].hash
     end
 
     # Builds the object from hash

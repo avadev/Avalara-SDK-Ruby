@@ -14,7 +14,7 @@ require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::BadRequest.new(
   error: 400,
-  message: Invalid data format YYYY-MM-DDThh:mm:ss expected
+  message: string
 )
 ```
 

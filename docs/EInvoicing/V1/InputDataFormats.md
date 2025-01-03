@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **format** | **String** | Invoice format | [optional] |
+| **format** | **String** | Document format | [optional] |
 | **versions** | **Array&lt;String&gt;** |  | [optional] |
 
 ## Example

@@ -12,7 +12,7 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::DocumentSubmitResponse.new(
-  id: 2022-01-008572
+  id: 52f60401-44d0-4667-ad47-4afe519abb53
 )
 ```
 

@@ -3,7 +3,7 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
+SDK Version : 24.12.0
 
 
 =end
@@ -18,7 +18,7 @@ module AvalaraSdk::EInvoicing
     # The unique ID for this document
     attr_accessor :id
 
-    # Status of the transaction: <br> 'Pending' <br> 'Failed' <br> 'Complete'
+    # Status of the document
     attr_accessor :status
 
     attr_accessor :events

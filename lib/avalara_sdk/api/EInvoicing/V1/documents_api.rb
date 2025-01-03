@@ -3,7 +3,7 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
+SDK Version : 24.12.0
 
 
 =end
@@ -19,7 +19,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("")
+        api_client.set_sdk_version("24.12.0")
         @api_client = api_client
       end
 
@@ -228,8 +228,8 @@ module AvalaraSdk::EInvoicing
       end
     
       # Returns a copy of the document
-      # When the document is available, use this endpoint to download it as text, XML, or PDF. The output format needs to be specified in the Accept header and it will vary depending on the mandate. If the file has not yet been created, then status code 404 (not found) is returned.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param accept [String] This header indicates the MIME type of the document      # @param document_id [String] The unique ID for this document that was returned in the POST /einvoicing/document response body      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;
+      # When the document is available, use this endpoint to download it as text, XML, or PDF. The output format needs to be specified in the Accept header, and it will vary depending on the mandate. If the file has not yet been created, then status code 404 (not found) is returned.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param accept [String] This header indicates the MIME type of the document      # @param document_id [String] The unique ID for this document that was returned in the POST /einvoicing/document response body      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
       # @return [File]
       def download_document(request_parameters)
         data, _status_code, _headers = download_document_with_http_info(request_parameters)
@@ -237,12 +237,12 @@ module AvalaraSdk::EInvoicing
       end
 
       # Returns a copy of the document
-      # When the document is available, use this endpoint to download it as text, XML, or PDF. The output format needs to be specified in the Accept header and it will vary depending on the mandate. If the file has not yet been created, then status code 404 (not found) is returned.
+      # When the document is available, use this endpoint to download it as text, XML, or PDF. The output format needs to be specified in the Accept header, and it will vary depending on the mandate. If the file has not yet been created, then status code 404 (not found) is returned.
           
       # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
       # @param accept [String] This header indicates the MIME type of the document    
       # @param document_id [String] The unique ID for this document that was returned in the POST /einvoicing/document response body    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
       # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
       def download_document_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -272,7 +272,7 @@ module AvalaraSdk::EInvoicing
 
         # header parameters
         header_params = {}
-        header_params[:'avalara-version'] = '1.0'
+        header_params[:'avalara-version'] = '1.2'
         # HTTP header 'Accept' (if needed)
         header_params['Accept'] = @api_client.select_header_accept(['application/pdf', 'application/xml', 'application/json'])
         if !avalara_version.nil?
@@ -318,9 +318,96 @@ module AvalaraSdk::EInvoicing
         return data, response.code, response.headers
       end
 
+      # Fetch the inbound document from a tax authority
+      # This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param document_fetch_request [DocumentFetchRequest]       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
+      # @return [DocumentFetch]
+      def fetch_documents(request_parameters)
+        data, _status_code, _headers = fetch_documents_with_http_info(request_parameters)
+        data
+      end
+
+      # Fetch the inbound document from a tax authority
+      # This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
+          
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
+      # @param document_fetch_request [DocumentFetchRequest]     
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
+      # @return [Array<(DocumentFetch, Integer, Hash)>] DocumentFetch data, response status code and response headers
+      def fetch_documents_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        avalara_version = request_parameters.get_avalara_version()
+        document_fetch_request = request_parameters.get_document_fetch_request()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling DocumentsApi.fetch_documents"
+        end
+        # verify the required parameter 'document_fetch_request' is set
+        if @api_client.config.client_side_validation && document_fetch_request.nil?
+          fail ArgumentError, "Missing the required parameter 'document_fetch_request' when calling DocumentsApi.fetch_documents"
+        end
+        # resource path
+        local_var_path = '/einvoicing/documents/$fetch'
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        header_params[:'avalara-version'] = '1.2'
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        # HTTP header 'Content-Type'
+        content_type = @api_client.select_header_content_type(['application/json'])
+        if !content_type.nil?
+            header_params['Content-Type'] = content_type
+        end
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body =  @api_client.object_to_http_body(document_fetch_request) || {}
+
+        # return_type
+        return_type = 'DocumentFetch'
+
+        # auth_names
+        auth_names = ['Bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"DocumentsApi.fetch_documents",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
       # Returns a summary of documents for a date range
       # Get a list of documents on the Avalara E-Invoicing platform that have a processing date within the specified date range.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;      # @param start_date [Time] Start date of documents to return. This defaults to the previous month.      # @param end_date [Time] End date of documents to return. This defaults to the current date.      # @param flow [String] Optionally filter by document direction, where issued &#x3D; &#x60;out&#x60; and received &#x3D; &#x60;in&#x60;      # @param count [String] When set to true, the count of the collection is also returned in the response body      # @param count_only [String] When set to true, only the count of the collection is returned      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed.      # @param top [Float] If nonzero, return no more than this number of results. Used with &lt;code&gt;$skip&lt;/code&gt; to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 200 records.      # @param skip [String] If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.      # @param start_date [Time] Start date of documents to return. This defaults to the previous month.      # @param end_date [Time] End date of documents to return. This defaults to the current date.      # @param flow [String] Optionally filter by document direction, where issued &#x3D; &#x60;out&#x60; and received &#x3D; &#x60;in&#x60;      # @param count [String] When set to true, the count of the collection is also returned in the response body      # @param count_only [String] When set to true, only the count of the collection is returned      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed.      # @param top [Float] If nonzero, return no more than this number of results. Used with &lt;code&gt;$skip&lt;/code&gt; to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 200 records.      # @param skip [String] If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets.
       # @return [DocumentListResponse]
       def get_document_list(request_parameters)
         data, _status_code, _headers = get_document_list_with_http_info(request_parameters)
@@ -331,7 +418,7 @@ module AvalaraSdk::EInvoicing
       # Get a list of documents on the Avalara E-Invoicing platform that have a processing date within the specified date range.
           
       # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
       # @param start_date [Time] Start date of documents to return. This defaults to the previous month.    
       # @param end_date [Time] End date of documents to return. This defaults to the current date.    
       # @param flow [String] Optionally filter by document direction, where issued &#x3D; &#x60;out&#x60; and received &#x3D; &#x60;in&#x60;    
@@ -391,7 +478,7 @@ module AvalaraSdk::EInvoicing
 
         # header parameters
         header_params = {}
-        header_params[:'avalara-version'] = '1.0'
+        header_params[:'avalara-version'] = '1.2'
         # HTTP header 'Accept' (if needed)
         header_params['Accept'] = @api_client.select_header_accept(['application/json'])
         if !avalara_version.nil?
@@ -436,7 +523,7 @@ module AvalaraSdk::EInvoicing
 
       # Checks the status of a document
       # Using the unique ID from POST /einvoicing/documents response body, request the current status of a document.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param document_id [String] The unique ID for this document that was returned in the POST /einvoicing/documents response body      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param document_id [String] The unique ID for this document that was returned in the POST /einvoicing/documents response body      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
       # @return [DocumentStatusResponse]
       def get_document_status(request_parameters)
         data, _status_code, _headers = get_document_status_with_http_info(request_parameters)
@@ -448,7 +535,7 @@ module AvalaraSdk::EInvoicing
           
       # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
       # @param document_id [String] The unique ID for this document that was returned in the POST /einvoicing/documents response body    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
       # @return [Array<(DocumentStatusResponse, Integer, Hash)>] DocumentStatusResponse data, response status code and response headers
       def get_document_status_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -466,14 +553,14 @@ module AvalaraSdk::EInvoicing
           fail ArgumentError, "Missing the required parameter 'document_id' when calling DocumentsApi.get_document_status"
         end
         # resource path
-        local_var_path = '/einvoicing/document/{documentId}/status'.sub('{' + 'documentId' + '}', CGI.escape(document_id.to_s))
+        local_var_path = '/einvoicing/documents/{documentId}/status'.sub('{' + 'documentId' + '}', CGI.escape(document_id.to_s))
 
         # query parameters
         query_params = {}
 
         # header parameters
         header_params = {}
-        header_params[:'avalara-version'] = '1.0'
+        header_params[:'avalara-version'] = '1.2'
         # HTTP header 'Accept' (if needed)
         header_params['Accept'] = @api_client.select_header_accept(['application/json'])
         if !avalara_version.nil?
@@ -517,8 +604,8 @@ module AvalaraSdk::EInvoicing
       end
 
       # Submits a document to Avalara E-Invoicing API
-      # For both e-invoices and credit notes, when a document is sent to this endpoint, it generates an invoice or credit note in the required format as mandated by the specified country. Additionally, it initiates the workflow to transmit the generated document to the relevant tax authority, if necessary.<br><br>The response from the endpoint contains a unique document ID, which can be used to request the status of the document and verify if it was successfully accepted at the destination.<br><br>Furthermore, the unique ID enables the download of a copy of the e-invoice or credit note for reference purposes.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param metadata [SubmitDocumentMetadata]       # @param data [SubmitDocumentData]       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;
+      # When a UBL document is sent to this endpoint, it generates a document in the required format as mandated by the specified country. Additionally, it initiates the workflow to transmit the generated document to the relevant tax authority, if necessary.<br><br>The response from the endpoint contains a unique document ID, which can be used to request the status of the document and verify if it was successfully accepted at the destination.<br><br>Furthermore, the unique ID enables the download of a copy of the generated document for reference purposes.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param metadata [SubmitDocumentMetadata]       # @param data [String] The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39;      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
       # @return [DocumentSubmitResponse]
       def submit_document(request_parameters)
         data, _status_code, _headers = submit_document_with_http_info(request_parameters)
@@ -526,12 +613,12 @@ module AvalaraSdk::EInvoicing
       end
 
       # Submits a document to Avalara E-Invoicing API
-      # For both e-invoices and credit notes, when a document is sent to this endpoint, it generates an invoice or credit note in the required format as mandated by the specified country. Additionally, it initiates the workflow to transmit the generated document to the relevant tax authority, if necessary.&lt;br&gt;&lt;br&gt;The response from the endpoint contains a unique document ID, which can be used to request the status of the document and verify if it was successfully accepted at the destination.&lt;br&gt;&lt;br&gt;Furthermore, the unique ID enables the download of a copy of the e-invoice or credit note for reference purposes.
+      # When a UBL document is sent to this endpoint, it generates a document in the required format as mandated by the specified country. Additionally, it initiates the workflow to transmit the generated document to the relevant tax authority, if necessary.&lt;br&gt;&lt;br&gt;The response from the endpoint contains a unique document ID, which can be used to request the status of the document and verify if it was successfully accepted at the destination.&lt;br&gt;&lt;br&gt;Furthermore, the unique ID enables the download of a copy of the generated document for reference purposes.
           
       # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
       # @param metadata [SubmitDocumentMetadata]     
-      # @param data [SubmitDocumentData]     
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
+      # @param data [String] The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39;    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
       # @return [Array<(DocumentSubmitResponse, Integer, Hash)>] DocumentSubmitResponse data, response status code and response headers
       def submit_document_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -561,7 +648,7 @@ module AvalaraSdk::EInvoicing
 
         # header parameters
         header_params = {}
-        header_params[:'avalara-version'] = '1.0'
+        header_params[:'avalara-version'] = '1.2'
         # HTTP header 'Accept' (if needed)
         header_params['Accept'] = @api_client.select_header_accept(['application/json', 'text/xml'])
         # HTTP header 'Content-Type'
@@ -620,7 +707,7 @@ module AvalaraSdk::EInvoicing
     # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
     # @param  String $accept This header indicates the MIME type of the document (required)
     # @param  String $document_id The unique ID for this document that was returned in the POST /einvoicing/document response body (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
     #
     class DownloadDocumentRequest
         attr_accessor :avalara_version
@@ -635,7 +722,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version
+            return @avalara_version || '1.2'
         end
 
         def set_avalara_version(avalara_version)
@@ -666,10 +753,50 @@ module AvalaraSdk::EInvoicing
             @x_avalara_client = x_avalara_client
         end
     end
+    # Represents the Request object for the FetchDocuments API
+    #
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
+    # @param  DocumentFetchRequest $document_fetch_request document_fetch_request (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
+    #
+    class FetchDocumentsRequest
+        attr_accessor :avalara_version
+
+        attr_accessor :document_fetch_request
+
+        attr_accessor :x_avalara_client
+
+        def initialize()
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '1.2'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_document_fetch_request()
+            return @document_fetch_request
+        end
+
+        def set_document_fetch_request(document_fetch_request)
+            @document_fetch_request = document_fetch_request
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+    end
     # Represents the Request object for the GetDocumentList API
     #
     # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
     # @param  Time $start_date Start date of documents to return. This defaults to the previous month. (optional)
     # @param  Time $end_date End date of documents to return. This defaults to the current date. (optional)
     # @param  String $flow Optionally filter by document direction, where issued &#x3D; &#x60;out&#x60; and received &#x3D; &#x60;in&#x60; (optional)
@@ -704,7 +831,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version
+            return @avalara_version || '1.2'
         end
 
         def set_avalara_version(avalara_version)
@@ -787,7 +914,7 @@ module AvalaraSdk::EInvoicing
     #
     # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
     # @param  String $document_id The unique ID for this document that was returned in the POST /einvoicing/documents response body (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
     #
     class GetDocumentStatusRequest
         attr_accessor :avalara_version
@@ -800,7 +927,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version
+            return @avalara_version || '1.2'
         end
 
         def set_avalara_version(avalara_version)
@@ -827,8 +954,8 @@ module AvalaraSdk::EInvoicing
     #
     # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
     # @param  SubmitDocumentMetadata $metadata metadata (required)
-    # @param  SubmitDocumentData $data data (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
+    # @param  String $data The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39; (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
     #
     class SubmitDocumentRequest
         attr_accessor :avalara_version
@@ -843,7 +970,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version
+            return @avalara_version || '1.2'
         end
 
         def set_avalara_version(avalara_version)

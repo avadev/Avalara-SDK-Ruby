@@ -3,7 +3,7 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
+SDK Version : 24.12.0
 
 
 =end
@@ -16,17 +16,17 @@ module AvalaraSdk::EInvoicing
       # Returns the requested list of documents
   class DocumentListResponse
     # Count of collections for the given date range
-    attr_accessor :record_set_count
+    attr_accessor :recordset_count
 
     attr_accessor :next_link
 
-    # Array of invoices matching query parameters
+    # Array of documents matching query parameters
     attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'record_set_count' => :'@recordSetCount',
+        :'recordset_count' => :'@recordsetCount',
         :'next_link' => :'@nextLink',
         :'value' => :'value'
       }
@@ -40,7 +40,7 @@ module AvalaraSdk::EInvoicing
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'record_set_count' => :'String',
+        :'recordset_count' => :'String',
         :'next_link' => :'String',
         :'value' => :'Array<DocumentSummary>'
       }
@@ -68,8 +68,8 @@ module AvalaraSdk::EInvoicing
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'record_set_count')
-        self.record_set_count = attributes[:'record_set_count']
+      if attributes.key?(:'recordset_count')
+        self.recordset_count = attributes[:'recordset_count']
       end
 
       if attributes.key?(:'next_link')
@@ -110,7 +110,7 @@ module AvalaraSdk::EInvoicing
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          record_set_count == o.record_set_count &&
+          recordset_count == o.recordset_count &&
           next_link == o.next_link &&
           value == o.value
     end
@@ -124,7 +124,7 @@ module AvalaraSdk::EInvoicing
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [record_set_count, next_link, value].hash
+      [recordset_count, next_link, value].hash
     end
 
     # Builds the object from hash

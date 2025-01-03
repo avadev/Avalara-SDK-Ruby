@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **mandate_id** | **String** | Mandate UUID | [optional] |
-| **country_mandate** | **String** | Country mandate name | [optional] |
+| **mandate_id** | **String** | The &#x60;mandateId&#x60; is comprised of the country code, mandate type, and the network or regulation type (for example, AU-B2G-PEPPOL). Keep in mind the following when specifying a &#x60;mandateId&#x60;. - A country can have multiple mandate types (B2C, B2B, B2G). - A entity/company can opt in for multiple mandates. - A &#x60;mandateId&#x60; is the combination of country + mandate type + network/regulation. | [optional] |
+| **country_mandate** | **String** | **[LEGACY]** This field is retained for backward compatibility. It is recommended to use &#x60;mandateId&#x60; instead. The &#x60;countryMandate&#x60; similar to the &#x60;mandateId&#x60; is comprised of the country code, mandate type, and the network or regulation type (for example, AU-B2G-PEPPOL).  | [optional] |
 | **country_code** | **String** | Country code | [optional] |
 | **description** | **String** | Mandate description | [optional] |
 | **supported_by_partner_api** | **Boolean** | Indicates whether this mandate supported by the partner API | [optional] |
@@ -19,12 +19,12 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::Mandate.new(
-  mandate_id: f1768981-7025-468b-9f87-8a8982cd6984,
-  country_mandate: PT-B2C-PDF,
-  country_code: PT,
-  description: The mandate supporting B2B clearance in Germany. This function will return a PDF invoice with the required QR-Codes, ATCUD (as of Jan 2023) and a legal Stamp. The invoice will not be sent to the buyer.,
+  mandate_id: AU-B2G-PEPPOL,
+  country_mandate: AU-B2G-PEPPOL,
+  country_code: AU,
+  description: The mandate supporting B2G eInvoicing in Australia. This function will create a Peppol BIS 3.0 file and sends the invoice to the related recipient via the Peppol network,
   supported_by_partner_api: true,
-  mandate_format: pdf,
+  mandate_format: xml,
   input_data_formats: null,
   workflow_ids: null
 )

@@ -17,7 +17,6 @@ describe 'DocumentsAPI' do
 
   describe 'test EInvoicing Documents endpoint' do
     get_doc_request = AvalaraSdk::EInvoicing::V1::GetDocumentListRequest.new
-    get_doc_request.set_avalara_version("1.0")
     it 'should be able to call list documents without exception' do
       result = nil
       begin

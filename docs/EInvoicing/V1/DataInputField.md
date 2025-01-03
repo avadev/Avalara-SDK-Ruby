@@ -8,7 +8,7 @@
 | **field_id** | **String** | Field ID | [optional] |
 | **applicable_document_roots** | **Array&lt;Object&gt;** |  | [optional] |
 | **path** | **String** | Path to this field | [optional] |
-| **name_space** | **String** | Namespace of this field | [optional] |
+| **namespace** | **String** | Namespace of this field | [optional] |
 | **field_name** | **String** | Field name | [optional] |
 | **example_or_fixed_value** | **String** | An example of the content for this field | [optional] |
 | **accepted_values** | **Object** | An object representing the acceptable values for this field | [optional] |
@@ -30,7 +30,7 @@ instance = AvalaraSdk::EInvoicing::V1::DataInputField.new(
   field_id: 1,
   applicable_document_roots: null,
   path: invoice/cbc:CustomizationID,
-  name_space: cbc:,
+  namespace: cbc:,
   field_name: cbc:CustomizationID,
   example_or_fixed_value: urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0,
   accepted_values: null,

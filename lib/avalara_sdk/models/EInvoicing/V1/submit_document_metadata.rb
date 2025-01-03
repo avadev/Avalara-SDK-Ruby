@@ -3,7 +3,7 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
+SDK Version : 24.12.0
 
 
 =end
@@ -13,7 +13,7 @@ require 'time'
 
 module AvalaraSdk::EInvoicing
     module AvalaraSdk::EInvoicing::V1
-      # Key value pairs of metadata for a document submission. dataFormat can be ubl-invoice or ubl-creditnote:  <br><pre>{  \"workflowId\": \"partner-einvoicing\", \"dataFormat\": \"ubl-invoice\", \"dataFormatVersion\": \"2.1\", \"countryCode\": \"SA\", \"countryMandate\": \"SA-Phase1-B2B\" }</pre> <br> 
+      # Key value pairs of metadata for a document submission <br><pre>{  \"workflowId\": \"partner-einvoicing\", \"dataFormat\": \"ubl-invoice\", \"dataFormatVersion\": \"2.1\", \"countryCode\": \"SA\", \"countryMandate\": \"SA-Phase1-B2B\" }</pre> <br> 
   class SubmitDocumentMetadata
     # Specifies a unique ID for this workflow.
     attr_accessor :workflow_id
@@ -24,7 +24,7 @@ module AvalaraSdk::EInvoicing
     # Specifies the data format version number.
     attr_accessor :data_format_version
 
-    # The two-letter ISO-3166 country code for the country where the e-invoice is being submitted
+    # The two-letter ISO-3166 country code for the country where the document is being submitted
     attr_accessor :country_code
 
     # The e-invoicing mandate for the specified country.
