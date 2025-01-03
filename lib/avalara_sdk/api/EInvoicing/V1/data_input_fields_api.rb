@@ -3,7 +3,7 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
+SDK Version : 24.12.0
 
 
 =end
@@ -19,7 +19,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("")
+        api_client.set_sdk_version("24.12.0")
         @api_client = api_client
       end
 
@@ -357,7 +357,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version
+            return @avalara_version || '1.2'
         end
 
         def set_avalara_version(avalara_version)
