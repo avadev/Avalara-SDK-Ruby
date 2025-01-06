@@ -3,8 +3,6 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 24.12.0
-
 
 =end
 
@@ -19,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("24.12.0")
+        api_client.set_sdk_version("24.12.1")
         @api_client = api_client
       end
 
@@ -292,7 +290,6 @@ module AvalaraSdk::EInvoicing
 
         # header parameters
         header_params = {}
-        header_params[:'avalara-version'] = '1.2'
         # HTTP header 'Accept' (if needed)
         header_params['Accept'] = @api_client.select_header_accept(['application/json'])
         # HTTP header 'Content-Type'
