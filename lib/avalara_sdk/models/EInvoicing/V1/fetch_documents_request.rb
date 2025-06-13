@@ -3,16 +3,13 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
-
 
 =end
 
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       class FetchDocumentsRequest
     # Array of key-value pairs used to retrieve inbound documents from the Tax Authority
     attr_accessor :data
@@ -222,5 +219,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

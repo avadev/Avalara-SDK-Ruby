@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       class DirectorySearchResponseValueInnerAddressesInner
     # Address line 1
     attr_accessor :line1
@@ -249,5 +248,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Mandate list response schema
   class MandatesResponse
     # Total count of results
@@ -232,5 +231,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

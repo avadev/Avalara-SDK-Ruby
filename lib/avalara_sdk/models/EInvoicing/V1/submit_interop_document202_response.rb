@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       class SubmitInteropDocument202Response
     # The unique interchange ID for this submission.
     attr_accessor :interchange_id
@@ -219,5 +218,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

@@ -9,9 +9,9 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
-      class Mandate
+module AvalaraSdk::EInvoicing::V1
+      # An object representing the country mandate
+  class Mandate
     # The `mandateId` is comprised of the country code, mandate type, and the network or regulation type (for example, AU-B2G-PEPPOL). Keep in mind the following when specifying a `mandateId`. - A country can have multiple mandate types (B2C, B2B, B2G). - A entity/company can opt in for multiple mandates. - A `mandateId` is the combination of country + mandate type + network/regulation.
     attr_accessor :mandate_id
 
@@ -24,14 +24,29 @@ module AvalaraSdk::EInvoicing
     # Mandate description
     attr_accessor :description
 
-    # Indicates whether this mandate supported by the partner API
-    attr_accessor :supported_by_partner_api
+    # Indicates whether this mandate supported by the ELR API
+    attr_accessor :supported_by_elrapi
 
     # Mandate format
     attr_accessor :mandate_format
 
+    # The type of e-invoicing flow for this mandate
+    attr_accessor :e_invoicing_flow
+
+    # Link to the documentation for this mandate's e-invoicing flow
+    attr_accessor :e_invoicing_flow_documentation_link
+
+    # List of available media types for downloading invoices for this mandate
+    attr_accessor :get_invoice_available_media_type
+
+    # Indicates whether this mandate supports inbound digital documents
+    attr_accessor :supports_inbound_digital_document
+
     # Format and version used when inputting the data
     attr_accessor :input_data_formats
+
+    # Lists the supported output document formats for the country mandate. For countries where specifying an output document format is required (e.g., France), this array will contain the applicable formats. For other countries where output format selection is not necessary, the array will be empty.
+    attr_accessor :output_data_formats
 
     # Workflow ID list
     attr_accessor :workflow_ids
@@ -43,9 +58,14 @@ module AvalaraSdk::EInvoicing
         :'country_mandate' => :'countryMandate',
         :'country_code' => :'countryCode',
         :'description' => :'description',
-        :'supported_by_partner_api' => :'supportedByPartnerAPI',
+        :'supported_by_elrapi' => :'supportedByELRAPI',
         :'mandate_format' => :'mandateFormat',
+        :'e_invoicing_flow' => :'eInvoicingFlow',
+        :'e_invoicing_flow_documentation_link' => :'eInvoicingFlowDocumentationLink',
+        :'get_invoice_available_media_type' => :'getInvoiceAvailableMediaType',
+        :'supports_inbound_digital_document' => :'supportsInboundDigitalDocument',
         :'input_data_formats' => :'inputDataFormats',
+        :'output_data_formats' => :'outputDataFormats',
         :'workflow_ids' => :'workflowIds'
       }
     end
@@ -62,9 +82,14 @@ module AvalaraSdk::EInvoicing
         :'country_mandate' => :'String',
         :'country_code' => :'String',
         :'description' => :'String',
-        :'supported_by_partner_api' => :'Boolean',
+        :'supported_by_elrapi' => :'Boolean',
         :'mandate_format' => :'String',
+        :'e_invoicing_flow' => :'String',
+        :'e_invoicing_flow_documentation_link' => :'String',
+        :'get_invoice_available_media_type' => :'Array<String>',
+        :'supports_inbound_digital_document' => :'String',
         :'input_data_formats' => :'Array<InputDataFormats>',
+        :'output_data_formats' => :'Array<OutputDataFormats>',
         :'workflow_ids' => :'Array<WorkflowIds>'
       }
     end
@@ -106,17 +131,41 @@ module AvalaraSdk::EInvoicing
         self.description = attributes[:'description']
       end
 
-      if attributes.key?(:'supported_by_partner_api')
-        self.supported_by_partner_api = attributes[:'supported_by_partner_api']
+      if attributes.key?(:'supported_by_elrapi')
+        self.supported_by_elrapi = attributes[:'supported_by_elrapi']
       end
 
       if attributes.key?(:'mandate_format')
         self.mandate_format = attributes[:'mandate_format']
       end
 
+      if attributes.key?(:'e_invoicing_flow')
+        self.e_invoicing_flow = attributes[:'e_invoicing_flow']
+      end
+
+      if attributes.key?(:'e_invoicing_flow_documentation_link')
+        self.e_invoicing_flow_documentation_link = attributes[:'e_invoicing_flow_documentation_link']
+      end
+
+      if attributes.key?(:'get_invoice_available_media_type')
+        if (value = attributes[:'get_invoice_available_media_type']).is_a?(Array)
+          self.get_invoice_available_media_type = value
+        end
+      end
+
+      if attributes.key?(:'supports_inbound_digital_document')
+        self.supports_inbound_digital_document = attributes[:'supports_inbound_digital_document']
+      end
+
       if attributes.key?(:'input_data_formats')
         if (value = attributes[:'input_data_formats']).is_a?(Array)
           self.input_data_formats = value
+        end
+      end
+
+      if attributes.key?(:'output_data_formats')
+        if (value = attributes[:'output_data_formats']).is_a?(Array)
+          self.output_data_formats = value
         end
       end
 
@@ -151,9 +200,14 @@ module AvalaraSdk::EInvoicing
           country_mandate == o.country_mandate &&
           country_code == o.country_code &&
           description == o.description &&
-          supported_by_partner_api == o.supported_by_partner_api &&
+          supported_by_elrapi == o.supported_by_elrapi &&
           mandate_format == o.mandate_format &&
+          e_invoicing_flow == o.e_invoicing_flow &&
+          e_invoicing_flow_documentation_link == o.e_invoicing_flow_documentation_link &&
+          get_invoice_available_media_type == o.get_invoice_available_media_type &&
+          supports_inbound_digital_document == o.supports_inbound_digital_document &&
           input_data_formats == o.input_data_formats &&
+          output_data_formats == o.output_data_formats &&
           workflow_ids == o.workflow_ids
     end
 
@@ -166,7 +220,7 @@ module AvalaraSdk::EInvoicing
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [mandate_id, country_mandate, country_code, description, supported_by_partner_api, mandate_format, input_data_formats, workflow_ids].hash
+      [mandate_id, country_mandate, country_code, description, supported_by_elrapi, mandate_format, e_invoicing_flow, e_invoicing_flow_documentation_link, get_invoice_available_media_type, supports_inbound_digital_document, input_data_formats, output_data_formats, workflow_ids].hash
     end
 
     # Builds the object from hash
@@ -283,5 +337,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

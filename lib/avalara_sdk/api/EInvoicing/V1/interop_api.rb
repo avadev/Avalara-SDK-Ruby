@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("24.12.1")
+        api_client.set_sdk_version("25.6.0")
         @api_client = api_client
       end
 
@@ -268,7 +268,7 @@ module AvalaraSdk::EInvoicing
           fail ArgumentError, "Missing the required parameter 'interchange_type' when calling InteropApi.submit_interop_document"
         end
         # verify enum value
-        allowable_values = ["FI-B2B", "FI-B2C", "FI-B2G"]
+        allowable_values = ["FI-B2B-TIEKE", "FI-B2G-TIEKE"]
         if @api_client.config.client_side_validation && !allowable_values.include?(interchange_type)
           fail ArgumentError, "invalid value for \"interchange_type\", must be one of #{allowable_values}"
         end
@@ -334,7 +334,7 @@ module AvalaraSdk::EInvoicing
           :return_type => return_type
         }
 
-        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes)
+        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes, false, :EInvoicing)
         if new_options[:return_type]
           data = deserialize(response, new_options[:return_type])
         else
@@ -352,7 +352,7 @@ module AvalaraSdk::EInvoicing
     # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
     # @param  File $file_name The file to be uploaded (e.g., UBL XML, CII XML). (optional)
     #
-    class SubmitInteropDocumentRequest
+    class SubmitInteropDocumentRequestSdk
         attr_accessor :document_type
 
         attr_accessor :interchange_type
@@ -385,7 +385,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.2'
+            return @avalara_version || '1.3'
         end
 
         def set_avalara_version(avalara_version)

@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | The unique ID for this document | [optional] |
+| **company_id** | **String** | Unique identifier that represents the company within the system. | [optional] |
 | **process_date_time** | **String** | The date and time when the document was processed, displayed in the format YYYY-MM-DDThh:mm:ss | [optional] |
 | **status** | **String** | The Document status | [optional] |
 | **supplier_name** | **String** | The name of the supplier in the transaction | [optional] |
@@ -26,6 +27,7 @@ require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::DocumentSummary.new(
   id: 52f60401-44d0-4667-ad47-4afe519abb53,
+  company_id: a5869a7b-4d5d-4ec1-9b29-fd272aa58ab2,
   process_date_time: 2022-01-09T12:36:02,
   status: Complete,
   supplier_name: Inposia GmbH,

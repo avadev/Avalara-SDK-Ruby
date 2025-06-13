@@ -9,9 +9,9 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
-      class ErrorResponse
+module AvalaraSdk::EInvoicing::V1
+      # Structure for reporting errors encountered during API operations, including title, status, and detailed message.
+  class ErrorResponse
     attr_accessor :title
 
     attr_accessor :status
@@ -235,5 +235,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

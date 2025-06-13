@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("24.12.1")
+        api_client.set_sdk_version("25.6.0")
         @api_client = api_client
       end
 
@@ -316,7 +316,7 @@ module AvalaraSdk::EInvoicing
           :return_type => return_type
         }
 
-        response = @api_client.call_api(:GET, local_var_path, new_options, required_scopes)
+        response = @api_client.call_api(:GET, local_var_path, new_options, required_scopes, false, :EInvoicing)
         if new_options[:return_type]
           data = deserialize(response, new_options[:return_type])
         else
@@ -335,7 +335,7 @@ module AvalaraSdk::EInvoicing
     # @param  Boolean $count When set to true, the count of the collection is also returned in the response body (optional)
     # @param  Boolean $count_only When set to true, only the count of the collection is returned (optional)
     #
-    class GetDataInputFieldsRequest
+    class GetDataInputFieldsRequestSdk
         attr_accessor :avalara_version
 
         attr_accessor :x_avalara_client
@@ -354,7 +354,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.2'
+            return @avalara_version || '1.3'
         end
 
         def set_avalara_version(avalara_version)

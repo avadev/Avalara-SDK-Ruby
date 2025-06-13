@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Returns an HTTP error code and message for a 'not found' error
   class NotFoundError
     # The three-digit HTTP error code for a not found error
@@ -220,5 +219,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

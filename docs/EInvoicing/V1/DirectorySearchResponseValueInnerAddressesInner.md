@@ -16,11 +16,11 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::DirectorySearchResponseValueInnerAddressesInner.new(
-  line1: ,
-  line2: ,
-  city: ,
-  state: ,
-  country: 
+  line1: null,
+  line2: null,
+  city: null,
+  state: null,
+  country: null
 )
 ```
 

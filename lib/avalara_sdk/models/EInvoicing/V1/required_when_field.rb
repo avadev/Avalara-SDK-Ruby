@@ -9,9 +9,9 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
-      class RequiredWhenField
+module AvalaraSdk::EInvoicing::V1
+      # Mandates for which this field is required
+  class RequiredWhenField
     attr_accessor :scenario
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -208,5 +208,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

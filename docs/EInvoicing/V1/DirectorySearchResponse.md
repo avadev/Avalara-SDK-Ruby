@@ -14,8 +14,8 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::DirectorySearchResponse.new(
-  record_set_count: 500,
-  next_link: TODO,
+  record_set_count: null,
+  next_link: null,
   value: null
 )
 ```

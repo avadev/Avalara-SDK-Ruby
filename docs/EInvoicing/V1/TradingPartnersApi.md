@@ -13,7 +13,7 @@ All URIs are relative to *https://api.sbx.avalara.com/einvoicing*
 
 ## batch_search_participants
 
-> batch_search_participants(avalara_version, name, notification_email, file, opts)
+> <BatchSearchParticipants202Response> batch_search_participants(avalara_version, name, notification_email, file, opts)
 
 Creates a batch search and performs a batch search in the directory for participants in the background.
 
@@ -48,7 +48,8 @@ opts = {
 
 begin
   # Creates a batch search and performs a batch search in the directory for participants in the background.
-  api_instance.batch_search_participants(avalara_version, name, notification_email, file, opts)
+  result = api_instance.batch_search_participants(avalara_version, name, notification_email, file, opts)
+  p result
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling TradingPartnersApi->batch_search_participants: #{e}"
 end
@@ -56,9 +57,9 @@ end
 
 #### Using the batch_search_participants_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> batch_search_participants_with_http_info(avalara_version, name, notification_email, file, opts)
+> <Array(<BatchSearchParticipants202Response>, Integer, Hash)> batch_search_participants_with_http_info(avalara_version, name, notification_email, file, opts)
 
 ```ruby
 begin
@@ -66,7 +67,7 @@ begin
   data, status_code, headers = api_instance.batch_search_participants_with_http_info(avalara_version, name, notification_email, file, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <BatchSearchParticipants202Response>
 rescue AvalaraSdk::EInvoicing::V1::ApiError => e
   puts "Error when calling TradingPartnersApi->batch_search_participants_with_http_info: #{e}"
 end
@@ -85,7 +86,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**BatchSearchParticipants202Response**](BatchSearchParticipants202Response.md)
 
 ### Authorization
 
@@ -186,7 +187,7 @@ end
 
 Get the batch search details for a given id.
 
-Get the batch search details for a given id.
+This endpoint provides a detailed information for a specific batch search based on a given ID. It is ideal for tracking the progress of a previously initiated batch search operation.
 
 ### Examples
 
@@ -269,7 +270,7 @@ end
 
 List all batch searches that were previously submitted.
 
-Retrieves all batch searches performed by the user.
+This endpoint provides a way to retrieve a comprehensive list of all batch search operations that have been previously submitted. This endpoint returns details about each batch search, such as their id, status, created date and associated metadata, allowing users to easily view past batch search requests. It's particularly useful for tracking the progress of a previously initiated batch search operations.
 
 ### Examples
 
@@ -360,7 +361,7 @@ end
 
 Returns a list of participants matching the input query.
 
-Returns a list of participants matching the input query.
+This endpoint provides a list of trading partners that match a specified input query. The search is performed based on various filters, search text, and other relevant parameters.
 
 ### Examples
 

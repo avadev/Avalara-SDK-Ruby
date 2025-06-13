@@ -20,6 +20,7 @@ require 'uri'
 require 'faraday'
 require 'avalara_sdk/token_metadata'
 require 'avalara_sdk/response_hash'
+require 'ostruct'
 
 module AvalaraSdk
   class ApiClient
@@ -52,7 +53,6 @@ module AvalaraSdk
         fail ArgumentError,'configuration is nil'
       end
 
-      @base_path=config.base_url()
       @sdk_version=""
       @config = config
       @default_headers = {
@@ -76,7 +76,7 @@ module AvalaraSdk
     #
     # @return [Array<(Object, Integer, Hash)>] an array of 3 elements:
     #   the data from response body (could be nil), response status code and response headers.
-    def call_api(http_method, path, opts = {}, required_scopes = "", is_retry = false)
+    def call_api(http_method, path, opts = {}, required_scopes = "", is_retry = false, microservice = AvalaraSdk::AvalaraMicroservice::NONE)
       ssl_options = {
         :ca_file => @config.ssl_ca_file,
         :verify => @config.ssl_verify,
@@ -85,7 +85,8 @@ module AvalaraSdk
         :client_key => @config.ssl_client_key
       }
 
-      connection = Faraday.new(:url => config.base_url, :ssl => ssl_options) do |conn|
+      base_url = @config.get_base_path(microservice)
+      connection = Faraday.new(:url => base_url, :ssl => ssl_options) do |conn|
         @config.configure_middleware(conn)
         if opts[:header_params]["Content-Type"] == "multipart/form-data"
           conn.request :multipart
@@ -109,7 +110,7 @@ module AvalaraSdk
             values = authorization_header.split(" ")
             if !values.nil? && values.length == 2
               update_oauth_access_token(required_scopes, values[1])
-              call_api(http_method, path, opts, required_scopes, true)
+              call_api(http_method, path, opts, required_scopes, true, microservice)
             end
 
           elsif response.status == 0
@@ -234,7 +235,8 @@ module AvalaraSdk
     def build_request_url(path, opts = {})
       # Add leading and trailing slashes to path
       path = "/#{path}".gsub(/\/+/, '/')
-      @config.base_url() + path      
+      # Return path only since base URL is now set on the Faraday connection
+      path      
     end
 
     # Sets user agent in HTTP header

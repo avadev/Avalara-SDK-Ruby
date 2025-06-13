@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       class DirectorySearchResponseValueInnerIdentifiersInner
     # Peppol Participant ID if the participant is in Peppol network
     attr_accessor :name
@@ -219,5 +218,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

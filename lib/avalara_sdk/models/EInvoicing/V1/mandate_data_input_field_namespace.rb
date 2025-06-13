@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # The namespace of the UBL element
   class MandateDataInputFieldNamespace
     # The namespace prefix for the UBL Element
@@ -219,5 +218,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

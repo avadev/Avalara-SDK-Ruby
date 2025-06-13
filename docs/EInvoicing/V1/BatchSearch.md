@@ -18,12 +18,12 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::BatchSearch.new(
-  id: 2f5ea4b5-4dae-445a-b3e4-9f65a61eaa99,
-  name: Batch Search Report 1,
-  created_by: user@example.com,
-  created: 2024-08-01T12:34:56Z,
-  last_modified: 2024-08-01T12:34:56Z,
-  status: Accepted,
+  id: null,
+  name: null,
+  created_by: null,
+  created: null,
+  last_modified: null,
+  status: null,
   error: null
 )
 ```

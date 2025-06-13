@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Returns an optional message with a 'forbidden' response
   class ForbiddenError
     # A message that informs the user that they may not access a resource
@@ -210,5 +209,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

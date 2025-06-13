@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Schema for batch search list
   class BatchSearchListResponse
     # The count of records in the result set
@@ -231,5 +230,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end
