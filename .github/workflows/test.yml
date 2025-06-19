@@ -20,21 +20,30 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Ruby Versions
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - name: Retrieve bearer token
-        id: get_bearer_token
+      - name: Retrieve bearer token for EInvoicing
+        id: get_bearer_token_einvoicing
         run: |
           response=$(curl -X POST ${{secrets.OKTA_ACCESS_TOKEN_URL}}/connect/token \
             -H "Content-Type: application/x-www-form-urlencoded" \
             -d "grant_type=client_credentials&client_id=${{secrets.OKTA_CLIENT_ID}}&client_secret=${{secrets.OKTA_CLIENT_SECRET}}")
           token=$(echo $response | jq -r '.access_token')
-          echo "BEARER_TOKEN=${token}" >> $GITHUB_ENV
+          echo "BEARER_TOKEN_EINVOICING=${token}" >> $GITHUB_ENV
+
+      - name: Retrieve bearer token for A1099
+        id: get_bearer_token_a1099
+        run: |
+          response=$(curl -X POST ${{secrets.AI_SBX_URL}}/connect/token \
+            -H "Content-Type: application/x-www-form-urlencoded" \
+            -d "grant_type=client_credentials&client_id=${{secrets.AI_CLIENT_ID_A1099}}&client_secret=${{secrets.AI_CLIENT_SECRET_A1099}}")
+          token=$(echo $response | jq -r '.access_token')
+          echo "BEARER_TOKEN_A1099=${token}" >> $GITHUB_ENV
 
       - name: Build & test
         run: |
@@ -43,4 +52,5 @@ jobs:
           bundle install
           bundle exec rspec
         env:
-          BEARER_TOKEN: ${{ env.BEARER_TOKEN }}
+          BEARER_TOKEN_EINVOICING: ${{ env.BEARER_TOKEN_EINVOICING }}
+          BEARER_TOKEN_A1099: ${{ env.BEARER_TOKEN_A1099 }}
