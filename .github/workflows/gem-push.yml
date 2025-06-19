@@ -27,7 +27,7 @@ jobs:
           echo $VERSION
           echo ${{ env.VERSION }}
       - name: Set up Ruby Versions
-        uses: ruby/setup-ruby@v2
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
