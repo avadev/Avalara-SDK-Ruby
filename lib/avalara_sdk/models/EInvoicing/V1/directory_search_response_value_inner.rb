@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       class DirectorySearchResponseValueInner
     # Avalara unique ID of the participant in the directory.
     attr_accessor :id
@@ -272,5 +271,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

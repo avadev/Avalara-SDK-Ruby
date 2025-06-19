@@ -9,12 +9,14 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Displays a summary of information about the document
   class DocumentSummary
     # The unique ID for this document
     attr_accessor :id
+
+    # Unique identifier that represents the company within the system.
+    attr_accessor :company_id
 
     # The date and time when the document was processed, displayed in the format YYYY-MM-DDThh:mm:ss
     attr_accessor :process_date_time
@@ -59,6 +61,7 @@ module AvalaraSdk::EInvoicing
     def self.attribute_map
       {
         :'id' => :'id',
+        :'company_id' => :'companyId',
         :'process_date_time' => :'processDateTime',
         :'status' => :'status',
         :'supplier_name' => :'supplierName',
@@ -84,6 +87,7 @@ module AvalaraSdk::EInvoicing
     def self.openapi_types
       {
         :'id' => :'String',
+        :'company_id' => :'String',
         :'process_date_time' => :'String',
         :'status' => :'String',
         :'supplier_name' => :'String',
@@ -123,6 +127,10 @@ module AvalaraSdk::EInvoicing
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'company_id')
+        self.company_id = attributes[:'company_id']
       end
 
       if attributes.key?(:'process_date_time')
@@ -199,6 +207,7 @@ module AvalaraSdk::EInvoicing
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          company_id == o.company_id &&
           process_date_time == o.process_date_time &&
           status == o.status &&
           supplier_name == o.supplier_name &&
@@ -223,7 +232,7 @@ module AvalaraSdk::EInvoicing
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, process_date_time, status, supplier_name, customer_name, document_type, document_version, document_number, document_date, flow, country_code, country_mandate, interface, receiver].hash
+      [id, company_id, process_date_time, status, supplier_name, customer_name, document_type, document_version, document_number, document_date, flow, country_code, country_mandate, interface, receiver].hash
     end
 
     # Builds the object from hash
@@ -340,5 +349,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

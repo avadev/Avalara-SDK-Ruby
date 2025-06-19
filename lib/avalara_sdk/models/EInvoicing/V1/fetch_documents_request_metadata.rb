@@ -3,16 +3,13 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
-
 
 =end
 
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       class FetchDocumentsRequestMetadata
     # Specifies a unique ID for this workflow.
     attr_accessor :workflow_id
@@ -22,6 +19,12 @@ module AvalaraSdk::EInvoicing
 
     # Specifies the data format version number
     attr_accessor :data_format_version
+
+    # Specifies the format of the output document to be generated for the recipient. This format should be chosen based on the recipient's preferences or requirements as defined by applicable e-invoicing regulations. When not specified for mandates that don't require a specific output format, the system will use the default format defined for that mandate.
+    attr_accessor :output_data_format
+
+    # Specifies the version of the selected output document format
+    attr_accessor :output_data_format_version
 
     # The two-letter ISO-3166 country code for the country for which document is being retrieved
     attr_accessor :country_code
@@ -35,6 +38,8 @@ module AvalaraSdk::EInvoicing
         :'workflow_id' => :'workflowId',
         :'data_format' => :'dataFormat',
         :'data_format_version' => :'dataFormatVersion',
+        :'output_data_format' => :'outputDataFormat',
+        :'output_data_format_version' => :'outputDataFormatVersion',
         :'country_code' => :'countryCode',
         :'country_mandate' => :'countryMandate'
       }
@@ -51,6 +56,8 @@ module AvalaraSdk::EInvoicing
         :'workflow_id' => :'String',
         :'data_format' => :'String',
         :'data_format_version' => :'Float',
+        :'output_data_format' => :'String',
+        :'output_data_format_version' => :'Float',
         :'country_code' => :'String',
         :'country_mandate' => :'String'
       }
@@ -95,6 +102,18 @@ module AvalaraSdk::EInvoicing
         self.data_format_version = nil
       end
 
+      if attributes.key?(:'output_data_format')
+        self.output_data_format = attributes[:'output_data_format']
+      else
+        self.output_data_format = nil
+      end
+
+      if attributes.key?(:'output_data_format_version')
+        self.output_data_format_version = attributes[:'output_data_format_version']
+      else
+        self.output_data_format_version = nil
+      end
+
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
       else
@@ -125,6 +144,14 @@ module AvalaraSdk::EInvoicing
         invalid_properties.push('invalid value for "data_format_version", data_format_version cannot be nil.')
       end
 
+      if @output_data_format.nil?
+        invalid_properties.push('invalid value for "output_data_format", output_data_format cannot be nil.')
+      end
+
+      if @output_data_format_version.nil?
+        invalid_properties.push('invalid value for "output_data_format_version", output_data_format_version cannot be nil.')
+      end
+
       if @country_code.nil?
         invalid_properties.push('invalid value for "country_code", country_code cannot be nil.')
       end
@@ -143,6 +170,8 @@ module AvalaraSdk::EInvoicing
       return false if @workflow_id.nil?
       return false if @data_format.nil?
       return false if @data_format_version.nil?
+      return false if @output_data_format.nil?
+      return false if @output_data_format_version.nil?
       return false if @country_code.nil?
       return false if @country_mandate.nil?
       true
@@ -156,6 +185,8 @@ module AvalaraSdk::EInvoicing
           workflow_id == o.workflow_id &&
           data_format == o.data_format &&
           data_format_version == o.data_format_version &&
+          output_data_format == o.output_data_format &&
+          output_data_format_version == o.output_data_format_version &&
           country_code == o.country_code &&
           country_mandate == o.country_mandate
     end
@@ -169,7 +200,7 @@ module AvalaraSdk::EInvoicing
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [workflow_id, data_format, data_format_version, country_code, country_mandate].hash
+      [workflow_id, data_format, data_format_version, output_data_format, output_data_format_version, country_code, country_mandate].hash
     end
 
     # Builds the object from hash
@@ -286,5 +317,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

@@ -3,16 +3,13 @@
 
 #An API that supports sending data for an E-Invoicing compliance use-case.
 
-SDK Version : 
-
 
 =end
 
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       class FetchDocumentsRequestDataInner
     # Descriptor of the identifier
     attr_accessor :key
@@ -235,5 +232,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

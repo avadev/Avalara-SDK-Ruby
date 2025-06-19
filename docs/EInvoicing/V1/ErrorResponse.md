@@ -18,7 +18,7 @@ instance = AvalaraSdk::EInvoicing::V1::ErrorResponse.new(
   title: BadInput,
   status: Error,
   detail: The input query is invalid.,
-  instance: unknown parameter &#39;city&#39;
+  instance: Invalid request format or parameters.
 )
 ```
 

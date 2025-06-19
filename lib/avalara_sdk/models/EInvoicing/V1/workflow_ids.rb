@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Workflow ID list
   class WorkflowIds
     # The name of this workflow
@@ -220,5 +219,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

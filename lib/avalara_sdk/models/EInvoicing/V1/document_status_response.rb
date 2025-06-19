@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Returns the current document ID and status
   class DocumentStatusResponse
     # The unique ID for this document
@@ -231,5 +230,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

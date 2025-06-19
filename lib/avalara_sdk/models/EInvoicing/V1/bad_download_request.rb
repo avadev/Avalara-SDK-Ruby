@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Returns an HTTP status code and message for a 'bad request'
   class BadDownloadRequest
     # The three-digit HTTP error code for the bad request
@@ -230,5 +229,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Format and version used when inputting the data
   class InputDataFormats
     # Document format
@@ -221,5 +220,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

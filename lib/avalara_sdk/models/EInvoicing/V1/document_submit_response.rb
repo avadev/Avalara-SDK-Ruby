@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Returns the unique ID of a successful document submission
   class DocumentSubmitResponse
     # Unique ID for this document that can be used for status checking and file downloads. This is a UID created by the Avalara E-Invoicing platform.
@@ -210,5 +209,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

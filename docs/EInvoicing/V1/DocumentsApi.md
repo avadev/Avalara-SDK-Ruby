@@ -96,7 +96,7 @@ end
 
 ## fetch_documents
 
-> <DocumentFetch> fetch_documents(avalara_version, document_fetch_request, opts)
+> <DocumentFetch> fetch_documents(avalara_version, fetch_documents_request, opts)
 
 Fetch the inbound document from a tax authority
 
@@ -121,14 +121,14 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
 avalara_version = '1.2' # String | The HTTP Header meant to specify the version of the API intended to be used
-document_fetch_request = AvalaraSdk::EInvoicing::V1::DocumentFetchRequest.new # DocumentFetchRequest | 
+fetch_documents_request = AvalaraSdk::EInvoicing::V1::FetchDocumentsRequest.new # FetchDocumentsRequest | 
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client' # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
 }
 
 begin
   # Fetch the inbound document from a tax authority
-  result = api_instance.fetch_documents(avalara_version, document_fetch_request, opts)
+  result = api_instance.fetch_documents(avalara_version, fetch_documents_request, opts)
   p result
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling DocumentsApi->fetch_documents: #{e}"
@@ -139,12 +139,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<DocumentFetch>, Integer, Hash)> fetch_documents_with_http_info(avalara_version, document_fetch_request, opts)
+> <Array(<DocumentFetch>, Integer, Hash)> fetch_documents_with_http_info(avalara_version, fetch_documents_request, opts)
 
 ```ruby
 begin
   # Fetch the inbound document from a tax authority
-  data, status_code, headers = api_instance.fetch_documents_with_http_info(avalara_version, document_fetch_request, opts)
+  data, status_code, headers = api_instance.fetch_documents_with_http_info(avalara_version, fetch_documents_request, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <DocumentFetch>
@@ -158,7 +158,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used |  |
-| **document_fetch_request** | [**DocumentFetchRequest**](DocumentFetchRequest.md) |  |  |
+| **fetch_documents_request** | [**FetchDocumentsRequest**](FetchDocumentsRequest.md) |  |  |
 | **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] |
 
 ### Return type
@@ -379,7 +379,7 @@ api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
 avalara_version = '1.2' # String | The HTTP Header meant to specify the version of the API intended to be used
 metadata = AvalaraSdk::EInvoicing::V1::SubmitDocumentMetadata.new({workflow_id: 'partner-einvoicing', data_format: 'ubl-invoice', data_format_version: '2.1', country_code: 'SA', country_mandate: 'SA-Phase1-B2B'}) # SubmitDocumentMetadata | 
-data = 'data_example' # String | The document to be submitted, as indicated by the metadata fields 'dataFormat' and 'dataFormatVersion'
+data = { ... } # Object | The document to be submitted, as indicated by the metadata fields 'dataFormat' and 'dataFormatVersion'
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client' # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
 }
@@ -417,7 +417,7 @@ end
 | ---- | ---- | ----------- | ----- |
 | **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used |  |
 | **metadata** | [**SubmitDocumentMetadata**](SubmitDocumentMetadata.md) |  |  |
-| **data** | **String** | The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39; |  |
+| **data** | [**Object**](Object.md) | The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39; |  |
 | **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] |
 
 ### Return type

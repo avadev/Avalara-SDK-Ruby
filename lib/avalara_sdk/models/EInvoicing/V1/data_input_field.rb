@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # The Data Input Field
   class DataInputField
     # Field UUID
@@ -349,5 +348,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

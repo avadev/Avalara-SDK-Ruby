@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Returns an HTTP status code and message for an 'exception'
   class DocumentSubmissionError
     # The three-digit HTTP status code for the exception
@@ -220,5 +219,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

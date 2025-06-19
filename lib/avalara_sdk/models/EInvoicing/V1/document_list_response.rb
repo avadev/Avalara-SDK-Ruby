@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Returns the requested list of documents
   class DocumentListResponse
     # Count of collections for the given date range
@@ -239,5 +238,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

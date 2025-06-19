@@ -13,8 +13,8 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::DirectorySearchResponseValueInnerIdentifiersInner.new(
-  name: PeppolParticipantId,
-  value: 9930:de112233445
+  name: null,
+  value: null
 )
 ```
 

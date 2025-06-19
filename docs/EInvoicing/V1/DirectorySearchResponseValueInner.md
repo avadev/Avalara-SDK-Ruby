@@ -18,9 +18,9 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::DirectorySearchResponseValueInner.new(
-  id: 2a27ee0cf5bcb6165ab891503652343419a8fc5fe6b406299c47d7b44aa8548c,
-  name: Pineapple Labs ltd,
-  network: Peppol,
+  id: null,
+  name: null,
+  network: null,
   registration_date: null,
   identifiers: null,
   addresses: null,

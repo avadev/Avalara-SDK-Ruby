@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Returns an optional message with a 'InternalServerError' response
   class InternalServerError
     # A bad request error code
@@ -220,5 +219,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

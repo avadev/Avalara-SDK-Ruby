@@ -1,2 +1,4 @@
---color
+--require bundler/setup
 --require spec_helper
+--format documentation
+--color

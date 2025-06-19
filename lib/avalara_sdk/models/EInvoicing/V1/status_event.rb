@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Displays when a status event occurred
   class StatusEvent
     # The date and time when the status event occured, displayed in the format YYYY-MM-DDThh:mm:ss
@@ -242,5 +241,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end

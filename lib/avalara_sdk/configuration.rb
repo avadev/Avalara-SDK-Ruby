@@ -15,6 +15,18 @@ module AvalaraSdk
     FALLBACK_TOKEN_URL = 'https://identity.avalara.com/connect/token'
     FALLBACK_DEVICE_AUTHORIZATION_URL = 'https://identity.avalara.com/connect/token'
 
+    # Official URL of EInvoicing Service (Production by Environment)
+    EINVOICING_SERVICE_PRODUCTION_URL = 'https://api.avalara.com'
+    EINVOICING_SERVICE_SANDBOX_URL = 'https://api.sbx.avalara.com'
+    EINVOICING_SERVICE_QA_URL = 'https://superapi.qa.avalara.io'
+    EINVOICING_SERVICE_DEV_URL = 'https://superapi.dev.avalara.io'
+
+    # Official URL of A1099 Service (Production by Environment)
+    A1099_SERVICE_PRODUCTION_URL = 'https://api.avalara.com/avalara1099'
+    A1099_SERVICE_SANDBOX_URL = 'https://api.sbx.avalara.com/avalara1099'
+    A1099_SERVICE_QA_URL = 'https://api-ava1099.gamma.qa.us-west-2.aws.avalara.io'
+    A1099_SERVICE_DEV_URL = 'https://api-ava1099.gamma.dev.us-west-2.aws.avalara.io'
+
     # Defines environment
     attr_accessor :environment
 
@@ -206,23 +218,49 @@ module AvalaraSdk
       @base_path=base_path      
     end
 
-    # Returns base URL for specified operation based on server settings
-    def base_url
-      case environment.downcase  
-      when 'sandbox'
-        return 'https://api.sbx.avalara.com'
-      when 'production'
-        return 'https://api.avalara.com'
-      when 'qa'
-        return 'https://superapi.qa.avalara.io'
-      when 'test'
-        if test_base_path.empty?
-          fail ArgumentError, "Test_Base_Path must be configured to run in test environment mode."
-        end
-        return test_base_path
-      else
-        fail ArgumentError, "Invalid environment value"
+    # Returns base URL for specified operation based on server settings and microservice
+    def get_base_path(microservice = :none)
+      puts "get_base_path called with microservice = #{microservice.inspect}"
+
+      if environment.downcase == 'test' && test_base_path.empty?
+        fail ArgumentError, "Test_Base_Path must be configured to run in test environment mode."
       end
+
+      case microservice
+      when :EInvoicing
+        case environment.downcase
+        when 'production'
+          return EINVOICING_SERVICE_PRODUCTION_URL
+        when 'sandbox'
+          return EINVOICING_SERVICE_SANDBOX_URL
+        when 'qa'
+          return EINVOICING_SERVICE_QA_URL
+        when 'dev'
+          return EINVOICING_SERVICE_DEV_URL
+        when 'test'
+          return test_base_path
+        else
+          fail ArgumentError, 'Environment not configured correctly, Acceptable values are "production", "sandbox", "qa", "dev", and "test".'
+        end
+      when :A1099
+        case environment.downcase
+        when 'production'
+          return A1099_SERVICE_PRODUCTION_URL
+        when 'sandbox'
+          return A1099_SERVICE_SANDBOX_URL
+        when 'qa'
+          return A1099_SERVICE_QA_URL
+        when 'dev'
+          return A1099_SERVICE_DEV_URL
+        when 'test'
+          return test_base_path
+        else
+          fail ArgumentError, 'Environment not configured correctly, Acceptable values are "production", "sandbox", "qa", "dev", and "test".'
+        end
+      when :none
+        fail ArgumentError, 'Microservice not configured correctly, Acceptable values are "EInvoicing", "A1099", and "none".'
+      end
+      
     end
 
     # Gets API key (with prefix if set).
@@ -326,5 +364,12 @@ module AvalaraSdk
       end
       JSON.parse(response.body)
     end
+  end
+
+  # Microservice enumeration
+  module AvalaraMicroservice
+    EINVOICING = :EInvoicing
+    A1099 = :A1099
+    NONE = :none
   end
 end

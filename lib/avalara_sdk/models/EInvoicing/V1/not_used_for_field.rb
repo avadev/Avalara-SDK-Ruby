@@ -9,8 +9,7 @@
 require 'date'
 require 'time'
 
-module AvalaraSdk::EInvoicing
-    module AvalaraSdk::EInvoicing::V1
+module AvalaraSdk::EInvoicing::V1
       # Mandates for which this field is not used
   class NotUsedForField
     attr_accessor :country_mandate
@@ -209,5 +208,4 @@ module AvalaraSdk::EInvoicing
 
   end
 
-    end
 end
