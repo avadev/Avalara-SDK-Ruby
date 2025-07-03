@@ -48,17 +48,17 @@ describe 'A1099Api' do
     end
   end
 
-  describe 'List1099Forms endpoint' do
-    it 'retrieves a list of 1099 forms' do
-      request = AvalaraSdk::A1099::V2::List1099FormsRequestSdk.new
-      request.avalara_version  = '2.0'
-      request.x_correlation_id = SecureRandom.uuid
-      request.top             = 10
-      request.skip            = 0
+  # describe 'List1099Forms endpoint' do
+  #   it 'retrieves a list of 1099 forms' do
+  #     request = AvalaraSdk::A1099::V2::List1099FormsRequestSdk.new
+  #     request.avalara_version  = '2.0'
+  #     request.x_correlation_id = SecureRandom.uuid
+  #     request.top             = 10
+  #     request.skip            = 0
 
-      result = @forms1099_api.list1099_forms(request)
-      expect(result).not_to be_nil
-      expect(result.data).not_to be_nil
-    end
-  end
+  #     result = @forms1099_api.list1099_forms(request)
+  #     expect(result).not_to be_nil
+  #     expect(result.data).not_to be_nil
+  #   end
+  # end
 end

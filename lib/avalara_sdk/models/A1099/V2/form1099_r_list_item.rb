@@ -11,8 +11,6 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class Form1099RListItem
-    attr_accessor :state_and_local_withholding
-
     attr_accessor :gross_distribution
 
     attr_accessor :taxable_amount
@@ -53,13 +51,13 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :date_of_payment
 
-    attr_accessor :issuer_id
-
     attr_accessor :issuer_reference_id
 
     attr_accessor :issuer_tin
 
     attr_accessor :tax_year
+
+    attr_accessor :issuer_id
 
     attr_accessor :reference_id
 
@@ -71,9 +69,9 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :recipient_second_name
 
-    attr_accessor :street_address
+    attr_accessor :address
 
-    attr_accessor :street_address_line2
+    attr_accessor :address2
 
     attr_accessor :city
 
@@ -101,6 +99,8 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :address_verification
 
+    attr_accessor :state_and_local_withholding
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -126,7 +126,6 @@ module AvalaraSdk::A1099::V2
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'state_and_local_withholding' => :'stateAndLocalWithholding',
         :'gross_distribution' => :'grossDistribution',
         :'taxable_amount' => :'taxableAmount',
         :'taxable_amount_not_determined' => :'taxableAmountNotDetermined',
@@ -147,17 +146,17 @@ module AvalaraSdk::A1099::V2
         :'first_year_of_designated_roth_contribution' => :'firstYearOfDesignatedRothContribution',
         :'fatca_filing_requirement' => :'fatcaFilingRequirement',
         :'date_of_payment' => :'dateOfPayment',
-        :'issuer_id' => :'issuerId',
         :'issuer_reference_id' => :'issuerReferenceId',
         :'issuer_tin' => :'issuerTin',
         :'tax_year' => :'taxYear',
+        :'issuer_id' => :'issuerId',
         :'reference_id' => :'referenceId',
         :'recipient_name' => :'recipientName',
         :'recipient_tin' => :'recipientTin',
         :'tin_type' => :'tinType',
         :'recipient_second_name' => :'recipientSecondName',
-        :'street_address' => :'streetAddress',
-        :'street_address_line2' => :'streetAddressLine2',
+        :'address' => :'address',
+        :'address2' => :'address2',
         :'city' => :'city',
         :'state' => :'state',
         :'zip' => :'zip',
@@ -170,7 +169,8 @@ module AvalaraSdk::A1099::V2
         :'postal_mail' => :'postalMail',
         :'state_e_file' => :'stateEFile',
         :'tin_match' => :'tinMatch',
-        :'address_verification' => :'addressVerification'
+        :'address_verification' => :'addressVerification',
+        :'state_and_local_withholding' => :'stateAndLocalWithholding'
       }
     end
 
@@ -182,7 +182,6 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'state_and_local_withholding' => :'StateAndLocalWithholding',
         :'gross_distribution' => :'Float',
         :'taxable_amount' => :'Float',
         :'taxable_amount_not_determined' => :'Boolean',
@@ -203,17 +202,17 @@ module AvalaraSdk::A1099::V2
         :'first_year_of_designated_roth_contribution' => :'Integer',
         :'fatca_filing_requirement' => :'Boolean',
         :'date_of_payment' => :'Time',
-        :'issuer_id' => :'String',
         :'issuer_reference_id' => :'String',
         :'issuer_tin' => :'String',
         :'tax_year' => :'Integer',
+        :'issuer_id' => :'String',
         :'reference_id' => :'String',
         :'recipient_name' => :'String',
         :'recipient_tin' => :'String',
-        :'tin_type' => :'Integer',
+        :'tin_type' => :'String',
         :'recipient_second_name' => :'String',
-        :'street_address' => :'String',
-        :'street_address_line2' => :'String',
+        :'address' => :'String',
+        :'address2' => :'String',
         :'city' => :'String',
         :'state' => :'String',
         :'zip' => :'String',
@@ -226,7 +225,8 @@ module AvalaraSdk::A1099::V2
         :'postal_mail' => :'Boolean',
         :'state_e_file' => :'Boolean',
         :'tin_match' => :'Boolean',
-        :'address_verification' => :'Boolean'
+        :'address_verification' => :'Boolean',
+        :'state_and_local_withholding' => :'StateAndLocalWithholdingRequest'
       }
     end
 
@@ -234,13 +234,21 @@ module AvalaraSdk::A1099::V2
     def self.openapi_nullable
       Set.new([
         :'second_distribution_code',
+        :'issuer_id',
+        :'reference_id',
+        :'recipient_name',
+        :'address2',
+        :'recipient_email',
+        :'account_number',
+        :'office_code',
+        :'recipient_non_us_province',
       ])
     end
 
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
-      :'FormRequestBase'
+      :'FormRequestCsvBase'
       ]
     end
 
@@ -258,10 +266,6 @@ module AvalaraSdk::A1099::V2
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'state_and_local_withholding')
-        self.state_and_local_withholding = attributes[:'state_and_local_withholding']
-      end
 
       if attributes.key?(:'gross_distribution')
         self.gross_distribution = attributes[:'gross_distribution']
@@ -343,10 +347,6 @@ module AvalaraSdk::A1099::V2
         self.date_of_payment = attributes[:'date_of_payment']
       end
 
-      if attributes.key?(:'issuer_id')
-        self.issuer_id = attributes[:'issuer_id']
-      end
-
       if attributes.key?(:'issuer_reference_id')
         self.issuer_reference_id = attributes[:'issuer_reference_id']
       end
@@ -357,6 +357,10 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'tax_year')
         self.tax_year = attributes[:'tax_year']
+      end
+
+      if attributes.key?(:'issuer_id')
+        self.issuer_id = attributes[:'issuer_id']
       end
 
       if attributes.key?(:'reference_id')
@@ -379,12 +383,12 @@ module AvalaraSdk::A1099::V2
         self.recipient_second_name = attributes[:'recipient_second_name']
       end
 
-      if attributes.key?(:'street_address')
-        self.street_address = attributes[:'street_address']
+      if attributes.key?(:'address')
+        self.address = attributes[:'address']
       end
 
-      if attributes.key?(:'street_address_line2')
-        self.street_address_line2 = attributes[:'street_address_line2']
+      if attributes.key?(:'address2')
+        self.address2 = attributes[:'address2']
       end
 
       if attributes.key?(:'city')
@@ -438,6 +442,10 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'address_verification')
         self.address_verification = attributes[:'address_verification']
       end
+
+      if attributes.key?(:'state_and_local_withholding')
+        self.state_and_local_withholding = attributes[:'state_and_local_withholding']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -456,6 +464,8 @@ module AvalaraSdk::A1099::V2
       return false unless distribution_code_validator.valid?(@distribution_code)
       second_distribution_code_validator = EnumAttributeValidator.new('String', ["EarlyDistributionNoException", "EarlyDistributionWithException", "Disability", "Death", "ProhibitedTransaction", "Section1035Exchange", "NormalDistribution", "ExcessContributionsCurrentYear", "CurrentLifeInsuranceProtectionCost", "TenYearTaxOption", "DesignatedRothDistribution", "ReportableDeathBenefits", "NonqualifiedAnnuityPayments", "EPCRSDistribution", "CharitableGiftAnnuity", "DirectRollover", "RothAccountToIRADirectRollover", "EarlyRothIRADistribution", "IRAAssetsNoFMV", "LoansDeemedDistributions", "QualifiedPlanLoanOffsets", "RecharacterizedIRANextYear", "ExcessContributionsPreviousYear", "QualifiedRothIRADistribution", "RecharacterizedIRAPreviousYear", "EarlySimpleIRADistribution", "RothIRADistributionException", "ESOPDistribution", "LongTermCareInsurance"])
       return false unless second_distribution_code_validator.valid?(@second_distribution_code)
+      tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
+      return false unless tin_type_validator.valid?(@tin_type)
       true
     end
 
@@ -479,12 +489,21 @@ module AvalaraSdk::A1099::V2
       @second_distribution_code = second_distribution_code
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tin_type Object to be assigned
+    def tin_type=(tin_type)
+      validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
+      unless validator.valid?(tin_type)
+        fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
+      end
+      @tin_type = tin_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          state_and_local_withholding == o.state_and_local_withholding &&
           gross_distribution == o.gross_distribution &&
           taxable_amount == o.taxable_amount &&
           taxable_amount_not_determined == o.taxable_amount_not_determined &&
@@ -505,17 +524,17 @@ module AvalaraSdk::A1099::V2
           first_year_of_designated_roth_contribution == o.first_year_of_designated_roth_contribution &&
           fatca_filing_requirement == o.fatca_filing_requirement &&
           date_of_payment == o.date_of_payment &&
-          issuer_id == o.issuer_id &&
           issuer_reference_id == o.issuer_reference_id &&
           issuer_tin == o.issuer_tin &&
           tax_year == o.tax_year &&
+          issuer_id == o.issuer_id &&
           reference_id == o.reference_id &&
           recipient_name == o.recipient_name &&
           recipient_tin == o.recipient_tin &&
           tin_type == o.tin_type &&
           recipient_second_name == o.recipient_second_name &&
-          street_address == o.street_address &&
-          street_address_line2 == o.street_address_line2 &&
+          address == o.address &&
+          address2 == o.address2 &&
           city == o.city &&
           state == o.state &&
           zip == o.zip &&
@@ -528,7 +547,8 @@ module AvalaraSdk::A1099::V2
           postal_mail == o.postal_mail &&
           state_e_file == o.state_e_file &&
           tin_match == o.tin_match &&
-          address_verification == o.address_verification
+          address_verification == o.address_verification &&
+          state_and_local_withholding == o.state_and_local_withholding
     end
 
     # @see the `==` method
@@ -540,7 +560,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [state_and_local_withholding, gross_distribution, taxable_amount, taxable_amount_not_determined, total_distribution_determined, capital_gain, federal_income_tax_withheld, employee_contributions_or_designated_roth_or_insurance_premiums, net_unrealized_appreciation_in_employer_securities, distribution_code, second_distribution_code, ira_sep_simple, traditional_ira_sep_simple_or_roth_conversion_amount, other_amount, other_percentage, total_distribution_percentage, total_employee_contributions, amount_allocable_to_irr_within5_years, first_year_of_designated_roth_contribution, fatca_filing_requirement, date_of_payment, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, recipient_name, recipient_tin, tin_type, recipient_second_name, street_address, street_address_line2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification].hash
+      [gross_distribution, taxable_amount, taxable_amount_not_determined, total_distribution_determined, capital_gain, federal_income_tax_withheld, employee_contributions_or_designated_roth_or_insurance_premiums, net_unrealized_appreciation_in_employer_securities, distribution_code, second_distribution_code, ira_sep_simple, traditional_ira_sep_simple_or_roth_conversion_amount, other_amount, other_percentage, total_distribution_percentage, total_employee_contributions, amount_allocable_to_irr_within5_years, first_year_of_designated_roth_contribution, fatca_filing_requirement, date_of_payment, issuer_reference_id, issuer_tin, tax_year, issuer_id, reference_id, recipient_name, recipient_tin, tin_type, recipient_second_name, address, address2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification, state_and_local_withholding].hash
     end
 
     # Builds the object from hash

@@ -13,7 +13,7 @@ All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/a
 
 ## create_issuer
 
-> <IssuerResponse> create_issuer(avalara_version, x_correlation_id, opts)
+> <IssuerResponse> create_issuer(avalara_version, opts)
 
 Create an issuer
 
@@ -38,14 +38,15 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 
 avalara_version = '2.0' # String | API version
-x_correlation_id = 'bb3c3258-4a6e-4dc8-a958-a699cfb3772e' # String | Unique correlation Id in a GUID format
 opts = {
+  x_correlation_id: 'c01c4ae6-a456-4171-9542-d2bea749dfd3', # String | Unique correlation Id in a GUID format
+  x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   issuer_command: AvalaraSdk::A1099::V2::IssuerCommand.new # IssuerCommand | The issuer to create
 }
 
 begin
   # Create an issuer
-  result = api_instance.create_issuer(avalara_version, x_correlation_id, opts)
+  result = api_instance.create_issuer(avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling Issuers1099Api->create_issuer: #{e}"
@@ -56,12 +57,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IssuerResponse>, Integer, Hash)> create_issuer_with_http_info(avalara_version, x_correlation_id, opts)
+> <Array(<IssuerResponse>, Integer, Hash)> create_issuer_with_http_info(avalara_version, opts)
 
 ```ruby
 begin
   # Create an issuer
-  data, status_code, headers = api_instance.create_issuer_with_http_info(avalara_version, x_correlation_id, opts)
+  data, status_code, headers = api_instance.create_issuer_with_http_info(avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <IssuerResponse>
@@ -75,7 +76,8 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **avalara_version** | **String** | API version |  |
-| **x_correlation_id** | **String** | Unique correlation Id in a GUID format |  |
+| **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
+| **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
 | **issuer_command** | [**IssuerCommand**](IssuerCommand.md) | The issuer to create | [optional] |
 
 ### Return type
@@ -94,7 +96,7 @@ end
 
 ## delete_issuer
 
-> delete_issuer(id, avalara_version, x_correlation_id)
+> delete_issuer(id, avalara_version, opts)
 
 Delete an issuer
 
@@ -120,11 +122,14 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 
 id = 'id_example' # String | Id of the issuer to delete
 avalara_version = '2.0' # String | API version
-x_correlation_id = 'ca05554f-4b06-4f80-ba5e-717d6edfcd67' # String | Unique correlation Id in a GUID format
+opts = {
+  x_correlation_id: 'a4cf1c4a-aba2-423e-b795-4f3b1aee3b0f', # String | Unique correlation Id in a GUID format
+  x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+}
 
 begin
   # Delete an issuer
-  api_instance.delete_issuer(id, avalara_version, x_correlation_id)
+  api_instance.delete_issuer(id, avalara_version, opts)
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling Issuers1099Api->delete_issuer: #{e}"
 end
@@ -134,12 +139,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> delete_issuer_with_http_info(id, avalara_version, x_correlation_id)
+> <Array(nil, Integer, Hash)> delete_issuer_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
   # Delete an issuer
-  data, status_code, headers = api_instance.delete_issuer_with_http_info(id, avalara_version, x_correlation_id)
+  data, status_code, headers = api_instance.delete_issuer_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -154,7 +159,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Id of the issuer to delete |  |
 | **avalara_version** | **String** | API version |  |
-| **x_correlation_id** | **String** | Unique correlation Id in a GUID format |  |
+| **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
+| **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
 
 ### Return type
 
@@ -172,7 +178,7 @@ nil (empty response body)
 
 ## get_issuer
 
-> <IssuerResponse> get_issuer(id, avalara_version, x_correlation_id)
+> <IssuerResponse> get_issuer(id, avalara_version, opts)
 
 Get an issuer
 
@@ -198,11 +204,14 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 
 id = 'id_example' # String | 
 avalara_version = '2.0' # String | API version
-x_correlation_id = 'ac852ed7-4d27-4844-bb38-3ad83c7ba46c' # String | Unique correlation Id in a GUID format
+opts = {
+  x_correlation_id: '7c125802-46dd-4703-a670-67a4a171b042', # String | Unique correlation Id in a GUID format
+  x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+}
 
 begin
   # Get an issuer
-  result = api_instance.get_issuer(id, avalara_version, x_correlation_id)
+  result = api_instance.get_issuer(id, avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling Issuers1099Api->get_issuer: #{e}"
@@ -213,12 +222,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IssuerResponse>, Integer, Hash)> get_issuer_with_http_info(id, avalara_version, x_correlation_id)
+> <Array(<IssuerResponse>, Integer, Hash)> get_issuer_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
   # Get an issuer
-  data, status_code, headers = api_instance.get_issuer_with_http_info(id, avalara_version, x_correlation_id)
+  data, status_code, headers = api_instance.get_issuer_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <IssuerResponse>
@@ -233,7 +242,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** |  |  |
 | **avalara_version** | **String** | API version |  |
-| **x_correlation_id** | **String** | Unique correlation Id in a GUID format |  |
+| **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
+| **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
 
 ### Return type
 
@@ -251,7 +261,7 @@ end
 
 ## get_issuers
 
-> <PaginatedQueryResultModelIssuerResponse> get_issuers(avalara_version, x_correlation_id, opts)
+> <PaginatedQueryResultModelIssuerResponse> get_issuers(avalara_version, opts)
 
 List issuers
 
@@ -276,19 +286,20 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 
 avalara_version = '2.0' # String | API version
-x_correlation_id = 'a48293cc-19f2-4971-9fde-c856cc131200' # String | Unique correlation Id in a GUID format
 opts = {
   filter: 'filter_example', # String | A filter statement to identify specific records to retrieve.  For more information on filtering, see <a href=\"https://developer.avalara.com/avatax/filtering-in-rest/\">Filtering in REST</a>.
   top: 56, # Integer | If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.
   skip: 56, # Integer | If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
-  count_only: true # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
+  count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
+  x_correlation_id: '82a4cc41-cbb7-4b0d-9385-c4cd9c6d087f', # String | Unique correlation Id in a GUID format
+  x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
 begin
   # List issuers
-  result = api_instance.get_issuers(avalara_version, x_correlation_id, opts)
+  result = api_instance.get_issuers(avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling Issuers1099Api->get_issuers: #{e}"
@@ -299,12 +310,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PaginatedQueryResultModelIssuerResponse>, Integer, Hash)> get_issuers_with_http_info(avalara_version, x_correlation_id, opts)
+> <Array(<PaginatedQueryResultModelIssuerResponse>, Integer, Hash)> get_issuers_with_http_info(avalara_version, opts)
 
 ```ruby
 begin
   # List issuers
-  data, status_code, headers = api_instance.get_issuers_with_http_info(avalara_version, x_correlation_id, opts)
+  data, status_code, headers = api_instance.get_issuers_with_http_info(avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <PaginatedQueryResultModelIssuerResponse>
@@ -318,13 +329,14 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **avalara_version** | **String** | API version |  |
-| **x_correlation_id** | **String** | Unique correlation Id in a GUID format |  |
 | **filter** | **String** | A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. | [optional] |
 | **top** | **Integer** | If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets. | [optional] |
 | **skip** | **Integer** | If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. | [optional] |
 | **order_by** | **String** | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC. | [optional] |
 | **count** | **Boolean** | If true, return the global count of elements in the collection. | [optional] |
 | **count_only** | **Boolean** | If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true. | [optional] |
+| **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
+| **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
 
 ### Return type
 
@@ -342,7 +354,7 @@ end
 
 ## update_issuer
 
-> update_issuer(id, avalara_version, x_correlation_id, opts)
+> update_issuer(id, avalara_version, opts)
 
 Update an issuer
 
@@ -368,14 +380,15 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 
 id = 'id_example' # String | Id of the issuer to Update
 avalara_version = '2.0' # String | API version
-x_correlation_id = '0c618dc9-79c1-424f-8b6a-6a80c766d673' # String | Unique correlation Id in a GUID format
 opts = {
+  x_correlation_id: '8d1cab49-aeb6-4655-abb0-d91b212b461f', # String | Unique correlation Id in a GUID format
+  x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   issuer_command: AvalaraSdk::A1099::V2::IssuerCommand.new # IssuerCommand | The issuer to update
 }
 
 begin
   # Update an issuer
-  api_instance.update_issuer(id, avalara_version, x_correlation_id, opts)
+  api_instance.update_issuer(id, avalara_version, opts)
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling Issuers1099Api->update_issuer: #{e}"
 end
@@ -385,12 +398,12 @@ end
 
 This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(nil, Integer, Hash)> update_issuer_with_http_info(id, avalara_version, x_correlation_id, opts)
+> <Array(nil, Integer, Hash)> update_issuer_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
   # Update an issuer
-  data, status_code, headers = api_instance.update_issuer_with_http_info(id, avalara_version, x_correlation_id, opts)
+  data, status_code, headers = api_instance.update_issuer_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => nil
@@ -405,7 +418,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Id of the issuer to Update |  |
 | **avalara_version** | **String** | API version |  |
-| **x_correlation_id** | **String** | Unique correlation Id in a GUID format |  |
+| **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
+| **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
 | **issuer_command** | [**IssuerCommand**](IssuerCommand.md) | The issuer to update | [optional] |
 
 ### Return type

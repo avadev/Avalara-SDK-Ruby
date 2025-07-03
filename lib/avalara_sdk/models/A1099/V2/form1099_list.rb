@@ -28,7 +28,7 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'data' => :'Array<Form1099ListDataInner>'
+        :'data' => :'Array<Get1099Form200Response>'
       }
     end
 

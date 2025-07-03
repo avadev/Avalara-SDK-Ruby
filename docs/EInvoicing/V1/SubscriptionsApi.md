@@ -288,8 +288,8 @@ avalara_version = 'avalara_version_example' # String | The version of the API to
 opts = {
   x_correlation_id: 'x_correlation_id_example', # String | A unique identifier for tracking the request and its response
   x_avalara_client: 'x_avalara_client_example', # String | Client application identification
-  top: 56, # Integer | The number of items to include in the result.
-  skip: 56, # Integer | The number of items to skip in the result.
+  top: 8.14, # Float | The number of items to include in the result.
+  skip: 8.14, # Float | The number of items to skip in the result.
   count: true, # Boolean | Whether to include the total count of records in the result.
   count_only: true # Boolean | Whether to return only the count of records, without the list of records.
 }
@@ -328,8 +328,8 @@ end
 | **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.3\&quot;. |  |
 | **x_correlation_id** | **String** | A unique identifier for tracking the request and its response | [optional] |
 | **x_avalara_client** | **String** | Client application identification | [optional] |
-| **top** | **Integer** | The number of items to include in the result. | [optional] |
-| **skip** | **Integer** | The number of items to skip in the result. | [optional] |
+| **top** | **Float** | The number of items to include in the result. | [optional] |
+| **skip** | **Float** | The number of items to skip in the result. | [optional] |
 | **count** | **Boolean** | Whether to include the total count of records in the result. | [optional] |
 | **count_only** | **Boolean** | Whether to return only the count of records, without the list of records. | [optional] |
 

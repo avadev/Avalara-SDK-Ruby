@@ -42,12 +42,12 @@
 | **address_verification_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
 | **reference_id** | **String** |  | [optional] |
 | **email** | **String** |  | [optional] |
-| **type_of_tin** | **String** |  | [optional] |
+| **tin_type** | **String** |  | [optional] |
 | **tin** | **String** |  | [optional] |
-| **first_payee_name** | **String** |  | [optional] |
-| **second_payee_name** | **String** |  | [optional] |
+| **recipient_name** | **String** |  | [optional] |
+| **recipient_second_name** | **String** |  | [optional] |
 | **address** | **String** |  | [optional] |
-| **address_recipient_second** | **String** |  | [optional] |
+| **address2** | **String** |  | [optional] |
 | **city** | **String** |  | [optional] |
 | **state** | **String** |  | [optional] |
 | **zip** | **String** |  | [optional] |
@@ -102,12 +102,12 @@ instance = AvalaraSdk::A1099::V2::Form1099R.new(
   address_verification_status: null,
   reference_id: null,
   email: null,
-  type_of_tin: null,
+  tin_type: null,
   tin: null,
-  first_payee_name: null,
-  second_payee_name: null,
+  recipient_name: null,
+  recipient_second_name: null,
   address: null,
-  address_recipient_second: null,
+  address2: null,
   city: null,
   state: null,
   zip: null,

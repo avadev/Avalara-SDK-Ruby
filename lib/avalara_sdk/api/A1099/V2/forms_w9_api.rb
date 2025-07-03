@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.6.0")
+        api_client.set_sdk_version("25.7.0")
         @api_client = api_client
       end
 
@@ -226,7 +226,7 @@ module AvalaraSdk::A1099
       end
     
       # Create a W9/W4/W8 form
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be created
+      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be created
       # @return [IW9FormDataModelsOneOf]
       def create_w9_form(request_parameters)
         data, _status_code, _headers = create_w9_form_with_http_info(request_parameters)
@@ -237,6 +237,7 @@ module AvalaraSdk::A1099
     
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be created    
       # @return [Array<(IW9FormDataModelsOneOf, Integer, Hash)>] IW9FormDataModelsOneOf data, response status code and response headers
       def create_w9_form_with_http_info(request_parameters)
@@ -245,14 +246,11 @@ module AvalaraSdk::A1099
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         iw9_form_data_models_one_of = request_parameters.get_iw9_form_data_models_one_of()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.create_w9_form"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling FormsW9Api.create_w9_form"
         end
         # resource path
         local_var_path = '/w9/forms'
@@ -274,6 +272,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -311,7 +312,7 @@ module AvalaraSdk::A1099
 
       # Delete a form
       # Delete a form
-      # @param id [String] Id of the form to delete      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format
+      # @param id [String] Id of the form to delete      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [nil]
       def delete_w9_form(request_parameters)
         delete_w9_form_with_http_info(request_parameters)
@@ -324,6 +325,7 @@ module AvalaraSdk::A1099
       # @param id [String] Id of the form to delete    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def delete_w9_form_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -332,6 +334,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling FormsW9Api.delete_w9_form"
@@ -339,10 +342,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.delete_w9_form"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling FormsW9Api.delete_w9_form"
         end
         # resource path
         local_var_path = '/w9/forms/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -359,6 +358,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -396,7 +398,7 @@ module AvalaraSdk::A1099
 
       # Retrieve a W9/W4/W8 form
       # Retrieve a W9/W4/W8 form
-      # @param id [String] Id of the form      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format
+      # @param id [String] Id of the form      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [IW9FormDataModelsOneOf]
       def get_w9_form(request_parameters)
         data, _status_code, _headers = get_w9_form_with_http_info(request_parameters)
@@ -409,6 +411,7 @@ module AvalaraSdk::A1099
       # @param id [String] Id of the form    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(IW9FormDataModelsOneOf, Integer, Hash)>] IW9FormDataModelsOneOf data, response status code and response headers
       def get_w9_form_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -417,6 +420,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling FormsW9Api.get_w9_form"
@@ -424,10 +428,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.get_w9_form"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling FormsW9Api.get_w9_form"
         end
         # resource path
         local_var_path = '/w9/forms/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -444,6 +444,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -479,94 +482,9 @@ module AvalaraSdk::A1099
         return data, response.code, response.headers
       end
 
-      # Retrieve a form request
-      # Retrieve a form request after creation: not likely to be useful except in testing. Previously-valid form requests will be Not Found after `expires_at`.
-      # @param form_request_id [String]       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format
-      # @return [FormRequestModel]
-      def get_w9_form_request(request_parameters)
-        data, _status_code, _headers = get_w9_form_request_with_http_info(request_parameters)
-        data
-      end
-
-      # Retrieve a form request
-      # Retrieve a form request after creation: not likely to be useful except in testing. Previously-valid form requests will be Not Found after &#x60;expires_at&#x60;.
-          
-      # @param form_request_id [String]     
-      # @param avalara_version [String] API version    
-      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
-      # @return [Array<(FormRequestModel, Integer, Hash)>] FormRequestModel data, response status code and response headers
-      def get_w9_form_request_with_http_info(request_parameters)
-        # OAuth2 Scopes
-        required_scopes = ''
-        # Request Parameters
-        form_request_id = request_parameters.get_form_request_id()
-        avalara_version = request_parameters.get_avalara_version()
-        x_correlation_id = request_parameters.get_x_correlation_id()
-        # verify the required parameter 'form_request_id' is set
-        if @api_client.config.client_side_validation && form_request_id.nil?
-          fail ArgumentError, "Missing the required parameter 'form_request_id' when calling FormsW9Api.get_w9_form_request"
-        end
-        # verify the required parameter 'avalara_version' is set
-        if @api_client.config.client_side_validation && avalara_version.nil?
-          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.get_w9_form_request"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling FormsW9Api.get_w9_form_request"
-        end
-        # resource path
-        local_var_path = '/w9/forms/requests/{formRequestId}'.sub('{' + 'formRequestId' + '}', CGI.escape(form_request_id.to_s))
-
-        # query parameters
-        query_params = {}
-
-        # header parameters
-        header_params = {}
-        # HTTP header 'Accept' (if needed)
-        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-        if !avalara_version.nil?
-          header_params[:'avalara-version'] = avalara_version
-        end
-        if !x_correlation_id.nil?
-          header_params[:'X-Correlation-Id'] = x_correlation_id
-        end
-
-        # form parameters
-        form_params = {}
-
-        # http body (model)
-        post_body = {}
-
-        # return_type
-        return_type = 'FormRequestModel'
-
-        # auth_names
-        auth_names = ['bearer']
-
-        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
-
-        new_options = {
-          :operation => :"FormsW9Api.get_w9_form_request",
-          :header_params => header_params,
-          :query_params => query_params,
-          :form_params => form_params,
-          :body => post_body,
-          :auth_names => auth_names,
-          :return_type => return_type
-        }
-
-        response = @api_client.call_api(:GET, local_var_path, new_options, required_scopes, false, :A1099)
-        if new_options[:return_type]
-          data = deserialize(response, new_options[:return_type])
-        else
-          data = nil
-        end
-        return data, response.code, response.headers
-      end
-
       # List W9/W4/W8 forms.
       # List W9/W4/W8 forms.
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] When true, returns a @recordSetCount in the result set
+      # @param avalara_version [String] API version      # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] When true, returns a @recordSetCount in the result set      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [PaginatedW9FormsModel]
       def list_w9_forms(request_parameters)
         data, _status_code, _headers = list_w9_forms_with_http_info(request_parameters)
@@ -577,31 +495,29 @@ module AvalaraSdk::A1099
       # List W9/W4/W8 forms.
           
       # @param avalara_version [String] API version    
-      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    
       # @param top [Integer] If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.    
       # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.    
       # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.    
       # @param count [Boolean] When true, returns a @recordSetCount in the result set    
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(PaginatedW9FormsModel, Integer, Hash)>] PaginatedW9FormsModel data, response status code and response headers
       def list_w9_forms_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
-        x_correlation_id = request_parameters.get_x_correlation_id()
         filter = request_parameters.get_filter()
         top = request_parameters.get_top()
         skip = request_parameters.get_skip()
         order_by = request_parameters.get_order_by()
         count = request_parameters.get_count()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.list_w9_forms"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling FormsW9Api.list_w9_forms"
         end
         # resource path
         local_var_path = '/w9/forms'
@@ -633,6 +549,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -669,7 +588,7 @@ module AvalaraSdk::A1099
       end
 
       # Sends a W9 email request to a vendor/payee
-      # @param id [String] The ID of the W9/W4/W8 form.      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format
+      # @param id [String] The ID of the W9/W4/W8 form.      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [IW9FormDataModelsOneOf]
       def send_w9_form_email(request_parameters)
         data, _status_code, _headers = send_w9_form_email_with_http_info(request_parameters)
@@ -681,6 +600,7 @@ module AvalaraSdk::A1099
       # @param id [String] The ID of the W9/W4/W8 form.    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(IW9FormDataModelsOneOf, Integer, Hash)>] IW9FormDataModelsOneOf data, response status code and response headers
       def send_w9_form_email_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -689,6 +609,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling FormsW9Api.send_w9_form_email"
@@ -696,10 +617,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.send_w9_form_email"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling FormsW9Api.send_w9_form_email"
         end
         # resource path
         local_var_path = '/w9/forms/{id}/$send-email'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -716,6 +633,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -752,7 +672,7 @@ module AvalaraSdk::A1099
       end
 
       # Update a W9/W4/W8 form
-      # @param id [String] Id of the form to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be updated
+      # @param id [String] Id of the form to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be updated
       # @return [IW9FormDataModelsOneOf]
       def update_w9_form(request_parameters)
         data, _status_code, _headers = update_w9_form_with_http_info(request_parameters)
@@ -764,6 +684,7 @@ module AvalaraSdk::A1099
       # @param id [String] Id of the form to update    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be updated    
       # @return [Array<(IW9FormDataModelsOneOf, Integer, Hash)>] IW9FormDataModelsOneOf data, response status code and response headers
       def update_w9_form_with_http_info(request_parameters)
@@ -773,6 +694,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         iw9_form_data_models_one_of = request_parameters.get_iw9_form_data_models_one_of()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
@@ -781,10 +703,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.update_w9_form"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling FormsW9Api.update_w9_form"
         end
         # resource path
         local_var_path = '/w9/forms/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -806,6 +724,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -843,7 +764,7 @@ module AvalaraSdk::A1099
 
       # Upload files for a W9/W4/W8 form
       # Upload files for a W9/W4/W8 form
-      # @param id [String] Id of the form      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param file [File] 
+      # @param id [String] Id of the form      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param file [File] 
       # @return [String]
       def upload_w9_files(request_parameters)
         data, _status_code, _headers = upload_w9_files_with_http_info(request_parameters)
@@ -856,6 +777,7 @@ module AvalaraSdk::A1099
       # @param id [String] Id of the form    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param file [File]     
       # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
       def upload_w9_files_with_http_info(request_parameters)
@@ -865,6 +787,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         file = request_parameters.get_file()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
@@ -873,10 +796,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.upload_w9_files"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling FormsW9Api.upload_w9_files"
         end
         # resource path
         local_var_path = '/w9/forms/{id}/attachment'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -898,6 +817,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -939,13 +861,16 @@ module AvalaraSdk::A1099
     # Represents the Request object for the CreateW9Form API
     #
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     # @param  IW9FormDataModelsOneOf $iw9_form_data_models_one_of Form to be created (optional)
     #
     class CreateW9FormRequestSdk
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         attr_accessor :iw9_form_data_models_one_of
 
@@ -968,6 +893,14 @@ module AvalaraSdk::A1099
             @x_correlation_id = x_correlation_id
         end
 
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
         def get_iw9_form_data_models_one_of()
             return @iw9_form_data_models_one_of
         end
@@ -980,7 +913,8 @@ module AvalaraSdk::A1099
     #
     # @param  String $id Id of the form to delete (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class DeleteW9FormRequestSdk
         attr_accessor :id
@@ -989,6 +923,8 @@ module AvalaraSdk::A1099
 
         attr_accessor :x_correlation_id
 
+        attr_accessor :x_avalara_client
+
         def initialize()
         end
 
@@ -1015,12 +951,21 @@ module AvalaraSdk::A1099
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
         end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the GetW9Form API
     #
     # @param  String $id Id of the form (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class GetW9FormRequestSdk
         attr_accessor :id
@@ -1029,6 +974,8 @@ module AvalaraSdk::A1099
 
         attr_accessor :x_correlation_id
 
+        attr_accessor :x_avalara_client
+
         def initialize()
         end
 
@@ -1055,61 +1002,28 @@ module AvalaraSdk::A1099
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
         end
-    end
-    # Represents the Request object for the GetW9FormRequest API
-    #
-    # @param  String $form_request_id  (required)
-    # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
-    #
-    class GetW9FormRequestRequestSdk
-        attr_accessor :form_request_id
 
-        attr_accessor :avalara_version
-
-        attr_accessor :x_correlation_id
-
-        def initialize()
+        def get_x_avalara_client()
+            return @x_avalara_client
         end
 
-        def get_form_request_id()
-            return @form_request_id
-        end
-
-        def set_form_request_id(form_request_id)
-            @form_request_id = form_request_id
-        end
-
-        def get_avalara_version()
-            return @avalara_version || '2.0'
-        end
-
-        def set_avalara_version(avalara_version)
-            @avalara_version = avalara_version
-        end
-
-        def get_x_correlation_id()
-            return @x_correlation_id
-        end
-
-        def set_x_correlation_id(x_correlation_id)
-            @x_correlation_id = x_correlation_id
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
         end
     end
     # Represents the Request object for the ListW9Forms API
     #
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
     # @param  String $filter A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. (optional)
     # @param  Integer $top If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records. (optional, default to 10)
     # @param  Integer $skip If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. (optional, default to 0)
     # @param  String $order_by A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC. (optional)
     # @param  Boolean $count When true, returns a @recordSetCount in the result set (optional)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class ListW9FormsRequestSdk
         attr_accessor :avalara_version
-
-        attr_accessor :x_correlation_id
 
         attr_accessor :filter
 
@@ -1121,6 +1035,10 @@ module AvalaraSdk::A1099
 
         attr_accessor :count
 
+        attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
+
         def initialize()
         end
 
@@ -1130,14 +1048,6 @@ module AvalaraSdk::A1099
 
         def set_avalara_version(avalara_version)
             @avalara_version = avalara_version
-        end
-
-        def get_x_correlation_id()
-            return @x_correlation_id
-        end
-
-        def set_x_correlation_id(x_correlation_id)
-            @x_correlation_id = x_correlation_id
         end
 
         def get_filter()
@@ -1179,12 +1089,29 @@ module AvalaraSdk::A1099
         def set_count(count)
             @count = count
         end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the SendW9FormEmail API
     #
     # @param  String $id The ID of the W9/W4/W8 form. (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class SendW9FormEmailRequestSdk
         attr_accessor :id
@@ -1192,6 +1119,8 @@ module AvalaraSdk::A1099
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         def initialize()
         end
@@ -1219,12 +1148,21 @@ module AvalaraSdk::A1099
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
         end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the UpdateW9Form API
     #
     # @param  String $id Id of the form to update (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     # @param  IW9FormDataModelsOneOf $iw9_form_data_models_one_of Form to be updated (optional)
     #
     class UpdateW9FormRequestSdk
@@ -1233,6 +1171,8 @@ module AvalaraSdk::A1099
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         attr_accessor :iw9_form_data_models_one_of
 
@@ -1263,6 +1203,14 @@ module AvalaraSdk::A1099
             @x_correlation_id = x_correlation_id
         end
 
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
         def get_iw9_form_data_models_one_of()
             return @iw9_form_data_models_one_of
         end
@@ -1275,7 +1223,8 @@ module AvalaraSdk::A1099
     #
     # @param  String $id Id of the form (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     # @param  File $file file (optional)
     #
     class UploadW9FilesRequestSdk
@@ -1284,6 +1233,8 @@ module AvalaraSdk::A1099
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         attr_accessor :file
 
@@ -1312,6 +1263,14 @@ module AvalaraSdk::A1099
 
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
         end
 
         def get_file()

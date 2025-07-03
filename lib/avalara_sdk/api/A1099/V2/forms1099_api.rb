@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.6.0")
+        api_client.set_sdk_version("25.7.0")
         @api_client = api_client
       end
 
@@ -226,8 +226,8 @@ module AvalaraSdk::A1099
       end
     
       # Creates or updates multiple 1099 forms.
-      # This endpoint allows you to create or update multiple 1099 forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  ```json  {     \"formType\": \"1099-MISC\",     \"forms\": [         {             \"IssuerId\": \"123456\",             \"IssuerReferenceId\": \"REF123\",             \"IssuerTin\": \"12-3456789\",             \"TaxYear\": 2023,             \"ReferenceId\": \"FORM123456\",             \"RecipientName\": \"John Doe\",             \"RecipientTin\": \"987-65-4321\",             \"TinType\": 1,             \"RecipientSecondName\": \"Jane Doe\",             \"StreetAddress\": \"123 Main Street\",             \"StreetAddressLine2\": \"Apt 4B\",             \"City\": \"New York\",             \"State\": \"NY\",             \"Zip\": \"10001\",             \"RecipientEmail\": \"john.doe@email.com\",             \"AccountNumber\": \"ACC123456\",             \"OfficeCode\": \"NYC01\",             \"SecondTinNotice\": false,             \"RecipientNonUsProvince\": \"\",             \"CountryCode\": \"US\",             \"Rents\": 12000.00,             \"Royalties\": 5000.00,             \"OtherIncome\": 3000.00,             \"FishingBoatProceeds\": 0.00,             \"MedicalHealthCarePayments\": 15000.00,             \"SubstitutePayments\": 1000.00,             \"CropInsuranceProceeds\": 0.00,             \"GrossProceedsPaidToAttorney\": 7500.00,             \"FishPurchasedForResale\": 0.00,             \"FedIncomeTaxWithheld\": 5000.00,             \"Section409ADeferrals\": 0.00,             \"ExcessGoldenParachutePayments\": 0.00,             \"NonqualifiedDeferredCompensation\": 0.00,             \"PayerMadeDirectSales\": false,             \"FatcaFilingRequirement\": false,             \"StateAndLocalWithholding\": {               \"StateTaxWithheld\": 2500.00,               \"LocalTaxWithheld\": 1000.00,               \"State\": \"NY\",               \"StateIdNumber\": \"NY123456\",               \"Locality\": \"New York City\",               \"StateIncome\": 35000.00,               \"LocalIncome\": 35000.00             }         }     ]  }  ```                **Form 1099-NEC:**  ```json  {    \"formType\": \"1099-NEC\",    \"forms\": [      {        \"issuerID\": \"180337282\",        \"issuerReferenceId\": \"ISS123\",        \"issuerTin\": \"12-3000000\",        \"taxYear\": 2024,        \"referenceID\": \"REF-002\",        \"recipientName\": \"Jane Smith\",        \"recipientSecondName\": \"\",        \"recipientTin\": \"987-65-4321\",        \"tinType\": 1,        \"streetAddress\": \"123 Center St\",        \"streetAddressLine2\": \"\",        \"city\": \"Santa Monica\",        \"state\": \"CA\",        \"zip\": \"90401\",        \"countryCode\": \"US\",        \"recipientNonUsProvince\": \"\",        \"recipientEmail\": \"\",        \"accountNumber\": \"\",        \"officeCode\": \"\",        \"secondTinNotice\": false,        \"nonemployeeCompensation\": 123.45,        \"payerMadeDirectSales\": false,        \"federalIncomeTaxWithheld\": 12.34,        \"stateAndLocalWithholding\": {          \"state\": \"CA\",          \"stateIdNumber\": \"123123123\"          \"stateIncome\": 123.45,          \"stateTaxWithheld\": 12.34,          \"locality\": \"Santa Monica\",          \"localityIdNumber\": \"456456\",          \"localTaxWithheld\": 12.34          \"localIncome\": 50000.00         },        \"federalEFile\": true,        \"postalMail\": true,        \"stateEFile\": true,        \"tinMatch\": true,        \"addressVerification\": true       }     ]   }  ```  For the full version of the payload and its schema details, refer to the Swagger schemas section.
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param dry_run [Boolean]       # @param bulk_upsert1099_forms_request [BulkUpsert1099FormsRequest] 
+      # This endpoint allows you to create or update multiple 1099 forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  ```json  {     \"formType\": \"1099-MISC\",     \"forms\": [         {             \"IssuerId\": \"123456\",             \"IssuerReferenceId\": \"REF123\",             \"IssuerTin\": \"12-3456789\",             \"TaxYear\": 2023,             \"ReferenceId\": \"FORM123456\",             \"RecipientName\": \"John Doe\",             \"RecipientTin\": \"987-65-4321\",             \"TinType\": \"IEN\",             \"RecipientSecondName\": \"Jane Doe\",             \"Address\": \"123 Main Street\",             \"Address2\": \"Apt 4B\",             \"City\": \"New York\",             \"State\": \"NY\",             \"Zip\": \"10001\",             \"RecipientEmail\": \"john.doe@email.com\",             \"AccountNumber\": \"ACC123456\",             \"OfficeCode\": \"NYC01\",             \"SecondTinNotice\": false,             \"RecipientNonUsProvince\": \"\",             \"CountryCode\": \"US\",             \"Rents\": 12000.00,             \"Royalties\": 5000.00,             \"OtherIncome\": 3000.00,             \"FishingBoatProceeds\": 0.00,             \"MedicalHealthCarePayments\": 15000.00,             \"SubstitutePayments\": 1000.00,             \"CropInsuranceProceeds\": 0.00,             \"GrossProceedsPaidToAttorney\": 7500.00,             \"FishPurchasedForResale\": 0.00,             \"FedIncomeTaxWithheld\": 5000.00,             \"Section409ADeferrals\": 0.00,             \"ExcessGoldenParachutePayments\": 0.00,             \"NonqualifiedDeferredCompensation\": 0.00,             \"PayerMadeDirectSales\": false,             \"FatcaFilingRequirement\": false,             \"StateAndLocalWithholding\": {               \"StateTaxWithheld\": 2500.00,               \"LocalTaxWithheld\": 1000.00,               \"State\": \"NY\",               \"StateIdNumber\": \"NY123456\",               \"Locality\": \"New York City\",               \"StateIncome\": 35000.00,               \"LocalIncome\": 35000.00             }         }     ]  }  ```                **Form 1099-NEC:**  ```json  {    \"formType\": \"1099-NEC\",    \"forms\": [      {        \"issuerID\": \"180337282\",        \"issuerReferenceId\": \"ISS123\",        \"issuerTin\": \"12-3000000\",        \"taxYear\": 2024,        \"referenceID\": \"REF-002\",        \"recipientName\": \"Jane Smith\",        \"recipientSecondName\": \"\",        \"recipientTin\": \"987-65-4321\",        \"tinType\": \"IEN\",        \"address\": \"123 Center St\",        \"address2\": \"\",        \"city\": \"Santa Monica\",        \"state\": \"CA\",        \"zip\": \"90401\",        \"countryCode\": \"US\",        \"recipientNonUsProvince\": \"\",        \"recipientEmail\": \"\",        \"accountNumber\": \"\",        \"officeCode\": \"\",        \"secondTinNotice\": false,        \"nonemployeeCompensation\": 123.45,        \"payerMadeDirectSales\": false,        \"federalIncomeTaxWithheld\": 12.34,        \"stateAndLocalWithholding\": {          \"state\": \"CA\",          \"stateIdNumber\": \"123123123\"          \"stateIncome\": 123.45,          \"stateTaxWithheld\": 12.34,          \"locality\": \"Santa Monica\",          \"localityIdNumber\": \"456456\",          \"localTaxWithheld\": 12.34          \"localIncome\": 50000.00         },        \"federalEFile\": true,        \"postalMail\": true,        \"stateEFile\": true,        \"tinMatch\": true,        \"addressVerification\": true       }     ]   }  ```  For the full version of the payload and its schema details, refer to the Swagger schemas section.
+      # @param avalara_version [String] API version      # @param dry_run [Boolean]       # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param bulk_upsert1099_forms_request [BulkUpsert1099FormsRequest] 
       # @return [Form1099ProccessResult]
       def bulk_upsert1099_forms(request_parameters)
         data, _status_code, _headers = bulk_upsert1099_forms_with_http_info(request_parameters)
@@ -235,11 +235,12 @@ module AvalaraSdk::A1099
       end
 
       # Creates or updates multiple 1099 forms.
-      # This endpoint allows you to create or update multiple 1099 forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  &#x60;&#x60;&#x60;json  {     \&quot;formType\&quot;: \&quot;1099-MISC\&quot;,     \&quot;forms\&quot;: [         {             \&quot;IssuerId\&quot;: \&quot;123456\&quot;,             \&quot;IssuerReferenceId\&quot;: \&quot;REF123\&quot;,             \&quot;IssuerTin\&quot;: \&quot;12-3456789\&quot;,             \&quot;TaxYear\&quot;: 2023,             \&quot;ReferenceId\&quot;: \&quot;FORM123456\&quot;,             \&quot;RecipientName\&quot;: \&quot;John Doe\&quot;,             \&quot;RecipientTin\&quot;: \&quot;987-65-4321\&quot;,             \&quot;TinType\&quot;: 1,             \&quot;RecipientSecondName\&quot;: \&quot;Jane Doe\&quot;,             \&quot;StreetAddress\&quot;: \&quot;123 Main Street\&quot;,             \&quot;StreetAddressLine2\&quot;: \&quot;Apt 4B\&quot;,             \&quot;City\&quot;: \&quot;New York\&quot;,             \&quot;State\&quot;: \&quot;NY\&quot;,             \&quot;Zip\&quot;: \&quot;10001\&quot;,             \&quot;RecipientEmail\&quot;: \&quot;john.doe@email.com\&quot;,             \&quot;AccountNumber\&quot;: \&quot;ACC123456\&quot;,             \&quot;OfficeCode\&quot;: \&quot;NYC01\&quot;,             \&quot;SecondTinNotice\&quot;: false,             \&quot;RecipientNonUsProvince\&quot;: \&quot;\&quot;,             \&quot;CountryCode\&quot;: \&quot;US\&quot;,             \&quot;Rents\&quot;: 12000.00,             \&quot;Royalties\&quot;: 5000.00,             \&quot;OtherIncome\&quot;: 3000.00,             \&quot;FishingBoatProceeds\&quot;: 0.00,             \&quot;MedicalHealthCarePayments\&quot;: 15000.00,             \&quot;SubstitutePayments\&quot;: 1000.00,             \&quot;CropInsuranceProceeds\&quot;: 0.00,             \&quot;GrossProceedsPaidToAttorney\&quot;: 7500.00,             \&quot;FishPurchasedForResale\&quot;: 0.00,             \&quot;FedIncomeTaxWithheld\&quot;: 5000.00,             \&quot;Section409ADeferrals\&quot;: 0.00,             \&quot;ExcessGoldenParachutePayments\&quot;: 0.00,             \&quot;NonqualifiedDeferredCompensation\&quot;: 0.00,             \&quot;PayerMadeDirectSales\&quot;: false,             \&quot;FatcaFilingRequirement\&quot;: false,             \&quot;StateAndLocalWithholding\&quot;: {               \&quot;StateTaxWithheld\&quot;: 2500.00,               \&quot;LocalTaxWithheld\&quot;: 1000.00,               \&quot;State\&quot;: \&quot;NY\&quot;,               \&quot;StateIdNumber\&quot;: \&quot;NY123456\&quot;,               \&quot;Locality\&quot;: \&quot;New York City\&quot;,               \&quot;StateIncome\&quot;: 35000.00,               \&quot;LocalIncome\&quot;: 35000.00             }         }     ]  }  &#x60;&#x60;&#x60;                **Form 1099-NEC:**  &#x60;&#x60;&#x60;json  {    \&quot;formType\&quot;: \&quot;1099-NEC\&quot;,    \&quot;forms\&quot;: [      {        \&quot;issuerID\&quot;: \&quot;180337282\&quot;,        \&quot;issuerReferenceId\&quot;: \&quot;ISS123\&quot;,        \&quot;issuerTin\&quot;: \&quot;12-3000000\&quot;,        \&quot;taxYear\&quot;: 2024,        \&quot;referenceID\&quot;: \&quot;REF-002\&quot;,        \&quot;recipientName\&quot;: \&quot;Jane Smith\&quot;,        \&quot;recipientSecondName\&quot;: \&quot;\&quot;,        \&quot;recipientTin\&quot;: \&quot;987-65-4321\&quot;,        \&quot;tinType\&quot;: 1,        \&quot;streetAddress\&quot;: \&quot;123 Center St\&quot;,        \&quot;streetAddressLine2\&quot;: \&quot;\&quot;,        \&quot;city\&quot;: \&quot;Santa Monica\&quot;,        \&quot;state\&quot;: \&quot;CA\&quot;,        \&quot;zip\&quot;: \&quot;90401\&quot;,        \&quot;countryCode\&quot;: \&quot;US\&quot;,        \&quot;recipientNonUsProvince\&quot;: \&quot;\&quot;,        \&quot;recipientEmail\&quot;: \&quot;\&quot;,        \&quot;accountNumber\&quot;: \&quot;\&quot;,        \&quot;officeCode\&quot;: \&quot;\&quot;,        \&quot;secondTinNotice\&quot;: false,        \&quot;nonemployeeCompensation\&quot;: 123.45,        \&quot;payerMadeDirectSales\&quot;: false,        \&quot;federalIncomeTaxWithheld\&quot;: 12.34,        \&quot;stateAndLocalWithholding\&quot;: {          \&quot;state\&quot;: \&quot;CA\&quot;,          \&quot;stateIdNumber\&quot;: \&quot;123123123\&quot;          \&quot;stateIncome\&quot;: 123.45,          \&quot;stateTaxWithheld\&quot;: 12.34,          \&quot;locality\&quot;: \&quot;Santa Monica\&quot;,          \&quot;localityIdNumber\&quot;: \&quot;456456\&quot;,          \&quot;localTaxWithheld\&quot;: 12.34          \&quot;localIncome\&quot;: 50000.00         },        \&quot;federalEFile\&quot;: true,        \&quot;postalMail\&quot;: true,        \&quot;stateEFile\&quot;: true,        \&quot;tinMatch\&quot;: true,        \&quot;addressVerification\&quot;: true       }     ]   }  &#x60;&#x60;&#x60;  For the full version of the payload and its schema details, refer to the Swagger schemas section.
+      # This endpoint allows you to create or update multiple 1099 forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  &#x60;&#x60;&#x60;json  {     \&quot;formType\&quot;: \&quot;1099-MISC\&quot;,     \&quot;forms\&quot;: [         {             \&quot;IssuerId\&quot;: \&quot;123456\&quot;,             \&quot;IssuerReferenceId\&quot;: \&quot;REF123\&quot;,             \&quot;IssuerTin\&quot;: \&quot;12-3456789\&quot;,             \&quot;TaxYear\&quot;: 2023,             \&quot;ReferenceId\&quot;: \&quot;FORM123456\&quot;,             \&quot;RecipientName\&quot;: \&quot;John Doe\&quot;,             \&quot;RecipientTin\&quot;: \&quot;987-65-4321\&quot;,             \&quot;TinType\&quot;: \&quot;IEN\&quot;,             \&quot;RecipientSecondName\&quot;: \&quot;Jane Doe\&quot;,             \&quot;Address\&quot;: \&quot;123 Main Street\&quot;,             \&quot;Address2\&quot;: \&quot;Apt 4B\&quot;,             \&quot;City\&quot;: \&quot;New York\&quot;,             \&quot;State\&quot;: \&quot;NY\&quot;,             \&quot;Zip\&quot;: \&quot;10001\&quot;,             \&quot;RecipientEmail\&quot;: \&quot;john.doe@email.com\&quot;,             \&quot;AccountNumber\&quot;: \&quot;ACC123456\&quot;,             \&quot;OfficeCode\&quot;: \&quot;NYC01\&quot;,             \&quot;SecondTinNotice\&quot;: false,             \&quot;RecipientNonUsProvince\&quot;: \&quot;\&quot;,             \&quot;CountryCode\&quot;: \&quot;US\&quot;,             \&quot;Rents\&quot;: 12000.00,             \&quot;Royalties\&quot;: 5000.00,             \&quot;OtherIncome\&quot;: 3000.00,             \&quot;FishingBoatProceeds\&quot;: 0.00,             \&quot;MedicalHealthCarePayments\&quot;: 15000.00,             \&quot;SubstitutePayments\&quot;: 1000.00,             \&quot;CropInsuranceProceeds\&quot;: 0.00,             \&quot;GrossProceedsPaidToAttorney\&quot;: 7500.00,             \&quot;FishPurchasedForResale\&quot;: 0.00,             \&quot;FedIncomeTaxWithheld\&quot;: 5000.00,             \&quot;Section409ADeferrals\&quot;: 0.00,             \&quot;ExcessGoldenParachutePayments\&quot;: 0.00,             \&quot;NonqualifiedDeferredCompensation\&quot;: 0.00,             \&quot;PayerMadeDirectSales\&quot;: false,             \&quot;FatcaFilingRequirement\&quot;: false,             \&quot;StateAndLocalWithholding\&quot;: {               \&quot;StateTaxWithheld\&quot;: 2500.00,               \&quot;LocalTaxWithheld\&quot;: 1000.00,               \&quot;State\&quot;: \&quot;NY\&quot;,               \&quot;StateIdNumber\&quot;: \&quot;NY123456\&quot;,               \&quot;Locality\&quot;: \&quot;New York City\&quot;,               \&quot;StateIncome\&quot;: 35000.00,               \&quot;LocalIncome\&quot;: 35000.00             }         }     ]  }  &#x60;&#x60;&#x60;                **Form 1099-NEC:**  &#x60;&#x60;&#x60;json  {    \&quot;formType\&quot;: \&quot;1099-NEC\&quot;,    \&quot;forms\&quot;: [      {        \&quot;issuerID\&quot;: \&quot;180337282\&quot;,        \&quot;issuerReferenceId\&quot;: \&quot;ISS123\&quot;,        \&quot;issuerTin\&quot;: \&quot;12-3000000\&quot;,        \&quot;taxYear\&quot;: 2024,        \&quot;referenceID\&quot;: \&quot;REF-002\&quot;,        \&quot;recipientName\&quot;: \&quot;Jane Smith\&quot;,        \&quot;recipientSecondName\&quot;: \&quot;\&quot;,        \&quot;recipientTin\&quot;: \&quot;987-65-4321\&quot;,        \&quot;tinType\&quot;: \&quot;IEN\&quot;,        \&quot;address\&quot;: \&quot;123 Center St\&quot;,        \&quot;address2\&quot;: \&quot;\&quot;,        \&quot;city\&quot;: \&quot;Santa Monica\&quot;,        \&quot;state\&quot;: \&quot;CA\&quot;,        \&quot;zip\&quot;: \&quot;90401\&quot;,        \&quot;countryCode\&quot;: \&quot;US\&quot;,        \&quot;recipientNonUsProvince\&quot;: \&quot;\&quot;,        \&quot;recipientEmail\&quot;: \&quot;\&quot;,        \&quot;accountNumber\&quot;: \&quot;\&quot;,        \&quot;officeCode\&quot;: \&quot;\&quot;,        \&quot;secondTinNotice\&quot;: false,        \&quot;nonemployeeCompensation\&quot;: 123.45,        \&quot;payerMadeDirectSales\&quot;: false,        \&quot;federalIncomeTaxWithheld\&quot;: 12.34,        \&quot;stateAndLocalWithholding\&quot;: {          \&quot;state\&quot;: \&quot;CA\&quot;,          \&quot;stateIdNumber\&quot;: \&quot;123123123\&quot;          \&quot;stateIncome\&quot;: 123.45,          \&quot;stateTaxWithheld\&quot;: 12.34,          \&quot;locality\&quot;: \&quot;Santa Monica\&quot;,          \&quot;localityIdNumber\&quot;: \&quot;456456\&quot;,          \&quot;localTaxWithheld\&quot;: 12.34          \&quot;localIncome\&quot;: 50000.00         },        \&quot;federalEFile\&quot;: true,        \&quot;postalMail\&quot;: true,        \&quot;stateEFile\&quot;: true,        \&quot;tinMatch\&quot;: true,        \&quot;addressVerification\&quot;: true       }     ]   }  &#x60;&#x60;&#x60;  For the full version of the payload and its schema details, refer to the Swagger schemas section.
           
       # @param avalara_version [String] API version    
-      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param dry_run [Boolean]     
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param bulk_upsert1099_forms_request [BulkUpsert1099FormsRequest]     
       # @return [Array<(Form1099ProccessResult, Integer, Hash)>] Form1099ProccessResult data, response status code and response headers
       def bulk_upsert1099_forms_with_http_info(request_parameters)
@@ -247,16 +248,13 @@ module AvalaraSdk::A1099
         required_scopes = ''
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
-        x_correlation_id = request_parameters.get_x_correlation_id()
         dry_run = request_parameters.get_dry_run()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         bulk_upsert1099_forms_request = request_parameters.get_bulk_upsert1099_forms_request()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Forms1099Api.bulk_upsert1099_forms"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling Forms1099Api.bulk_upsert1099_forms"
         end
         # resource path
         local_var_path = '/1099/forms/$bulk-upsert'
@@ -281,6 +279,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -317,8 +318,8 @@ module AvalaraSdk::A1099
       end
 
       # Creates a 1099 form.
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param i_create_form1099_request [ICreateForm1099Request] 
-      # @return [FormResponseBase]
+      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param i_create_form1099_request [ICreateForm1099Request] 
+      # @return [Get1099Form200Response]
       def create1099_form(request_parameters)
         data, _status_code, _headers = create1099_form_with_http_info(request_parameters)
         data
@@ -328,22 +329,20 @@ module AvalaraSdk::A1099
     
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param i_create_form1099_request [ICreateForm1099Request]     
-      # @return [Array<(FormResponseBase, Integer, Hash)>] FormResponseBase data, response status code and response headers
+      # @return [Array<(Get1099Form200Response, Integer, Hash)>] Get1099Form200Response data, response status code and response headers
       def create1099_form_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         i_create_form1099_request = request_parameters.get_i_create_form1099_request()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Forms1099Api.create1099_form"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling Forms1099Api.create1099_form"
         end
         # resource path
         local_var_path = '/1099/forms'
@@ -366,6 +365,9 @@ module AvalaraSdk::A1099
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
         end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
 
         # form parameters
         form_params = {}
@@ -374,7 +376,7 @@ module AvalaraSdk::A1099
         post_body =  @api_client.object_to_http_body(i_create_form1099_request) || {}
 
         # return_type
-        return_type = 'FormResponseBase'
+        return_type = 'Get1099Form200Response'
 
         # auth_names
         auth_names = ['bearer']
@@ -401,7 +403,7 @@ module AvalaraSdk::A1099
       end
 
       # Deletes a 1099 form.
-      # @param id [String] The unique identifier of the desired form to delete.      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format
+      # @param id [String] The unique identifier of the desired form to delete.      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [nil]
       def delete1099_form(request_parameters)
         delete1099_form_with_http_info(request_parameters)
@@ -413,6 +415,7 @@ module AvalaraSdk::A1099
       # @param id [String] The unique identifier of the desired form to delete.    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def delete1099_form_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -421,6 +424,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling Forms1099Api.delete1099_form"
@@ -428,10 +432,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Forms1099Api.delete1099_form"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling Forms1099Api.delete1099_form"
         end
         # resource path
         local_var_path = '/1099/forms/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -448,6 +448,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -484,8 +487,8 @@ module AvalaraSdk::A1099
       end
 
       # Retrieves a 1099 form.
-      # @param id [String]       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format
-      # @return [FormResponseBase]
+      # @param id [String]       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # @return [Get1099Form200Response]
       def get1099_form(request_parameters)
         data, _status_code, _headers = get1099_form_with_http_info(request_parameters)
         data
@@ -496,7 +499,8 @@ module AvalaraSdk::A1099
       # @param id [String]     
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
-      # @return [Array<(FormResponseBase, Integer, Hash)>] FormResponseBase data, response status code and response headers
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
+      # @return [Array<(Get1099Form200Response, Integer, Hash)>] Get1099Form200Response data, response status code and response headers
       def get1099_form_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -504,6 +508,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling Forms1099Api.get1099_form"
@@ -511,10 +516,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Forms1099Api.get1099_form"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling Forms1099Api.get1099_form"
         end
         # resource path
         local_var_path = '/1099/forms/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -532,6 +533,9 @@ module AvalaraSdk::A1099
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
         end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
 
         # form parameters
         form_params = {}
@@ -540,7 +544,7 @@ module AvalaraSdk::A1099
         post_body = {}
 
         # return_type
-        return_type = 'FormResponseBase'
+        return_type = 'Get1099Form200Response'
 
         # auth_names
         auth_names = ['bearer']
@@ -567,8 +571,8 @@ module AvalaraSdk::A1099
       end
 
       # Retrieves the PDF file for a single 1099 by form id.
-      # @param id [String]       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param mark_edelivered [Boolean] The parameter for marked e-delivered
-      # @return [FormResponseBase]
+      # @param id [String]       # @param avalara_version [String] API version      # @param mark_edelivered [Boolean] The parameter for marked e-delivered      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # @return [Update1099Form200Response]
       def get1099_form_pdf(request_parameters)
         data, _status_code, _headers = get1099_form_pdf_with_http_info(request_parameters)
         data
@@ -578,17 +582,19 @@ module AvalaraSdk::A1099
     
       # @param id [String]     
       # @param avalara_version [String] API version    
-      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param mark_edelivered [Boolean] The parameter for marked e-delivered    
-      # @return [Array<(FormResponseBase, Integer, Hash)>] FormResponseBase data, response status code and response headers
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
+      # @return [Array<(Update1099Form200Response, Integer, Hash)>] Update1099Form200Response data, response status code and response headers
       def get1099_form_pdf_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
         # Request Parameters
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
-        x_correlation_id = request_parameters.get_x_correlation_id()
         mark_edelivered = request_parameters.get_mark_edelivered()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling Forms1099Api.get1099_form_pdf"
@@ -596,10 +602,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Forms1099Api.get1099_form_pdf"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling Forms1099Api.get1099_form_pdf"
         end
         # resource path
         local_var_path = '/1099/forms/{id}/pdf'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -620,6 +622,9 @@ module AvalaraSdk::A1099
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
         end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
 
         # form parameters
         form_params = {}
@@ -628,7 +633,7 @@ module AvalaraSdk::A1099
         post_body = {}
 
         # return_type
-        return_type = 'FormResponseBase'
+        return_type = 'Update1099Form200Response'
 
         # auth_names
         auth_names = ['bearer']
@@ -655,7 +660,7 @@ module AvalaraSdk::A1099
       end
 
       # Retrieves a list of 1099 forms based on query parameters.
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    Collections support filtering only on certain fields. An attempt to filter on an unsupported field will receive a 400 Bad Request response.    Supported filtering fields are as follows:        issuerId      issuerReferenceId      taxYear      addressVerificationStatus - possible values are: unknown, pending, failed, incomplete, unchanged, verified      createdAt      edeliveryStatus - possible values are: sent, unscheduled, bad_verify, bad_verify_limit, scheduled, bounced, accepted      email      federalEfileStatus - possible values are: unscheduled, scheduled, sent, corrected_scheduled, accepted, corrected, corrected_accepted, held      firstPayeeName      mailStatus - possible values are: sent, unscheduled, pending, delivered      referenceId      tinMatchStatus - possible values are: none, pending, matched, failed      type - possible values are: 940, 941, 943, 944, 945, 1042, 1042-S, 1095-B, 1095-C, 1097-BTC, 1098, 1098-C, 1098-E, 1098-Q, 1098-T, 3921, 3922, 5498, 5498-ESA, 5498-SA, 1099-MISC, 1099-A, 1099-B, 1099-C, 1099-CAP, 1099-DIV, 1099-G, 1099-INT, 1099-K, 1099-LS, 1099-LTC, 1099-NEC, 1099-OID, 1099-PATR, 1099-Q, 1099-R, 1099-S, 1099-SA, T4A, W-2, W-2G, 1099-HC      updatedAt      validity - possible values are: true, false      # @param top [Integer] If nonzero, return no more than this number of results.     Used with skip to provide pagination for large datasets.     Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example issuerReferenceId ASC.    Supported sorting fields are:         issuerReferenceId       taxYear       createdAt       firstPayeeName      updatedAt
+      # @param avalara_version [String] API version      # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    Collections support filtering only on certain fields. An attempt to filter on an unsupported field will receive a 400 Bad Request response.    Supported filtering fields are as follows:        issuerId      issuerReferenceId      taxYear      addressVerificationStatus - possible values are: unknown, pending, failed, incomplete, unchanged, verified      createdAt      edeliveryStatus - possible values are: sent, unscheduled, bad_verify, bad_verify_limit, scheduled, bounced, accepted      email      federalEfileStatus - possible values are: unscheduled, scheduled, sent, corrected_scheduled, accepted, corrected, corrected_accepted, held      recipientName      mailStatus - possible values are: sent, unscheduled, pending, delivered      referenceId      tinMatchStatus - possible values are: none, pending, matched, failed      type - possible values are: 940, 941, 943, 944, 945, 1042, 1042-S, 1095-B, 1095-C, 1097-BTC, 1098, 1098-C, 1098-E, 1098-Q, 1098-T, 3921, 3922, 5498, 5498-ESA, 5498-SA, 1099-MISC, 1099-A, 1099-B, 1099-C, 1099-CAP, 1099-DIV, 1099-G, 1099-INT, 1099-K, 1099-LS, 1099-LTC, 1099-NEC, 1099-OID, 1099-PATR, 1099-Q, 1099-R, 1099-S, 1099-SA, T4A, W-2, W-2G, 1099-HC      updatedAt      validity - possible values are: true, false      # @param top [Integer] If nonzero, return no more than this number of results.     Used with skip to provide pagination for large datasets.     Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example issuerReferenceId ASC.    Supported sorting fields are:         issuerReferenceId       taxYear       createdAt       recipientName      updatedAt      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [Form1099List]
       def list1099_forms(request_parameters)
         data, _status_code, _headers = list1099_forms_with_http_info(request_parameters)
@@ -665,29 +670,27 @@ module AvalaraSdk::A1099
       # Retrieves a list of 1099 forms based on query parameters.
     
       # @param avalara_version [String] API version    
-      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
-      # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    Collections support filtering only on certain fields. An attempt to filter on an unsupported field will receive a 400 Bad Request response.    Supported filtering fields are as follows:        issuerId      issuerReferenceId      taxYear      addressVerificationStatus - possible values are: unknown, pending, failed, incomplete, unchanged, verified      createdAt      edeliveryStatus - possible values are: sent, unscheduled, bad_verify, bad_verify_limit, scheduled, bounced, accepted      email      federalEfileStatus - possible values are: unscheduled, scheduled, sent, corrected_scheduled, accepted, corrected, corrected_accepted, held      firstPayeeName      mailStatus - possible values are: sent, unscheduled, pending, delivered      referenceId      tinMatchStatus - possible values are: none, pending, matched, failed      type - possible values are: 940, 941, 943, 944, 945, 1042, 1042-S, 1095-B, 1095-C, 1097-BTC, 1098, 1098-C, 1098-E, 1098-Q, 1098-T, 3921, 3922, 5498, 5498-ESA, 5498-SA, 1099-MISC, 1099-A, 1099-B, 1099-C, 1099-CAP, 1099-DIV, 1099-G, 1099-INT, 1099-K, 1099-LS, 1099-LTC, 1099-NEC, 1099-OID, 1099-PATR, 1099-Q, 1099-R, 1099-S, 1099-SA, T4A, W-2, W-2G, 1099-HC      updatedAt      validity - possible values are: true, false    
+      # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    Collections support filtering only on certain fields. An attempt to filter on an unsupported field will receive a 400 Bad Request response.    Supported filtering fields are as follows:        issuerId      issuerReferenceId      taxYear      addressVerificationStatus - possible values are: unknown, pending, failed, incomplete, unchanged, verified      createdAt      edeliveryStatus - possible values are: sent, unscheduled, bad_verify, bad_verify_limit, scheduled, bounced, accepted      email      federalEfileStatus - possible values are: unscheduled, scheduled, sent, corrected_scheduled, accepted, corrected, corrected_accepted, held      recipientName      mailStatus - possible values are: sent, unscheduled, pending, delivered      referenceId      tinMatchStatus - possible values are: none, pending, matched, failed      type - possible values are: 940, 941, 943, 944, 945, 1042, 1042-S, 1095-B, 1095-C, 1097-BTC, 1098, 1098-C, 1098-E, 1098-Q, 1098-T, 3921, 3922, 5498, 5498-ESA, 5498-SA, 1099-MISC, 1099-A, 1099-B, 1099-C, 1099-CAP, 1099-DIV, 1099-G, 1099-INT, 1099-K, 1099-LS, 1099-LTC, 1099-NEC, 1099-OID, 1099-PATR, 1099-Q, 1099-R, 1099-S, 1099-SA, T4A, W-2, W-2G, 1099-HC      updatedAt      validity - possible values are: true, false    
       # @param top [Integer] If nonzero, return no more than this number of results.     Used with skip to provide pagination for large datasets.     Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.    
       # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.    
-      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example issuerReferenceId ASC.    Supported sorting fields are:         issuerReferenceId       taxYear       createdAt       firstPayeeName      updatedAt    
+      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example issuerReferenceId ASC.    Supported sorting fields are:         issuerReferenceId       taxYear       createdAt       recipientName      updatedAt    
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(Form1099List, Integer, Hash)>] Form1099List data, response status code and response headers
       def list1099_forms_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
-        x_correlation_id = request_parameters.get_x_correlation_id()
         filter = request_parameters.get_filter()
         top = request_parameters.get_top()
         skip = request_parameters.get_skip()
         order_by = request_parameters.get_order_by()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Forms1099Api.list1099_forms"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling Forms1099Api.list1099_forms"
         end
         # resource path
         local_var_path = '/1099/forms'
@@ -716,6 +719,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -752,8 +758,8 @@ module AvalaraSdk::A1099
       end
 
       # Updates a 1099 form.
-      # @param id [String]       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param i_update_form1099_request [IUpdateForm1099Request] 
-      # @return [FormResponseBase]
+      # @param id [String]       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param i_update_form1099_request [IUpdateForm1099Request] 
+      # @return [Update1099Form200Response]
       def update1099_form(request_parameters)
         data, _status_code, _headers = update1099_form_with_http_info(request_parameters)
         data
@@ -764,8 +770,9 @@ module AvalaraSdk::A1099
       # @param id [String]     
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param i_update_form1099_request [IUpdateForm1099Request]     
-      # @return [Array<(FormResponseBase, Integer, Hash)>] FormResponseBase data, response status code and response headers
+      # @return [Array<(Update1099Form200Response, Integer, Hash)>] Update1099Form200Response data, response status code and response headers
       def update1099_form_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -773,6 +780,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         i_update_form1099_request = request_parameters.get_i_update_form1099_request()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
@@ -781,10 +789,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Forms1099Api.update1099_form"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling Forms1099Api.update1099_form"
         end
         # resource path
         local_var_path = '/1099/forms/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -807,6 +811,9 @@ module AvalaraSdk::A1099
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
         end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
 
         # form parameters
         form_params = {}
@@ -815,7 +822,7 @@ module AvalaraSdk::A1099
         post_body =  @api_client.object_to_http_body(i_update_form1099_request) || {}
 
         # return_type
-        return_type = 'FormResponseBase'
+        return_type = 'Update1099Form200Response'
 
         # auth_names
         auth_names = ['bearer']
@@ -844,16 +851,19 @@ module AvalaraSdk::A1099
     # Represents the Request object for the BulkUpsert1099Forms API
     #
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
     # @param  Boolean $dry_run  (optional, default to false)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     # @param  BulkUpsert1099FormsRequest $bulk_upsert1099_forms_request  (optional)
     #
     class BulkUpsert1099FormsRequestSdk
         attr_accessor :avalara_version
 
+        attr_accessor :dry_run
+
         attr_accessor :x_correlation_id
 
-        attr_accessor :dry_run
+        attr_accessor :x_avalara_client
 
         attr_accessor :bulk_upsert1099_forms_request
 
@@ -868,6 +878,14 @@ module AvalaraSdk::A1099
             @avalara_version = avalara_version
         end
 
+        def get_dry_run()
+            return @dry_run
+        end
+
+        def set_dry_run(dry_run)
+            @dry_run = dry_run
+        end
+
         def get_x_correlation_id()
             return @x_correlation_id
         end
@@ -876,12 +894,12 @@ module AvalaraSdk::A1099
             @x_correlation_id = x_correlation_id
         end
 
-        def get_dry_run()
-            return @dry_run
+        def get_x_avalara_client()
+            return @x_avalara_client
         end
 
-        def set_dry_run(dry_run)
-            @dry_run = dry_run
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
         end
 
         def get_bulk_upsert1099_forms_request()
@@ -895,13 +913,16 @@ module AvalaraSdk::A1099
     # Represents the Request object for the Create1099Form API
     #
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     # @param  ICreateForm1099Request $i_create_form1099_request i_create_form1099_request (optional)
     #
     class Create1099FormRequestSdk
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         attr_accessor :i_create_form1099_request
 
@@ -924,6 +945,14 @@ module AvalaraSdk::A1099
             @x_correlation_id = x_correlation_id
         end
 
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
         def get_i_create_form1099_request()
             return @i_create_form1099_request
         end
@@ -936,7 +965,8 @@ module AvalaraSdk::A1099
     #
     # @param  String $id The unique identifier of the desired form to delete. (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class Delete1099FormRequestSdk
         attr_accessor :id
@@ -945,6 +975,8 @@ module AvalaraSdk::A1099
 
         attr_accessor :x_correlation_id
 
+        attr_accessor :x_avalara_client
+
         def initialize()
         end
 
@@ -971,12 +1003,21 @@ module AvalaraSdk::A1099
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
         end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the Get1099Form API
     #
     # @param  String $id id (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class Get1099FormRequestSdk
         attr_accessor :id
@@ -985,6 +1026,8 @@ module AvalaraSdk::A1099
 
         attr_accessor :x_correlation_id
 
+        attr_accessor :x_avalara_client
+
         def initialize()
         end
 
@@ -1010,23 +1053,34 @@ module AvalaraSdk::A1099
 
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
         end
     end
     # Represents the Request object for the Get1099FormPdf API
     #
     # @param  String $id  (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
     # @param  Boolean $mark_edelivered The parameter for marked e-delivered (optional)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class Get1099FormPdfRequestSdk
         attr_accessor :id
 
         attr_accessor :avalara_version
 
+        attr_accessor :mark_edelivered
+
         attr_accessor :x_correlation_id
 
-        attr_accessor :mark_edelivered
+        attr_accessor :x_avalara_client
 
         def initialize()
         end
@@ -1045,14 +1099,6 @@ module AvalaraSdk::A1099
 
         def set_avalara_version(avalara_version)
             @avalara_version = avalara_version
-        end
-
-        def get_x_correlation_id()
-            return @x_correlation_id
-        end
-
-        def set_x_correlation_id(x_correlation_id)
-            @x_correlation_id = x_correlation_id
         end
 
         def get_mark_edelivered()
@@ -1062,20 +1108,35 @@ module AvalaraSdk::A1099
         def set_mark_edelivered(mark_edelivered)
             @mark_edelivered = mark_edelivered
         end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the List1099Forms API
     #
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
-    # @param  String $filter A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    Collections support filtering only on certain fields. An attempt to filter on an unsupported field will receive a 400 Bad Request response.    Supported filtering fields are as follows:        issuerId      issuerReferenceId      taxYear      addressVerificationStatus - possible values are: unknown, pending, failed, incomplete, unchanged, verified      createdAt      edeliveryStatus - possible values are: sent, unscheduled, bad_verify, bad_verify_limit, scheduled, bounced, accepted      email      federalEfileStatus - possible values are: unscheduled, scheduled, sent, corrected_scheduled, accepted, corrected, corrected_accepted, held      firstPayeeName      mailStatus - possible values are: sent, unscheduled, pending, delivered      referenceId      tinMatchStatus - possible values are: none, pending, matched, failed      type - possible values are: 940, 941, 943, 944, 945, 1042, 1042-S, 1095-B, 1095-C, 1097-BTC, 1098, 1098-C, 1098-E, 1098-Q, 1098-T, 3921, 3922, 5498, 5498-ESA, 5498-SA, 1099-MISC, 1099-A, 1099-B, 1099-C, 1099-CAP, 1099-DIV, 1099-G, 1099-INT, 1099-K, 1099-LS, 1099-LTC, 1099-NEC, 1099-OID, 1099-PATR, 1099-Q, 1099-R, 1099-S, 1099-SA, T4A, W-2, W-2G, 1099-HC      updatedAt      validity - possible values are: true, false (optional)
+    # @param  String $filter A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    Collections support filtering only on certain fields. An attempt to filter on an unsupported field will receive a 400 Bad Request response.    Supported filtering fields are as follows:        issuerId      issuerReferenceId      taxYear      addressVerificationStatus - possible values are: unknown, pending, failed, incomplete, unchanged, verified      createdAt      edeliveryStatus - possible values are: sent, unscheduled, bad_verify, bad_verify_limit, scheduled, bounced, accepted      email      federalEfileStatus - possible values are: unscheduled, scheduled, sent, corrected_scheduled, accepted, corrected, corrected_accepted, held      recipientName      mailStatus - possible values are: sent, unscheduled, pending, delivered      referenceId      tinMatchStatus - possible values are: none, pending, matched, failed      type - possible values are: 940, 941, 943, 944, 945, 1042, 1042-S, 1095-B, 1095-C, 1097-BTC, 1098, 1098-C, 1098-E, 1098-Q, 1098-T, 3921, 3922, 5498, 5498-ESA, 5498-SA, 1099-MISC, 1099-A, 1099-B, 1099-C, 1099-CAP, 1099-DIV, 1099-G, 1099-INT, 1099-K, 1099-LS, 1099-LTC, 1099-NEC, 1099-OID, 1099-PATR, 1099-Q, 1099-R, 1099-S, 1099-SA, T4A, W-2, W-2G, 1099-HC      updatedAt      validity - possible values are: true, false (optional)
     # @param  Integer $top If nonzero, return no more than this number of results.     Used with skip to provide pagination for large datasets.     Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records. (optional, default to 10)
     # @param  Integer $skip If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. (optional, default to 0)
-    # @param  String $order_by A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example issuerReferenceId ASC.    Supported sorting fields are:         issuerReferenceId       taxYear       createdAt       firstPayeeName      updatedAt (optional)
+    # @param  String $order_by A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example issuerReferenceId ASC.    Supported sorting fields are:         issuerReferenceId       taxYear       createdAt       recipientName      updatedAt (optional)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class List1099FormsRequestSdk
         attr_accessor :avalara_version
-
-        attr_accessor :x_correlation_id
 
         attr_accessor :filter
 
@@ -1084,6 +1145,10 @@ module AvalaraSdk::A1099
         attr_accessor :skip
 
         attr_accessor :order_by
+
+        attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         def initialize()
         end
@@ -1094,14 +1159,6 @@ module AvalaraSdk::A1099
 
         def set_avalara_version(avalara_version)
             @avalara_version = avalara_version
-        end
-
-        def get_x_correlation_id()
-            return @x_correlation_id
-        end
-
-        def set_x_correlation_id(x_correlation_id)
-            @x_correlation_id = x_correlation_id
         end
 
         def get_filter()
@@ -1135,12 +1192,29 @@ module AvalaraSdk::A1099
         def set_order_by(order_by)
             @order_by = order_by
         end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the Update1099Form API
     #
     # @param  String $id id (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     # @param  IUpdateForm1099Request $i_update_form1099_request i_update_form1099_request (optional)
     #
     class Update1099FormRequestSdk
@@ -1149,6 +1223,8 @@ module AvalaraSdk::A1099
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         attr_accessor :i_update_form1099_request
 
@@ -1177,6 +1253,14 @@ module AvalaraSdk::A1099
 
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
         end
 
         def get_i_update_form1099_request()

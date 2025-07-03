@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.6.0")
+        api_client.set_sdk_version("25.7.0")
         @api_client = api_client
       end
 
@@ -490,7 +490,7 @@ module AvalaraSdk::EInvoicing
 
       # List all subscriptions
       # Retrieve a list of all subscriptions.
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param count [Boolean] Whether to include the total count of records in the result.      # @param count_only [Boolean] Whether to return only the count of records, without the list of records.
+      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification      # @param top [Float] The number of items to include in the result.      # @param skip [Float] The number of items to skip in the result.      # @param count [Boolean] Whether to include the total count of records in the result.      # @param count_only [Boolean] Whether to return only the count of records, without the list of records.
       # @return [SubscriptionListResponse]
       def list_webhook_subscriptions(request_parameters)
         data, _status_code, _headers = list_webhook_subscriptions_with_http_info(request_parameters)
@@ -503,8 +503,8 @@ module AvalaraSdk::EInvoicing
       # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.    
       # @param x_correlation_id [String] A unique identifier for tracking the request and its response    
       # @param x_avalara_client [String] Client application identification    
-      # @param top [Integer] The number of items to include in the result.    
-      # @param skip [Integer] The number of items to skip in the result.    
+      # @param top [Float] The number of items to include in the result.    
+      # @param skip [Float] The number of items to skip in the result.    
       # @param count [Boolean] Whether to include the total count of records in the result.    
       # @param count_only [Boolean] Whether to return only the count of records, without the list of records.    
       # @return [Array<(SubscriptionListResponse, Integer, Hash)>] SubscriptionListResponse data, response status code and response headers
@@ -746,8 +746,8 @@ module AvalaraSdk::EInvoicing
     # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.3\&quot;. (required)
     # @param  String $x_correlation_id A unique identifier for tracking the request and its response (optional)
     # @param  String $x_avalara_client Client application identification (optional)
-    # @param  Integer $top The number of items to include in the result. (optional)
-    # @param  Integer $skip The number of items to skip in the result. (optional)
+    # @param  Float $top The number of items to include in the result. (optional)
+    # @param  Float $skip The number of items to skip in the result. (optional)
     # @param  Boolean $count Whether to include the total count of records in the result. (optional)
     # @param  Boolean $count_only Whether to return only the count of records, without the list of records. (optional)
     #

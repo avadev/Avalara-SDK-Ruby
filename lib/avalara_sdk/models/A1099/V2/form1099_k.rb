@@ -87,17 +87,17 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :email
 
-    attr_accessor :type_of_tin
+    attr_accessor :tin_type
 
     attr_accessor :tin
 
-    attr_accessor :first_payee_name
+    attr_accessor :recipient_name
 
-    attr_accessor :second_payee_name
+    attr_accessor :recipient_second_name
 
     attr_accessor :address
 
-    attr_accessor :address_recipient_second
+    attr_accessor :address2
 
     attr_accessor :city
 
@@ -180,12 +180,12 @@ module AvalaraSdk::A1099::V2
         :'address_verification_status' => :'addressVerificationStatus',
         :'reference_id' => :'referenceId',
         :'email' => :'email',
-        :'type_of_tin' => :'typeOfTin',
+        :'tin_type' => :'tinType',
         :'tin' => :'tin',
-        :'first_payee_name' => :'firstPayeeName',
-        :'second_payee_name' => :'secondPayeeName',
+        :'recipient_name' => :'recipientName',
+        :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
-        :'address_recipient_second' => :'addressRecipientSecond',
+        :'address2' => :'address2',
         :'city' => :'city',
         :'state' => :'state',
         :'zip' => :'zip',
@@ -244,12 +244,12 @@ module AvalaraSdk::A1099::V2
         :'address_verification_status' => :'Form1099StatusDetail',
         :'reference_id' => :'String',
         :'email' => :'String',
-        :'type_of_tin' => :'String',
+        :'tin_type' => :'String',
         :'tin' => :'String',
-        :'first_payee_name' => :'String',
-        :'second_payee_name' => :'String',
+        :'recipient_name' => :'String',
+        :'recipient_second_name' => :'String',
         :'address' => :'String',
-        :'address_recipient_second' => :'String',
+        :'address2' => :'String',
         :'city' => :'String',
         :'state' => :'String',
         :'zip' => :'String',
@@ -289,12 +289,12 @@ module AvalaraSdk::A1099::V2
         :'address_verification_status',
         :'reference_id',
         :'email',
-        :'type_of_tin',
+        :'tin_type',
         :'tin',
-        :'first_payee_name',
-        :'second_payee_name',
+        :'recipient_name',
+        :'recipient_second_name',
         :'address',
-        :'address_recipient_second',
+        :'address2',
         :'city',
         :'state',
         :'zip',
@@ -481,28 +481,28 @@ module AvalaraSdk::A1099::V2
         self.email = attributes[:'email']
       end
 
-      if attributes.key?(:'type_of_tin')
-        self.type_of_tin = attributes[:'type_of_tin']
+      if attributes.key?(:'tin_type')
+        self.tin_type = attributes[:'tin_type']
       end
 
       if attributes.key?(:'tin')
         self.tin = attributes[:'tin']
       end
 
-      if attributes.key?(:'first_payee_name')
-        self.first_payee_name = attributes[:'first_payee_name']
+      if attributes.key?(:'recipient_name')
+        self.recipient_name = attributes[:'recipient_name']
       end
 
-      if attributes.key?(:'second_payee_name')
-        self.second_payee_name = attributes[:'second_payee_name']
+      if attributes.key?(:'recipient_second_name')
+        self.recipient_second_name = attributes[:'recipient_second_name']
       end
 
       if attributes.key?(:'address')
         self.address = attributes[:'address']
       end
 
-      if attributes.key?(:'address_recipient_second')
-        self.address_recipient_second = attributes[:'address_recipient_second']
+      if attributes.key?(:'address2')
+        self.address2 = attributes[:'address2']
       end
 
       if attributes.key?(:'city')
@@ -638,12 +638,12 @@ module AvalaraSdk::A1099::V2
           address_verification_status == o.address_verification_status &&
           reference_id == o.reference_id &&
           email == o.email &&
-          type_of_tin == o.type_of_tin &&
+          tin_type == o.tin_type &&
           tin == o.tin &&
-          first_payee_name == o.first_payee_name &&
-          second_payee_name == o.second_payee_name &&
+          recipient_name == o.recipient_name &&
+          recipient_second_name == o.recipient_second_name &&
           address == o.address &&
-          address_recipient_second == o.address_recipient_second &&
+          address2 == o.address2 &&
           city == o.city &&
           state == o.state &&
           zip == o.zip &&
@@ -664,7 +664,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [filer_type, payment_type, payment_settlement_entity_name_phone_number, gross_amount_payment_card, card_not_present_transactions, merchant_category_code, payment_transaction_number, federal_income_tax_withheld, january, february, march, april, may, june, july, august, sept, october, november, december, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, reference_id, email, type_of_tin, tin, first_payee_name, second_payee_name, address, address_recipient_second, city, state, zip, foreign_province, country_code, validation_errors, created_at, updated_at, state_and_local_withholding].hash
+      [filer_type, payment_type, payment_settlement_entity_name_phone_number, gross_amount_payment_card, card_not_present_transactions, merchant_category_code, payment_transaction_number, federal_income_tax_withheld, january, february, march, april, may, june, july, august, sept, october, november, december, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, reference_id, email, tin_type, tin, recipient_name, recipient_second_name, address, address2, city, state, zip, foreign_province, country_code, validation_errors, created_at, updated_at, state_and_local_withholding].hash
     end
 
     # Builds the object from hash

@@ -210,7 +210,7 @@ opts = {
   count: 'true', # String | When set to true, the count of the collection is also returned in the response body
   count_only: 'false', # String | When set to true, only the count of the collection is returned
   filter: 'id eq 52f60401-44d0-4667-ad47-4afe519abb53', # String | Filter by field name and value. This filter only supports <code>eq</code> . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed.
-  top: 10, # Float | If nonzero, return no more than this number of results. Used with <code>$skip</code> to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 200 records.
+  top: 8.14, # Float | The number of items to include in the result.
   skip: '10' # String | If nonzero, skip this number of results before returning data. Used with <code>$top</code> to provide pagination for large datasets.
 }
 
@@ -253,7 +253,7 @@ end
 | **count** | **String** | When set to true, the count of the collection is also returned in the response body | [optional] |
 | **count_only** | **String** | When set to true, only the count of the collection is returned | [optional] |
 | **filter** | **String** | Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed. | [optional] |
-| **top** | **Float** | If nonzero, return no more than this number of results. Used with &lt;code&gt;$skip&lt;/code&gt; to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 200 records. | [optional] |
+| **top** | **Float** | The number of items to include in the result. | [optional] |
 | **skip** | **String** | If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] |
 
 ### Return type
