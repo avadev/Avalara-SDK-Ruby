@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.6.0")
+        api_client.set_sdk_version("25.7.0")
         @api_client = api_client
       end
 
@@ -227,7 +227,7 @@ module AvalaraSdk::A1099
     
       # Retrieves information about the job
       # Retrieves information about the job
-      # @param id [String] Job id obtained from other API responses, like &#x60;/1099/bulk-upsert&#x60;.      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format
+      # @param id [String] Job id obtained from other API responses, like &#x60;/1099/bulk-upsert&#x60;.      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [JobResult]
       def get_job(request_parameters)
         data, _status_code, _headers = get_job_with_http_info(request_parameters)
@@ -240,6 +240,7 @@ module AvalaraSdk::A1099
       # @param id [String] Job id obtained from other API responses, like &#x60;/1099/bulk-upsert&#x60;.    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(JobResult, Integer, Hash)>] JobResult data, response status code and response headers
       def get_job_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -248,6 +249,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling Jobs1099Api.get_job"
@@ -255,10 +257,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Jobs1099Api.get_job"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling Jobs1099Api.get_job"
         end
         # resource path
         local_var_path = '/1099/jobs/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -275,6 +273,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -314,7 +315,8 @@ module AvalaraSdk::A1099
     #
     # @param  String $id Job id obtained from other API responses, like &#x60;/1099/bulk-upsert&#x60;. (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class GetJobRequestSdk
         attr_accessor :id
@@ -322,6 +324,8 @@ module AvalaraSdk::A1099
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         def initialize()
         end
@@ -348,6 +352,14 @@ module AvalaraSdk::A1099
 
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
         end
     end
   end

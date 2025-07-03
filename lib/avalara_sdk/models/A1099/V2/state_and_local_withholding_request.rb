@@ -63,6 +63,7 @@ module AvalaraSdk::A1099::V2
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'locality_id_number',
       ])
     end
 

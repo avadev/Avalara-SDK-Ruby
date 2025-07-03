@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.6.0")
+        api_client.set_sdk_version("25.7.0")
         @api_client = api_client
       end
 
@@ -227,7 +227,7 @@ module AvalaraSdk::A1099
     
       # Creates a new company
       # Creates a new company
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The company to create
+      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The company to create
       # @return [CompanyResponseModel]
       def create_company(request_parameters)
         data, _status_code, _headers = create_company_with_http_info(request_parameters)
@@ -239,6 +239,7 @@ module AvalaraSdk::A1099
           
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The company to create    
       # @return [Array<(CompanyResponseModel, Integer, Hash)>] CompanyResponseModel data, response status code and response headers
       def create_company_with_http_info(request_parameters)
@@ -247,14 +248,11 @@ module AvalaraSdk::A1099
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         company_create_update_request_model = request_parameters.get_company_create_update_request_model()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling CompaniesW9Api.create_company"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling CompaniesW9Api.create_company"
         end
         # resource path
         local_var_path = '/w9/companies'
@@ -276,6 +274,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -313,7 +314,7 @@ module AvalaraSdk::A1099
 
       # Deletes a company
       # Deletes a company
-      # @param id [String] The company to delete      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format
+      # @param id [String] The company to delete      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [nil]
       def delete_company(request_parameters)
         delete_company_with_http_info(request_parameters)
@@ -326,6 +327,7 @@ module AvalaraSdk::A1099
       # @param id [String] The company to delete    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def delete_company_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -334,6 +336,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling CompaniesW9Api.delete_company"
@@ -341,10 +344,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling CompaniesW9Api.delete_company"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling CompaniesW9Api.delete_company"
         end
         # resource path
         local_var_path = '/w9/companies/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -361,6 +360,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -398,7 +400,7 @@ module AvalaraSdk::A1099
 
       # List companies
       # List existing companies. Filterable/Sortable fields are: \"name\", \"referenceId\", \"group.name\", \"createdAt\" and \"updatedAt\".
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] If true, return the global count of elements in the collection.      # @param count_only [Boolean] If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true.
+      # @param avalara_version [String] API version      # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] If true, return the global count of elements in the collection.      # @param count_only [Boolean] If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true.      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [PaginatedQueryResultModelCompanyResponse]
       def get_companies(request_parameters)
         data, _status_code, _headers = get_companies_with_http_info(request_parameters)
@@ -409,33 +411,31 @@ module AvalaraSdk::A1099
       # List existing companies. Filterable/Sortable fields are: \&quot;name\&quot;, \&quot;referenceId\&quot;, \&quot;group.name\&quot;, \&quot;createdAt\&quot; and \&quot;updatedAt\&quot;.
           
       # @param avalara_version [String] API version    
-      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    
       # @param top [Integer] If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.    
       # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.    
       # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.    
       # @param count [Boolean] If true, return the global count of elements in the collection.    
       # @param count_only [Boolean] If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true.    
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(PaginatedQueryResultModelCompanyResponse, Integer, Hash)>] PaginatedQueryResultModelCompanyResponse data, response status code and response headers
       def get_companies_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
-        x_correlation_id = request_parameters.get_x_correlation_id()
         filter = request_parameters.get_filter()
         top = request_parameters.get_top()
         skip = request_parameters.get_skip()
         order_by = request_parameters.get_order_by()
         count = request_parameters.get_count()
         count_only = request_parameters.get_count_only()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling CompaniesW9Api.get_companies"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling CompaniesW9Api.get_companies"
         end
         # resource path
         local_var_path = '/w9/companies'
@@ -470,6 +470,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -507,7 +510,7 @@ module AvalaraSdk::A1099
 
       # Retrieve a company
       # Retrieve an existing company
-      # @param id [String] Id of the company      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format
+      # @param id [String] Id of the company      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [CompanyResponse]
       def get_company(request_parameters)
         data, _status_code, _headers = get_company_with_http_info(request_parameters)
@@ -520,6 +523,7 @@ module AvalaraSdk::A1099
       # @param id [String] Id of the company    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @return [Array<(CompanyResponse, Integer, Hash)>] CompanyResponse data, response status code and response headers
       def get_company_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -528,6 +532,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling CompaniesW9Api.get_company"
@@ -535,10 +540,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling CompaniesW9Api.get_company"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling CompaniesW9Api.get_company"
         end
         # resource path
         local_var_path = '/w9/companies/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -555,6 +556,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -592,7 +596,7 @@ module AvalaraSdk::A1099
 
       # Update a company
       # Update a company
-      # @param id [String] The ID of the company to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The updated company data
+      # @param id [String] The ID of the company to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The updated company data
       # @return [CompanyResponseModel]
       def update_company(request_parameters)
         data, _status_code, _headers = update_company_with_http_info(request_parameters)
@@ -605,6 +609,7 @@ module AvalaraSdk::A1099
       # @param id [String] The ID of the company to update    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The updated company data    
       # @return [Array<(CompanyResponseModel, Integer, Hash)>] CompanyResponseModel data, response status code and response headers
       def update_company_with_http_info(request_parameters)
@@ -614,6 +619,7 @@ module AvalaraSdk::A1099
         id = request_parameters.get_id()
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
         company_create_update_request_model = request_parameters.get_company_create_update_request_model()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
@@ -622,10 +628,6 @@ module AvalaraSdk::A1099
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling CompaniesW9Api.update_company"
-        end
-        # verify the required parameter 'x_correlation_id' is set
-        if @api_client.config.client_side_validation && x_correlation_id.nil?
-          fail ArgumentError, "Missing the required parameter 'x_correlation_id' when calling CompaniesW9Api.update_company"
         end
         # resource path
         local_var_path = '/w9/companies/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
@@ -647,6 +649,9 @@ module AvalaraSdk::A1099
         end
         if !x_correlation_id.nil?
           header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
         end
 
         # form parameters
@@ -685,13 +690,16 @@ module AvalaraSdk::A1099
     # Represents the Request object for the CreateCompany API
     #
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     # @param  CompanyCreateUpdateRequestModel $company_create_update_request_model The company to create (optional)
     #
     class CreateCompanyRequestSdk
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         attr_accessor :company_create_update_request_model
 
@@ -714,6 +722,14 @@ module AvalaraSdk::A1099
             @x_correlation_id = x_correlation_id
         end
 
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
         def get_company_create_update_request_model()
             return @company_create_update_request_model
         end
@@ -726,7 +742,8 @@ module AvalaraSdk::A1099
     #
     # @param  String $id The company to delete (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class DeleteCompanyRequestSdk
         attr_accessor :id
@@ -734,6 +751,8 @@ module AvalaraSdk::A1099
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         def initialize()
         end
@@ -761,22 +780,29 @@ module AvalaraSdk::A1099
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
         end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the GetCompanies API
     #
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
     # @param  String $filter A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. (optional)
     # @param  Integer $top If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets. (optional)
     # @param  Integer $skip If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. (optional)
     # @param  String $order_by A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC. (optional)
     # @param  Boolean $count If true, return the global count of elements in the collection. (optional)
     # @param  Boolean $count_only If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true. (optional)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class GetCompaniesRequestSdk
         attr_accessor :avalara_version
-
-        attr_accessor :x_correlation_id
 
         attr_accessor :filter
 
@@ -790,6 +816,10 @@ module AvalaraSdk::A1099
 
         attr_accessor :count_only
 
+        attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
+
         def initialize()
         end
 
@@ -799,14 +829,6 @@ module AvalaraSdk::A1099
 
         def set_avalara_version(avalara_version)
             @avalara_version = avalara_version
-        end
-
-        def get_x_correlation_id()
-            return @x_correlation_id
-        end
-
-        def set_x_correlation_id(x_correlation_id)
-            @x_correlation_id = x_correlation_id
         end
 
         def get_filter()
@@ -856,12 +878,29 @@ module AvalaraSdk::A1099
         def set_count_only(count_only)
             @count_only = count_only
         end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the GetCompany API
     #
     # @param  String $id Id of the company (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class GetCompanyRequestSdk
         attr_accessor :id
@@ -869,6 +908,8 @@ module AvalaraSdk::A1099
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         def initialize()
         end
@@ -896,12 +937,21 @@ module AvalaraSdk::A1099
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
         end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the UpdateCompany API
     #
     # @param  String $id The ID of the company to update (required)
     # @param  String $avalara_version API version (required)
-    # @param  String $x_correlation_id Unique correlation Id in a GUID format (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     # @param  CompanyCreateUpdateRequestModel $company_create_update_request_model The updated company data (optional)
     #
     class UpdateCompanyRequestSdk
@@ -910,6 +960,8 @@ module AvalaraSdk::A1099
         attr_accessor :avalara_version
 
         attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
 
         attr_accessor :company_create_update_request_model
 
@@ -938,6 +990,14 @@ module AvalaraSdk::A1099
 
         def set_x_correlation_id(x_correlation_id)
             @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
         end
 
         def get_company_create_update_request_model()

@@ -21,6 +21,38 @@ AvalaraSdk::A1099::V2::Form1099ListDataInner.openapi_one_of
 # ]
 ```
 
+### `openapi_discriminator_name`
+
+Returns the discriminator's property name.
+
+#### Example
+
+```ruby
+require 'avalara_sdk'
+
+AvalaraSdk::A1099::V2::Form1099ListDataInner.openapi_discriminator_name
+# => :'type'
+```
+
+### `openapi_discriminator_name`
+
+Returns the discriminator's mapping.
+
+#### Example
+
+```ruby
+require 'avalara_sdk'
+
+AvalaraSdk::A1099::V2::Form1099ListDataInner.openapi_discriminator_mapping
+# =>
+# {
+#   :'1099-K' => :'Form1099K',
+#   :'1099-MISC' => :'Form1099Misc',
+#   :'1099-NEC' => :'Form1099Nec',
+#   :'1099-R' => :'Form1099R'
+# }
+```
+
 ### build
 
 Find the appropriate object from the `openapi_one_of` list and casts the data into it.

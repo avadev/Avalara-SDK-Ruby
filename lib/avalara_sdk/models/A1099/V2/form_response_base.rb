@@ -11,6 +11,20 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class FormResponseBase
+    attr_accessor :type
+
+    attr_accessor :created_at
+
+    attr_accessor :updated_at
+
+    attr_accessor :user_id
+
+    attr_accessor :state_and_local_withholding
+
+    attr_accessor :tin_type
+
+    attr_accessor :id
+
     attr_accessor :issuer_id
 
     attr_accessor :issuer_reference_id
@@ -23,15 +37,13 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :recipient_name
 
-    attr_accessor :recipient_federal_id
-
-    attr_accessor :federal_id_type
+    attr_accessor :recipient_tin
 
     attr_accessor :recipient_second_name
 
-    attr_accessor :street_address
+    attr_accessor :address
 
-    attr_accessor :street_address_line2
+    attr_accessor :address2
 
     attr_accessor :city
 
@@ -49,20 +61,70 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :country_code
 
+    attr_accessor :federal_e_file
+
+    attr_accessor :postal_mail
+
+    attr_accessor :state_e_file
+
+    attr_accessor :tin_match
+
+    attr_accessor :address_verification
+
+    attr_accessor :federal_efile_status
+
+    attr_accessor :state_efile_status
+
+    attr_accessor :postal_mail_status
+
+    attr_accessor :tin_match_status
+
+    attr_accessor :address_verification_status
+
+    attr_accessor :validation_errors
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'type' => :'type',
+        :'created_at' => :'createdAt',
+        :'updated_at' => :'updatedAt',
+        :'user_id' => :'userId',
+        :'state_and_local_withholding' => :'stateAndLocalWithholding',
+        :'tin_type' => :'tinType',
+        :'id' => :'id',
         :'issuer_id' => :'issuerId',
         :'issuer_reference_id' => :'issuerReferenceId',
         :'issuer_tin' => :'issuerTin',
         :'tax_year' => :'taxYear',
         :'reference_id' => :'referenceId',
         :'recipient_name' => :'recipientName',
-        :'recipient_federal_id' => :'recipientFederalId',
-        :'federal_id_type' => :'federalIdType',
+        :'recipient_tin' => :'recipientTin',
         :'recipient_second_name' => :'recipientSecondName',
-        :'street_address' => :'streetAddress',
-        :'street_address_line2' => :'streetAddressLine2',
+        :'address' => :'address',
+        :'address2' => :'address2',
         :'city' => :'city',
         :'state' => :'state',
         :'zip' => :'zip',
@@ -70,7 +132,18 @@ module AvalaraSdk::A1099::V2
         :'account_number' => :'accountNumber',
         :'office_code' => :'officeCode',
         :'recipient_non_us_province' => :'recipientNonUsProvince',
-        :'country_code' => :'countryCode'
+        :'country_code' => :'countryCode',
+        :'federal_e_file' => :'federalEFile',
+        :'postal_mail' => :'postalMail',
+        :'state_e_file' => :'stateEFile',
+        :'tin_match' => :'tinMatch',
+        :'address_verification' => :'addressVerification',
+        :'federal_efile_status' => :'federalEfileStatus',
+        :'state_efile_status' => :'stateEfileStatus',
+        :'postal_mail_status' => :'postalMailStatus',
+        :'tin_match_status' => :'tinMatchStatus',
+        :'address_verification_status' => :'addressVerificationStatus',
+        :'validation_errors' => :'validationErrors'
       }
     end
 
@@ -82,17 +155,23 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'type' => :'String',
+        :'created_at' => :'Time',
+        :'updated_at' => :'Time',
+        :'user_id' => :'String',
+        :'state_and_local_withholding' => :'StateAndLocalWithholdingResponse',
+        :'tin_type' => :'String',
+        :'id' => :'String',
         :'issuer_id' => :'String',
         :'issuer_reference_id' => :'String',
         :'issuer_tin' => :'String',
         :'tax_year' => :'Integer',
         :'reference_id' => :'String',
         :'recipient_name' => :'String',
-        :'recipient_federal_id' => :'String',
-        :'federal_id_type' => :'Integer',
+        :'recipient_tin' => :'String',
         :'recipient_second_name' => :'String',
-        :'street_address' => :'String',
-        :'street_address_line2' => :'String',
+        :'address' => :'String',
+        :'address2' => :'String',
         :'city' => :'String',
         :'state' => :'String',
         :'zip' => :'String',
@@ -100,13 +179,30 @@ module AvalaraSdk::A1099::V2
         :'account_number' => :'String',
         :'office_code' => :'String',
         :'recipient_non_us_province' => :'String',
-        :'country_code' => :'String'
+        :'country_code' => :'String',
+        :'federal_e_file' => :'Boolean',
+        :'postal_mail' => :'Boolean',
+        :'state_e_file' => :'Boolean',
+        :'tin_match' => :'Boolean',
+        :'address_verification' => :'Boolean',
+        :'federal_efile_status' => :'StatusDetail',
+        :'state_efile_status' => :'Array<StateEfileStatusDetailApp>',
+        :'postal_mail_status' => :'StatusDetail',
+        :'tin_match_status' => :'StatusDetail',
+        :'address_verification_status' => :'StatusDetail',
+        :'validation_errors' => :'Array<ValidationErrorApp>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'federal_efile_status',
+        :'state_efile_status',
+        :'postal_mail_status',
+        :'tin_match_status',
+        :'address_verification_status',
+        :'validation_errors'
       ])
     end
 
@@ -124,6 +220,34 @@ module AvalaraSdk::A1099::V2
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
+
+      if attributes.key?(:'user_id')
+        self.user_id = attributes[:'user_id']
+      end
+
+      if attributes.key?(:'state_and_local_withholding')
+        self.state_and_local_withholding = attributes[:'state_and_local_withholding']
+      end
+
+      if attributes.key?(:'tin_type')
+        self.tin_type = attributes[:'tin_type']
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
 
       if attributes.key?(:'issuer_id')
         self.issuer_id = attributes[:'issuer_id']
@@ -149,24 +273,20 @@ module AvalaraSdk::A1099::V2
         self.recipient_name = attributes[:'recipient_name']
       end
 
-      if attributes.key?(:'recipient_federal_id')
-        self.recipient_federal_id = attributes[:'recipient_federal_id']
-      end
-
-      if attributes.key?(:'federal_id_type')
-        self.federal_id_type = attributes[:'federal_id_type']
+      if attributes.key?(:'recipient_tin')
+        self.recipient_tin = attributes[:'recipient_tin']
       end
 
       if attributes.key?(:'recipient_second_name')
         self.recipient_second_name = attributes[:'recipient_second_name']
       end
 
-      if attributes.key?(:'street_address')
-        self.street_address = attributes[:'street_address']
+      if attributes.key?(:'address')
+        self.address = attributes[:'address']
       end
 
-      if attributes.key?(:'street_address_line2')
-        self.street_address_line2 = attributes[:'street_address_line2']
+      if attributes.key?(:'address2')
+        self.address2 = attributes[:'address2']
       end
 
       if attributes.key?(:'city')
@@ -200,6 +320,54 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
       end
+
+      if attributes.key?(:'federal_e_file')
+        self.federal_e_file = attributes[:'federal_e_file']
+      end
+
+      if attributes.key?(:'postal_mail')
+        self.postal_mail = attributes[:'postal_mail']
+      end
+
+      if attributes.key?(:'state_e_file')
+        self.state_e_file = attributes[:'state_e_file']
+      end
+
+      if attributes.key?(:'tin_match')
+        self.tin_match = attributes[:'tin_match']
+      end
+
+      if attributes.key?(:'address_verification')
+        self.address_verification = attributes[:'address_verification']
+      end
+
+      if attributes.key?(:'federal_efile_status')
+        self.federal_efile_status = attributes[:'federal_efile_status']
+      end
+
+      if attributes.key?(:'state_efile_status')
+        if (value = attributes[:'state_efile_status']).is_a?(Array)
+          self.state_efile_status = value
+        end
+      end
+
+      if attributes.key?(:'postal_mail_status')
+        self.postal_mail_status = attributes[:'postal_mail_status']
+      end
+
+      if attributes.key?(:'tin_match_status')
+        self.tin_match_status = attributes[:'tin_match_status']
+      end
+
+      if attributes.key?(:'address_verification_status')
+        self.address_verification_status = attributes[:'address_verification_status']
+      end
+
+      if attributes.key?(:'validation_errors')
+        if (value = attributes[:'validation_errors']).is_a?(Array)
+          self.validation_errors = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -214,7 +382,43 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      type_validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B"])
+      return false unless type_validator.valid?(@type)
+      tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
+      return false unless tin_type_validator.valid?(@tin_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tin_type Object to be assigned
+    def tin_type=(tin_type)
+      validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
+      unless validator.valid?(tin_type)
+        fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
+      end
+      @tin_type = tin_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] state_efile_status Value to be assigned
+    def state_efile_status=(state_efile_status)
+      @state_efile_status = state_efile_status
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] validation_errors Value to be assigned
+    def validation_errors=(validation_errors)
+      @validation_errors = validation_errors
     end
 
     # Checks equality by comparing each attribute.
@@ -222,17 +426,23 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          type == o.type &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at &&
+          user_id == o.user_id &&
+          state_and_local_withholding == o.state_and_local_withholding &&
+          tin_type == o.tin_type &&
+          id == o.id &&
           issuer_id == o.issuer_id &&
           issuer_reference_id == o.issuer_reference_id &&
           issuer_tin == o.issuer_tin &&
           tax_year == o.tax_year &&
           reference_id == o.reference_id &&
           recipient_name == o.recipient_name &&
-          recipient_federal_id == o.recipient_federal_id &&
-          federal_id_type == o.federal_id_type &&
+          recipient_tin == o.recipient_tin &&
           recipient_second_name == o.recipient_second_name &&
-          street_address == o.street_address &&
-          street_address_line2 == o.street_address_line2 &&
+          address == o.address &&
+          address2 == o.address2 &&
           city == o.city &&
           state == o.state &&
           zip == o.zip &&
@@ -240,7 +450,18 @@ module AvalaraSdk::A1099::V2
           account_number == o.account_number &&
           office_code == o.office_code &&
           recipient_non_us_province == o.recipient_non_us_province &&
-          country_code == o.country_code
+          country_code == o.country_code &&
+          federal_e_file == o.federal_e_file &&
+          postal_mail == o.postal_mail &&
+          state_e_file == o.state_e_file &&
+          tin_match == o.tin_match &&
+          address_verification == o.address_verification &&
+          federal_efile_status == o.federal_efile_status &&
+          state_efile_status == o.state_efile_status &&
+          postal_mail_status == o.postal_mail_status &&
+          tin_match_status == o.tin_match_status &&
+          address_verification_status == o.address_verification_status &&
+          validation_errors == o.validation_errors
     end
 
     # @see the `==` method
@@ -252,7 +473,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, recipient_name, recipient_federal_id, federal_id_type, recipient_second_name, street_address, street_address_line2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code].hash
+      [type, created_at, updated_at, user_id, state_and_local_withholding, tin_type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, recipient_name, recipient_tin, recipient_second_name, address, address2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, validation_errors].hash
     end
 
     # Builds the object from hash

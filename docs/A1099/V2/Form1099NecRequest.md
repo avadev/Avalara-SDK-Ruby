@@ -4,23 +4,19 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) |  | [optional] |
 | **second_tin_notice** | **Boolean** |  | [optional] |
 | **nonemployee_compensation** | **Float** |  | [optional] |
 | **payer_made_direct_sales** | **Boolean** |  | [optional] |
 | **federal_income_tax_withheld** | **Float** |  | [optional] |
-| **type** | **String** |  | [optional] |
+| **type** | **String** |  | [optional][readonly] |
 | **issuer_id** | **String** |  | [optional] |
-| **issuer_reference_id** | **String** |  | [optional] |
-| **issuer_tin** | **String** |  | [optional] |
-| **tax_year** | **Integer** |  | [optional] |
 | **reference_id** | **String** |  | [optional] |
 | **recipient_name** | **String** |  | [optional] |
 | **recipient_tin** | **String** |  | [optional] |
-| **tin_type** | **Integer** |  | [optional] |
+| **tin_type** | **String** |  | [optional] |
 | **recipient_second_name** | **String** |  | [optional] |
-| **street_address** | **String** |  | [optional] |
-| **street_address_line2** | **String** |  | [optional] |
+| **address** | **String** |  | [optional] |
+| **address2** | **String** |  | [optional] |
 | **city** | **String** |  | [optional] |
 | **state** | **String** |  | [optional] |
 | **zip** | **String** |  | [optional] |
@@ -34,6 +30,7 @@
 | **state_e_file** | **Boolean** |  | [optional] |
 | **tin_match** | **Boolean** |  | [optional] |
 | **address_verification** | **Boolean** |  | [optional] |
+| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) |  | [optional] |
 
 ## Example
 
@@ -41,23 +38,19 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::Form1099NecRequest.new(
-  state_and_local_withholding: null,
   second_tin_notice: null,
   nonemployee_compensation: null,
   payer_made_direct_sales: null,
   federal_income_tax_withheld: null,
-  type: null,
+  type: Form1099Nec,
   issuer_id: null,
-  issuer_reference_id: null,
-  issuer_tin: null,
-  tax_year: null,
   reference_id: null,
   recipient_name: null,
   recipient_tin: null,
-  tin_type: null,
+  tin_type: EIN,
   recipient_second_name: null,
-  street_address: null,
-  street_address_line2: null,
+  address: null,
+  address2: null,
   city: null,
   state: null,
   zip: null,
@@ -70,7 +63,8 @@ instance = AvalaraSdk::A1099::V2::Form1099NecRequest.new(
   postal_mail: null,
   state_e_file: null,
   tin_match: null,
-  address_verification: null
+  address_verification: null,
+  state_and_local_withholding: null
 )
 ```
 

@@ -4,7 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **data** | [**Array&lt;Form1099ListDataInner&gt;**](Form1099ListDataInner.md) |  | [optional] |
+| **data** | [**Array&lt;Get1099Form200Response&gt;**](Get1099Form200Response.md) |  | [optional] |
 
 ## Example
 

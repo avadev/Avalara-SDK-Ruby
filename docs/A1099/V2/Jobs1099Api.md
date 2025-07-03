@@ -9,7 +9,7 @@ All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/a
 
 ## get_job
 
-> <JobResult> get_job(id, avalara_version, x_correlation_id)
+> <JobResult> get_job(id, avalara_version, opts)
 
 Retrieves information about the job
 
@@ -35,11 +35,14 @@ api_instance = AvalaraSdk::A1099::V2::Jobs1099Api.new api_client
 
 id = 'id_example' # String | Job id obtained from other API responses, like `/1099/bulk-upsert`.
 avalara_version = '2.0' # String | API version
-x_correlation_id = '68c7de82-2685-4e81-b0e9-77a78d3c601b' # String | Unique correlation Id in a GUID format
+opts = {
+  x_correlation_id: 'b63b2c1f-52a6-4a88-92a4-d11b4c5da79f', # String | Unique correlation Id in a GUID format
+  x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+}
 
 begin
   # Retrieves information about the job
-  result = api_instance.get_job(id, avalara_version, x_correlation_id)
+  result = api_instance.get_job(id, avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling Jobs1099Api->get_job: #{e}"
@@ -50,12 +53,12 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<JobResult>, Integer, Hash)> get_job_with_http_info(id, avalara_version, x_correlation_id)
+> <Array(<JobResult>, Integer, Hash)> get_job_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
   # Retrieves information about the job
-  data, status_code, headers = api_instance.get_job_with_http_info(id, avalara_version, x_correlation_id)
+  data, status_code, headers = api_instance.get_job_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
   p data # => <JobResult>
@@ -70,7 +73,8 @@ end
 | ---- | ---- | ----------- | ----- |
 | **id** | **String** | Job id obtained from other API responses, like &#x60;/1099/bulk-upsert&#x60;. |  |
 | **avalara_version** | **String** | API version |  |
-| **x_correlation_id** | **String** | Unique correlation Id in a GUID format |  |
+| **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
+| **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
 
 ### Return type
 

@@ -37,8 +37,8 @@ avalara_version = '1.2' # String | The HTTP Header meant to specify the version 
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
   filter: 'requiredFor/countryMandate eq AU-B2G-PEPPOL', # String | Filter by field name and value. This filter only supports <code>eq</code> and <code>contains</code>. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering.
-  top: 10, # Float | If nonzero, return no more than this number of results. Used with <code>$skip</code> to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
-  skip: 10, # Float | If nonzero, skip this number of results before returning data. Used with <code>$top</code> to provide pagination for large datasets.
+  top: 8.14, # Float | The number of items to include in the result.
+  skip: 'skip_example', # String | If nonzero, skip this number of results before returning data. Used with <code>$top</code> to provide pagination for large datasets.
   count: 'true', # Boolean | When set to true, the count of the collection is also returned in the response body
   count_only: 'true' # Boolean | When set to true, only the count of the collection is returned
 }
@@ -77,8 +77,8 @@ end
 | **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used |  |
 | **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] |
 | **filter** | **String** | Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. | [optional] |
-| **top** | **Float** | If nonzero, return no more than this number of results. Used with &lt;code&gt;$skip&lt;/code&gt; to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records. | [optional] |
-| **skip** | **Float** | If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] |
+| **top** | **Float** | The number of items to include in the result. | [optional] |
+| **skip** | **String** | If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] |
 | **count** | **Boolean** | When set to true, the count of the collection is also returned in the response body | [optional] |
 | **count_only** | **Boolean** | When set to true, only the count of the collection is returned | [optional] |
 

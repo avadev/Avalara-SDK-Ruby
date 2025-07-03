@@ -14,7 +14,7 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::StateEfileStatusDetail.new(
-  status: accepted,
+  status: null,
   time: null,
   jurisdiction: null
 )
