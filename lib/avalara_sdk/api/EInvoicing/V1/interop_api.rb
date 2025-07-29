@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.7.2")
+        api_client.set_sdk_version("25.8.0")
         @api_client = api_client
       end
 
@@ -385,7 +385,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)

@@ -10,8 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Response model providing a list of input fields required, optional, or conditional for different country mandates.
-  class DataInputFieldsResponse
+      class DataInputFieldsResponse
     # Total count of results
     attr_accessor :recordset_count
 

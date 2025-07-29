@@ -10,8 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Includes the actual signature applied to a webhook message along with the algorithm used.
-  class SignatureValue
+      class SignatureValue
     attr_accessor :signature
 
     # Attribute mapping from ruby-style variable name to JSON key.

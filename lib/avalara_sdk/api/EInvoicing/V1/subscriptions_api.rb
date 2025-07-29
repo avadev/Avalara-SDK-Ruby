@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.7.2")
+        api_client.set_sdk_version("25.8.0")
         @api_client = api_client
       end
 
@@ -227,7 +227,7 @@ module AvalaraSdk::EInvoicing
     
       # Create a subscription to events
       # Create a subscription to events exposed by registered systems.
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.      # @param subscription_registration [SubscriptionRegistration]       # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification
+      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.4\&quot;.      # @param subscription_registration [SubscriptionRegistration]       # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification
       # @return [SuccessResponse]
       def create_webhook_subscription(request_parameters)
         data, _status_code, _headers = create_webhook_subscription_with_http_info(request_parameters)
@@ -237,7 +237,7 @@ module AvalaraSdk::EInvoicing
       # Create a subscription to events
       # Create a subscription to events exposed by registered systems.
           
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.    
+      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.4\&quot;.    
       # @param subscription_registration [SubscriptionRegistration]     
       # @param x_correlation_id [String] A unique identifier for tracking the request and its response    
       # @param x_avalara_client [String] Client application identification    
@@ -318,7 +318,7 @@ module AvalaraSdk::EInvoicing
 
       # Unsubscribe from events
       # Remove a subscription from the webhooks dispatch service. All events and subscriptions are also deleted.
-      # @param subscription_id [String]       # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification
+      # @param subscription_id [String]       # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.4\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification
       # @return [nil]
       def delete_webhook_subscription(request_parameters)
         delete_webhook_subscription_with_http_info(request_parameters)
@@ -329,7 +329,7 @@ module AvalaraSdk::EInvoicing
       # Remove a subscription from the webhooks dispatch service. All events and subscriptions are also deleted.
           
       # @param subscription_id [String]     
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.    
+      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.4\&quot;.    
       # @param x_correlation_id [String] A unique identifier for tracking the request and its response    
       # @param x_avalara_client [String] Client application identification    
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
@@ -404,7 +404,7 @@ module AvalaraSdk::EInvoicing
 
       # Get details of a subscription
       # Retrieve details of a specific subscription.
-      # @param subscription_id [String]       # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification
+      # @param subscription_id [String]       # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.4\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification
       # @return [SubscriptionDetail]
       def get_webhook_subscription(request_parameters)
         data, _status_code, _headers = get_webhook_subscription_with_http_info(request_parameters)
@@ -415,7 +415,7 @@ module AvalaraSdk::EInvoicing
       # Retrieve details of a specific subscription.
           
       # @param subscription_id [String]     
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.    
+      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.4\&quot;.    
       # @param x_correlation_id [String] A unique identifier for tracking the request and its response    
       # @param x_avalara_client [String] Client application identification    
       # @return [Array<(SubscriptionDetail, Integer, Hash)>] SubscriptionDetail data, response status code and response headers
@@ -490,7 +490,7 @@ module AvalaraSdk::EInvoicing
 
       # List all subscriptions
       # Retrieve a list of all subscriptions.
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification      # @param top [Float] The number of items to include in the result.      # @param skip [Float] The number of items to skip in the result.      # @param count [Boolean] Whether to include the total count of records in the result.      # @param count_only [Boolean] Whether to return only the count of records, without the list of records.
+      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.4\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param count [Boolean] Whether to include the total count of records in the result.      # @param count_only [Boolean] Whether to return only the count of records, without the list of records.
       # @return [SubscriptionListResponse]
       def list_webhook_subscriptions(request_parameters)
         data, _status_code, _headers = list_webhook_subscriptions_with_http_info(request_parameters)
@@ -500,11 +500,11 @@ module AvalaraSdk::EInvoicing
       # List all subscriptions
       # Retrieve a list of all subscriptions.
           
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.3\&quot;.    
+      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.4\&quot;.    
       # @param x_correlation_id [String] A unique identifier for tracking the request and its response    
       # @param x_avalara_client [String] Client application identification    
-      # @param top [Float] The number of items to include in the result.    
-      # @param skip [Float] The number of items to skip in the result.    
+      # @param top [Integer] The number of items to include in the result.    
+      # @param skip [Integer] The number of items to skip in the result.    
       # @param count [Boolean] Whether to include the total count of records in the result.    
       # @param count_only [Boolean] Whether to return only the count of records, without the list of records.    
       # @return [Array<(SubscriptionListResponse, Integer, Hash)>] SubscriptionListResponse data, response status code and response headers
@@ -590,7 +590,7 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the CreateWebhookSubscription API
     #
-    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.3\&quot;. (required)
+    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.4\&quot;. (required)
     # @param  SubscriptionRegistration $subscription_registration subscription_registration (required)
     # @param  String $x_correlation_id A unique identifier for tracking the request and its response (optional)
     # @param  String $x_avalara_client Client application identification (optional)
@@ -608,7 +608,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -642,7 +642,7 @@ module AvalaraSdk::EInvoicing
     # Represents the Request object for the DeleteWebhookSubscription API
     #
     # @param  String $subscription_id subscription_id (required)
-    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.3\&quot;. (required)
+    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.4\&quot;. (required)
     # @param  String $x_correlation_id A unique identifier for tracking the request and its response (optional)
     # @param  String $x_avalara_client Client application identification (optional)
     #
@@ -667,7 +667,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -693,7 +693,7 @@ module AvalaraSdk::EInvoicing
     # Represents the Request object for the GetWebhookSubscription API
     #
     # @param  String $subscription_id subscription_id (required)
-    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.3\&quot;. (required)
+    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.4\&quot;. (required)
     # @param  String $x_correlation_id A unique identifier for tracking the request and its response (optional)
     # @param  String $x_avalara_client Client application identification (optional)
     #
@@ -718,7 +718,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -743,11 +743,11 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the ListWebhookSubscriptions API
     #
-    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.3\&quot;. (required)
+    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.4\&quot;. (required)
     # @param  String $x_correlation_id A unique identifier for tracking the request and its response (optional)
     # @param  String $x_avalara_client Client application identification (optional)
-    # @param  Float $top The number of items to include in the result. (optional)
-    # @param  Float $skip The number of items to skip in the result. (optional)
+    # @param  Integer $top The number of items to include in the result. (optional)
+    # @param  Integer $skip The number of items to skip in the result. (optional)
     # @param  Boolean $count Whether to include the total count of records in the result. (optional)
     # @param  Boolean $count_only Whether to return only the count of records, without the list of records. (optional)
     #
@@ -770,7 +770,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)

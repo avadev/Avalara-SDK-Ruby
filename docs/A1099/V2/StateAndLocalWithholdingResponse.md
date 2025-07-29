@@ -4,14 +4,14 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **state_tax_withheld** | **Float** |  | [optional] |
-| **state** | **String** |  | [optional] |
-| **state_id_number** | **String** |  | [optional] |
-| **state_income** | **Float** |  | [optional] |
-| **local_tax_withheld** | **Float** |  | [optional] |
-| **locality** | **String** |  | [optional] |
-| **locality_id_number** | **String** |  | [optional] |
-| **local_income** | **Float** |  | [optional] |
+| **state_tax_withheld** | **Float** | Amount of state tax that was withheld | [optional] |
+| **state** | **String** | US state | [optional] |
+| **state_id_number** | **String** | State ID number of the entity issuing the form | [optional] |
+| **state_income** | **Float** | Amount of state income | [optional] |
+| **local_tax_withheld** | **Float** | Amount of local tax that was withheld | [optional] |
+| **locality** | **String** | Locality name | [optional] |
+| **locality_id_number** | **String** | Locality ID number of the entity issuing the form | [optional] |
+| **local_income** | **Float** | Amount of local income | [optional] |
 
 ## Example
 

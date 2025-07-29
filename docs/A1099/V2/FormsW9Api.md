@@ -5,19 +5,21 @@ All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/a
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**create_w9_form**](FormsW9Api.md#create_w9_form) | **POST** /w9/forms | Create a W9/W4/W8 form |
-| [**delete_w9_form**](FormsW9Api.md#delete_w9_form) | **DELETE** /w9/forms/{id} | Delete a form |
+| [**delete_w9_form**](FormsW9Api.md#delete_w9_form) | **DELETE** /w9/forms/{id} | Delete a W9/W4/W8 form |
 | [**get_w9_form**](FormsW9Api.md#get_w9_form) | **GET** /w9/forms/{id} | Retrieve a W9/W4/W8 form |
-| [**list_w9_forms**](FormsW9Api.md#list_w9_forms) | **GET** /w9/forms | List W9/W4/W8 forms. |
-| [**send_w9_form_email**](FormsW9Api.md#send_w9_form_email) | **POST** /w9/forms/{id}/$send-email | Sends a W9 email request to a vendor/payee |
+| [**list_w9_forms**](FormsW9Api.md#list_w9_forms) | **GET** /w9/forms | List W9/W4/W8 forms |
+| [**send_w9_form_email**](FormsW9Api.md#send_w9_form_email) | **POST** /w9/forms/{id}/$send-email | Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form |
 | [**update_w9_form**](FormsW9Api.md#update_w9_form) | **PUT** /w9/forms/{id} | Update a W9/W4/W8 form |
-| [**upload_w9_files**](FormsW9Api.md#upload_w9_files) | **PUT** /w9/forms/{id}/attachment | Upload files for a W9/W4/W8 form |
+| [**upload_w9_files**](FormsW9Api.md#upload_w9_files) | **POST** /w9/forms/{id}/attachment | Replace the PDF file for a W9/W4/W8 form |
 
 
 ## create_w9_form
 
-> <IW9FormDataModelsOneOf> create_w9_form(avalara_version, opts)
+> <CreateW9Form201Response> create_w9_form(avalara_version, opts)
 
 Create a W9/W4/W8 form
+
+Create a W9/W4/W8 form.
 
 ### Examples
 
@@ -37,11 +39,11 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '5003c014-1aa4-48a4-91c5-3176fcf2bf73', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'a80d4171-c58b-440c-8cc7-4093fd542b00', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  iw9_form_data_models_one_of: AvalaraSdk::A1099::V2::W4FormDataModel.new # IW9FormDataModelsOneOf | Form to be created
+  create_w9_form_request: AvalaraSdk::A1099::V2::W4FormRequest.new # CreateW9FormRequest | Form to be created
 }
 
 begin
@@ -57,7 +59,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IW9FormDataModelsOneOf>, Integer, Hash)> create_w9_form_with_http_info(avalara_version, opts)
+> <Array(<CreateW9Form201Response>, Integer, Hash)> create_w9_form_with_http_info(avalara_version, opts)
 
 ```ruby
 begin
@@ -65,7 +67,7 @@ begin
   data, status_code, headers = api_instance.create_w9_form_with_http_info(avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IW9FormDataModelsOneOf>
+  p data # => <CreateW9Form201Response>
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling FormsW9Api->create_w9_form_with_http_info: #{e}"
 end
@@ -78,11 +80,11 @@ end
 | **avalara_version** | **String** | API version |  |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
-| **iw9_form_data_models_one_of** | [**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md) | Form to be created | [optional] |
+| **create_w9_form_request** | [**CreateW9FormRequest**](CreateW9FormRequest.md) | Form to be created | [optional] |
 
 ### Return type
 
-[**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md)
+[**CreateW9Form201Response**](CreateW9Form201Response.md)
 
 ### Authorization
 
@@ -98,9 +100,9 @@ end
 
 > delete_w9_form(id, avalara_version, opts)
 
-Delete a form
+Delete a W9/W4/W8 form
 
-Delete a form
+Delete a W9/W4/W8 form.
 
 ### Examples
 
@@ -120,15 +122,15 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
-id = 'id_example' # String | Id of the form to delete
-avalara_version = '2.0' # String | API version
+id = 'id_example' # String | ID of the form to delete
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '949a3535-39c5-4928-8214-2dc8c4224670', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '458bae89-b373-4297-b5eb-0e7a18838af3', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
 begin
-  # Delete a form
+  # Delete a W9/W4/W8 form
   api_instance.delete_w9_form(id, avalara_version, opts)
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling FormsW9Api->delete_w9_form: #{e}"
@@ -143,7 +145,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # Delete a form
+  # Delete a W9/W4/W8 form
   data, status_code, headers = api_instance.delete_w9_form_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -157,7 +159,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Id of the form to delete |  |
+| **id** | **String** | ID of the form to delete |  |
 | **avalara_version** | **String** | API version |  |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
@@ -178,11 +180,11 @@ nil (empty response body)
 
 ## get_w9_form
 
-> <IW9FormDataModelsOneOf> get_w9_form(id, avalara_version, opts)
+> <CreateW9Form201Response> get_w9_form(id, avalara_version, opts)
 
 Retrieve a W9/W4/W8 form
 
-Retrieve a W9/W4/W8 form
+Retrieve a W9/W4/W8 form.
 
 ### Examples
 
@@ -202,10 +204,10 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
-id = 'id_example' # String | Id of the form
-avalara_version = '2.0' # String | API version
+id = 'id_example' # String | ID of the form
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '5a0f7713-ffaf-49f0-be47-96783364c87d', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'fcd3a4fb-da5b-4195-a470-97567434f46c', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -222,7 +224,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IW9FormDataModelsOneOf>, Integer, Hash)> get_w9_form_with_http_info(id, avalara_version, opts)
+> <Array(<CreateW9Form201Response>, Integer, Hash)> get_w9_form_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
@@ -230,7 +232,7 @@ begin
   data, status_code, headers = api_instance.get_w9_form_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IW9FormDataModelsOneOf>
+  p data # => <CreateW9Form201Response>
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling FormsW9Api->get_w9_form_with_http_info: #{e}"
 end
@@ -240,14 +242,14 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Id of the form |  |
+| **id** | **String** | ID of the form |  |
 | **avalara_version** | **String** | API version |  |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
 
 ### Return type
 
-[**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md)
+[**CreateW9Form201Response**](CreateW9Form201Response.md)
 
 ### Authorization
 
@@ -263,7 +265,7 @@ end
 
 > <PaginatedW9FormsModel> list_w9_forms(avalara_version, opts)
 
-List W9/W4/W8 forms.
+List W9/W4/W8 forms
 
 List W9/W4/W8 forms.
 
@@ -285,19 +287,19 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
   filter: 'filter_example', # String | A filter statement to identify specific records to retrieve. For more information on filtering, see <a href=\"https://developer.avalara.com/avatax/filtering-in-rest/\">Filtering in REST</a>.
   top: 56, # Integer | If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
   skip: 56, # Integer | If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | When true, returns a @recordSetCount in the result set
-  x_correlation_id: 'ee2ba593-ca8c-41f1-b96e-5cec3fc8e068', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'a4990941-fbe5-45f9-8495-43ed73f8334e', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
 begin
-  # List W9/W4/W8 forms.
+  # List W9/W4/W8 forms
   result = api_instance.list_w9_forms(avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
@@ -313,7 +315,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # List W9/W4/W8 forms.
+  # List W9/W4/W8 forms
   data, status_code, headers = api_instance.list_w9_forms_with_http_info(avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -354,7 +356,9 @@ end
 
 > <IW9FormDataModelsOneOf> send_w9_form_email(id, avalara_version, opts)
 
-Sends a W9 email request to a vendor/payee
+Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
+
+Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
 
 ### Examples
 
@@ -375,14 +379,14 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
 id = 'id_example' # String | The ID of the W9/W4/W8 form.
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '6503b7f4-7f28-42c1-8a3c-d158c4b5aa76', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '72cf9106-878e-4643-9b5a-440f89a7b20d', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
 begin
-  # Sends a W9 email request to a vendor/payee
+  # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
   result = api_instance.send_w9_form_email(id, avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
@@ -398,7 +402,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Sends a W9 email request to a vendor/payee
+  # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
   data, status_code, headers = api_instance.send_w9_form_email_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -437,6 +441,8 @@ end
 
 Update a W9/W4/W8 form
 
+Update a W9/W4/W8 form.
+
 ### Examples
 
 ```ruby
@@ -455,10 +461,10 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
-id = 'id_example' # String | Id of the form to update
-avalara_version = '2.0' # String | API version
+id = 'id_example' # String | ID of the form to update
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'a40ce0b3-6438-4890-ba0a-ad7be75fb3e1', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '38f0a02f-83cf-4142-b6ed-6b29474177df', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   iw9_form_data_models_one_of: AvalaraSdk::A1099::V2::W4FormDataModel.new # IW9FormDataModelsOneOf | Form to be updated
 }
@@ -494,7 +500,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Id of the form to update |  |
+| **id** | **String** | ID of the form to update |  |
 | **avalara_version** | **String** | API version |  |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
@@ -516,11 +522,11 @@ end
 
 ## upload_w9_files
 
-> String upload_w9_files(id, avalara_version, opts)
+> upload_w9_files(id, avalara_version, opts)
 
-Upload files for a W9/W4/W8 form
+Replace the PDF file for a W9/W4/W8 form
 
-Upload files for a W9/W4/W8 form
+Replaces the PDF file for a W9/W4/W8 form.
 
 ### Examples
 
@@ -541,17 +547,16 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
 id = 'id_example' # String | Id of the form
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'fe4f3600-70a9-4fa1-a8a8-28bcf27e678c', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '4fee6fea-2e64-4911-bb75-0931dd2875be', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   file: File.new('/path/to/some/file') # File | 
 }
 
 begin
-  # Upload files for a W9/W4/W8 form
-  result = api_instance.upload_w9_files(id, avalara_version, opts)
-  p result
+  # Replace the PDF file for a W9/W4/W8 form
+  api_instance.upload_w9_files(id, avalara_version, opts)
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling FormsW9Api->upload_w9_files: #{e}"
 end
@@ -559,17 +564,17 @@ end
 
 #### Using the upload_w9_files_with_http_info variant
 
-This returns an Array which contains the response data, status code and headers.
+This returns an Array which contains the response data (`nil` in this case), status code and headers.
 
-> <Array(String, Integer, Hash)> upload_w9_files_with_http_info(id, avalara_version, opts)
+> <Array(nil, Integer, Hash)> upload_w9_files_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
-  # Upload files for a W9/W4/W8 form
+  # Replace the PDF file for a W9/W4/W8 form
   data, status_code, headers = api_instance.upload_w9_files_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => String
+  p data # => nil
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling FormsW9Api->upload_w9_files_with_http_info: #{e}"
 end
@@ -587,7 +592,7 @@ end
 
 ### Return type
 
-**String**
+nil (empty response body)
 
 ### Authorization
 

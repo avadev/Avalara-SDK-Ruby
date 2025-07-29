@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.7.2")
+        api_client.set_sdk_version("25.8.0")
         @api_client = api_client
       end
 
@@ -226,20 +226,22 @@ module AvalaraSdk::A1099
       end
     
       # Create a W9/W4/W8 form
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be created
-      # @return [IW9FormDataModelsOneOf]
+      # Create a W9/W4/W8 form.
+      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param create_w9_form_request [CreateW9FormRequest] Form to be created
+      # @return [CreateW9Form201Response]
       def create_w9_form(request_parameters)
         data, _status_code, _headers = create_w9_form_with_http_info(request_parameters)
         data
       end
 
       # Create a W9/W4/W8 form
-    
+      # Create a W9/W4/W8 form.
+          
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be created    
-      # @return [Array<(IW9FormDataModelsOneOf, Integer, Hash)>] IW9FormDataModelsOneOf data, response status code and response headers
+      # @param create_w9_form_request [CreateW9FormRequest] Form to be created    
+      # @return [Array<(CreateW9Form201Response, Integer, Hash)>] CreateW9Form201Response data, response status code and response headers
       def create_w9_form_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -247,7 +249,7 @@ module AvalaraSdk::A1099
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
         x_avalara_client = request_parameters.get_x_avalara_client()
-        iw9_form_data_models_one_of = request_parameters.get_iw9_form_data_models_one_of()
+        create_w9_form_request = request_parameters.get_create_w9_form_request()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.create_w9_form"
@@ -281,10 +283,10 @@ module AvalaraSdk::A1099
         form_params = {}
 
         # http body (model)
-        post_body =  @api_client.object_to_http_body(iw9_form_data_models_one_of) || {}
+        post_body =  @api_client.object_to_http_body(create_w9_form_request) || {}
 
         # return_type
-        return_type = 'IW9FormDataModelsOneOf'
+        return_type = 'CreateW9Form201Response'
 
         # auth_names
         auth_names = ['bearer']
@@ -310,19 +312,19 @@ module AvalaraSdk::A1099
         return data, response.code, response.headers
       end
 
-      # Delete a form
-      # Delete a form
-      # @param id [String] Id of the form to delete      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # Delete a W9/W4/W8 form
+      # Delete a W9/W4/W8 form.
+      # @param id [String] ID of the form to delete      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [nil]
       def delete_w9_form(request_parameters)
         delete_w9_form_with_http_info(request_parameters)
         nil
       end
 
-      # Delete a form
-      # Delete a form
+      # Delete a W9/W4/W8 form
+      # Delete a W9/W4/W8 form.
           
-      # @param id [String] Id of the form to delete    
+      # @param id [String] ID of the form to delete    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
@@ -397,22 +399,22 @@ module AvalaraSdk::A1099
       end
 
       # Retrieve a W9/W4/W8 form
-      # Retrieve a W9/W4/W8 form
-      # @param id [String] Id of the form      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-      # @return [IW9FormDataModelsOneOf]
+      # Retrieve a W9/W4/W8 form.
+      # @param id [String] ID of the form      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # @return [CreateW9Form201Response]
       def get_w9_form(request_parameters)
         data, _status_code, _headers = get_w9_form_with_http_info(request_parameters)
         data
       end
 
       # Retrieve a W9/W4/W8 form
-      # Retrieve a W9/W4/W8 form
+      # Retrieve a W9/W4/W8 form.
           
-      # @param id [String] Id of the form    
+      # @param id [String] ID of the form    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @return [Array<(IW9FormDataModelsOneOf, Integer, Hash)>] IW9FormDataModelsOneOf data, response status code and response headers
+      # @return [Array<(CreateW9Form201Response, Integer, Hash)>] CreateW9Form201Response data, response status code and response headers
       def get_w9_form_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -456,7 +458,7 @@ module AvalaraSdk::A1099
         post_body = {}
 
         # return_type
-        return_type = 'IW9FormDataModelsOneOf'
+        return_type = 'CreateW9Form201Response'
 
         # auth_names
         auth_names = ['bearer']
@@ -482,7 +484,7 @@ module AvalaraSdk::A1099
         return data, response.code, response.headers
       end
 
-      # List W9/W4/W8 forms.
+      # List W9/W4/W8 forms
       # List W9/W4/W8 forms.
       # @param avalara_version [String] API version      # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] When true, returns a @recordSetCount in the result set      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [PaginatedW9FormsModel]
@@ -491,7 +493,7 @@ module AvalaraSdk::A1099
         data
       end
 
-      # List W9/W4/W8 forms.
+      # List W9/W4/W8 forms
       # List W9/W4/W8 forms.
           
       # @param avalara_version [String] API version    
@@ -587,7 +589,8 @@ module AvalaraSdk::A1099
         return data, response.code, response.headers
       end
 
-      # Sends a W9 email request to a vendor/payee
+      # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
+      # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
       # @param id [String] The ID of the W9/W4/W8 form.      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [IW9FormDataModelsOneOf]
       def send_w9_form_email(request_parameters)
@@ -595,8 +598,9 @@ module AvalaraSdk::A1099
         data
       end
 
-      # Sends a W9 email request to a vendor/payee
-    
+      # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
+      # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
+          
       # @param id [String] The ID of the W9/W4/W8 form.    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
@@ -672,7 +676,8 @@ module AvalaraSdk::A1099
       end
 
       # Update a W9/W4/W8 form
-      # @param id [String] Id of the form to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be updated
+      # Update a W9/W4/W8 form.
+      # @param id [String] ID of the form to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param iw9_form_data_models_one_of [IW9FormDataModelsOneOf] Form to be updated
       # @return [IW9FormDataModelsOneOf]
       def update_w9_form(request_parameters)
         data, _status_code, _headers = update_w9_form_with_http_info(request_parameters)
@@ -680,8 +685,9 @@ module AvalaraSdk::A1099
       end
 
       # Update a W9/W4/W8 form
-    
-      # @param id [String] Id of the form to update    
+      # Update a W9/W4/W8 form.
+          
+      # @param id [String] ID of the form to update    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
@@ -762,24 +768,24 @@ module AvalaraSdk::A1099
         return data, response.code, response.headers
       end
 
-      # Upload files for a W9/W4/W8 form
-      # Upload files for a W9/W4/W8 form
+      # Replace the PDF file for a W9/W4/W8 form
+      # Replaces the PDF file for a W9/W4/W8 form.
       # @param id [String] Id of the form      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param file [File] 
-      # @return [String]
+      # @return [nil]
       def upload_w9_files(request_parameters)
-        data, _status_code, _headers = upload_w9_files_with_http_info(request_parameters)
-        data
+        upload_w9_files_with_http_info(request_parameters)
+        nil
       end
 
-      # Upload files for a W9/W4/W8 form
-      # Upload files for a W9/W4/W8 form
+      # Replace the PDF file for a W9/W4/W8 form
+      # Replaces the PDF file for a W9/W4/W8 form.
           
       # @param id [String] Id of the form    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param file [File]     
-      # @return [Array<(String, Integer, Hash)>] String data, response status code and response headers
+      # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def upload_w9_files_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -832,7 +838,7 @@ module AvalaraSdk::A1099
         post_body = {}
 
         # return_type
-        return_type = 'String'
+        return_type = ''
 
         # auth_names
         auth_names = ['bearer']
@@ -849,7 +855,7 @@ module AvalaraSdk::A1099
           :return_type => return_type
         }
 
-        response = @api_client.call_api(:PUT, local_var_path, new_options, required_scopes, false, :A1099)
+        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes, false, :A1099)
         if new_options[:return_type]
           data = deserialize(response, new_options[:return_type])
         else
@@ -863,7 +869,7 @@ module AvalaraSdk::A1099
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
-    # @param  IW9FormDataModelsOneOf $iw9_form_data_models_one_of Form to be created (optional)
+    # @param  CreateW9FormRequest $create_w9_form_request Form to be created (optional)
     #
     class CreateW9FormRequestSdk
         attr_accessor :avalara_version
@@ -872,7 +878,7 @@ module AvalaraSdk::A1099
 
         attr_accessor :x_avalara_client
 
-        attr_accessor :iw9_form_data_models_one_of
+        attr_accessor :create_w9_form_request
 
         def initialize()
         end
@@ -901,17 +907,17 @@ module AvalaraSdk::A1099
             @x_avalara_client = x_avalara_client
         end
 
-        def get_iw9_form_data_models_one_of()
-            return @iw9_form_data_models_one_of
+        def get_create_w9_form_request()
+            return @create_w9_form_request
         end
 
-        def set_iw9_form_data_models_one_of(iw9_form_data_models_one_of)
-            @iw9_form_data_models_one_of = iw9_form_data_models_one_of
+        def set_create_w9_form_request(create_w9_form_request)
+            @create_w9_form_request = create_w9_form_request
         end
     end
     # Represents the Request object for the DeleteW9Form API
     #
-    # @param  String $id Id of the form to delete (required)
+    # @param  String $id ID of the form to delete (required)
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
@@ -962,7 +968,7 @@ module AvalaraSdk::A1099
     end
     # Represents the Request object for the GetW9Form API
     #
-    # @param  String $id Id of the form (required)
+    # @param  String $id ID of the form (required)
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
@@ -1159,7 +1165,7 @@ module AvalaraSdk::A1099
     end
     # Represents the Request object for the UpdateW9Form API
     #
-    # @param  String $id Id of the form to update (required)
+    # @param  String $id ID of the form to update (required)
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)

@@ -10,14 +10,15 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Schema for batch search list
+      # Response schema for listing batch search details.
   class BatchSearchListResponse
-    # The count of records in the result set
+    # The count of records in the result set.
     attr_accessor :record_set_count
 
     # Next Link
     attr_accessor :next_link
 
+    # List of batch search records.
     attr_accessor :value
 
     # Attribute mapping from ruby-style variable name to JSON key.

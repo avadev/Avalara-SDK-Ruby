@@ -11,7 +11,7 @@
 | **fed_income_tax_withheld** | **Float** |  | [optional] |
 | **fishing_boat_proceeds** | **Float** |  | [optional] |
 | **medical_health_care_payments** | **Float** |  | [optional] |
-| **payer_made_direct_sales** | **Boolean** |  | [optional] |
+| **direct_sales_indicator** | **Boolean** |  | [optional] |
 | **substitute_payments** | **Float** |  | [optional] |
 | **crop_insurance_proceeds** | **Float** |  | [optional] |
 | **gross_proceeds_paid_to_attorney** | **Float** |  | [optional] |
@@ -51,11 +51,11 @@
 | **tin_match** | **Boolean** |  | [optional] |
 | **address_verification** | **Boolean** |  | [optional] |
 | **federal_efile_status** | [**StatusDetail**](StatusDetail.md) |  | [optional] |
-| **state_efile_status** | [**Array&lt;StateEfileStatusDetailApp&gt;**](StateEfileStatusDetailApp.md) |  | [optional] |
+| **state_efile_status** | [**Array&lt;StateEfileStatusDetailResponse&gt;**](StateEfileStatusDetailResponse.md) |  | [optional] |
 | **postal_mail_status** | [**StatusDetail**](StatusDetail.md) |  | [optional] |
 | **tin_match_status** | [**StatusDetail**](StatusDetail.md) |  | [optional] |
 | **address_verification_status** | [**StatusDetail**](StatusDetail.md) |  | [optional] |
-| **validation_errors** | [**Array&lt;ValidationErrorApp&gt;**](ValidationErrorApp.md) |  | [optional] |
+| **validation_errors** | [**Array&lt;ValidationErrorResponse&gt;**](ValidationErrorResponse.md) |  | [optional] |
 
 ## Example
 
@@ -70,7 +70,7 @@ instance = AvalaraSdk::A1099::V2::Form1099MiscResponse.new(
   fed_income_tax_withheld: null,
   fishing_boat_proceeds: null,
   medical_health_care_payments: null,
-  payer_made_direct_sales: null,
+  direct_sales_indicator: null,
   substitute_payments: null,
   crop_insurance_proceeds: null,
   gross_proceeds_paid_to_attorney: null,
@@ -79,7 +79,7 @@ instance = AvalaraSdk::A1099::V2::Form1099MiscResponse.new(
   fatca_filing_requirement: null,
   excess_golden_parachute_payments: null,
   nonqualified_deferred_compensation: null,
-  type: Form1099Nec,
+  type: 1099-NEC,
   created_at: null,
   updated_at: null,
   user_id: null,

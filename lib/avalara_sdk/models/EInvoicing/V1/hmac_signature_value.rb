@@ -10,8 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Contains the HMAC algorithm and the resulting signature value used for verifying message integrity.
-  class HmacSignatureValue
+      class HmacSignatureValue
     # The algorithm used to create the signature.
     attr_accessor :algorithm
 

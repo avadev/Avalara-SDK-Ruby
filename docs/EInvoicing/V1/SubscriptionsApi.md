@@ -36,7 +36,7 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::SubscriptionsApi.new api_client
 
-avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.3\".
+avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.4\".
 subscription_registration = AvalaraSdk::EInvoicing::V1::SubscriptionRegistration.new({notification_url: 'https://webhook.example.com/notifications', signature: AvalaraSdk::EInvoicing::V1::SignatureSignature.new({type: 'none', key: 'key_example', algorithm: 'sha256'}), events: [AvalaraSdk::EInvoicing::V1::EventSubscription.new({event_name: 'document.complete'})]}) # SubscriptionRegistration | 
 opts = {
   x_correlation_id: 'x_correlation_id_example', # String | A unique identifier for tracking the request and its response
@@ -74,7 +74,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.3\&quot;. |  |
+| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.4\&quot;. |  |
 | **subscription_registration** | [**SubscriptionRegistration**](SubscriptionRegistration.md) |  |  |
 | **x_correlation_id** | **String** | A unique identifier for tracking the request and its response | [optional] |
 | **x_avalara_client** | **String** | Client application identification | [optional] |
@@ -120,7 +120,7 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::SubscriptionsApi.new api_client
 
 subscription_id = 'subscription_id_example' # String | 
-avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.3\".
+avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.4\".
 opts = {
   x_correlation_id: 'x_correlation_id_example', # String | A unique identifier for tracking the request and its response
   x_avalara_client: 'x_avalara_client_example' # String | Client application identification
@@ -157,7 +157,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **subscription_id** | **String** |  |  |
-| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.3\&quot;. |  |
+| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.4\&quot;. |  |
 | **x_correlation_id** | **String** | A unique identifier for tracking the request and its response | [optional] |
 | **x_avalara_client** | **String** | Client application identification | [optional] |
 
@@ -202,7 +202,7 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::SubscriptionsApi.new api_client
 
 subscription_id = 'subscription_id_example' # String | 
-avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.3\".
+avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.4\".
 opts = {
   x_correlation_id: 'x_correlation_id_example', # String | A unique identifier for tracking the request and its response
   x_avalara_client: 'x_avalara_client_example' # String | Client application identification
@@ -240,7 +240,7 @@ end
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **subscription_id** | **String** |  |  |
-| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.3\&quot;. |  |
+| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.4\&quot;. |  |
 | **x_correlation_id** | **String** | A unique identifier for tracking the request and its response | [optional] |
 | **x_avalara_client** | **String** | Client application identification | [optional] |
 
@@ -284,12 +284,12 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::SubscriptionsApi.new api_client
 
-avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.3\".
+avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.4\".
 opts = {
   x_correlation_id: 'x_correlation_id_example', # String | A unique identifier for tracking the request and its response
   x_avalara_client: 'x_avalara_client_example', # String | Client application identification
-  top: 8.14, # Float | The number of items to include in the result.
-  skip: 8.14, # Float | The number of items to skip in the result.
+  top: 56, # Integer | The number of items to include in the result.
+  skip: 56, # Integer | The number of items to skip in the result.
   count: true, # Boolean | Whether to include the total count of records in the result.
   count_only: true # Boolean | Whether to return only the count of records, without the list of records.
 }
@@ -325,11 +325,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.3\&quot;. |  |
+| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.4\&quot;. |  |
 | **x_correlation_id** | **String** | A unique identifier for tracking the request and its response | [optional] |
 | **x_avalara_client** | **String** | Client application identification | [optional] |
-| **top** | **Float** | The number of items to include in the result. | [optional] |
-| **skip** | **Float** | The number of items to skip in the result. | [optional] |
+| **top** | **Integer** | The number of items to include in the result. | [optional] |
+| **skip** | **Integer** | The number of items to skip in the result. | [optional] |
 | **count** | **Boolean** | Whether to include the total count of records in the result. | [optional] |
 | **count_only** | **Boolean** | Whether to return only the count of records, without the list of records. | [optional] |
 

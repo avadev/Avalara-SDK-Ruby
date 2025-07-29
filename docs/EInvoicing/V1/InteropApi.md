@@ -35,7 +35,7 @@ api_instance = AvalaraSdk::EInvoicing::V1::InteropApi.new api_client
 
 document_type = 'ubl-invoice-2.1' # String | Type of the document being uploaded. Partners will be configured in Avalara system to send only certain types of documents.
 interchange_type = 'FI-B2B-TIEKE' # String | Type of interchange (codes in Avalara system that uniquely identifies a type of interchange). Partners will be configured in Avalara system to send documents belonging to certain types of interchanges.
-avalara_version = '1.2' # String | The HTTP Header meant to specify the version of the API intended to be used
+avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\"
   x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43', # String | The caller can use this as an identifier to use as a correlation id to trace the call.

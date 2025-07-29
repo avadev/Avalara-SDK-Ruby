@@ -14,6 +14,7 @@ require 'avalara_sdk'
 AvalaraSdk::A1099::V2::BulkUpsert1099FormsRequest.openapi_one_of
 # =>
 # [
+#   :'Form1042SList',
 #   :'Form1095BList',
 #   :'Form1099DivList',
 #   :'Form1099KList',
@@ -33,7 +34,7 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 require 'avalara_sdk'
 
 AvalaraSdk::A1099::V2::BulkUpsert1099FormsRequest.build(data)
-# => #<Form1095BList:0x00007fdd4aab02a0>
+# => #<Form1042SList:0x00007fdd4aab02a0>
 
 AvalaraSdk::A1099::V2::BulkUpsert1099FormsRequest.build(data_that_doesnt_match)
 # => nil
@@ -47,6 +48,7 @@ AvalaraSdk::A1099::V2::BulkUpsert1099FormsRequest.build(data_that_doesnt_match)
 
 #### Return type
 
+- `Form1042SList`
 - `Form1095BList`
 - `Form1099DivList`
 - `Form1099KList`

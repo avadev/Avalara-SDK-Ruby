@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -11,20 +11,28 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class StateAndLocalWithholdingResponse
+    # Amount of state tax that was withheld
     attr_accessor :state_tax_withheld
 
+    # US state
     attr_accessor :state
 
+    # State ID number of the entity issuing the form
     attr_accessor :state_id_number
 
+    # Amount of state income
     attr_accessor :state_income
 
+    # Amount of local tax that was withheld
     attr_accessor :local_tax_withheld
 
+    # Locality name
     attr_accessor :locality
 
+    # Locality ID number of the entity issuing the form
     attr_accessor :locality_id_number
 
+    # Amount of local income
     attr_accessor :local_income
 
     # Attribute mapping from ruby-style variable name to JSON key.

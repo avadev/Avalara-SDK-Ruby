@@ -10,8 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Basic configuration for a webhook subscription, including description and target notification URL.
-  class SubscriptionCommon
+      class SubscriptionCommon
     # Description of the subscription
     attr_accessor :description
 

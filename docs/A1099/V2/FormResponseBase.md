@@ -35,11 +35,11 @@
 | **tin_match** | **Boolean** |  | [optional] |
 | **address_verification** | **Boolean** |  | [optional] |
 | **federal_efile_status** | [**StatusDetail**](StatusDetail.md) |  | [optional] |
-| **state_efile_status** | [**Array&lt;StateEfileStatusDetailApp&gt;**](StateEfileStatusDetailApp.md) |  | [optional] |
+| **state_efile_status** | [**Array&lt;StateEfileStatusDetailResponse&gt;**](StateEfileStatusDetailResponse.md) |  | [optional] |
 | **postal_mail_status** | [**StatusDetail**](StatusDetail.md) |  | [optional] |
 | **tin_match_status** | [**StatusDetail**](StatusDetail.md) |  | [optional] |
 | **address_verification_status** | [**StatusDetail**](StatusDetail.md) |  | [optional] |
-| **validation_errors** | [**Array&lt;ValidationErrorApp&gt;**](ValidationErrorApp.md) |  | [optional] |
+| **validation_errors** | [**Array&lt;ValidationErrorResponse&gt;**](ValidationErrorResponse.md) |  | [optional] |
 
 ## Example
 
@@ -47,7 +47,7 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::FormResponseBase.new(
-  type: Form1099Nec,
+  type: 1099-NEC,
   created_at: null,
   updated_at: null,
   user_id: null,

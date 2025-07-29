@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **record_set_count** | **Integer** | The count of records in the result set | [optional] |
+| **record_set_count** | **Integer** | The count of records in the result set. | [optional] |
 | **next_link** | **String** | Next Link | [optional] |
-| **value** | [**Array&lt;BatchSearch&gt;**](BatchSearch.md) |  | [optional] |
+| **value** | [**Array&lt;BatchSearch&gt;**](BatchSearch.md) | List of batch search records. | [optional] |
 
 ## Example
 

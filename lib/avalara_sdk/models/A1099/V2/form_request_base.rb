@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -11,48 +11,70 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class FormRequestBase
+    # Issuer ID
     attr_accessor :issuer_id
 
+    # Reference ID
     attr_accessor :reference_id
 
-    attr_accessor :recipient_name
-
+    # Recipient Tax ID Number
     attr_accessor :recipient_tin
 
+    # Recipient name
+    attr_accessor :recipient_name
+
+    # Type of TIN (Tax ID Number). Will be one of:  * SSN  * EIN  * ITIN  * ATIN
     attr_accessor :tin_type
 
+    # Recipient second name
     attr_accessor :recipient_second_name
 
+    # Address
     attr_accessor :address
 
+    # Address line 2
     attr_accessor :address2
 
+    # City
     attr_accessor :city
 
+    # US state. Required if CountryCode is \"US\".
     attr_accessor :state
 
+    # Zip/postal code
     attr_accessor :zip
 
+    # Recipient email address
     attr_accessor :recipient_email
 
+    # Account number
     attr_accessor :account_number
 
+    # Office code
     attr_accessor :office_code
 
+    # Foreign province
     attr_accessor :recipient_non_us_province
 
+    # Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
     attr_accessor :country_code
 
+    # Boolean indicating that federal e-filing should be scheduled for this form
     attr_accessor :federal_e_file
 
+    # Boolean indicating that postal mailing to the recipient should be scheduled for this form
     attr_accessor :postal_mail
 
+    # Boolean indicating that state e-filing should be scheduled for this form
     attr_accessor :state_e_file
 
+    # Boolean indicating that TIN Matching should be scheduled for this form
     attr_accessor :tin_match
 
+    # Boolean indicating that address verification should be scheduled for this form
     attr_accessor :address_verification
 
+    # State and local withholding information
     attr_accessor :state_and_local_withholding
 
     class EnumAttributeValidator
@@ -82,8 +104,8 @@ module AvalaraSdk::A1099::V2
       {
         :'issuer_id' => :'issuerId',
         :'reference_id' => :'referenceId',
-        :'recipient_name' => :'recipientName',
         :'recipient_tin' => :'recipientTin',
+        :'recipient_name' => :'recipientName',
         :'tin_type' => :'tinType',
         :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
@@ -115,8 +137,8 @@ module AvalaraSdk::A1099::V2
       {
         :'issuer_id' => :'String',
         :'reference_id' => :'String',
-        :'recipient_name' => :'String',
         :'recipient_tin' => :'String',
+        :'recipient_name' => :'String',
         :'tin_type' => :'String',
         :'recipient_second_name' => :'String',
         :'address' => :'String',
@@ -143,7 +165,7 @@ module AvalaraSdk::A1099::V2
       Set.new([
         :'issuer_id',
         :'reference_id',
-        :'recipient_name',
+        :'recipient_second_name',
         :'address2',
         :'recipient_email',
         :'account_number',
@@ -175,12 +197,14 @@ module AvalaraSdk::A1099::V2
         self.reference_id = attributes[:'reference_id']
       end
 
-      if attributes.key?(:'recipient_name')
-        self.recipient_name = attributes[:'recipient_name']
-      end
-
       if attributes.key?(:'recipient_tin')
         self.recipient_tin = attributes[:'recipient_tin']
+      end
+
+      if attributes.key?(:'recipient_name')
+        self.recipient_name = attributes[:'recipient_name']
+      else
+        self.recipient_name = nil
       end
 
       if attributes.key?(:'tin_type')
@@ -193,6 +217,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'address')
         self.address = attributes[:'address']
+      else
+        self.address = nil
       end
 
       if attributes.key?(:'address2')
@@ -201,6 +227,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
+      else
+        self.city = nil
       end
 
       if attributes.key?(:'state')
@@ -229,6 +257,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
+      else
+        self.country_code = nil
       end
 
       if attributes.key?(:'federal_e_file')
@@ -261,6 +291,38 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @recipient_name.nil?
+        invalid_properties.push('invalid value for "recipient_name", recipient_name cannot be nil.')
+      end
+
+      if @recipient_name.to_s.length < 1
+        invalid_properties.push('invalid value for "recipient_name", the character length must be great than or equal to 1.')
+      end
+
+      if @address.nil?
+        invalid_properties.push('invalid value for "address", address cannot be nil.')
+      end
+
+      if @address.to_s.length < 1
+        invalid_properties.push('invalid value for "address", the character length must be great than or equal to 1.')
+      end
+
+      if @city.nil?
+        invalid_properties.push('invalid value for "city", city cannot be nil.')
+      end
+
+      if @city.to_s.length < 1
+        invalid_properties.push('invalid value for "city", the character length must be great than or equal to 1.')
+      end
+
+      if @country_code.nil?
+        invalid_properties.push('invalid value for "country_code", country_code cannot be nil.')
+      end
+
+      if @country_code.to_s.length < 1
+        invalid_properties.push('invalid value for "country_code", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -268,9 +330,31 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      return false if @recipient_name.nil?
+      return false if @recipient_name.to_s.length < 1
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
+      return false if @address.nil?
+      return false if @address.to_s.length < 1
+      return false if @city.nil?
+      return false if @city.to_s.length < 1
+      return false if @country_code.nil?
+      return false if @country_code.to_s.length < 1
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] recipient_name Value to be assigned
+    def recipient_name=(recipient_name)
+      if recipient_name.nil?
+        fail ArgumentError, 'recipient_name cannot be nil'
+      end
+
+      if recipient_name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "recipient_name", the character length must be great than or equal to 1.'
+      end
+
+      @recipient_name = recipient_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -283,6 +367,48 @@ module AvalaraSdk::A1099::V2
       @tin_type = tin_type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] address Value to be assigned
+    def address=(address)
+      if address.nil?
+        fail ArgumentError, 'address cannot be nil'
+      end
+
+      if address.to_s.length < 1
+        fail ArgumentError, 'invalid value for "address", the character length must be great than or equal to 1.'
+      end
+
+      @address = address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] city Value to be assigned
+    def city=(city)
+      if city.nil?
+        fail ArgumentError, 'city cannot be nil'
+      end
+
+      if city.to_s.length < 1
+        fail ArgumentError, 'invalid value for "city", the character length must be great than or equal to 1.'
+      end
+
+      @city = city
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] country_code Value to be assigned
+    def country_code=(country_code)
+      if country_code.nil?
+        fail ArgumentError, 'country_code cannot be nil'
+      end
+
+      if country_code.to_s.length < 1
+        fail ArgumentError, 'invalid value for "country_code", the character length must be great than or equal to 1.'
+      end
+
+      @country_code = country_code
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -290,8 +416,8 @@ module AvalaraSdk::A1099::V2
       self.class == o.class &&
           issuer_id == o.issuer_id &&
           reference_id == o.reference_id &&
-          recipient_name == o.recipient_name &&
           recipient_tin == o.recipient_tin &&
+          recipient_name == o.recipient_name &&
           tin_type == o.tin_type &&
           recipient_second_name == o.recipient_second_name &&
           address == o.address &&
@@ -321,7 +447,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [issuer_id, reference_id, recipient_name, recipient_tin, tin_type, recipient_second_name, address, address2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification, state_and_local_withholding].hash
+      [issuer_id, reference_id, recipient_tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification, state_and_local_withholding].hash
     end
 
     # Builds the object from hash

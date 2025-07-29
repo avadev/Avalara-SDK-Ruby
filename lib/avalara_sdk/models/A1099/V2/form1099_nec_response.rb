@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -15,7 +15,7 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :nonemployee_compensation
 
-    attr_accessor :payer_made_direct_sales
+    attr_accessor :direct_sales_indicator
 
     attr_accessor :federal_income_tax_withheld
 
@@ -118,7 +118,7 @@ module AvalaraSdk::A1099::V2
       {
         :'second_tin_notice' => :'secondTinNotice',
         :'nonemployee_compensation' => :'nonemployeeCompensation',
-        :'payer_made_direct_sales' => :'payerMadeDirectSales',
+        :'direct_sales_indicator' => :'directSalesIndicator',
         :'federal_income_tax_withheld' => :'federalIncomeTaxWithheld',
         :'type' => :'type',
         :'created_at' => :'createdAt',
@@ -169,7 +169,7 @@ module AvalaraSdk::A1099::V2
       {
         :'second_tin_notice' => :'Boolean',
         :'nonemployee_compensation' => :'Float',
-        :'payer_made_direct_sales' => :'Boolean',
+        :'direct_sales_indicator' => :'Boolean',
         :'federal_income_tax_withheld' => :'Float',
         :'type' => :'String',
         :'created_at' => :'Time',
@@ -202,11 +202,11 @@ module AvalaraSdk::A1099::V2
         :'tin_match' => :'Boolean',
         :'address_verification' => :'Boolean',
         :'federal_efile_status' => :'StatusDetail',
-        :'state_efile_status' => :'Array<StateEfileStatusDetailApp>',
+        :'state_efile_status' => :'Array<StateEfileStatusDetailResponse>',
         :'postal_mail_status' => :'StatusDetail',
         :'tin_match_status' => :'StatusDetail',
         :'address_verification_status' => :'StatusDetail',
-        :'validation_errors' => :'Array<ValidationErrorApp>'
+        :'validation_errors' => :'Array<ValidationErrorResponse>'
       }
     end
 
@@ -252,8 +252,8 @@ module AvalaraSdk::A1099::V2
         self.nonemployee_compensation = attributes[:'nonemployee_compensation']
       end
 
-      if attributes.key?(:'payer_made_direct_sales')
-        self.payer_made_direct_sales = attributes[:'payer_made_direct_sales']
+      if attributes.key?(:'direct_sales_indicator')
+        self.direct_sales_indicator = attributes[:'direct_sales_indicator']
       end
 
       if attributes.key?(:'federal_income_tax_withheld')
@@ -421,7 +421,7 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B"])
+      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
@@ -431,7 +431,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B"])
+      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -467,7 +467,7 @@ module AvalaraSdk::A1099::V2
       self.class == o.class &&
           second_tin_notice == o.second_tin_notice &&
           nonemployee_compensation == o.nonemployee_compensation &&
-          payer_made_direct_sales == o.payer_made_direct_sales &&
+          direct_sales_indicator == o.direct_sales_indicator &&
           federal_income_tax_withheld == o.federal_income_tax_withheld &&
           type == o.type &&
           created_at == o.created_at &&
@@ -516,7 +516,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [second_tin_notice, nonemployee_compensation, payer_made_direct_sales, federal_income_tax_withheld, type, created_at, updated_at, user_id, state_and_local_withholding, tin_type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, recipient_name, recipient_tin, recipient_second_name, address, address2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, validation_errors].hash
+      [second_tin_notice, nonemployee_compensation, direct_sales_indicator, federal_income_tax_withheld, type, created_at, updated_at, user_id, state_and_local_withholding, tin_type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, recipient_name, recipient_tin, recipient_second_name, address, address2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, validation_errors].hash
     end
 
     # Builds the object from hash

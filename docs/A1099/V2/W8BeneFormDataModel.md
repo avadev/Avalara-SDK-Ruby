@@ -103,9 +103,9 @@
 | **certify_box41** | **Boolean** |  | [optional] |
 | **certify_box43** | **Boolean** |  | [optional] |
 | **certify_part29_signature** | **Boolean** |  | [optional] |
-| **part19_formation_or_resolution_date** | **Time** |  | [optional] |
-| **part20_filing_date** | **Time** |  | [optional] |
-| **part21_determination_date** | **Time** |  | [optional] |
+| **part19_formation_or_resolution_date** | **Date** |  | [optional] |
+| **part20_filing_date** | **Date** |  | [optional] |
+| **part21_determination_date** | **Date** |  | [optional] |
 | **substantial_us_owners** | [**Array&lt;W8BenESubstantialUsOwnerDataModel&gt;**](W8BenESubstantialUsOwnerDataModel.md) |  | [optional] |
 | **employee_first_name** | **String** | The first name of the employee. | [optional] |
 | **employee_middle_name** | **String** | The middle name of the employee. | [optional] |
@@ -201,8 +201,8 @@
 | **certify_box40** | **Boolean** | Indicates certification for box 40. | [optional] |
 | **box41_sponsoring_entity** | **String** | The sponsoring entity information for box 41. | [optional] |
 | **certify_box42** | **Boolean** | Indicates certification for box 42. | [optional] |
-| **box35_formed_on_date** | **Time** |  | [optional] |
-| **box36_filed_on_date** | **Time** |  | [optional] |
+| **box35_formed_on_date** | **Date** |  | [optional] |
+| **box36_filed_on_date** | **Date** |  | [optional] |
 | **tin_match_status** | **String** | The status of the TIN match. | [optional] |
 | **signature** | **String** | The signature itself | [optional] |
 | **business_classification** | **String** | The classification of the business. | [optional] |

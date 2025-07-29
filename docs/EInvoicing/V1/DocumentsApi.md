@@ -37,7 +37,7 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.2' # String | The HTTP Header meant to specify the version of the API intended to be used
+avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
 accept = 'application/pdf' # String | This header indicates the MIME type of the document
 document_id = 'document_id_example' # String | The unique ID for this document that was returned in the POST /einvoicing/document response body
 opts = {
@@ -120,7 +120,7 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.2' # String | The HTTP Header meant to specify the version of the API intended to be used
+avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
 fetch_documents_request = AvalaraSdk::EInvoicing::V1::FetchDocumentsRequest.new # FetchDocumentsRequest | 
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client' # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
@@ -201,7 +201,7 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.2' # String | The HTTP Header meant to specify the version of the API intended to be used
+avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
   start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Start date of documents to return. This defaults to the previous month.
@@ -210,7 +210,7 @@ opts = {
   count: 'true', # String | When set to true, the count of the collection is also returned in the response body
   count_only: 'false', # String | When set to true, only the count of the collection is returned
   filter: 'id eq 52f60401-44d0-4667-ad47-4afe519abb53', # String | Filter by field name and value. This filter only supports <code>eq</code> . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed.
-  top: 8.14, # Float | The number of items to include in the result.
+  top: 10, # Float | If nonzero, return no more than this number of results. Used with <code>$skip</code> to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 200 records.
   skip: '10' # String | If nonzero, skip this number of results before returning data. Used with <code>$top</code> to provide pagination for large datasets.
 }
 
@@ -253,7 +253,7 @@ end
 | **count** | **String** | When set to true, the count of the collection is also returned in the response body | [optional] |
 | **count_only** | **String** | When set to true, only the count of the collection is returned | [optional] |
 | **filter** | **String** | Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed. | [optional] |
-| **top** | **Float** | The number of items to include in the result. | [optional] |
+| **top** | **Float** | If nonzero, return no more than this number of results. Used with &lt;code&gt;$skip&lt;/code&gt; to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 200 records. | [optional] |
 | **skip** | **String** | If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. | [optional] |
 
 ### Return type
@@ -296,7 +296,7 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.2' # String | The HTTP Header meant to specify the version of the API intended to be used
+avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
 document_id = 'document_id_example' # String | The unique ID for this document that was returned in the POST /einvoicing/documents response body
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client' # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
@@ -377,7 +377,7 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.2' # String | The HTTP Header meant to specify the version of the API intended to be used
+avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
 metadata = AvalaraSdk::EInvoicing::V1::SubmitDocumentMetadata.new({workflow_id: 'partner-einvoicing', data_format: 'ubl-invoice', data_format_version: '2.1', country_code: 'SA', country_mandate: 'SA-Phase1-B2B'}) # SubmitDocumentMetadata | 
 data = { ... } # Object | The document to be submitted, as indicated by the metadata fields 'dataFormat' and 'dataFormatVersion'
 opts = {

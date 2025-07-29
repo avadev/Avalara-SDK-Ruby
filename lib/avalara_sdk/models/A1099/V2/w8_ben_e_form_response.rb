@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -539,11 +539,11 @@ module AvalaraSdk::A1099::V2
         :'territory_financial_institution_certification' => :'Boolean',
         :'excepted_nonfinancial_group_entity_certification' => :'Boolean',
         :'excepted_nonfinancial_start_up_certification' => :'Boolean',
-        :'startup_formation_or_resolution_date' => :'Time',
+        :'startup_formation_or_resolution_date' => :'Date',
         :'excepted_nonfinancial_entity_in_liquidation_or_bankruptcy_certification' => :'Boolean',
-        :'nonfinancial_entity_filing_date' => :'Time',
+        :'nonfinancial_entity_filing_date' => :'Date',
         :'section501_c_organization_certification' => :'Boolean',
-        :'determination_letter_date' => :'Time',
+        :'determination_letter_date' => :'Date',
         :'nonprofit_organization_certification' => :'Boolean',
         :'publicly_traded_nffe_certification' => :'Boolean',
         :'publicly_traded_nffe_securities_market' => :'String',

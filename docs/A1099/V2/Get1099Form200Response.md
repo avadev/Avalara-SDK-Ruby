@@ -14,11 +14,13 @@ require 'avalara_sdk'
 AvalaraSdk::A1099::V2::Get1099Form200Response.openapi_one_of
 # =>
 # [
-#   :'Form1095B',
-#   :'Form1099K',
-#   :'Form1099Misc',
-#   :'Form1099Nec',
-#   :'Form1099R'
+#   :'Form1042SListItemResponse',
+#   :'Form1095BListItemResponse',
+#   :'Form1099BaseResponse',
+#   :'Form1099KListItemResponse',
+#   :'Form1099MiscListItemResponse',
+#   :'Form1099NecListItemResponse',
+#   :'Form1099RListItemResponse'
 # ]
 ```
 
@@ -32,7 +34,7 @@ Find the appropriate object from the `openapi_one_of` list and casts the data in
 require 'avalara_sdk'
 
 AvalaraSdk::A1099::V2::Get1099Form200Response.build(data)
-# => #<Form1095B:0x00007fdd4aab02a0>
+# => #<Form1042SListItemResponse:0x00007fdd4aab02a0>
 
 AvalaraSdk::A1099::V2::Get1099Form200Response.build(data_that_doesnt_match)
 # => nil
@@ -46,10 +48,12 @@ AvalaraSdk::A1099::V2::Get1099Form200Response.build(data_that_doesnt_match)
 
 #### Return type
 
-- `Form1095B`
-- `Form1099K`
-- `Form1099Misc`
-- `Form1099Nec`
-- `Form1099R`
+- `Form1042SListItemResponse`
+- `Form1095BListItemResponse`
+- `Form1099BaseResponse`
+- `Form1099KListItemResponse`
+- `Form1099MiscListItemResponse`
+- `Form1099NecListItemResponse`
+- `Form1099RListItemResponse`
 - `nil` (if no type matches)
 
