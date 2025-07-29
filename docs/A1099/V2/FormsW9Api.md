@@ -41,7 +41,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'a80d4171-c58b-440c-8cc7-4093fd542b00', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '968b9850-b859-4a5a-8165-bd1e444fbf47', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   create_w9_form_request: AvalaraSdk::A1099::V2::W4FormRequest.new # CreateW9FormRequest | Form to be created
 }
@@ -125,7 +125,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | ID of the form to delete
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '458bae89-b373-4297-b5eb-0e7a18838af3', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '69926298-ed5b-4d78-8099-b5488589912d', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -207,7 +207,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | ID of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'fcd3a4fb-da5b-4195-a470-97567434f46c', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'e138390c-5561-49df-a969-49427e2c5ffa', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -294,7 +294,7 @@ opts = {
   skip: 56, # Integer | If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | When true, returns a @recordSetCount in the result set
-  x_correlation_id: 'a4990941-fbe5-45f9-8495-43ed73f8334e', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'f80bd20b-84ec-47de-913f-304dd9951b58', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -381,7 +381,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | The ID of the W9/W4/W8 form.
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '72cf9106-878e-4643-9b5a-440f89a7b20d', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '75735dc9-2909-4f11-bc6c-6e1ec0d77264', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -464,7 +464,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | ID of the form to update
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '38f0a02f-83cf-4142-b6ed-6b29474177df', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'd24784a4-9522-46c7-b6e0-8f44cb176f17', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   iw9_form_data_models_one_of: AvalaraSdk::A1099::V2::W4FormDataModel.new # IW9FormDataModelsOneOf | Form to be updated
 }
@@ -549,7 +549,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | Id of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '4fee6fea-2e64-4911-bb75-0931dd2875be', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'ee2e9278-6cdb-47ad-82a0-9d5a726f7412', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   file: File.new('/path/to/some/file') # File | 
 }

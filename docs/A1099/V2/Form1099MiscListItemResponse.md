@@ -100,8 +100,8 @@ instance = AvalaraSdk::A1099::V2::Form1099MiscListItemResponse.new(
   foreign_province: ,
   country_code: US,
   validation_errors: null,
-  created_at: 2025-07-29T15:26:03.302645900Z,
-  updated_at: 2025-07-29T15:26:03.302646500Z,
+  created_at: 2025-07-29T15:47:39.396860Z,
+  updated_at: 2025-07-29T15:47:39.396860500Z,
   state_and_local_withholding: null
 )
 ```

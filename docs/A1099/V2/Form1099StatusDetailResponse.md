@@ -13,7 +13,7 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::Form1099StatusDetailResponse.new(
-  time: 2025-07-29T15:26:03.2848136Z,
+  time: 2025-07-29T15:47:39.3790485Z,
   status: accepted
 )
 ```
