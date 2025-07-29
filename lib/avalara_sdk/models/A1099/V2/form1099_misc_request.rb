@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -11,82 +11,120 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class Form1099MiscRequest
+    # Second TIN notice
     attr_accessor :second_tin_notice
 
+    # Rents
     attr_accessor :rents
 
+    # Royalties
     attr_accessor :royalties
 
+    # Other income
     attr_accessor :other_income
 
+    # Federal income tax withheld
     attr_accessor :fed_income_tax_withheld
 
+    # Fishing boat proceeds
     attr_accessor :fishing_boat_proceeds
 
+    # Medical and health care payments
     attr_accessor :medical_health_care_payments
 
-    attr_accessor :payer_made_direct_sales
+    # Payer made direct sales totaling $5,000 or more of consumer products to recipient for resale
+    attr_accessor :direct_sales_indicator
 
+    # Substitute payments in lieu of dividends or interest
     attr_accessor :substitute_payments
 
+    # Crop insurance proceeds
     attr_accessor :crop_insurance_proceeds
 
+    # Gross proceeds paid to an attorney
     attr_accessor :gross_proceeds_paid_to_attorney
 
+    # Fish purchased for resale
     attr_accessor :fish_purchased_for_resale
 
+    # Section 409A deferrals
     attr_accessor :section409_a_deferrals
 
+    # FATCA filing requirement
     attr_accessor :fatca_filing_requirement
 
+    # (Legacy field) Excess golden parachute payments
     attr_accessor :excess_golden_parachute_payments
 
+    # Nonqualified deferred compensation
     attr_accessor :nonqualified_deferred_compensation
 
     attr_accessor :type
 
+    # Issuer ID
     attr_accessor :issuer_id
 
+    # Reference ID
     attr_accessor :reference_id
 
-    attr_accessor :recipient_name
-
+    # Recipient Tax ID Number
     attr_accessor :recipient_tin
 
+    # Recipient name
+    attr_accessor :recipient_name
+
+    # Type of TIN (Tax ID Number). Will be one of:  * SSN  * EIN  * ITIN  * ATIN
     attr_accessor :tin_type
 
+    # Recipient second name
     attr_accessor :recipient_second_name
 
+    # Address
     attr_accessor :address
 
+    # Address line 2
     attr_accessor :address2
 
+    # City
     attr_accessor :city
 
+    # US state. Required if CountryCode is \"US\".
     attr_accessor :state
 
+    # Zip/postal code
     attr_accessor :zip
 
+    # Recipient email address
     attr_accessor :recipient_email
 
+    # Account number
     attr_accessor :account_number
 
+    # Office code
     attr_accessor :office_code
 
+    # Foreign province
     attr_accessor :recipient_non_us_province
 
+    # Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
     attr_accessor :country_code
 
+    # Boolean indicating that federal e-filing should be scheduled for this form
     attr_accessor :federal_e_file
 
+    # Boolean indicating that postal mailing to the recipient should be scheduled for this form
     attr_accessor :postal_mail
 
+    # Boolean indicating that state e-filing should be scheduled for this form
     attr_accessor :state_e_file
 
+    # Boolean indicating that TIN Matching should be scheduled for this form
     attr_accessor :tin_match
 
+    # Boolean indicating that address verification should be scheduled for this form
     attr_accessor :address_verification
 
+    # State and local withholding information
     attr_accessor :state_and_local_withholding
 
     class EnumAttributeValidator
@@ -121,7 +159,7 @@ module AvalaraSdk::A1099::V2
         :'fed_income_tax_withheld' => :'fedIncomeTaxWithheld',
         :'fishing_boat_proceeds' => :'fishingBoatProceeds',
         :'medical_health_care_payments' => :'medicalHealthCarePayments',
-        :'payer_made_direct_sales' => :'payerMadeDirectSales',
+        :'direct_sales_indicator' => :'directSalesIndicator',
         :'substitute_payments' => :'substitutePayments',
         :'crop_insurance_proceeds' => :'cropInsuranceProceeds',
         :'gross_proceeds_paid_to_attorney' => :'grossProceedsPaidToAttorney',
@@ -133,8 +171,8 @@ module AvalaraSdk::A1099::V2
         :'type' => :'type',
         :'issuer_id' => :'issuerId',
         :'reference_id' => :'referenceId',
-        :'recipient_name' => :'recipientName',
         :'recipient_tin' => :'recipientTin',
+        :'recipient_name' => :'recipientName',
         :'tin_type' => :'tinType',
         :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
@@ -171,7 +209,7 @@ module AvalaraSdk::A1099::V2
         :'fed_income_tax_withheld' => :'Float',
         :'fishing_boat_proceeds' => :'Float',
         :'medical_health_care_payments' => :'Float',
-        :'payer_made_direct_sales' => :'Boolean',
+        :'direct_sales_indicator' => :'Boolean',
         :'substitute_payments' => :'Float',
         :'crop_insurance_proceeds' => :'Float',
         :'gross_proceeds_paid_to_attorney' => :'Float',
@@ -183,8 +221,8 @@ module AvalaraSdk::A1099::V2
         :'type' => :'String',
         :'issuer_id' => :'String',
         :'reference_id' => :'String',
-        :'recipient_name' => :'String',
         :'recipient_tin' => :'String',
+        :'recipient_name' => :'String',
         :'tin_type' => :'String',
         :'recipient_second_name' => :'String',
         :'address' => :'String',
@@ -211,7 +249,7 @@ module AvalaraSdk::A1099::V2
       Set.new([
         :'issuer_id',
         :'reference_id',
-        :'recipient_name',
+        :'recipient_second_name',
         :'address2',
         :'recipient_email',
         :'account_number',
@@ -270,8 +308,8 @@ module AvalaraSdk::A1099::V2
         self.medical_health_care_payments = attributes[:'medical_health_care_payments']
       end
 
-      if attributes.key?(:'payer_made_direct_sales')
-        self.payer_made_direct_sales = attributes[:'payer_made_direct_sales']
+      if attributes.key?(:'direct_sales_indicator')
+        self.direct_sales_indicator = attributes[:'direct_sales_indicator']
       end
 
       if attributes.key?(:'substitute_payments')
@@ -318,12 +356,14 @@ module AvalaraSdk::A1099::V2
         self.reference_id = attributes[:'reference_id']
       end
 
-      if attributes.key?(:'recipient_name')
-        self.recipient_name = attributes[:'recipient_name']
-      end
-
       if attributes.key?(:'recipient_tin')
         self.recipient_tin = attributes[:'recipient_tin']
+      end
+
+      if attributes.key?(:'recipient_name')
+        self.recipient_name = attributes[:'recipient_name']
+      else
+        self.recipient_name = nil
       end
 
       if attributes.key?(:'tin_type')
@@ -336,6 +376,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'address')
         self.address = attributes[:'address']
+      else
+        self.address = nil
       end
 
       if attributes.key?(:'address2')
@@ -344,6 +386,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
+      else
+        self.city = nil
       end
 
       if attributes.key?(:'state')
@@ -372,6 +416,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
+      else
+        self.country_code = nil
       end
 
       if attributes.key?(:'federal_e_file')
@@ -404,6 +450,38 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @recipient_name.nil?
+        invalid_properties.push('invalid value for "recipient_name", recipient_name cannot be nil.')
+      end
+
+      if @recipient_name.to_s.length < 1
+        invalid_properties.push('invalid value for "recipient_name", the character length must be great than or equal to 1.')
+      end
+
+      if @address.nil?
+        invalid_properties.push('invalid value for "address", address cannot be nil.')
+      end
+
+      if @address.to_s.length < 1
+        invalid_properties.push('invalid value for "address", the character length must be great than or equal to 1.')
+      end
+
+      if @city.nil?
+        invalid_properties.push('invalid value for "city", city cannot be nil.')
+      end
+
+      if @city.to_s.length < 1
+        invalid_properties.push('invalid value for "city", the character length must be great than or equal to 1.')
+      end
+
+      if @country_code.nil?
+        invalid_properties.push('invalid value for "country_code", country_code cannot be nil.')
+      end
+
+      if @country_code.to_s.length < 1
+        invalid_properties.push('invalid value for "country_code", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -411,21 +489,43 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B"])
+      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S"])
       return false unless type_validator.valid?(@type)
+      return false if @recipient_name.nil?
+      return false if @recipient_name.to_s.length < 1
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
+      return false if @address.nil?
+      return false if @address.to_s.length < 1
+      return false if @city.nil?
+      return false if @city.to_s.length < 1
+      return false if @country_code.nil?
+      return false if @country_code.to_s.length < 1
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B"])
+      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] recipient_name Value to be assigned
+    def recipient_name=(recipient_name)
+      if recipient_name.nil?
+        fail ArgumentError, 'recipient_name cannot be nil'
+      end
+
+      if recipient_name.to_s.length < 1
+        fail ArgumentError, 'invalid value for "recipient_name", the character length must be great than or equal to 1.'
+      end
+
+      @recipient_name = recipient_name
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -436,6 +536,48 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
       end
       @tin_type = tin_type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] address Value to be assigned
+    def address=(address)
+      if address.nil?
+        fail ArgumentError, 'address cannot be nil'
+      end
+
+      if address.to_s.length < 1
+        fail ArgumentError, 'invalid value for "address", the character length must be great than or equal to 1.'
+      end
+
+      @address = address
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] city Value to be assigned
+    def city=(city)
+      if city.nil?
+        fail ArgumentError, 'city cannot be nil'
+      end
+
+      if city.to_s.length < 1
+        fail ArgumentError, 'invalid value for "city", the character length must be great than or equal to 1.'
+      end
+
+      @city = city
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] country_code Value to be assigned
+    def country_code=(country_code)
+      if country_code.nil?
+        fail ArgumentError, 'country_code cannot be nil'
+      end
+
+      if country_code.to_s.length < 1
+        fail ArgumentError, 'invalid value for "country_code", the character length must be great than or equal to 1.'
+      end
+
+      @country_code = country_code
     end
 
     # Checks equality by comparing each attribute.
@@ -450,7 +592,7 @@ module AvalaraSdk::A1099::V2
           fed_income_tax_withheld == o.fed_income_tax_withheld &&
           fishing_boat_proceeds == o.fishing_boat_proceeds &&
           medical_health_care_payments == o.medical_health_care_payments &&
-          payer_made_direct_sales == o.payer_made_direct_sales &&
+          direct_sales_indicator == o.direct_sales_indicator &&
           substitute_payments == o.substitute_payments &&
           crop_insurance_proceeds == o.crop_insurance_proceeds &&
           gross_proceeds_paid_to_attorney == o.gross_proceeds_paid_to_attorney &&
@@ -462,8 +604,8 @@ module AvalaraSdk::A1099::V2
           type == o.type &&
           issuer_id == o.issuer_id &&
           reference_id == o.reference_id &&
-          recipient_name == o.recipient_name &&
           recipient_tin == o.recipient_tin &&
+          recipient_name == o.recipient_name &&
           tin_type == o.tin_type &&
           recipient_second_name == o.recipient_second_name &&
           address == o.address &&
@@ -493,7 +635,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [second_tin_notice, rents, royalties, other_income, fed_income_tax_withheld, fishing_boat_proceeds, medical_health_care_payments, payer_made_direct_sales, substitute_payments, crop_insurance_proceeds, gross_proceeds_paid_to_attorney, fish_purchased_for_resale, section409_a_deferrals, fatca_filing_requirement, excess_golden_parachute_payments, nonqualified_deferred_compensation, type, issuer_id, reference_id, recipient_name, recipient_tin, tin_type, recipient_second_name, address, address2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification, state_and_local_withholding].hash
+      [second_tin_notice, rents, royalties, other_income, fed_income_tax_withheld, fishing_boat_proceeds, medical_health_care_payments, direct_sales_indicator, substitute_payments, crop_insurance_proceeds, gross_proceeds_paid_to_attorney, fish_purchased_for_resale, section409_a_deferrals, fatca_filing_requirement, excess_golden_parachute_payments, nonqualified_deferred_compensation, type, issuer_id, reference_id, recipient_tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification, state_and_local_withholding].hash
     end
 
     # Builds the object from hash

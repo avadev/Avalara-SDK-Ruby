@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -15,36 +15,51 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :type
 
+    # Dry run. If `true`, this job only simulates the changes but doesn't actually persist them.
     attr_accessor :dry_run
 
+    # Upsert. If `true`, this job will first attempt to update existing records if matches can be found. Matches are done in the following order:  * Form ID  * Form Reference ID and tax year  * Form TIN and tax year
     attr_accessor :upsert
 
+    # Status of the job
     attr_accessor :status
 
     attr_accessor :error_message
 
+    # Total number of forms processed
     attr_accessor :total_processed
 
+    # Total number of forms in the request
     attr_accessor :total_rows
 
+    # Number of forms updated and valid for e-filing and e-delivery
     attr_accessor :updated_valid
 
+    # Number of forms updated and valid for e-filing but missing email or email is undeliverable
     attr_accessor :updated_no_email
 
+    # Number of forms updated but invalid for e-filing
     attr_accessor :updated_invalid
 
+    # Number of forms skipped because they would have updated a record already updated once in the request
     attr_accessor :skipped_duplicate
 
+    # Number of forms skipped because they would have made a form invalid and the form is already e-filed or scheduled for e-filing
     attr_accessor :skipped_invalid
 
+    # Number of forms skipped because they matched multiple forms
     attr_accessor :skipped_multiple_matches
 
+    # Number of forms skipped because no matching form or issuer could be found
     attr_accessor :not_found
 
+    # Number of new forms created because no matching form could be found (and `upsert` was true) - with errors
     attr_accessor :created_invalid
 
+    # Number of new forms created because no matching form could be found (and `upsert` was true) - valid for e-filing but missing email or email is undeliverable
     attr_accessor :created_no_email
 
+    # Number of new forms created because no matching form could be found (and `upsert` was true) - valid for e-filing and e-delivery
     attr_accessor :created_valid
 
     # Attribute mapping from ruby-style variable name to JSON key.

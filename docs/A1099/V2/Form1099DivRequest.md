@@ -4,48 +4,48 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **total_ordinary_dividends** | **String** |  | [optional] |
-| **qualified_dividends** | **String** |  | [optional] |
-| **total_capital_gain_distr** | **String** |  | [optional] |
-| **unrecap_sec1250_gain** | **String** |  | [optional] |
-| **section1202_gain** | **String** |  | [optional] |
-| **collectibles_gain** | **String** |  | [optional] |
-| **section897_ordinary_dividends** | **String** |  | [optional] |
-| **section897_capital_gain** | **String** |  | [optional] |
-| **nondividend_distributions** | **String** |  | [optional] |
-| **federal_income_tax_withheld** | **String** |  | [optional] |
-| **section199_a_dividends** | **String** |  | [optional] |
-| **investment_expenses** | **String** |  | [optional] |
-| **foreign_tax_paid** | **String** |  | [optional] |
-| **foreign_country_or_us_possession** | **String** |  | [optional] |
-| **cash_liquidation_distributions** | **String** |  | [optional] |
-| **noncash_liquidation_distributions** | **String** |  | [optional] |
-| **exempt_interest_dividends** | **String** |  | [optional] |
-| **specified_private_activity_bond_interest_dividends** | **String** |  | [optional] |
-| **fatca_filing_requirement** | **String** |  | [optional] |
-| **type** | **String** |  | [optional][readonly] |
-| **issuer_id** | **String** |  | [optional] |
-| **reference_id** | **String** |  | [optional] |
-| **recipient_name** | **String** |  | [optional] |
-| **recipient_tin** | **String** |  | [optional] |
-| **tin_type** | **String** |  | [optional] |
-| **recipient_second_name** | **String** |  | [optional] |
-| **address** | **String** |  | [optional] |
-| **address2** | **String** |  | [optional] |
-| **city** | **String** |  | [optional] |
-| **state** | **String** |  | [optional] |
-| **zip** | **String** |  | [optional] |
-| **recipient_email** | **String** |  | [optional] |
-| **account_number** | **String** |  | [optional] |
-| **office_code** | **String** |  | [optional] |
-| **recipient_non_us_province** | **String** |  | [optional] |
-| **country_code** | **String** |  | [optional] |
-| **federal_e_file** | **Boolean** |  | [optional] |
-| **postal_mail** | **Boolean** |  | [optional] |
-| **state_e_file** | **Boolean** |  | [optional] |
-| **tin_match** | **Boolean** |  | [optional] |
-| **address_verification** | **Boolean** |  | [optional] |
-| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) |  | [optional] |
+| **total_ordinary_dividends** | **String** | Total ordinary dividends | [optional] |
+| **qualified_dividends** | **String** | Qualified dividends | [optional] |
+| **total_capital_gain_distr** | **String** | Total capital gain distributions | [optional] |
+| **unrecap_sec1250_gain** | **String** | Unrecaptured Section 1250 gain | [optional] |
+| **section1202_gain** | **String** | Section 1202 gain | [optional] |
+| **collectibles_gain** | **String** | Collectibles (28%) gain | [optional] |
+| **section897_ordinary_dividends** | **String** | Section 897 ordinary dividends | [optional] |
+| **section897_capital_gain** | **String** | Section 897 capital gain | [optional] |
+| **nondividend_distributions** | **String** | Nondividend distributions | [optional] |
+| **federal_income_tax_withheld** | **String** | Federal income tax withheld | [optional] |
+| **section199_a_dividends** | **String** | Section 199A dividends | [optional] |
+| **investment_expenses** | **String** | Investment expenses | [optional] |
+| **foreign_tax_paid** | **String** | Foreign tax paid | [optional] |
+| **foreign_country_or_us_possession** | **String** | Foreign country or U.S. possession | [optional] |
+| **cash_liquidation_distributions** | **String** | Cash liquidation distributions | [optional] |
+| **noncash_liquidation_distributions** | **String** | Noncash liquidation distributions | [optional] |
+| **exempt_interest_dividends** | **String** | Exempt-interest dividends | [optional] |
+| **specified_private_activity_bond_interest_dividends** | **String** | Specified private activity bond interest dividends | [optional] |
+| **fatca_filing_requirement** | **String** | FATCA filing requirement | [optional] |
+| **type** | **String** |  | [optional] |
+| **issuer_id** | **String** | Issuer ID | [optional] |
+| **reference_id** | **String** | Reference ID | [optional] |
+| **recipient_tin** | **String** | Recipient Tax ID Number | [optional] |
+| **recipient_name** | **String** | Recipient name |  |
+| **tin_type** | **String** | Type of TIN (Tax ID Number). Will be one of:  * SSN  * EIN  * ITIN  * ATIN | [optional] |
+| **recipient_second_name** | **String** | Recipient second name | [optional] |
+| **address** | **String** | Address |  |
+| **address2** | **String** | Address line 2 | [optional] |
+| **city** | **String** | City |  |
+| **state** | **String** | US state. Required if CountryCode is \&quot;US\&quot;. | [optional] |
+| **zip** | **String** | Zip/postal code | [optional] |
+| **recipient_email** | **String** | Recipient email address | [optional] |
+| **account_number** | **String** | Account number | [optional] |
+| **office_code** | **String** | Office code | [optional] |
+| **recipient_non_us_province** | **String** | Foreign province | [optional] |
+| **country_code** | **String** | Country code, as defined at https://www.irs.gov/e-file-providers/country-codes |  |
+| **federal_e_file** | **Boolean** | Boolean indicating that federal e-filing should be scheduled for this form | [optional] |
+| **postal_mail** | **Boolean** | Boolean indicating that postal mailing to the recipient should be scheduled for this form | [optional] |
+| **state_e_file** | **Boolean** | Boolean indicating that state e-filing should be scheduled for this form | [optional] |
+| **tin_match** | **Boolean** | Boolean indicating that TIN Matching should be scheduled for this form | [optional] |
+| **address_verification** | **Boolean** | Boolean indicating that address verification should be scheduled for this form | [optional] |
+| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) | State and local withholding information | [optional] |
 
 ## Example
 
@@ -72,11 +72,11 @@ instance = AvalaraSdk::A1099::V2::Form1099DivRequest.new(
   exempt_interest_dividends: null,
   specified_private_activity_bond_interest_dividends: null,
   fatca_filing_requirement: null,
-  type: Form1099Nec,
+  type: 1099-NEC,
   issuer_id: null,
   reference_id: null,
-  recipient_name: null,
   recipient_tin: null,
+  recipient_name: null,
   tin_type: EIN,
   recipient_second_name: null,
   address: null,

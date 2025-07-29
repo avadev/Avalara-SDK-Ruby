@@ -4,36 +4,36 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **employee_first_name** | **String** |  | [optional] |
-| **employee_middle_name** | **String** |  | [optional] |
-| **employee_last_name** | **String** |  | [optional] |
-| **employee_name_suffix** | **String** |  | [optional] |
-| **employee_date_of_birth** | **Time** |  | [optional] |
-| **origin_of_health_coverage_code** | **String** |  | [optional] |
-| **covered_individuals** | [**Array&lt;CoveredIndividualRequest&gt;**](CoveredIndividualRequest.md) |  | [optional] |
-| **type** | **String** |  | [optional][readonly] |
-| **issuer_id** | **String** |  | [optional] |
-| **reference_id** | **String** |  | [optional] |
-| **recipient_name** | **String** |  | [optional] |
-| **recipient_tin** | **String** |  | [optional] |
-| **tin_type** | **String** |  | [optional] |
-| **recipient_second_name** | **String** |  | [optional] |
-| **address** | **String** |  | [optional] |
-| **address2** | **String** |  | [optional] |
-| **city** | **String** |  | [optional] |
-| **state** | **String** |  | [optional] |
-| **zip** | **String** |  | [optional] |
-| **recipient_email** | **String** |  | [optional] |
-| **account_number** | **String** |  | [optional] |
-| **office_code** | **String** |  | [optional] |
-| **recipient_non_us_province** | **String** |  | [optional] |
-| **country_code** | **String** |  | [optional] |
-| **federal_e_file** | **Boolean** |  | [optional] |
-| **postal_mail** | **Boolean** |  | [optional] |
-| **state_e_file** | **Boolean** |  | [optional] |
-| **tin_match** | **Boolean** |  | [optional] |
-| **address_verification** | **Boolean** |  | [optional] |
-| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) |  | [optional] |
+| **employee_first_name** | **String** | Employee&#39;s first name | [optional] |
+| **employee_middle_name** | **String** | Employee&#39;s middle name | [optional] |
+| **employee_last_name** | **String** | Employee&#39;s last name | [optional] |
+| **employee_name_suffix** | **String** | Employee&#39;s name suffix | [optional] |
+| **employee_date_of_birth** | **Time** | Employee&#39;s date of birth | [optional] |
+| **origin_of_health_coverage_code** | **String** | Origin of health coverage code | [optional] |
+| **covered_individuals** | [**Array&lt;CoveredIndividualRequest&gt;**](CoveredIndividualRequest.md) | Covered individuals information | [optional] |
+| **type** | **String** |  | [optional] |
+| **issuer_id** | **String** | Issuer ID | [optional] |
+| **reference_id** | **String** | Reference ID | [optional] |
+| **recipient_tin** | **String** | Recipient Tax ID Number | [optional] |
+| **recipient_name** | **String** | Recipient name |  |
+| **tin_type** | **String** | Type of TIN (Tax ID Number). Will be one of:  * SSN  * EIN  * ITIN  * ATIN | [optional] |
+| **recipient_second_name** | **String** | Recipient second name | [optional] |
+| **address** | **String** | Address |  |
+| **address2** | **String** | Address line 2 | [optional] |
+| **city** | **String** | City |  |
+| **state** | **String** | US state. Required if CountryCode is \&quot;US\&quot;. | [optional] |
+| **zip** | **String** | Zip/postal code | [optional] |
+| **recipient_email** | **String** | Recipient email address | [optional] |
+| **account_number** | **String** | Account number | [optional] |
+| **office_code** | **String** | Office code | [optional] |
+| **recipient_non_us_province** | **String** | Foreign province | [optional] |
+| **country_code** | **String** | Country code, as defined at https://www.irs.gov/e-file-providers/country-codes |  |
+| **federal_e_file** | **Boolean** | Boolean indicating that federal e-filing should be scheduled for this form | [optional] |
+| **postal_mail** | **Boolean** | Boolean indicating that postal mailing to the recipient should be scheduled for this form | [optional] |
+| **state_e_file** | **Boolean** | Boolean indicating that state e-filing should be scheduled for this form | [optional] |
+| **tin_match** | **Boolean** | Boolean indicating that TIN Matching should be scheduled for this form | [optional] |
+| **address_verification** | **Boolean** | Boolean indicating that address verification should be scheduled for this form | [optional] |
+| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) | State and local withholding information | [optional] |
 
 ## Example
 
@@ -46,13 +46,13 @@ instance = AvalaraSdk::A1099::V2::Form1095BRequest.new(
   employee_last_name: null,
   employee_name_suffix: null,
   employee_date_of_birth: null,
-  origin_of_health_coverage_code: SmallBusinessHealthOptionsProgram,
+  origin_of_health_coverage_code: A,
   covered_individuals: null,
-  type: Form1099Nec,
+  type: 1099-NEC,
   issuer_id: null,
   reference_id: null,
-  recipient_name: null,
   recipient_tin: null,
+  recipient_name: null,
   tin_type: EIN,
   recipient_second_name: null,
   address: null,

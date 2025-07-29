@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -11,42 +11,61 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class CoveredIndividualRequest
+    # Covered individual's first name
     attr_accessor :first_name
 
+    # Covered individual's middle name
     attr_accessor :middle_name
 
+    # Covered individual's last name
     attr_accessor :last_name
 
+    # Covered individual's name suffix
     attr_accessor :name_suffix
 
+    # Covered individual's TIN (SSN or ITIN)
     attr_accessor :tin
 
+    # Covered individual's date of birth
     attr_accessor :birth_date
 
+    # Coverage indicator for all 12 months
     attr_accessor :covered_month_indicator0
 
+    # Coverage indicator for January
     attr_accessor :covered_month_indicator1
 
+    # Coverage indicator for February
     attr_accessor :covered_month_indicator2
 
+    # Coverage indicator for March
     attr_accessor :covered_month_indicator3
 
+    # Coverage indicator for April
     attr_accessor :covered_month_indicator4
 
+    # Coverage indicator for May
     attr_accessor :covered_month_indicator5
 
+    # Coverage indicator for June
     attr_accessor :covered_month_indicator6
 
+    # Coverage indicator for July
     attr_accessor :covered_month_indicator7
 
+    # Coverage indicator for August
     attr_accessor :covered_month_indicator8
 
+    # Coverage indicator for September
     attr_accessor :covered_month_indicator9
 
+    # Coverage indicator for October
     attr_accessor :covered_month_indicator10
 
+    # Coverage indicator for November
     attr_accessor :covered_month_indicator11
 
+    # Coverage indicator for December
     attr_accessor :covered_month_indicator12
 
     # Attribute mapping from ruby-style variable name to JSON key.

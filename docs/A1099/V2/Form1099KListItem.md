@@ -4,51 +4,51 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **filer_type** | **String** |  | [optional] |
-| **payment_type** | **String** |  | [optional] |
-| **payment_settlement_entity_name_phone_number** | **String** |  | [optional] |
-| **gross_amount_payment_card** | **Float** |  | [optional] |
-| **card_not_present_transactions** | **Float** |  | [optional] |
-| **merchant_category_code** | **String** |  | [optional] |
-| **payment_transaction_number** | **Float** |  | [optional] |
-| **federal_income_tax_withheld** | **Float** |  | [optional] |
-| **january** | **Float** |  | [optional] |
-| **february** | **Float** |  | [optional] |
-| **march** | **Float** |  | [optional] |
-| **april** | **Float** |  | [optional] |
-| **may** | **Float** |  | [optional] |
-| **june** | **Float** |  | [optional] |
-| **july** | **Float** |  | [optional] |
-| **august** | **Float** |  | [optional] |
-| **sept** | **Float** |  | [optional] |
-| **october** | **Float** |  | [optional] |
-| **november** | **Float** |  | [optional] |
-| **december** | **Float** |  | [optional] |
-| **issuer_reference_id** | **String** |  | [optional] |
-| **issuer_tin** | **String** |  | [optional] |
-| **tax_year** | **Integer** |  | [optional] |
-| **issuer_id** | **String** |  | [optional] |
-| **reference_id** | **String** |  | [optional] |
-| **recipient_name** | **String** |  | [optional] |
-| **recipient_tin** | **String** |  | [optional] |
-| **tin_type** | **String** |  | [optional] |
-| **recipient_second_name** | **String** |  | [optional] |
-| **address** | **String** |  | [optional] |
-| **address2** | **String** |  | [optional] |
-| **city** | **String** |  | [optional] |
-| **state** | **String** |  | [optional] |
-| **zip** | **String** |  | [optional] |
-| **recipient_email** | **String** |  | [optional] |
-| **account_number** | **String** |  | [optional] |
-| **office_code** | **String** |  | [optional] |
-| **recipient_non_us_province** | **String** |  | [optional] |
-| **country_code** | **String** |  | [optional] |
-| **federal_e_file** | **Boolean** |  | [optional] |
-| **postal_mail** | **Boolean** |  | [optional] |
-| **state_e_file** | **Boolean** |  | [optional] |
-| **tin_match** | **Boolean** |  | [optional] |
-| **address_verification** | **Boolean** |  | [optional] |
-| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) |  | [optional] |
+| **filer_type** | **String** | Filer type (PSE or EPF) | [optional] |
+| **payment_type** | **String** | Payment type (payment card or third party network) | [optional] |
+| **payment_settlement_entity_name_phone_number** | **String** | Payment settlement entity name and phone number | [optional] |
+| **gross_amount_payment_card** | **Float** | Gross amount of payment card/third party network transactions | [optional] |
+| **card_not_present_transactions** | **Float** | Card not present transactions | [optional] |
+| **merchant_category_code** | **String** | Merchant category code | [optional] |
+| **payment_transaction_number** | **Float** | Number of payment transactions | [optional] |
+| **federal_income_tax_withheld** | **Float** | Federal income tax withheld | [optional] |
+| **january** | **Float** | January gross payments | [optional] |
+| **february** | **Float** | February gross payments | [optional] |
+| **march** | **Float** | March gross payments | [optional] |
+| **april** | **Float** | April gross payments | [optional] |
+| **may** | **Float** | May gross payments | [optional] |
+| **june** | **Float** | June gross payments | [optional] |
+| **july** | **Float** | July gross payments | [optional] |
+| **august** | **Float** | August gross payments | [optional] |
+| **sept** | **Float** | September gross payments | [optional] |
+| **october** | **Float** | October gross payments | [optional] |
+| **november** | **Float** | November gross payments | [optional] |
+| **december** | **Float** | December gross payments | [optional] |
+| **issuer_reference_id** | **String** | Issuer Reference ID. One of &#x60;issuerReferenceId&#x60; or &#x60;issuerTin&#x60; is required. | [optional] |
+| **issuer_tin** | **String** | Issuer TIN. One of &#x60;issuerReferenceId&#x60; or &#x60;issuerTin&#x60; is required. | [optional] |
+| **tax_year** | **Integer** | Tax year |  |
+| **issuer_id** | **String** | Issuer ID | [optional] |
+| **reference_id** | **String** | Reference ID | [optional] |
+| **recipient_tin** | **String** | Recipient Tax ID Number | [optional] |
+| **recipient_name** | **String** | Recipient name |  |
+| **tin_type** | **String** | Type of TIN (Tax ID Number). Will be one of:  * SSN  * EIN  * ITIN  * ATIN | [optional] |
+| **recipient_second_name** | **String** | Recipient second name | [optional] |
+| **address** | **String** | Address |  |
+| **address2** | **String** | Address line 2 | [optional] |
+| **city** | **String** | City |  |
+| **state** | **String** | US state. Required if CountryCode is \&quot;US\&quot;. | [optional] |
+| **zip** | **String** | Zip/postal code | [optional] |
+| **recipient_email** | **String** | Recipient email address | [optional] |
+| **account_number** | **String** | Account number | [optional] |
+| **office_code** | **String** | Office code | [optional] |
+| **recipient_non_us_province** | **String** | Foreign province | [optional] |
+| **country_code** | **String** | Country code, as defined at https://www.irs.gov/e-file-providers/country-codes |  |
+| **federal_e_file** | **Boolean** | Boolean indicating that federal e-filing should be scheduled for this form | [optional] |
+| **postal_mail** | **Boolean** | Boolean indicating that postal mailing to the recipient should be scheduled for this form | [optional] |
+| **state_e_file** | **Boolean** | Boolean indicating that state e-filing should be scheduled for this form | [optional] |
+| **tin_match** | **Boolean** | Boolean indicating that TIN Matching should be scheduled for this form | [optional] |
+| **address_verification** | **Boolean** | Boolean indicating that address verification should be scheduled for this form | [optional] |
+| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) | State and local withholding information | [optional] |
 
 ## Example
 
@@ -81,8 +81,8 @@ instance = AvalaraSdk::A1099::V2::Form1099KListItem.new(
   tax_year: null,
   issuer_id: null,
   reference_id: null,
-  recipient_name: null,
   recipient_tin: null,
+  recipient_name: null,
   tin_type: EIN,
   recipient_second_name: null,
   address: null,

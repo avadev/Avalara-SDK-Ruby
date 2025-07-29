@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.7.2")
+        api_client.set_sdk_version("25.8.0")
         @api_client = api_client
       end
 
@@ -403,7 +403,7 @@ module AvalaraSdk::EInvoicing
 
       # Returns a summary of documents for a date range
       # Get a list of documents on the Avalara E-Invoicing platform that have a processing date within the specified date range.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.      # @param start_date [Time] Start date of documents to return. This defaults to the previous month.      # @param end_date [Time] End date of documents to return. This defaults to the current date.      # @param flow [String] Optionally filter by document direction, where issued &#x3D; &#x60;out&#x60; and received &#x3D; &#x60;in&#x60;      # @param count [String] When set to true, the count of the collection is also returned in the response body      # @param count_only [String] When set to true, only the count of the collection is returned      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed.      # @param top [Float] The number of items to include in the result.      # @param skip [String] If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.      # @param start_date [Time] Start date of documents to return. This defaults to the previous month.      # @param end_date [Time] End date of documents to return. This defaults to the current date.      # @param flow [String] Optionally filter by document direction, where issued &#x3D; &#x60;out&#x60; and received &#x3D; &#x60;in&#x60;      # @param count [String] When set to true, the count of the collection is also returned in the response body      # @param count_only [String] When set to true, only the count of the collection is returned      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed.      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.
       # @return [DocumentListResponse]
       def get_document_list(request_parameters)
         data, _status_code, _headers = get_document_list_with_http_info(request_parameters)
@@ -421,8 +421,8 @@ module AvalaraSdk::EInvoicing
       # @param count [String] When set to true, the count of the collection is also returned in the response body    
       # @param count_only [String] When set to true, only the count of the collection is returned    
       # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed.    
-      # @param top [Float] The number of items to include in the result.    
-      # @param skip [String] If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets.    
+      # @param top [Integer] The number of items to include in the result.    
+      # @param skip [Integer] The number of items to skip in the result.    
       # @return [Array<(DocumentListResponse, Integer, Hash)>] DocumentListResponse data, response status code and response headers
       def get_document_list_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -715,7 +715,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -763,7 +763,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -796,8 +796,8 @@ module AvalaraSdk::EInvoicing
     # @param  String $count When set to true, the count of the collection is also returned in the response body (optional)
     # @param  String $count_only When set to true, only the count of the collection is returned (optional)
     # @param  String $filter Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed. (optional)
-    # @param  Float $top The number of items to include in the result. (optional)
-    # @param  String $skip If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. (optional)
+    # @param  Integer $top The number of items to include in the result. (optional)
+    # @param  Integer $skip The number of items to skip in the result. (optional)
     #
     class GetDocumentListRequestSdk
         attr_accessor :avalara_version
@@ -824,7 +824,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -920,7 +920,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -963,7 +963,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)

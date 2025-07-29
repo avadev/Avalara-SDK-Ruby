@@ -10,8 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Indicates a successful outcome of an API operation, including a generated ID and success message.
-  class SuccessResponse
+      class SuccessResponse
     # Unique identifier for the new or updated entity.
     attr_accessor :id
 

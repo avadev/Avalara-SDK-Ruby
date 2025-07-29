@@ -10,8 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # An object representing the country mandate
-  class Mandate
+      class Mandate
     # The `mandateId` is comprised of the country code, mandate type, and the network or regulation type (for example, AU-B2G-PEPPOL). Keep in mind the following when specifying a `mandateId`. - A country can have multiple mandate types (B2C, B2B, B2G). - A entity/company can opt in for multiple mandates. - A `mandateId` is the combination of country + mandate type + network/regulation.
     attr_accessor :mandate_id
 

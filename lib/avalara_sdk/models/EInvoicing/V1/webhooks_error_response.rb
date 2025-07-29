@@ -10,8 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Wrapper for errors occurring during webhook subscription or delivery processing.
-  class WebhooksErrorResponse
+      class WebhooksErrorResponse
     attr_accessor :error
 
     # Attribute mapping from ruby-style variable name to JSON key.

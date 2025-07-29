@@ -122,8 +122,8 @@
 | **certify_box42** | **Boolean** | Indicates certification for box 42. | [optional] |
 | **signer_name** | **String** | The name of the signer of the form. | [optional] |
 | **e_delivery_consented_at** | **Time** | The date when e-delivery was consented. | [optional] |
-| **box35_formed_on_date** | **Time** |  | [optional] |
-| **box36_filed_on_date** | **Time** |  | [optional] |
+| **box35_formed_on_date** | **Date** |  | [optional] |
+| **box36_filed_on_date** | **Date** |  | [optional] |
 | **employee_first_name** | **String** | The first name of the employee. | [optional] |
 | **employee_middle_name** | **String** | The middle name of the employee. | [optional] |
 | **employee_last_name** | **String** | The last name of the employee. | [optional] |
@@ -193,9 +193,9 @@
 | **certify_box41** | **Boolean** |  | [optional] |
 | **certify_box43** | **Boolean** |  | [optional] |
 | **certify_part29_signature** | **Boolean** |  | [optional] |
-| **part19_formation_or_resolution_date** | **Time** |  | [optional] |
-| **part20_filing_date** | **Time** |  | [optional] |
-| **part21_determination_date** | **Time** |  | [optional] |
+| **part19_formation_or_resolution_date** | **Date** |  | [optional] |
+| **part20_filing_date** | **Date** |  | [optional] |
+| **part21_determination_date** | **Date** |  | [optional] |
 | **substantial_us_owners** | [**Array&lt;W8BenESubstantialUsOwnerDataModel&gt;**](W8BenESubstantialUsOwnerDataModel.md) |  | [optional] |
 | **birthday** | **String** | The birthday of the individual associated with the form. | [optional] |
 | **foreign_tin_not_required** | **Boolean** | Indicates whether a foreign TIN is not required. | [optional] |

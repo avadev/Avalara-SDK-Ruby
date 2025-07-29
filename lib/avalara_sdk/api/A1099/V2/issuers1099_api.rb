@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.7.2")
+        api_client.set_sdk_version("25.8.0")
         @api_client = api_client
       end
 
@@ -226,7 +226,7 @@ module AvalaraSdk::A1099
       end
     
       # Create an issuer
-      # Create a new issuer
+      # Create an issuer (also known as a Payer).
       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param issuer_command [IssuerCommand] The issuer to create
       # @return [IssuerResponse]
       def create_issuer(request_parameters)
@@ -235,7 +235,7 @@ module AvalaraSdk::A1099
       end
 
       # Create an issuer
-      # Create a new issuer
+      # Create an issuer (also known as a Payer).
           
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
@@ -313,7 +313,7 @@ module AvalaraSdk::A1099
       end
 
       # Delete an issuer
-      # Delete an issuer
+      # Delete an issuer (also known as a Payer).
       # @param id [String] Id of the issuer to delete      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [nil]
       def delete_issuer(request_parameters)
@@ -322,7 +322,7 @@ module AvalaraSdk::A1099
       end
 
       # Delete an issuer
-      # Delete an issuer
+      # Delete an issuer (also known as a Payer).
           
       # @param id [String] Id of the issuer to delete    
       # @param avalara_version [String] API version    
@@ -398,19 +398,19 @@ module AvalaraSdk::A1099
         return data, response.code, response.headers
       end
 
-      # Get an issuer
-      # Get an issuer
-      # @param id [String]       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # Retrieve an issuer
+      # Retrieve an issuer (also known as a Payer).
+      # @param id [String] Id of the issuer to retrieve      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [IssuerResponse]
       def get_issuer(request_parameters)
         data, _status_code, _headers = get_issuer_with_http_info(request_parameters)
         data
       end
 
-      # Get an issuer
-      # Get an issuer
+      # Retrieve an issuer
+      # Retrieve an issuer (also known as a Payer).
           
-      # @param id [String]     
+      # @param id [String] Id of the issuer to retrieve    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
@@ -485,7 +485,7 @@ module AvalaraSdk::A1099
       end
 
       # List issuers
-      # List issuers for a given tax year. Filterable fields are name, referenceId and taxYear
+      # List issuers (also known as Payers). Filterable fields are name, referenceId and taxYear.
       # @param avalara_version [String] API version      # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] If true, return the global count of elements in the collection.      # @param count_only [Boolean] If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true.      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [PaginatedQueryResultModelIssuerResponse]
       def get_issuers(request_parameters)
@@ -494,7 +494,7 @@ module AvalaraSdk::A1099
       end
 
       # List issuers
-      # List issuers for a given tax year. Filterable fields are name, referenceId and taxYear
+      # List issuers (also known as Payers). Filterable fields are name, referenceId and taxYear.
           
       # @param avalara_version [String] API version    
       # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    
@@ -595,8 +595,8 @@ module AvalaraSdk::A1099
       end
 
       # Update an issuer
-      # Update an existing issuer
-      # @param id [String] Id of the issuer to Update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param issuer_command [IssuerCommand] The issuer to update
+      # Update an issuer (also known as a Payer).
+      # @param id [String] Id of the issuer to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param issuer_command [IssuerCommand] The issuer to update
       # @return [nil]
       def update_issuer(request_parameters)
         update_issuer_with_http_info(request_parameters)
@@ -604,9 +604,9 @@ module AvalaraSdk::A1099
       end
 
       # Update an issuer
-      # Update an existing issuer
+      # Update an issuer (also known as a Payer).
           
-      # @param id [String] Id of the issuer to Update    
+      # @param id [String] Id of the issuer to update    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
@@ -791,7 +791,7 @@ module AvalaraSdk::A1099
     end
     # Represents the Request object for the GetIssuer API
     #
-    # @param  String $id id (required)
+    # @param  String $id Id of the issuer to retrieve (required)
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
@@ -948,7 +948,7 @@ module AvalaraSdk::A1099
     end
     # Represents the Request object for the UpdateIssuer API
     #
-    # @param  String $id Id of the issuer to Update (required)
+    # @param  String $id Id of the issuer to update (required)
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)

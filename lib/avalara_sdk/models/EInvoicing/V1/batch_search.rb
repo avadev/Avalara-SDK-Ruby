@@ -10,7 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Provides details about a batch search operation, including status, timestamps, and potential errors.
+      # Represents a single batch search operation
   class BatchSearch
     # ID of the batch search
     attr_accessor :id

@@ -10,8 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Pagination information for the dataset.
-  class Pagination
+      class Pagination
     # The total count of records in the dataset.
     attr_accessor :recordset_count
 

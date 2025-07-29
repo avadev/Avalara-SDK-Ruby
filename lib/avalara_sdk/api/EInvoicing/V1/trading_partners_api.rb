@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.7.2")
+        api_client.set_sdk_version("25.8.0")
         @api_client = api_client
       end
 
@@ -225,23 +225,23 @@ module AvalaraSdk::EInvoicing
         end
       end
     
-      # Creates a batch search and performs a batch search in the directory for participants in the background.
       # Handles batch search requests by uploading a file containing search parameters.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param name [String] The human readable name given to this batch search.      # @param notification_email [String] The email address of the user to whom the batch search completion notification must go to.      # @param file [File] CSV file containing search parameters.      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # This endpoint creates a batch search and performs a batch search in the directory for participants in the background.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param name [String] A &lt;b&gt;human-readable&lt;/b&gt; name for the batch search.      # @param notification_email [String] The email address to which a notification will be sent once the batch search is complete.      # @param file [File] CSV file containing search parameters.  Input Constraints: - Maximum file size: 1 MB - File Header: Must be less than 500 KB - Total number of lines (including header): Must be 101 or fewer      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
       # @return [BatchSearchParticipants202Response]
       def batch_search_participants(request_parameters)
         data, _status_code, _headers = batch_search_participants_with_http_info(request_parameters)
         data
       end
 
-      # Creates a batch search and performs a batch search in the directory for participants in the background.
       # Handles batch search requests by uploading a file containing search parameters.
+      # This endpoint creates a batch search and performs a batch search in the directory for participants in the background.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param name [String] The human readable name given to this batch search.    
-      # @param notification_email [String] The email address of the user to whom the batch search completion notification must go to.    
-      # @param file [File] CSV file containing search parameters.    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
+      # @param name [String] A &lt;b&gt;human-readable&lt;/b&gt; name for the batch search.    
+      # @param notification_email [String] The email address to which a notification will be sent once the batch search is complete.    
+      # @param file [File] CSV file containing search parameters.  Input Constraints: - Maximum file size: 1 MB - File Header: Must be less than 500 KB - Total number of lines (including header): Must be 101 or fewer    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
       # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
       # @return [Array<(BatchSearchParticipants202Response, Integer, Hash)>] BatchSearchParticipants202Response data, response status code and response headers
       def batch_search_participants_with_http_info(request_parameters)
@@ -337,21 +337,289 @@ module AvalaraSdk::EInvoicing
         return data, response.code, response.headers
       end
 
-      # Download batch search results in a csv file.
-      # Downloads the report for a specific batch search using the batch search ID.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param id [String] The ID of the batch search whose report is to be downloaded.      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # Creates a new trading partner.
+      # This endpoint creates a new trading partner with the provided details. The request body must include the necessary information as defined in the `TradingPartner` schema.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param trading_partner [TradingPartner]       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # @return [CreateTradingPartner201Response]
+      def create_trading_partner(request_parameters)
+        data, _status_code, _headers = create_trading_partner_with_http_info(request_parameters)
+        data
+      end
+
+      # Creates a new trading partner.
+      # This endpoint creates a new trading partner with the provided details. The request body must include the necessary information as defined in the &#x60;TradingPartner&#x60; schema.
+          
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
+      # @param trading_partner [TradingPartner]     
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
+      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
+      # @return [Array<(CreateTradingPartner201Response, Integer, Hash)>] CreateTradingPartner201Response data, response status code and response headers
+      def create_trading_partner_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        avalara_version = request_parameters.get_avalara_version()
+        trading_partner = request_parameters.get_trading_partner()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling TradingPartnersApi.create_trading_partner"
+        end
+        # verify the required parameter 'trading_partner' is set
+        if @api_client.config.client_side_validation && trading_partner.nil?
+          fail ArgumentError, "Missing the required parameter 'trading_partner' when calling TradingPartnersApi.create_trading_partner"
+        end
+        # resource path
+        local_var_path = '/einvoicing/trading-partners'
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        # HTTP header 'Content-Type'
+        content_type = @api_client.select_header_content_type(['application/json'])
+        if !content_type.nil?
+            header_params['Content-Type'] = content_type
+        end
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-ID'] = x_correlation_id
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body =  @api_client.object_to_http_body(trading_partner) || {}
+
+        # return_type
+        return_type = 'CreateTradingPartner201Response'
+
+        # auth_names
+        auth_names = ['Bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"TradingPartnersApi.create_trading_partner",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes, false, :EInvoicing)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
+      # Creates a batch of multiple trading partners.
+      # This endpoint creates multiple trading partners in a single batch request. It accepts an array of trading partners and processes them synchronously. Supports a maximum of 100 records or 1 MB request payload. The batch is processed atomically and partial success is not allowed.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param create_trading_partners_batch_request [CreateTradingPartnersBatchRequest]       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # @return [CreateTradingPartnersBatch200Response]
+      def create_trading_partners_batch(request_parameters)
+        data, _status_code, _headers = create_trading_partners_batch_with_http_info(request_parameters)
+        data
+      end
+
+      # Creates a batch of multiple trading partners.
+      # This endpoint creates multiple trading partners in a single batch request. It accepts an array of trading partners and processes them synchronously. Supports a maximum of 100 records or 1 MB request payload. The batch is processed atomically and partial success is not allowed.
+          
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
+      # @param create_trading_partners_batch_request [CreateTradingPartnersBatchRequest]     
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
+      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
+      # @return [Array<(CreateTradingPartnersBatch200Response, Integer, Hash)>] CreateTradingPartnersBatch200Response data, response status code and response headers
+      def create_trading_partners_batch_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        avalara_version = request_parameters.get_avalara_version()
+        create_trading_partners_batch_request = request_parameters.get_create_trading_partners_batch_request()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling TradingPartnersApi.create_trading_partners_batch"
+        end
+        # verify the required parameter 'create_trading_partners_batch_request' is set
+        if @api_client.config.client_side_validation && create_trading_partners_batch_request.nil?
+          fail ArgumentError, "Missing the required parameter 'create_trading_partners_batch_request' when calling TradingPartnersApi.create_trading_partners_batch"
+        end
+        # resource path
+        local_var_path = '/einvoicing/trading-partners/batch'
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        # HTTP header 'Content-Type'
+        content_type = @api_client.select_header_content_type(['application/json'])
+        if !content_type.nil?
+            header_params['Content-Type'] = content_type
+        end
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-ID'] = x_correlation_id
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body =  @api_client.object_to_http_body(create_trading_partners_batch_request) || {}
+
+        # return_type
+        return_type = 'CreateTradingPartnersBatch200Response'
+
+        # auth_names
+        auth_names = ['Bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"TradingPartnersApi.create_trading_partners_batch",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes, false, :EInvoicing)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
+      # Deletes a trading partner using ID.
+      # This endpoint deletes an existing trading partner identified by the provided ID.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param id [String] The ID of the trading partner which is being deleted.      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # @return [nil]
+      def delete_trading_partner(request_parameters)
+        delete_trading_partner_with_http_info(request_parameters)
+        nil
+      end
+
+      # Deletes a trading partner using ID.
+      # This endpoint deletes an existing trading partner identified by the provided ID.
+          
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
+      # @param id [String] The ID of the trading partner which is being deleted.    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
+      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
+      # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+      def delete_trading_partner_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        avalara_version = request_parameters.get_avalara_version()
+        id = request_parameters.get_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling TradingPartnersApi.delete_trading_partner"
+        end
+        # verify the required parameter 'id' is set
+        if @api_client.config.client_side_validation && id.nil?
+          fail ArgumentError, "Missing the required parameter 'id' when calling TradingPartnersApi.delete_trading_partner"
+        end
+        # resource path
+        local_var_path = '/einvoicing/trading-partners/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-ID'] = x_correlation_id
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body = {}
+
+        # return_type
+        return_type = ''
+
+        # auth_names
+        auth_names = ['Bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"TradingPartnersApi.delete_trading_partner",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:DELETE, local_var_path, new_options, required_scopes, false, :EInvoicing)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
+      # Downloads batch search results in a csv file.
+      # This endpoint downloads the report for a specific batch search using the batch search ID. It returns a CSV file containing up to 1,000 query results.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param id [String] The ID of the batch search for which the report should be downloaded.      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
       # @return [File]
       def download_batch_search_report(request_parameters)
         data, _status_code, _headers = download_batch_search_report_with_http_info(request_parameters)
         data
       end
 
-      # Download batch search results in a csv file.
-      # Downloads the report for a specific batch search using the batch search ID.
+      # Downloads batch search results in a csv file.
+      # This endpoint downloads the report for a specific batch search using the batch search ID. It returns a CSV file containing up to 1,000 query results.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param id [String] The ID of the batch search whose report is to be downloaded.    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
+      # @param id [String] The ID of the batch search for which the report should be downloaded.    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
       # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
       # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
       def download_batch_search_report_with_http_info(request_parameters)
@@ -423,21 +691,21 @@ module AvalaraSdk::EInvoicing
         return data, response.code, response.headers
       end
 
-      # Get the batch search details for a given id.
-      # This endpoint provides a detailed information for a specific batch search based on a given ID. It is ideal for tracking the progress of a previously initiated batch search operation.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param id [String] The ID of the batch search that was submitted earlier.      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # Returns the batch search details using ID.
+      # This endpoint returns detailed information for a specific batch search using the provided ID. It is useful for tracking the status and progress of a previously initiated batch search operation.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param id [String] The ID of the batch search that was submitted earlier.      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
       # @return [BatchSearch]
       def get_batch_search_detail(request_parameters)
         data, _status_code, _headers = get_batch_search_detail_with_http_info(request_parameters)
         data
       end
 
-      # Get the batch search details for a given id.
-      # This endpoint provides a detailed information for a specific batch search based on a given ID. It is ideal for tracking the progress of a previously initiated batch search operation.
+      # Returns the batch search details using ID.
+      # This endpoint returns detailed information for a specific batch search using the provided ID. It is useful for tracking the status and progress of a previously initiated batch search operation.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
       # @param id [String] The ID of the batch search that was submitted earlier.    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
       # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
       # @return [Array<(BatchSearch, Integer, Hash)>] BatchSearch data, response status code and response headers
       def get_batch_search_detail_with_http_info(request_parameters)
@@ -509,25 +777,25 @@ module AvalaraSdk::EInvoicing
         return data, response.code, response.headers
       end
 
-      # List all batch searches that were previously submitted.
-      # This endpoint provides a way to retrieve a comprehensive list of all batch search operations that have been previously submitted. This endpoint returns details about each batch search, such as their id, status, created date and associated metadata, allowing users to easily view past batch search requests. It's particularly useful for tracking the progress of a previously initiated batch search operations.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; .The parameters supported is &lt;code&gt;name&lt;/code&gt;.    Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided parameters.      # @param count [Boolean] When set to true, the count of the collection is included as @recordSetCount in the response body.      # @param top [Float] The number of items to include in the result.      # @param skip [String] If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets.      # @param order_by [String] The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # Lists all batch searches that were previously submitted.
+      # This endpoint retrieves a list of all batch search operations that have been previously submitted. It returns details such as the batch search ID, status, creation date, and associated metadata. It is useful for tracking the progress of a previously initiated batch search operations.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param filter [String] Filters the results by field name. Only the &lt;code&gt;eq&lt;/code&gt; operator and the name field is supported. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/).      # @param count [Boolean] When set to &lt;code&gt;true&lt;/code&gt;, returns the total count of matching records included as &lt;code&gt;@recordSetCount&lt;/code&gt; in the response body.      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param order_by [String] The &lt;code&gt;$orderBy&lt;/code&gt; query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
       # @return [BatchSearchListResponse]
       def list_batch_searches(request_parameters)
         data, _status_code, _headers = list_batch_searches_with_http_info(request_parameters)
         data
       end
 
-      # List all batch searches that were previously submitted.
-      # This endpoint provides a way to retrieve a comprehensive list of all batch search operations that have been previously submitted. This endpoint returns details about each batch search, such as their id, status, created date and associated metadata, allowing users to easily view past batch search requests. It&#39;s particularly useful for tracking the progress of a previously initiated batch search operations.
+      # Lists all batch searches that were previously submitted.
+      # This endpoint retrieves a list of all batch search operations that have been previously submitted. It returns details such as the batch search ID, status, creation date, and associated metadata. It is useful for tracking the progress of a previously initiated batch search operations.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
-      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; .The parameters supported is &lt;code&gt;name&lt;/code&gt;.    Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided parameters.    
-      # @param count [Boolean] When set to true, the count of the collection is included as @recordSetCount in the response body.    
-      # @param top [Float] The number of items to include in the result.    
-      # @param skip [String] If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets.    
-      # @param order_by [String] The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.    
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
+      # @param filter [String] Filters the results by field name. Only the &lt;code&gt;eq&lt;/code&gt; operator and the name field is supported. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/).    
+      # @param count [Boolean] When set to &lt;code&gt;true&lt;/code&gt;, returns the total count of matching records included as &lt;code&gt;@recordSetCount&lt;/code&gt; in the response body.    
+      # @param top [Integer] The number of items to include in the result.    
+      # @param skip [Integer] The number of items to skip in the result.    
+      # @param order_by [String] The &lt;code&gt;$orderBy&lt;/code&gt; query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.    
       # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
       # @return [Array<(BatchSearchListResponse, Integer, Hash)>] BatchSearchListResponse data, response status code and response headers
       def list_batch_searches_with_http_info(request_parameters)
@@ -615,27 +883,27 @@ module AvalaraSdk::EInvoicing
       end
 
       # Returns a list of participants matching the input query.
-      # This endpoint provides a list of trading partners that match a specified input query. The search is performed based on various filters, search text, and other relevant parameters.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param search [String] Search by value supports logical AND and OR. Refer to [https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search) for more information on search. Search will be done over &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;identifier&lt;/code&gt; parameters only.      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;      # @param count [Boolean] When set to true, the count of the collection is included as @recordSetCount in the response body.      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; .The parameters supported are &lt;code&gt;network&lt;/code&gt;, &lt;code&gt;country&lt;/code&gt;, &lt;code&gt;documentType&lt;/code&gt;, &lt;code&gt;idType&lt;/code&gt;.          Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided parameters.      # @param top [Float] The number of items to include in the result.      # @param skip [String] If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets.      # @param order_by [String] The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
-      # @return [DirectorySearchResponse]
+      # This endpoint retrieves a list of trading partners that match the specified search criteria. It supports filtering, search text, and other relevant query parameters to narrow down the results.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param search [String] Search by value supports logical &lt;code&gt;AND&lt;/code&gt; / &lt;code&gt;OR&lt;/code&gt; operators. Search is performed only over the name and identifier value fields. For more information, refer to [Query options overview - OData.](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search).      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param count [Boolean] When set to &lt;code&gt;true&lt;/code&gt;, returns the total count of matching records included as &lt;code&gt;@recordSetCount&lt;/code&gt; in the response body.      # @param filter [String] Filters the results using the &lt;code&gt;eq&lt;/code&gt; operator. Supported fields: &lt;code&gt;network&lt;/code&gt;, &lt;code&gt;country&lt;/code&gt;, &lt;code&gt;documentType&lt;/code&gt;, &lt;code&gt;idType&lt;/code&gt;. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/).      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param order_by [String] The &lt;code&gt;$orderBy&lt;/code&gt; query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # @return [SearchParticipants200Response]
       def search_participants(request_parameters)
         data, _status_code, _headers = search_participants_with_http_info(request_parameters)
         data
       end
 
       # Returns a list of participants matching the input query.
-      # This endpoint provides a list of trading partners that match a specified input query. The search is performed based on various filters, search text, and other relevant parameters.
+      # This endpoint retrieves a list of trading partners that match the specified search criteria. It supports filtering, search text, and other relevant query parameters to narrow down the results.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param search [String] Search by value supports logical AND and OR. Refer to [https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search) for more information on search. Search will be done over &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;identifier&lt;/code&gt; parameters only.    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
-      # @param count [Boolean] When set to true, the count of the collection is included as @recordSetCount in the response body.    
-      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; .The parameters supported are &lt;code&gt;network&lt;/code&gt;, &lt;code&gt;country&lt;/code&gt;, &lt;code&gt;documentType&lt;/code&gt;, &lt;code&gt;idType&lt;/code&gt;.          Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided parameters.    
-      # @param top [Float] The number of items to include in the result.    
-      # @param skip [String] If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets.    
-      # @param order_by [String] The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.    
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
+      # @param search [String] Search by value supports logical &lt;code&gt;AND&lt;/code&gt; / &lt;code&gt;OR&lt;/code&gt; operators. Search is performed only over the name and identifier value fields. For more information, refer to [Query options overview - OData.](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search).    
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
+      # @param count [Boolean] When set to &lt;code&gt;true&lt;/code&gt;, returns the total count of matching records included as &lt;code&gt;@recordSetCount&lt;/code&gt; in the response body.    
+      # @param filter [String] Filters the results using the &lt;code&gt;eq&lt;/code&gt; operator. Supported fields: &lt;code&gt;network&lt;/code&gt;, &lt;code&gt;country&lt;/code&gt;, &lt;code&gt;documentType&lt;/code&gt;, &lt;code&gt;idType&lt;/code&gt;. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/).    
+      # @param top [Integer] The number of items to include in the result.    
+      # @param skip [Integer] The number of items to skip in the result.    
+      # @param order_by [String] The &lt;code&gt;$orderBy&lt;/code&gt; query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.    
       # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
-      # @return [Array<(DirectorySearchResponse, Integer, Hash)>] DirectorySearchResponse data, response status code and response headers
+      # @return [Array<(SearchParticipants200Response, Integer, Hash)>] SearchParticipants200Response data, response status code and response headers
       def search_participants_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -702,7 +970,7 @@ module AvalaraSdk::EInvoicing
         post_body = {}
 
         # return_type
-        return_type = 'DirectorySearchResponse'
+        return_type = 'SearchParticipants200Response'
 
         # auth_names
         auth_names = ['Bearer']
@@ -727,14 +995,111 @@ module AvalaraSdk::EInvoicing
         end
         return data, response.code, response.headers
       end
+
+      # Updates a trading partner using ID.
+      # This endpoint updates the details of an existing trading partner specified by the provided ID. It performs a full update, and the request body must include all required fields.
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param id [String] The ID of the trading partner which is being updated.      # @param trading_partner [TradingPartner]       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # @return [UpdateTradingPartner200Response]
+      def update_trading_partner(request_parameters)
+        data, _status_code, _headers = update_trading_partner_with_http_info(request_parameters)
+        data
+      end
+
+      # Updates a trading partner using ID.
+      # This endpoint updates the details of an existing trading partner specified by the provided ID. It performs a full update, and the request body must include all required fields.
+          
+      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
+      # @param id [String] The ID of the trading partner which is being updated.    
+      # @param trading_partner [TradingPartner]     
+      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
+      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
+      # @return [Array<(UpdateTradingPartner200Response, Integer, Hash)>] UpdateTradingPartner200Response data, response status code and response headers
+      def update_trading_partner_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        avalara_version = request_parameters.get_avalara_version()
+        id = request_parameters.get_id()
+        trading_partner = request_parameters.get_trading_partner()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling TradingPartnersApi.update_trading_partner"
+        end
+        # verify the required parameter 'id' is set
+        if @api_client.config.client_side_validation && id.nil?
+          fail ArgumentError, "Missing the required parameter 'id' when calling TradingPartnersApi.update_trading_partner"
+        end
+        # verify the required parameter 'trading_partner' is set
+        if @api_client.config.client_side_validation && trading_partner.nil?
+          fail ArgumentError, "Missing the required parameter 'trading_partner' when calling TradingPartnersApi.update_trading_partner"
+        end
+        # resource path
+        local_var_path = '/einvoicing/trading-partners/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        # HTTP header 'Content-Type'
+        content_type = @api_client.select_header_content_type(['application/json'])
+        if !content_type.nil?
+            header_params['Content-Type'] = content_type
+        end
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-ID'] = x_correlation_id
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body =  @api_client.object_to_http_body(trading_partner) || {}
+
+        # return_type
+        return_type = 'UpdateTradingPartner200Response'
+
+        # auth_names
+        auth_names = ['Bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"TradingPartnersApi.update_trading_partner",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:PUT, local_var_path, new_options, required_scopes, false, :EInvoicing)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
     end
     # Represents the Request object for the BatchSearchParticipants API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  String $name The human readable name given to this batch search. (required)
-    # @param  String $notification_email The email address of the user to whom the batch search completion notification must go to. (required)
-    # @param  File $file CSV file containing search parameters. (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
+    # @param  String $name A &lt;b&gt;human-readable&lt;/b&gt; name for the batch search. (required)
+    # @param  String $notification_email The email address to which a notification will be sent once the batch search is complete. (required)
+    # @param  File $file CSV file containing search parameters.  Input Constraints: - Maximum file size: 1 MB - File Header: Must be less than 500 KB - Total number of lines (including header): Must be 101 or fewer (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
     # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
     #
     class BatchSearchParticipantsRequestSdk
@@ -754,7 +1119,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -801,11 +1166,164 @@ module AvalaraSdk::EInvoicing
             @x_correlation_id = x_correlation_id
         end
     end
+    # Represents the Request object for the CreateTradingPartner API
+    #
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
+    # @param  TradingPartner $trading_partner trading_partner (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
+    # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
+    #
+    class CreateTradingPartnerRequestSdk
+        attr_accessor :avalara_version
+
+        attr_accessor :trading_partner
+
+        attr_accessor :x_avalara_client
+
+        attr_accessor :x_correlation_id
+
+        def initialize()
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '1.4'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_trading_partner()
+            return @trading_partner
+        end
+
+        def set_trading_partner(trading_partner)
+            @trading_partner = trading_partner
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+    end
+    # Represents the Request object for the CreateTradingPartnersBatch API
+    #
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
+    # @param  CreateTradingPartnersBatchRequest $create_trading_partners_batch_request create_trading_partners_batch_request (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
+    # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
+    #
+    class CreateTradingPartnersBatchRequestSdk
+        attr_accessor :avalara_version
+
+        attr_accessor :create_trading_partners_batch_request
+
+        attr_accessor :x_avalara_client
+
+        attr_accessor :x_correlation_id
+
+        def initialize()
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '1.4'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_create_trading_partners_batch_request()
+            return @create_trading_partners_batch_request
+        end
+
+        def set_create_trading_partners_batch_request(create_trading_partners_batch_request)
+            @create_trading_partners_batch_request = create_trading_partners_batch_request
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+    end
+    # Represents the Request object for the DeleteTradingPartner API
+    #
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
+    # @param  String $id The ID of the trading partner which is being deleted. (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
+    # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
+    #
+    class DeleteTradingPartnerRequestSdk
+        attr_accessor :avalara_version
+
+        attr_accessor :id
+
+        attr_accessor :x_avalara_client
+
+        attr_accessor :x_correlation_id
+
+        def initialize()
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '1.4'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_id()
+            return @id
+        end
+
+        def set_id(id)
+            @id = id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+    end
     # Represents the Request object for the DownloadBatchSearchReport API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  String $id The ID of the batch search whose report is to be downloaded. (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
+    # @param  String $id The ID of the batch search for which the report should be downloaded. (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
     # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
     #
     class DownloadBatchSearchReportRequestSdk
@@ -821,7 +1339,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -854,9 +1372,9 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the GetBatchSearchDetail API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
     # @param  String $id The ID of the batch search that was submitted earlier. (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
     # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
     #
     class GetBatchSearchDetailRequestSdk
@@ -872,7 +1390,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -905,13 +1423,13 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the ListBatchSearches API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
-    # @param  String $filter Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; .The parameters supported is &lt;code&gt;name&lt;/code&gt;.    Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided parameters. (optional)
-    # @param  Boolean $count When set to true, the count of the collection is included as @recordSetCount in the response body. (optional)
-    # @param  Float $top The number of items to include in the result. (optional)
-    # @param  String $skip If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. (optional)
-    # @param  String $order_by The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space. (optional)
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
+    # @param  String $filter Filters the results by field name. Only the &lt;code&gt;eq&lt;/code&gt; operator and the name field is supported. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/). (optional)
+    # @param  Boolean $count When set to &lt;code&gt;true&lt;/code&gt;, returns the total count of matching records included as &lt;code&gt;@recordSetCount&lt;/code&gt; in the response body. (optional)
+    # @param  Integer $top The number of items to include in the result. (optional)
+    # @param  Integer $skip The number of items to skip in the result. (optional)
+    # @param  String $order_by The &lt;code&gt;$orderBy&lt;/code&gt; query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space. (optional)
     # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
     #
     class ListBatchSearchesRequestSdk
@@ -935,7 +1453,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -1000,14 +1518,14 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the SearchParticipants API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  String $search Search by value supports logical AND and OR. Refer to [https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search) for more information on search. Search will be done over &lt;code&gt;name&lt;/code&gt; and &lt;code&gt;identifier&lt;/code&gt; parameters only. (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
-    # @param  Boolean $count When set to true, the count of the collection is included as @recordSetCount in the response body. (optional)
-    # @param  String $filter Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; .The parameters supported are &lt;code&gt;network&lt;/code&gt;, &lt;code&gt;country&lt;/code&gt;, &lt;code&gt;documentType&lt;/code&gt;, &lt;code&gt;idType&lt;/code&gt;.          Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided parameters. (optional)
-    # @param  Float $top The number of items to include in the result. (optional)
-    # @param  String $skip If nonzero, skip this number of results before returning data. Used with &lt;code&gt;$top&lt;/code&gt; to provide pagination for large datasets. (optional)
-    # @param  String $order_by The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space. (optional)
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
+    # @param  String $search Search by value supports logical &lt;code&gt;AND&lt;/code&gt; / &lt;code&gt;OR&lt;/code&gt; operators. Search is performed only over the name and identifier value fields. For more information, refer to [Query options overview - OData.](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search). (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
+    # @param  Boolean $count When set to &lt;code&gt;true&lt;/code&gt;, returns the total count of matching records included as &lt;code&gt;@recordSetCount&lt;/code&gt; in the response body. (optional)
+    # @param  String $filter Filters the results using the &lt;code&gt;eq&lt;/code&gt; operator. Supported fields: &lt;code&gt;network&lt;/code&gt;, &lt;code&gt;country&lt;/code&gt;, &lt;code&gt;documentType&lt;/code&gt;, &lt;code&gt;idType&lt;/code&gt;. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/). (optional)
+    # @param  Integer $top The number of items to include in the result. (optional)
+    # @param  Integer $skip The number of items to skip in the result. (optional)
+    # @param  String $order_by The &lt;code&gt;$orderBy&lt;/code&gt; query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space. (optional)
     # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
     #
     class SearchParticipantsRequestSdk
@@ -1033,7 +1551,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.3'
+            return @avalara_version || '1.4'
         end
 
         def set_avalara_version(avalara_version)
@@ -1094,6 +1612,68 @@ module AvalaraSdk::EInvoicing
 
         def set_order_by(order_by)
             @order_by = order_by
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+    end
+    # Represents the Request object for the UpdateTradingPartner API
+    #
+    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
+    # @param  String $id The ID of the trading partner which is being updated. (required)
+    # @param  TradingPartner $trading_partner trading_partner (required)
+    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
+    # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
+    #
+    class UpdateTradingPartnerRequestSdk
+        attr_accessor :avalara_version
+
+        attr_accessor :id
+
+        attr_accessor :trading_partner
+
+        attr_accessor :x_avalara_client
+
+        attr_accessor :x_correlation_id
+
+        def initialize()
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '1.4'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_id()
+            return @id
+        end
+
+        def set_id(id)
+            @id = id
+        end
+
+        def get_trading_partner()
+            return @trading_partner
+        end
+
+        def set_trading_partner(trading_partner)
+            @trading_partner = trading_partner
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
         end
 
         def get_x_correlation_id()

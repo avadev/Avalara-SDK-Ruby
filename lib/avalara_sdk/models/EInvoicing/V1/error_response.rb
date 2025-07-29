@@ -10,7 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Structure for reporting errors encountered during API operations, including title, status, and detailed message.
+      # Standard format for API error responses.
   class ErrorResponse
     attr_accessor :title
 

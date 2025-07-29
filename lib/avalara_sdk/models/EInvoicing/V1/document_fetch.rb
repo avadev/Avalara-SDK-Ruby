@@ -10,8 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # An object of the inbound document
-  class DocumentFetch
+      class DocumentFetch
     # Unique ID for this document that can be used for status checking and file downloads. This is a UID created by the Avalara E-Invoicing platform.
     attr_accessor :id
 

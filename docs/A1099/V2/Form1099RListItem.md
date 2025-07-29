@@ -4,51 +4,51 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **gross_distribution** | **Float** |  | [optional] |
-| **taxable_amount** | **Float** |  | [optional] |
-| **taxable_amount_not_determined** | **Boolean** |  | [optional] |
-| **total_distribution_determined** | **Boolean** |  | [optional] |
-| **capital_gain** | **Float** |  | [optional] |
-| **federal_income_tax_withheld** | **Float** |  | [optional] |
-| **employee_contributions_or_designated_roth_or_insurance_premiums** | **Float** |  | [optional] |
-| **net_unrealized_appreciation_in_employer_securities** | **Float** |  | [optional] |
-| **distribution_code** | **String** |  | [optional] |
-| **second_distribution_code** | **String** |  | [optional] |
-| **ira_sep_simple** | **Boolean** |  | [optional] |
-| **traditional_ira_sep_simple_or_roth_conversion_amount** | **Float** |  | [optional] |
-| **other_amount** | **Float** |  | [optional] |
-| **other_percentage** | **String** |  | [optional] |
-| **total_distribution_percentage** | **String** |  | [optional] |
-| **total_employee_contributions** | **Float** |  | [optional] |
-| **amount_allocable_to_irr_within5_years** | **Float** |  | [optional] |
-| **first_year_of_designated_roth_contribution** | **Integer** |  | [optional] |
-| **fatca_filing_requirement** | **Boolean** |  | [optional] |
-| **date_of_payment** | **Time** |  | [optional] |
-| **issuer_reference_id** | **String** |  | [optional] |
-| **issuer_tin** | **String** |  | [optional] |
-| **tax_year** | **Integer** |  | [optional] |
-| **issuer_id** | **String** |  | [optional] |
-| **reference_id** | **String** |  | [optional] |
-| **recipient_name** | **String** |  | [optional] |
-| **recipient_tin** | **String** |  | [optional] |
-| **tin_type** | **String** |  | [optional] |
-| **recipient_second_name** | **String** |  | [optional] |
-| **address** | **String** |  | [optional] |
-| **address2** | **String** |  | [optional] |
-| **city** | **String** |  | [optional] |
-| **state** | **String** |  | [optional] |
-| **zip** | **String** |  | [optional] |
-| **recipient_email** | **String** |  | [optional] |
-| **account_number** | **String** |  | [optional] |
-| **office_code** | **String** |  | [optional] |
-| **recipient_non_us_province** | **String** |  | [optional] |
-| **country_code** | **String** |  | [optional] |
-| **federal_e_file** | **Boolean** |  | [optional] |
-| **postal_mail** | **Boolean** |  | [optional] |
-| **state_e_file** | **Boolean** |  | [optional] |
-| **tin_match** | **Boolean** |  | [optional] |
-| **address_verification** | **Boolean** |  | [optional] |
-| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) |  | [optional] |
+| **gross_distribution** | **Float** | Gross distribution | [optional] |
+| **taxable_amount** | **Float** | Taxable amount | [optional] |
+| **taxable_amount_not_determined** | **Boolean** | Taxable amount not determined | [optional] |
+| **total_distribution_determined** | **Boolean** | Total distribution | [optional] |
+| **capital_gain** | **Float** | Capital gain (included in Box 2a) | [optional] |
+| **federal_income_tax_withheld** | **Float** | Federal income tax withheld | [optional] |
+| **employee_contributions_or_designated_roth_or_insurance_premiums** | **Float** | Employee contributions/Designated Roth contributions or insurance premiums | [optional] |
+| **net_unrealized_appreciation_in_employer_securities** | **Float** | Net unrealized appreciation in employer&#39;s securities | [optional] |
+| **distribution_code** | **String** | Distribution code | [optional] |
+| **second_distribution_code** | **String** | Second distribution code | [optional] |
+| **ira_sep_simple** | **Boolean** | IRA/SEP/SIMPLE | [optional] |
+| **traditional_ira_sep_simple_or_roth_conversion_amount** | **Float** | Traditional IRA/SEP/SIMPLE or Roth conversion amount | [optional] |
+| **other_amount** | **Float** | Other amount | [optional] |
+| **other_percentage** | **String** | Other percentage | [optional] |
+| **total_distribution_percentage** | **String** | Total distribution percentage | [optional] |
+| **total_employee_contributions** | **Float** | Total employee contributions | [optional] |
+| **amount_allocable_to_irr_within5_years** | **Float** | Amount allocable to IRR within 5 years | [optional] |
+| **first_year_of_designated_roth_contribution** | **Integer** | First year of designated Roth contribution | [optional] |
+| **fatca_filing_requirement** | **Boolean** | FATCA filing requirement | [optional] |
+| **date_of_payment** | **Time** | Date of payment | [optional] |
+| **issuer_reference_id** | **String** | Issuer Reference ID. One of &#x60;issuerReferenceId&#x60; or &#x60;issuerTin&#x60; is required. | [optional] |
+| **issuer_tin** | **String** | Issuer TIN. One of &#x60;issuerReferenceId&#x60; or &#x60;issuerTin&#x60; is required. | [optional] |
+| **tax_year** | **Integer** | Tax year |  |
+| **issuer_id** | **String** | Issuer ID | [optional] |
+| **reference_id** | **String** | Reference ID | [optional] |
+| **recipient_tin** | **String** | Recipient Tax ID Number | [optional] |
+| **recipient_name** | **String** | Recipient name |  |
+| **tin_type** | **String** | Type of TIN (Tax ID Number). Will be one of:  * SSN  * EIN  * ITIN  * ATIN | [optional] |
+| **recipient_second_name** | **String** | Recipient second name | [optional] |
+| **address** | **String** | Address |  |
+| **address2** | **String** | Address line 2 | [optional] |
+| **city** | **String** | City |  |
+| **state** | **String** | US state. Required if CountryCode is \&quot;US\&quot;. | [optional] |
+| **zip** | **String** | Zip/postal code | [optional] |
+| **recipient_email** | **String** | Recipient email address | [optional] |
+| **account_number** | **String** | Account number | [optional] |
+| **office_code** | **String** | Office code | [optional] |
+| **recipient_non_us_province** | **String** | Foreign province | [optional] |
+| **country_code** | **String** | Country code, as defined at https://www.irs.gov/e-file-providers/country-codes |  |
+| **federal_e_file** | **Boolean** | Boolean indicating that federal e-filing should be scheduled for this form | [optional] |
+| **postal_mail** | **Boolean** | Boolean indicating that postal mailing to the recipient should be scheduled for this form | [optional] |
+| **state_e_file** | **Boolean** | Boolean indicating that state e-filing should be scheduled for this form | [optional] |
+| **tin_match** | **Boolean** | Boolean indicating that TIN Matching should be scheduled for this form | [optional] |
+| **address_verification** | **Boolean** | Boolean indicating that address verification should be scheduled for this form | [optional] |
+| **state_and_local_withholding** | [**StateAndLocalWithholdingRequest**](StateAndLocalWithholdingRequest.md) | State and local withholding information | [optional] |
 
 ## Example
 
@@ -64,7 +64,7 @@ instance = AvalaraSdk::A1099::V2::Form1099RListItem.new(
   federal_income_tax_withheld: null,
   employee_contributions_or_designated_roth_or_insurance_premiums: null,
   net_unrealized_appreciation_in_employer_securities: null,
-  distribution_code: EarlyDistributionNoException,
+  distribution_code: 1,
   second_distribution_code: null,
   ira_sep_simple: null,
   traditional_ira_sep_simple_or_roth_conversion_amount: null,
@@ -81,8 +81,8 @@ instance = AvalaraSdk::A1099::V2::Form1099RListItem.new(
   tax_year: null,
   issuer_id: null,
   reference_id: null,
-  recipient_name: null,
   recipient_tin: null,
+  recipient_name: null,
   tin_type: EIN,
   recipient_second_name: null,
   address: null,

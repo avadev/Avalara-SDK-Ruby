@@ -4,22 +4,22 @@ All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/a
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**bulk_upsert1099_forms**](Forms1099Api.md#bulk_upsert1099_forms) | **POST** /1099/forms/$bulk-upsert | Creates or updates multiple 1099 forms. |
-| [**create1099_form**](Forms1099Api.md#create1099_form) | **POST** /1099/forms | Creates a 1099 form. |
-| [**delete1099_form**](Forms1099Api.md#delete1099_form) | **DELETE** /1099/forms/{id} | Deletes a 1099 form. |
-| [**get1099_form**](Forms1099Api.md#get1099_form) | **GET** /1099/forms/{id} | Retrieves a 1099 form. |
-| [**get1099_form_pdf**](Forms1099Api.md#get1099_form_pdf) | **GET** /1099/forms/{id}/pdf | Retrieves the PDF file for a single 1099 by form id. |
-| [**list1099_forms**](Forms1099Api.md#list1099_forms) | **GET** /1099/forms | Retrieves a list of 1099 forms based on query parameters. |
-| [**update1099_form**](Forms1099Api.md#update1099_form) | **PUT** /1099/forms/{id} | Updates a 1099 form. |
+| [**bulk_upsert1099_forms**](Forms1099Api.md#bulk_upsert1099_forms) | **POST** /1099/forms/$bulk-upsert | Create or update multiple 1099/1095/W2/1042S forms |
+| [**create1099_form**](Forms1099Api.md#create1099_form) | **POST** /1099/forms | Create a 1099/1095/W2/1042S form |
+| [**delete1099_form**](Forms1099Api.md#delete1099_form) | **DELETE** /1099/forms/{id} | Delete a 1099/1095/W2/1042S form |
+| [**get1099_form**](Forms1099Api.md#get1099_form) | **GET** /1099/forms/{id} | Retrieve a 1099/1095/W2/1042S form |
+| [**get1099_form_pdf**](Forms1099Api.md#get1099_form_pdf) | **GET** /1099/forms/{id}/pdf | Retrieve the PDF file for a 1099/1095/W2/1042S form |
+| [**list1099_forms**](Forms1099Api.md#list1099_forms) | **GET** /1099/forms | List 1099/1095/W2/1042S forms |
+| [**update1099_form**](Forms1099Api.md#update1099_form) | **PUT** /1099/forms/{id} | Update a 1099/1095/W2/1042S form |
 
 
 ## bulk_upsert1099_forms
 
 > <Form1099ProccessResult> bulk_upsert1099_forms(avalara_version, opts)
 
-Creates or updates multiple 1099 forms.
+Create or update multiple 1099/1095/W2/1042S forms
 
-This endpoint allows you to create or update multiple 1099 forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  ```json  {     \"formType\": \"1099-MISC\",     \"forms\": [         {             \"IssuerId\": \"123456\",             \"IssuerReferenceId\": \"REF123\",             \"IssuerTin\": \"12-3456789\",             \"TaxYear\": 2023,             \"ReferenceId\": \"FORM123456\",             \"RecipientName\": \"John Doe\",             \"RecipientTin\": \"987-65-4321\",             \"TinType\": \"IEN\",             \"RecipientSecondName\": \"Jane Doe\",             \"Address\": \"123 Main Street\",             \"Address2\": \"Apt 4B\",             \"City\": \"New York\",             \"State\": \"NY\",             \"Zip\": \"10001\",             \"RecipientEmail\": \"john.doe@email.com\",             \"AccountNumber\": \"ACC123456\",             \"OfficeCode\": \"NYC01\",             \"SecondTinNotice\": false,             \"RecipientNonUsProvince\": \"\",             \"CountryCode\": \"US\",             \"Rents\": 12000.00,             \"Royalties\": 5000.00,             \"OtherIncome\": 3000.00,             \"FishingBoatProceeds\": 0.00,             \"MedicalHealthCarePayments\": 15000.00,             \"SubstitutePayments\": 1000.00,             \"CropInsuranceProceeds\": 0.00,             \"GrossProceedsPaidToAttorney\": 7500.00,             \"FishPurchasedForResale\": 0.00,             \"FedIncomeTaxWithheld\": 5000.00,             \"Section409ADeferrals\": 0.00,             \"ExcessGoldenParachutePayments\": 0.00,             \"NonqualifiedDeferredCompensation\": 0.00,             \"PayerMadeDirectSales\": false,             \"FatcaFilingRequirement\": false,             \"StateAndLocalWithholding\": {               \"StateTaxWithheld\": 2500.00,               \"LocalTaxWithheld\": 1000.00,               \"State\": \"NY\",               \"StateIdNumber\": \"NY123456\",               \"Locality\": \"New York City\",               \"StateIncome\": 35000.00,               \"LocalIncome\": 35000.00             }         }     ]  }  ```                **Form 1099-NEC:**  ```json  {    \"formType\": \"1099-NEC\",    \"forms\": [      {        \"issuerID\": \"180337282\",        \"issuerReferenceId\": \"ISS123\",        \"issuerTin\": \"12-3000000\",        \"taxYear\": 2024,        \"referenceID\": \"REF-002\",        \"recipientName\": \"Jane Smith\",        \"recipientSecondName\": \"\",        \"recipientTin\": \"987-65-4321\",        \"tinType\": \"IEN\",        \"address\": \"123 Center St\",        \"address2\": \"\",        \"city\": \"Santa Monica\",        \"state\": \"CA\",        \"zip\": \"90401\",        \"countryCode\": \"US\",        \"recipientNonUsProvince\": \"\",        \"recipientEmail\": \"\",        \"accountNumber\": \"\",        \"officeCode\": \"\",        \"secondTinNotice\": false,        \"nonemployeeCompensation\": 123.45,        \"payerMadeDirectSales\": false,        \"federalIncomeTaxWithheld\": 12.34,        \"stateAndLocalWithholding\": {          \"state\": \"CA\",          \"stateIdNumber\": \"123123123\"          \"stateIncome\": 123.45,          \"stateTaxWithheld\": 12.34,          \"locality\": \"Santa Monica\",          \"localityIdNumber\": \"456456\",          \"localTaxWithheld\": 12.34          \"localIncome\": 50000.00         },        \"federalEFile\": true,        \"postalMail\": true,        \"stateEFile\": true,        \"tinMatch\": true,        \"addressVerification\": true       }     ]   }  ```  For the full version of the payload and its schema details, refer to the Swagger schemas section.
+This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  You can use one of the following payload structures:                **Form 1099-MISC:**  ```json  {     \"formType\": \"1099-MISC\",     \"forms\": [         {             \"IssuerId\": \"123456\",             \"IssuerReferenceId\": \"REF123\",             \"IssuerTin\": \"12-3456789\",             \"TaxYear\": 2023,             \"ReferenceId\": \"FORM123456\",             \"RecipientName\": \"John Doe\",             \"RecipientTin\": \"587-65-4321\",             \"TinType\": \"SSN\",             \"RecipientSecondName\": \"Jane Doe\",             \"Address\": \"123 Main Street\",             \"Address2\": \"Apt 4B\",             \"City\": \"New York\",             \"State\": \"NY\",             \"Zip\": \"10001\",             \"RecipientEmail\": \"john.doe@email.com\",             \"AccountNumber\": \"ACC123456\",             \"OfficeCode\": \"NYC01\",             \"SecondTinNotice\": false,             \"RecipientNonUsProvince\": \"\",             \"CountryCode\": \"US\",             \"Rents\": 12000.00,             \"Royalties\": 5000.00,             \"OtherIncome\": 3000.00,             \"FishingBoatProceeds\": 0.00,             \"MedicalHealthCarePayments\": 15000.00,             \"SubstitutePayments\": 1000.00,             \"CropInsuranceProceeds\": 0.00,             \"GrossProceedsPaidToAttorney\": 7500.00,             \"FishPurchasedForResale\": 0.00,             \"FedIncomeTaxWithheld\": 5000.00,             \"Section409ADeferrals\": 0.00,             \"ExcessGoldenParachutePayments\": 0.00,             \"NonqualifiedDeferredCompensation\": 0.00,             \"DirectSalesIndicator\": false,             \"FatcaFilingRequirement\": false,             \"StateAndLocalWithholding\": {               \"StateTaxWithheld\": 2500.00,               \"LocalTaxWithheld\": 1000.00,               \"State\": \"NY\",               \"StateIdNumber\": \"NY123456\",               \"Locality\": \"New York City\",               \"StateIncome\": 35000.00,               \"LocalIncome\": 35000.00             }         }     ]  }  ```                **Form 1099-NEC:**  ```json  {    \"formType\": \"1099-NEC\",    \"forms\": [      {        \"issuerID\": \"180337282\",        \"issuerReferenceId\": \"ISS123\",        \"issuerTin\": \"12-3000000\",        \"taxYear\": 2024,        \"referenceID\": \"REF-002\",        \"recipientName\": \"Jane Smith\",        \"recipientSecondName\": \"\",        \"recipientTin\": \"587-65-4321\",        \"tinType\": \"SSN\",        \"address\": \"123 Center St\",        \"address2\": \"\",        \"city\": \"Santa Monica\",        \"state\": \"CA\",        \"zip\": \"90401\",        \"countryCode\": \"US\",        \"recipientNonUsProvince\": \"\",        \"recipientEmail\": \"\",        \"accountNumber\": \"\",        \"officeCode\": \"\",        \"secondTinNotice\": false,        \"nonemployeeCompensation\": 123.45,        \"directSalesIndicator\": false,        \"federalIncomeTaxWithheld\": 12.34,        \"stateAndLocalWithholding\": {          \"state\": \"CA\",          \"stateIdNumber\": \"123123123\",          \"stateIncome\": 123.45,          \"stateTaxWithheld\": 12.34,          \"locality\": \"Santa Monica\",          \"localityIdNumber\": \"456456\",          \"localTaxWithheld\": 12.34,          \"localIncome\": 50000.00         },        \"federalEFile\": true,        \"postalMail\": true,        \"stateEFile\": true,        \"tinMatch\": true,        \"addressVerification\": true       }     ]   }  ```  For the full version of the payload and its schema details, refer to the Swagger schemas section.
 
 ### Examples
 
@@ -39,16 +39,16 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
   dry_run: true, # Boolean | 
-  x_correlation_id: 'e5719e20-8805-4ccc-b626-013045304315', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '032e11a9-1930-48bc-9cd5-865dfeb5f8bb', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  bulk_upsert1099_forms_request: AvalaraSdk::A1099::V2::Form1095BList.new # BulkUpsert1099FormsRequest | 
+  bulk_upsert1099_forms_request: AvalaraSdk::A1099::V2::Form1042SList.new # BulkUpsert1099FormsRequest | 
 }
 
 begin
-  # Creates or updates multiple 1099 forms.
+  # Create or update multiple 1099/1095/W2/1042S forms
   result = api_instance.bulk_upsert1099_forms(avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
@@ -64,7 +64,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Creates or updates multiple 1099 forms.
+  # Create or update multiple 1099/1095/W2/1042S forms
   data, status_code, headers = api_instance.bulk_upsert1099_forms_with_http_info(avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -100,9 +100,11 @@ end
 
 ## create1099_form
 
-> <Get1099Form200Response> create1099_form(avalara_version, opts)
+> <Create1099Form201Response> create1099_form(avalara_version, opts)
 
-Creates a 1099 form.
+Create a 1099/1095/W2/1042S form
+
+Create a 1099/1095/W2/1042S form.
 
 ### Examples
 
@@ -122,15 +124,15 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '6095f693-4fb2-48c8-b6e5-c7ab4611f673', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '2a525a1d-2ac8-4894-87a5-1bd347d76b1c', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  i_create_form1099_request: AvalaraSdk::A1099::V2::Form1099DivRequest.new # ICreateForm1099Request | 
+  i_create_form1099_request: AvalaraSdk::A1099::V2::Form1099DivRequest.new({recipient_name: 'recipient_name_example', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # ICreateForm1099Request | 
 }
 
 begin
-  # Creates a 1099 form.
+  # Create a 1099/1095/W2/1042S form
   result = api_instance.create1099_form(avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
@@ -142,15 +144,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Get1099Form200Response>, Integer, Hash)> create1099_form_with_http_info(avalara_version, opts)
+> <Array(<Create1099Form201Response>, Integer, Hash)> create1099_form_with_http_info(avalara_version, opts)
 
 ```ruby
 begin
-  # Creates a 1099 form.
+  # Create a 1099/1095/W2/1042S form
   data, status_code, headers = api_instance.create1099_form_with_http_info(avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Get1099Form200Response>
+  p data # => <Create1099Form201Response>
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling Forms1099Api->create1099_form_with_http_info: #{e}"
 end
@@ -167,7 +169,7 @@ end
 
 ### Return type
 
-[**Get1099Form200Response**](Get1099Form200Response.md)
+[**Create1099Form201Response**](Create1099Form201Response.md)
 
 ### Authorization
 
@@ -183,7 +185,9 @@ end
 
 > delete1099_form(id, avalara_version, opts)
 
-Deletes a 1099 form.
+Delete a 1099/1095/W2/1042S form
+
+Delete a 1099/1095/W2/1042S form.
 
 ### Examples
 
@@ -204,14 +208,14 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
 id = 'id_example' # String | The unique identifier of the desired form to delete.
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '15d84d4b-81ef-4d59-af08-94e94dc49322', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'ba633be6-e650-424e-a01c-28c6693b9e3a', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
 begin
-  # Deletes a 1099 form.
+  # Delete a 1099/1095/W2/1042S form
   api_instance.delete1099_form(id, avalara_version, opts)
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling Forms1099Api->delete1099_form: #{e}"
@@ -226,7 +230,7 @@ This returns an Array which contains the response data (`nil` in this case), sta
 
 ```ruby
 begin
-  # Deletes a 1099 form.
+  # Delete a 1099/1095/W2/1042S form
   data, status_code, headers = api_instance.delete1099_form_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -263,7 +267,9 @@ nil (empty response body)
 
 > <Get1099Form200Response> get1099_form(id, avalara_version, opts)
 
-Retrieves a 1099 form.
+Retrieve a 1099/1095/W2/1042S form
+
+Retrieve a 1099/1095/W2/1042S form.
 
 ### Examples
 
@@ -284,14 +290,14 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
 id = 'id_example' # String | 
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '72e6716a-27d0-4cd0-8a93-a9aaef422691', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'f311cf9a-de50-4d53-9663-bdf93020dd26', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
 begin
-  # Retrieves a 1099 form.
+  # Retrieve a 1099/1095/W2/1042S form
   result = api_instance.get1099_form(id, avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
@@ -307,7 +313,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Retrieves a 1099 form.
+  # Retrieve a 1099/1095/W2/1042S form
   data, status_code, headers = api_instance.get1099_form_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
@@ -342,9 +348,11 @@ end
 
 ## get1099_form_pdf
 
-> <Update1099Form200Response> get1099_form_pdf(id, avalara_version, opts)
+> File get1099_form_pdf(id, avalara_version, opts)
 
-Retrieves the PDF file for a single 1099 by form id.
+Retrieve the PDF file for a 1099/1095/W2/1042S form
+
+Retrieve the PDF file for a 1099/1095/W2/1042S form.
 
 ### Examples
 
@@ -364,16 +372,16 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
-id = 'id_example' # String | 
-avalara_version = '2.0' # String | API version
+id = 'id_example' # String | The ID of the form
+avalara_version = '2.0.0' # String | API version
 opts = {
-  mark_edelivered: true, # Boolean | The parameter for marked e-delivered
-  x_correlation_id: '782ecb31-ec05-4880-a431-bd7a890e63e6', # String | Unique correlation Id in a GUID format
+  mark_edelivered: true, # Boolean | Optional boolean that if set indicates that the form should be marked as having been successfully edelivered
+  x_correlation_id: 'a1c63b5e-c575-4315-90ad-0ac98e71a981', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
 begin
-  # Retrieves the PDF file for a single 1099 by form id.
+  # Retrieve the PDF file for a 1099/1095/W2/1042S form
   result = api_instance.get1099_form_pdf(id, avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
@@ -385,15 +393,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Update1099Form200Response>, Integer, Hash)> get1099_form_pdf_with_http_info(id, avalara_version, opts)
+> <Array(File, Integer, Hash)> get1099_form_pdf_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
-  # Retrieves the PDF file for a single 1099 by form id.
+  # Retrieve the PDF file for a 1099/1095/W2/1042S form
   data, status_code, headers = api_instance.get1099_form_pdf_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Update1099Form200Response>
+  p data # => File
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling Forms1099Api->get1099_form_pdf_with_http_info: #{e}"
 end
@@ -403,15 +411,15 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** |  |  |
+| **id** | **String** | The ID of the form |  |
 | **avalara_version** | **String** | API version |  |
-| **mark_edelivered** | **Boolean** | The parameter for marked e-delivered | [optional] |
+| **mark_edelivered** | **Boolean** | Optional boolean that if set indicates that the form should be marked as having been successfully edelivered | [optional] |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
 
 ### Return type
 
-[**Update1099Form200Response**](Update1099Form200Response.md)
+**File**
 
 ### Authorization
 
@@ -420,14 +428,16 @@ end
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/pdf, application/json
 
 
 ## list1099_forms
 
-> <Form1099List> list1099_forms(avalara_version, opts)
+> <Form1099ListResponse> list1099_forms(avalara_version, opts)
 
-Retrieves a list of 1099 forms based on query parameters.
+List 1099/1095/W2/1042S forms
+
+List 1099/1095/W2/1042S forms. Filterable fields are name, referenceId and taxYear.
 
 ### Examples
 
@@ -447,18 +457,18 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
   filter: 'filter_example', # String | A filter statement to identify specific records to retrieve. For more information on filtering, see <a href=\"https://developer.avalara.com/avatax/filtering-in-rest/\">Filtering in REST</a>.    Collections support filtering only on certain fields. An attempt to filter on an unsupported field will receive a 400 Bad Request response.    Supported filtering fields are as follows:        issuerId      issuerReferenceId      taxYear      addressVerificationStatus - possible values are: unknown, pending, failed, incomplete, unchanged, verified      createdAt      edeliveryStatus - possible values are: sent, unscheduled, bad_verify, bad_verify_limit, scheduled, bounced, accepted      email      federalEfileStatus - possible values are: unscheduled, scheduled, sent, corrected_scheduled, accepted, corrected, corrected_accepted, held      recipientName      mailStatus - possible values are: sent, unscheduled, pending, delivered      referenceId      tinMatchStatus - possible values are: none, pending, matched, failed      type - possible values are: 940, 941, 943, 944, 945, 1042, 1042-S, 1095-B, 1095-C, 1097-BTC, 1098, 1098-C, 1098-E, 1098-Q, 1098-T, 3921, 3922, 5498, 5498-ESA, 5498-SA, 1099-MISC, 1099-A, 1099-B, 1099-C, 1099-CAP, 1099-DIV, 1099-G, 1099-INT, 1099-K, 1099-LS, 1099-LTC, 1099-NEC, 1099-OID, 1099-PATR, 1099-Q, 1099-R, 1099-S, 1099-SA, T4A, W-2, W-2G, 1099-HC      updatedAt      validity - possible values are: true, false
   top: 56, # Integer | If nonzero, return no more than this number of results.     Used with skip to provide pagination for large datasets.     Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
   skip: 56, # Integer | If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example issuerReferenceId ASC.    Supported sorting fields are:         issuerReferenceId       taxYear       createdAt       recipientName      updatedAt
-  x_correlation_id: '3023fd6b-afc3-488f-ad85-1dd9f72d9f64', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '443e5440-659c-4f7d-865e-fd185b0ed923', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
 begin
-  # Retrieves a list of 1099 forms based on query parameters.
+  # List 1099/1095/W2/1042S forms
   result = api_instance.list1099_forms(avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
@@ -470,15 +480,15 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<Form1099List>, Integer, Hash)> list1099_forms_with_http_info(avalara_version, opts)
+> <Array(<Form1099ListResponse>, Integer, Hash)> list1099_forms_with_http_info(avalara_version, opts)
 
 ```ruby
 begin
-  # Retrieves a list of 1099 forms based on query parameters.
+  # List 1099/1095/W2/1042S forms
   data, status_code, headers = api_instance.list1099_forms_with_http_info(avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <Form1099List>
+  p data # => <Form1099ListResponse>
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling Forms1099Api->list1099_forms_with_http_info: #{e}"
 end
@@ -498,7 +508,7 @@ end
 
 ### Return type
 
-[**Form1099List**](Form1099List.md)
+[**Form1099ListResponse**](Form1099ListResponse.md)
 
 ### Authorization
 
@@ -514,7 +524,9 @@ end
 
 > <Update1099Form200Response> update1099_form(id, avalara_version, opts)
 
-Updates a 1099 form.
+Update a 1099/1095/W2/1042S form
+
+Update a 1099/1095/W2/1042S form.
 
 ### Examples
 
@@ -535,15 +547,15 @@ api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
 id = 'id_example' # String | 
-avalara_version = '2.0' # String | API version
+avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '6a610d02-ab2b-4ef8-9554-5149445333f1', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'd65ebcaf-e252-421c-a543-3d1ba4e4175b', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  i_update_form1099_request: AvalaraSdk::A1099::V2::Form1099DivRequest.new # IUpdateForm1099Request | 
+  i_update_form1099_request: AvalaraSdk::A1099::V2::Form1099DivRequest.new({recipient_name: 'recipient_name_example', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # IUpdateForm1099Request | 
 }
 
 begin
-  # Updates a 1099 form.
+  # Update a 1099/1095/W2/1042S form
   result = api_instance.update1099_form(id, avalara_version, opts)
   p result
 rescue AvalaraSdk::ApiError => e
@@ -559,7 +571,7 @@ This returns an Array which contains the response data, status code and headers.
 
 ```ruby
 begin
-  # Updates a 1099 form.
+  # Update a 1099/1095/W2/1042S form
   data, status_code, headers = api_instance.update1099_form_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
