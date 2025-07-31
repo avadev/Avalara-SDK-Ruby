@@ -13,19 +13,22 @@
 | **issuer_tin** | **String** | Issuer TIN | [optional] |
 | **tax_year** | **Integer** | Tax year | [optional] |
 | **federal_efile** | **Boolean** | Boolean indicating that federal e-filing has been scheduled for this form |  |
-| **federal_efile_status** | [**Form1099StatusDetailResponse**](Form1099StatusDetailResponse.md) | Federal e-file status | [optional][readonly] |
+| **federal_efile_status** | [**StatusDetail**](StatusDetail.md) | Federal e-file status | [optional][readonly] |
 | **state_efile** | **Boolean** | Boolean indicating that state e-filing has been scheduled for this form |  |
 | **state_efile_status** | [**Array&lt;StateEfileStatusDetailResponse&gt;**](StateEfileStatusDetailResponse.md) | State e-file status | [optional][readonly] |
 | **postal_mail** | **Boolean** | Boolean indicating that postal mailing to the recipient has been scheduled for this form |  |
-| **postal_mail_status** | [**Form1099StatusDetailResponse**](Form1099StatusDetailResponse.md) | Postal mail to recipient status | [optional][readonly] |
+| **postal_mail_status** | [**StatusDetail**](StatusDetail.md) | Postal mail to recipient status | [optional][readonly] |
 | **tin_match** | **Boolean** | Boolean indicating that TIN Matching has been scheduled for this form |  |
-| **tin_match_status** | [**Form1099StatusDetailResponse**](Form1099StatusDetailResponse.md) | TIN Match status | [optional][readonly] |
+| **tin_match_status** | [**StatusDetail**](StatusDetail.md) | TIN Match status | [optional][readonly] |
 | **address_verification** | **Boolean** | Boolean indicating that address verification has been scheduled for this form |  |
-| **address_verification_status** | [**Form1099StatusDetailResponse**](Form1099StatusDetailResponse.md) | Address verification status | [optional][readonly] |
+| **address_verification_status** | [**StatusDetail**](StatusDetail.md) | Address verification status | [optional][readonly] |
+| **e_delivery_status** | [**StatusDetail**](StatusDetail.md) | EDelivery status | [optional][readonly] |
 | **reference_id** | **String** | Reference ID | [optional] |
 | **email** | **String** | Recipient email address | [optional] |
 | **tin_type** | **String** | Type of TIN (Tax ID Number). Will be one of:  * SSN  * EIN  * ITIN  * ATIN | [optional] |
 | **tin** | **String** | Recipient Tax ID Number | [optional] |
+| **no_tin** | **Boolean** | Indicates whether the recipient has no TIN | [optional] |
+| **second_tin_notice** | **Boolean** | Second Tin Notice | [optional] |
 | **recipient_name** | **String** | Recipient name | [optional] |
 | **recipient_second_name** | **String** | Recipient second name | [optional] |
 | **address** | **String** | Address | [optional] |
@@ -33,8 +36,11 @@
 | **city** | **String** | City | [optional] |
 | **state** | **String** | US state | [optional] |
 | **zip** | **String** | Zip/postal code | [optional] |
-| **foreign_province** | **String** | Foreign province | [optional] |
+| **non_us_province** | **String** | Foreign province | [optional] |
 | **country_code** | **String** | Country code, as defined at https://www.irs.gov/e-file-providers/country-codes | [optional] |
+| **account_number** | **String** | Account Number | [optional] |
+| **office_code** | **String** | Office Code | [optional] |
+| **fatca_filing_requirement** | **Boolean** | FATCA filing requirement | [optional] |
 | **validation_errors** | [**Array&lt;ValidationErrorResponse&gt;**](ValidationErrorResponse.md) | Validation errors | [optional][readonly] |
 | **created_at** | **Time** | Creation time | [optional][readonly] |
 | **updated_at** | **Time** | Update time | [optional][readonly] |
@@ -64,10 +70,13 @@ instance = AvalaraSdk::A1099::V2::Form1095BListItemResponse.new(
   tin_match_status: null,
   address_verification: false,
   address_verification_status: null,
+  e_delivery_status: null,
   reference_id: 1891810-9819891,
   email: roadrunner@acmecorp.com,
   tin_type: null,
   tin: null,
+  no_tin: false,
+  second_tin_notice: null,
   recipient_name: null,
   recipient_second_name: null,
   address: 1234 Meep Meep Blvd,
@@ -75,11 +84,14 @@ instance = AvalaraSdk::A1099::V2::Form1095BListItemResponse.new(
   city: Tucson,
   state: AZ,
   zip: 35004,
-  foreign_province: ,
+  non_us_province: ,
   country_code: US,
+  account_number: null,
+  office_code: null,
+  fatca_filing_requirement: null,
   validation_errors: null,
-  created_at: 2025-07-29T15:47:39.396860Z,
-  updated_at: 2025-07-29T15:47:39.396860500Z,
+  created_at: 2025-07-31T02:07:40.939073500Z,
+  updated_at: 2025-07-31T02:07:40.939074300Z,
   state_and_local_withholding: null
 )
 ```

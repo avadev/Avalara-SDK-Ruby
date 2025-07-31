@@ -17,6 +17,7 @@ AvalaraSdk::A1099::V2::Create1099Form201Response.openapi_one_of
 #   :'Form1042SListItemResponse',
 #   :'Form1095BListItemResponse',
 #   :'Form1099BaseResponse',
+#   :'Form1099DivListItemResponse',
 #   :'Form1099KListItemResponse',
 #   :'Form1099MiscListItemResponse',
 #   :'Form1099NecListItemResponse',
@@ -51,6 +52,7 @@ AvalaraSdk::A1099::V2::Create1099Form201Response.build(data_that_doesnt_match)
 - `Form1042SListItemResponse`
 - `Form1095BListItemResponse`
 - `Form1099BaseResponse`
+- `Form1099DivListItemResponse`
 - `Form1099KListItemResponse`
 - `Form1099MiscListItemResponse`
 - `Form1099NecListItemResponse`

@@ -119,6 +119,9 @@ module AvalaraSdk::A1099::V2
     # Address verification status
     attr_accessor :address_verification_status
 
+    # EDelivery status
+    attr_accessor :e_delivery_status
+
     # Reference ID
     attr_accessor :reference_id
 
@@ -130,6 +133,12 @@ module AvalaraSdk::A1099::V2
 
     # Recipient Tax ID Number
     attr_accessor :tin
+
+    # Indicates whether the recipient has no TIN
+    attr_accessor :no_tin
+
+    # Second Tin Notice
+    attr_accessor :second_tin_notice
 
     # Recipient name
     attr_accessor :recipient_name
@@ -153,10 +162,19 @@ module AvalaraSdk::A1099::V2
     attr_accessor :zip
 
     # Foreign province
-    attr_accessor :foreign_province
+    attr_accessor :non_us_province
 
     # Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
     attr_accessor :country_code
+
+    # Account Number
+    attr_accessor :account_number
+
+    # Office Code
+    attr_accessor :office_code
+
+    # FATCA filing requirement
+    attr_accessor :fatca_filing_requirement
 
     # Validation errors
     attr_accessor :validation_errors
@@ -230,10 +248,13 @@ module AvalaraSdk::A1099::V2
         :'tin_match_status' => :'tinMatchStatus',
         :'address_verification' => :'addressVerification',
         :'address_verification_status' => :'addressVerificationStatus',
+        :'e_delivery_status' => :'eDeliveryStatus',
         :'reference_id' => :'referenceId',
         :'email' => :'email',
         :'tin_type' => :'tinType',
         :'tin' => :'tin',
+        :'no_tin' => :'noTin',
+        :'second_tin_notice' => :'secondTinNotice',
         :'recipient_name' => :'recipientName',
         :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
@@ -241,8 +262,11 @@ module AvalaraSdk::A1099::V2
         :'city' => :'city',
         :'state' => :'state',
         :'zip' => :'zip',
-        :'foreign_province' => :'foreignProvince',
+        :'non_us_province' => :'nonUsProvince',
         :'country_code' => :'countryCode',
+        :'account_number' => :'accountNumber',
+        :'office_code' => :'officeCode',
+        :'fatca_filing_requirement' => :'fatcaFilingRequirement',
         :'validation_errors' => :'validationErrors',
         :'created_at' => :'createdAt',
         :'updated_at' => :'updatedAt',
@@ -285,19 +309,22 @@ module AvalaraSdk::A1099::V2
         :'issuer_tin' => :'String',
         :'tax_year' => :'Integer',
         :'federal_efile' => :'Boolean',
-        :'federal_efile_status' => :'Form1099StatusDetailResponse',
+        :'federal_efile_status' => :'StatusDetail',
         :'state_efile' => :'Boolean',
         :'state_efile_status' => :'Array<StateEfileStatusDetailResponse>',
         :'postal_mail' => :'Boolean',
-        :'postal_mail_status' => :'Form1099StatusDetailResponse',
+        :'postal_mail_status' => :'StatusDetail',
         :'tin_match' => :'Boolean',
-        :'tin_match_status' => :'Form1099StatusDetailResponse',
+        :'tin_match_status' => :'StatusDetail',
         :'address_verification' => :'Boolean',
-        :'address_verification_status' => :'Form1099StatusDetailResponse',
+        :'address_verification_status' => :'StatusDetail',
+        :'e_delivery_status' => :'StatusDetail',
         :'reference_id' => :'String',
         :'email' => :'String',
         :'tin_type' => :'String',
         :'tin' => :'String',
+        :'no_tin' => :'Boolean',
+        :'second_tin_notice' => :'Boolean',
         :'recipient_name' => :'String',
         :'recipient_second_name' => :'String',
         :'address' => :'String',
@@ -305,8 +332,11 @@ module AvalaraSdk::A1099::V2
         :'city' => :'String',
         :'state' => :'String',
         :'zip' => :'String',
-        :'foreign_province' => :'String',
+        :'non_us_province' => :'String',
         :'country_code' => :'String',
+        :'account_number' => :'String',
+        :'office_code' => :'String',
+        :'fatca_filing_requirement' => :'Boolean',
         :'validation_errors' => :'Array<ValidationErrorResponse>',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
@@ -339,10 +369,12 @@ module AvalaraSdk::A1099::V2
         :'postal_mail_status',
         :'tin_match_status',
         :'address_verification_status',
+        :'e_delivery_status',
         :'reference_id',
         :'email',
         :'tin_type',
         :'tin',
+        :'second_tin_notice',
         :'recipient_name',
         :'recipient_second_name',
         :'address',
@@ -350,8 +382,11 @@ module AvalaraSdk::A1099::V2
         :'city',
         :'state',
         :'zip',
-        :'foreign_province',
+        :'non_us_province',
         :'country_code',
+        :'account_number',
+        :'office_code',
+        :'fatca_filing_requirement',
         :'validation_errors',
         :'state_and_local_withholding'
       ])
@@ -541,6 +576,10 @@ module AvalaraSdk::A1099::V2
         self.address_verification_status = attributes[:'address_verification_status']
       end
 
+      if attributes.key?(:'e_delivery_status')
+        self.e_delivery_status = attributes[:'e_delivery_status']
+      end
+
       if attributes.key?(:'reference_id')
         self.reference_id = attributes[:'reference_id']
       end
@@ -555,6 +594,14 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'tin')
         self.tin = attributes[:'tin']
+      end
+
+      if attributes.key?(:'no_tin')
+        self.no_tin = attributes[:'no_tin']
+      end
+
+      if attributes.key?(:'second_tin_notice')
+        self.second_tin_notice = attributes[:'second_tin_notice']
       end
 
       if attributes.key?(:'recipient_name')
@@ -585,12 +632,24 @@ module AvalaraSdk::A1099::V2
         self.zip = attributes[:'zip']
       end
 
-      if attributes.key?(:'foreign_province')
-        self.foreign_province = attributes[:'foreign_province']
+      if attributes.key?(:'non_us_province')
+        self.non_us_province = attributes[:'non_us_province']
       end
 
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
+      end
+
+      if attributes.key?(:'account_number')
+        self.account_number = attributes[:'account_number']
+      end
+
+      if attributes.key?(:'office_code')
+        self.office_code = attributes[:'office_code']
+      end
+
+      if attributes.key?(:'fatca_filing_requirement')
+        self.fatca_filing_requirement = attributes[:'fatca_filing_requirement']
       end
 
       if attributes.key?(:'validation_errors')
@@ -782,10 +841,13 @@ module AvalaraSdk::A1099::V2
           tin_match_status == o.tin_match_status &&
           address_verification == o.address_verification &&
           address_verification_status == o.address_verification_status &&
+          e_delivery_status == o.e_delivery_status &&
           reference_id == o.reference_id &&
           email == o.email &&
           tin_type == o.tin_type &&
           tin == o.tin &&
+          no_tin == o.no_tin &&
+          second_tin_notice == o.second_tin_notice &&
           recipient_name == o.recipient_name &&
           recipient_second_name == o.recipient_second_name &&
           address == o.address &&
@@ -793,8 +855,11 @@ module AvalaraSdk::A1099::V2
           city == o.city &&
           state == o.state &&
           zip == o.zip &&
-          foreign_province == o.foreign_province &&
+          non_us_province == o.non_us_province &&
           country_code == o.country_code &&
+          account_number == o.account_number &&
+          office_code == o.office_code &&
+          fatca_filing_requirement == o.fatca_filing_requirement &&
           validation_errors == o.validation_errors &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
@@ -810,7 +875,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [filer_type, payment_type, payment_settlement_entity_name_phone_number, gross_amount_payment_card, card_not_present_transactions, merchant_category_code, payment_transaction_number, federal_income_tax_withheld, january, february, march, april, may, june, july, august, sept, october, november, december, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, reference_id, email, tin_type, tin, recipient_name, recipient_second_name, address, address2, city, state, zip, foreign_province, country_code, validation_errors, created_at, updated_at, state_and_local_withholding].hash
+      [filer_type, payment_type, payment_settlement_entity_name_phone_number, gross_amount_payment_card, card_not_present_transactions, merchant_category_code, payment_transaction_number, federal_income_tax_withheld, january, february, march, april, may, june, july, august, sept, october, november, december, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, e_delivery_status, reference_id, email, tin_type, tin, no_tin, second_tin_notice, recipient_name, recipient_second_name, address, address2, city, state, zip, non_us_province, country_code, account_number, office_code, fatca_filing_requirement, validation_errors, created_at, updated_at, state_and_local_withholding].hash
     end
 
     # Builds the object from hash

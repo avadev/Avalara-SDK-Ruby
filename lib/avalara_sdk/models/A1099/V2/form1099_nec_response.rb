@@ -11,8 +11,6 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class Form1099NecResponse
-    attr_accessor :second_tin_notice
-
     attr_accessor :nonemployee_compensation
 
     attr_accessor :direct_sales_indicator
@@ -24,8 +22,6 @@ module AvalaraSdk::A1099::V2
     attr_accessor :created_at
 
     attr_accessor :updated_at
-
-    attr_accessor :user_id
 
     attr_accessor :state_and_local_withholding
 
@@ -59,13 +55,13 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :zip
 
-    attr_accessor :recipient_email
+    attr_accessor :email
 
     attr_accessor :account_number
 
     attr_accessor :office_code
 
-    attr_accessor :recipient_non_us_province
+    attr_accessor :non_us_province
 
     attr_accessor :country_code
 
@@ -77,9 +73,15 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :tin_match
 
+    attr_accessor :no_tin
+
+    attr_accessor :second_tin_notice
+
     attr_accessor :address_verification
 
     attr_accessor :federal_efile_status
+
+    attr_accessor :e_delivery_status
 
     attr_accessor :state_efile_status
 
@@ -116,14 +118,12 @@ module AvalaraSdk::A1099::V2
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'second_tin_notice' => :'secondTinNotice',
         :'nonemployee_compensation' => :'nonemployeeCompensation',
         :'direct_sales_indicator' => :'directSalesIndicator',
         :'federal_income_tax_withheld' => :'federalIncomeTaxWithheld',
         :'type' => :'type',
         :'created_at' => :'createdAt',
         :'updated_at' => :'updatedAt',
-        :'user_id' => :'userId',
         :'state_and_local_withholding' => :'stateAndLocalWithholding',
         :'tin_type' => :'tinType',
         :'id' => :'id',
@@ -140,17 +140,20 @@ module AvalaraSdk::A1099::V2
         :'city' => :'city',
         :'state' => :'state',
         :'zip' => :'zip',
-        :'recipient_email' => :'recipientEmail',
+        :'email' => :'email',
         :'account_number' => :'accountNumber',
         :'office_code' => :'officeCode',
-        :'recipient_non_us_province' => :'recipientNonUsProvince',
+        :'non_us_province' => :'nonUsProvince',
         :'country_code' => :'countryCode',
         :'federal_e_file' => :'federalEFile',
         :'postal_mail' => :'postalMail',
         :'state_e_file' => :'stateEFile',
         :'tin_match' => :'tinMatch',
+        :'no_tin' => :'noTin',
+        :'second_tin_notice' => :'secondTinNotice',
         :'address_verification' => :'addressVerification',
         :'federal_efile_status' => :'federalEfileStatus',
+        :'e_delivery_status' => :'eDeliveryStatus',
         :'state_efile_status' => :'stateEfileStatus',
         :'postal_mail_status' => :'postalMailStatus',
         :'tin_match_status' => :'tinMatchStatus',
@@ -167,14 +170,12 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'second_tin_notice' => :'Boolean',
         :'nonemployee_compensation' => :'Float',
         :'direct_sales_indicator' => :'Boolean',
         :'federal_income_tax_withheld' => :'Float',
         :'type' => :'String',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
-        :'user_id' => :'String',
         :'state_and_local_withholding' => :'StateAndLocalWithholdingResponse',
         :'tin_type' => :'String',
         :'id' => :'String',
@@ -191,17 +192,20 @@ module AvalaraSdk::A1099::V2
         :'city' => :'String',
         :'state' => :'String',
         :'zip' => :'String',
-        :'recipient_email' => :'String',
+        :'email' => :'String',
         :'account_number' => :'String',
         :'office_code' => :'String',
-        :'recipient_non_us_province' => :'String',
+        :'non_us_province' => :'String',
         :'country_code' => :'String',
         :'federal_e_file' => :'Boolean',
         :'postal_mail' => :'Boolean',
         :'state_e_file' => :'Boolean',
         :'tin_match' => :'Boolean',
+        :'no_tin' => :'Boolean',
+        :'second_tin_notice' => :'Boolean',
         :'address_verification' => :'Boolean',
         :'federal_efile_status' => :'StatusDetail',
+        :'e_delivery_status' => :'StatusDetail',
         :'state_efile_status' => :'Array<StateEfileStatusDetailResponse>',
         :'postal_mail_status' => :'StatusDetail',
         :'tin_match_status' => :'StatusDetail',
@@ -214,6 +218,7 @@ module AvalaraSdk::A1099::V2
     def self.openapi_nullable
       Set.new([
         :'federal_efile_status',
+        :'e_delivery_status',
         :'state_efile_status',
         :'postal_mail_status',
         :'tin_match_status',
@@ -244,10 +249,6 @@ module AvalaraSdk::A1099::V2
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'second_tin_notice')
-        self.second_tin_notice = attributes[:'second_tin_notice']
-      end
-
       if attributes.key?(:'nonemployee_compensation')
         self.nonemployee_compensation = attributes[:'nonemployee_compensation']
       end
@@ -270,10 +271,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
-      end
-
-      if attributes.key?(:'user_id')
-        self.user_id = attributes[:'user_id']
       end
 
       if attributes.key?(:'state_and_local_withholding')
@@ -340,8 +337,8 @@ module AvalaraSdk::A1099::V2
         self.zip = attributes[:'zip']
       end
 
-      if attributes.key?(:'recipient_email')
-        self.recipient_email = attributes[:'recipient_email']
+      if attributes.key?(:'email')
+        self.email = attributes[:'email']
       end
 
       if attributes.key?(:'account_number')
@@ -352,8 +349,8 @@ module AvalaraSdk::A1099::V2
         self.office_code = attributes[:'office_code']
       end
 
-      if attributes.key?(:'recipient_non_us_province')
-        self.recipient_non_us_province = attributes[:'recipient_non_us_province']
+      if attributes.key?(:'non_us_province')
+        self.non_us_province = attributes[:'non_us_province']
       end
 
       if attributes.key?(:'country_code')
@@ -376,12 +373,24 @@ module AvalaraSdk::A1099::V2
         self.tin_match = attributes[:'tin_match']
       end
 
+      if attributes.key?(:'no_tin')
+        self.no_tin = attributes[:'no_tin']
+      end
+
+      if attributes.key?(:'second_tin_notice')
+        self.second_tin_notice = attributes[:'second_tin_notice']
+      end
+
       if attributes.key?(:'address_verification')
         self.address_verification = attributes[:'address_verification']
       end
 
       if attributes.key?(:'federal_efile_status')
         self.federal_efile_status = attributes[:'federal_efile_status']
+      end
+
+      if attributes.key?(:'e_delivery_status')
+        self.e_delivery_status = attributes[:'e_delivery_status']
       end
 
       if attributes.key?(:'state_efile_status')
@@ -421,7 +430,7 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S"])
+      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
@@ -431,7 +440,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S"])
+      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -465,14 +474,12 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          second_tin_notice == o.second_tin_notice &&
           nonemployee_compensation == o.nonemployee_compensation &&
           direct_sales_indicator == o.direct_sales_indicator &&
           federal_income_tax_withheld == o.federal_income_tax_withheld &&
           type == o.type &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
-          user_id == o.user_id &&
           state_and_local_withholding == o.state_and_local_withholding &&
           tin_type == o.tin_type &&
           id == o.id &&
@@ -489,17 +496,20 @@ module AvalaraSdk::A1099::V2
           city == o.city &&
           state == o.state &&
           zip == o.zip &&
-          recipient_email == o.recipient_email &&
+          email == o.email &&
           account_number == o.account_number &&
           office_code == o.office_code &&
-          recipient_non_us_province == o.recipient_non_us_province &&
+          non_us_province == o.non_us_province &&
           country_code == o.country_code &&
           federal_e_file == o.federal_e_file &&
           postal_mail == o.postal_mail &&
           state_e_file == o.state_e_file &&
           tin_match == o.tin_match &&
+          no_tin == o.no_tin &&
+          second_tin_notice == o.second_tin_notice &&
           address_verification == o.address_verification &&
           federal_efile_status == o.federal_efile_status &&
+          e_delivery_status == o.e_delivery_status &&
           state_efile_status == o.state_efile_status &&
           postal_mail_status == o.postal_mail_status &&
           tin_match_status == o.tin_match_status &&
@@ -516,7 +526,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [second_tin_notice, nonemployee_compensation, direct_sales_indicator, federal_income_tax_withheld, type, created_at, updated_at, user_id, state_and_local_withholding, tin_type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, recipient_name, recipient_tin, recipient_second_name, address, address2, city, state, zip, recipient_email, account_number, office_code, recipient_non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, address_verification, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, validation_errors].hash
+      [nonemployee_compensation, direct_sales_indicator, federal_income_tax_withheld, type, created_at, updated_at, state_and_local_withholding, tin_type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, recipient_name, recipient_tin, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, no_tin, second_tin_notice, address_verification, federal_efile_status, e_delivery_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, validation_errors].hash
     end
 
     # Builds the object from hash

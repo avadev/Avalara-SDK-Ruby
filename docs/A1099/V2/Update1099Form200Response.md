@@ -16,6 +16,7 @@ AvalaraSdk::A1099::V2::Update1099Form200Response.openapi_one_of
 # [
 #   :'Form1042SResponse',
 #   :'Form1099DivResponse',
+#   :'Form1099KResponse',
 #   :'Form1099MiscResponse',
 #   :'Form1099NecResponse',
 #   :'FormResponseBase'
@@ -48,6 +49,7 @@ AvalaraSdk::A1099::V2::Update1099Form200Response.build(data_that_doesnt_match)
 
 - `Form1042SResponse`
 - `Form1099DivResponse`
+- `Form1099KResponse`
 - `Form1099MiscResponse`
 - `Form1099NecResponse`
 - `FormResponseBase`
