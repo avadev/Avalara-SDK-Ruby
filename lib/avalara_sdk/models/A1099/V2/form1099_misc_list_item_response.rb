@@ -27,7 +27,7 @@ module AvalaraSdk::A1099::V2
     attr_accessor :fishing_boat_proceeds
 
     # Medical and health care payments
-    attr_accessor :medical_and_health_care
+    attr_accessor :medical_and_health_care_payments
 
     # Substitute payments in lieu of dividends or interest
     attr_accessor :substitute_payments
@@ -39,16 +39,19 @@ module AvalaraSdk::A1099::V2
     attr_accessor :crop_insurance_proceeds
 
     # (Legacy field) Excess golden parachute payments
-    attr_accessor :excess_golden_parachute
+    attr_accessor :excess_golden_parachute_payments
 
     # Gross proceeds paid to an attorney
-    attr_accessor :gross_amount_paid_attorney
+    attr_accessor :gross_proceeds_paid_to_attorney
+
+    # Fish purchased for resale
+    attr_accessor :fish_purchased_for_resale
 
     # Section 409A deferrals
     attr_accessor :section409_a_deferrals
 
     # Nonqualified deferred compensation
-    attr_accessor :section409_a_income
+    attr_accessor :nonqualified_deferred_compensation
 
     # ID of the form
     attr_accessor :id
@@ -98,6 +101,9 @@ module AvalaraSdk::A1099::V2
     # Address verification status
     attr_accessor :address_verification_status
 
+    # EDelivery status
+    attr_accessor :e_delivery_status
+
     # Reference ID
     attr_accessor :reference_id
 
@@ -109,6 +115,12 @@ module AvalaraSdk::A1099::V2
 
     # Recipient Tax ID Number
     attr_accessor :tin
+
+    # Indicates whether the recipient has no TIN
+    attr_accessor :no_tin
+
+    # Second Tin Notice
+    attr_accessor :second_tin_notice
 
     # Recipient name
     attr_accessor :recipient_name
@@ -132,10 +144,19 @@ module AvalaraSdk::A1099::V2
     attr_accessor :zip
 
     # Foreign province
-    attr_accessor :foreign_province
+    attr_accessor :non_us_province
 
     # Country code, as defined at https://www.irs.gov/e-file-providers/country-codes
     attr_accessor :country_code
+
+    # Account Number
+    attr_accessor :account_number
+
+    # Office Code
+    attr_accessor :office_code
+
+    # FATCA filing requirement
+    attr_accessor :fatca_filing_requirement
 
     # Validation errors
     attr_accessor :validation_errors
@@ -156,14 +177,15 @@ module AvalaraSdk::A1099::V2
         :'other_income' => :'otherIncome',
         :'fed_income_tax_withheld' => :'fedIncomeTaxWithheld',
         :'fishing_boat_proceeds' => :'fishingBoatProceeds',
-        :'medical_and_health_care' => :'medicalAndHealthCare',
+        :'medical_and_health_care_payments' => :'medicalAndHealthCarePayments',
         :'substitute_payments' => :'substitutePayments',
         :'direct_sales_indicator' => :'directSalesIndicator',
         :'crop_insurance_proceeds' => :'cropInsuranceProceeds',
-        :'excess_golden_parachute' => :'excessGoldenParachute',
-        :'gross_amount_paid_attorney' => :'grossAmountPaidAttorney',
+        :'excess_golden_parachute_payments' => :'excessGoldenParachutePayments',
+        :'gross_proceeds_paid_to_attorney' => :'grossProceedsPaidToAttorney',
+        :'fish_purchased_for_resale' => :'fishPurchasedForResale',
         :'section409_a_deferrals' => :'section409ADeferrals',
-        :'section409_a_income' => :'section409AIncome',
+        :'nonqualified_deferred_compensation' => :'nonqualifiedDeferredCompensation',
         :'id' => :'id',
         :'type' => :'type',
         :'issuer_id' => :'issuerId',
@@ -180,10 +202,13 @@ module AvalaraSdk::A1099::V2
         :'tin_match_status' => :'tinMatchStatus',
         :'address_verification' => :'addressVerification',
         :'address_verification_status' => :'addressVerificationStatus',
+        :'e_delivery_status' => :'eDeliveryStatus',
         :'reference_id' => :'referenceId',
         :'email' => :'email',
         :'tin_type' => :'tinType',
         :'tin' => :'tin',
+        :'no_tin' => :'noTin',
+        :'second_tin_notice' => :'secondTinNotice',
         :'recipient_name' => :'recipientName',
         :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
@@ -191,8 +216,11 @@ module AvalaraSdk::A1099::V2
         :'city' => :'city',
         :'state' => :'state',
         :'zip' => :'zip',
-        :'foreign_province' => :'foreignProvince',
+        :'non_us_province' => :'nonUsProvince',
         :'country_code' => :'countryCode',
+        :'account_number' => :'accountNumber',
+        :'office_code' => :'officeCode',
+        :'fatca_filing_requirement' => :'fatcaFilingRequirement',
         :'validation_errors' => :'validationErrors',
         :'created_at' => :'createdAt',
         :'updated_at' => :'updatedAt',
@@ -213,14 +241,15 @@ module AvalaraSdk::A1099::V2
         :'other_income' => :'Float',
         :'fed_income_tax_withheld' => :'Float',
         :'fishing_boat_proceeds' => :'Float',
-        :'medical_and_health_care' => :'Float',
+        :'medical_and_health_care_payments' => :'Float',
         :'substitute_payments' => :'Float',
         :'direct_sales_indicator' => :'Boolean',
         :'crop_insurance_proceeds' => :'Float',
-        :'excess_golden_parachute' => :'Float',
-        :'gross_amount_paid_attorney' => :'Float',
+        :'excess_golden_parachute_payments' => :'Float',
+        :'gross_proceeds_paid_to_attorney' => :'Float',
+        :'fish_purchased_for_resale' => :'Float',
         :'section409_a_deferrals' => :'Float',
-        :'section409_a_income' => :'Float',
+        :'nonqualified_deferred_compensation' => :'Float',
         :'id' => :'String',
         :'type' => :'String',
         :'issuer_id' => :'Integer',
@@ -228,19 +257,22 @@ module AvalaraSdk::A1099::V2
         :'issuer_tin' => :'String',
         :'tax_year' => :'Integer',
         :'federal_efile' => :'Boolean',
-        :'federal_efile_status' => :'Form1099StatusDetailResponse',
+        :'federal_efile_status' => :'StatusDetail',
         :'state_efile' => :'Boolean',
         :'state_efile_status' => :'Array<StateEfileStatusDetailResponse>',
         :'postal_mail' => :'Boolean',
-        :'postal_mail_status' => :'Form1099StatusDetailResponse',
+        :'postal_mail_status' => :'StatusDetail',
         :'tin_match' => :'Boolean',
-        :'tin_match_status' => :'Form1099StatusDetailResponse',
+        :'tin_match_status' => :'StatusDetail',
         :'address_verification' => :'Boolean',
-        :'address_verification_status' => :'Form1099StatusDetailResponse',
+        :'address_verification_status' => :'StatusDetail',
+        :'e_delivery_status' => :'StatusDetail',
         :'reference_id' => :'String',
         :'email' => :'String',
         :'tin_type' => :'String',
         :'tin' => :'String',
+        :'no_tin' => :'Boolean',
+        :'second_tin_notice' => :'Boolean',
         :'recipient_name' => :'String',
         :'recipient_second_name' => :'String',
         :'address' => :'String',
@@ -248,8 +280,11 @@ module AvalaraSdk::A1099::V2
         :'city' => :'String',
         :'state' => :'String',
         :'zip' => :'String',
-        :'foreign_province' => :'String',
+        :'non_us_province' => :'String',
         :'country_code' => :'String',
+        :'account_number' => :'String',
+        :'office_code' => :'String',
+        :'fatca_filing_requirement' => :'Boolean',
         :'validation_errors' => :'Array<ValidationErrorResponse>',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
@@ -265,23 +300,26 @@ module AvalaraSdk::A1099::V2
         :'other_income',
         :'fed_income_tax_withheld',
         :'fishing_boat_proceeds',
-        :'medical_and_health_care',
+        :'medical_and_health_care_payments',
         :'substitute_payments',
         :'crop_insurance_proceeds',
-        :'excess_golden_parachute',
-        :'gross_amount_paid_attorney',
+        :'excess_golden_parachute_payments',
+        :'gross_proceeds_paid_to_attorney',
+        :'fish_purchased_for_resale',
         :'section409_a_deferrals',
-        :'section409_a_income',
+        :'nonqualified_deferred_compensation',
         :'issuer_reference_id',
         :'issuer_tin',
         :'state_efile_status',
         :'postal_mail_status',
         :'tin_match_status',
         :'address_verification_status',
+        :'e_delivery_status',
         :'reference_id',
         :'email',
         :'tin_type',
         :'tin',
+        :'second_tin_notice',
         :'recipient_name',
         :'recipient_second_name',
         :'address',
@@ -289,8 +327,11 @@ module AvalaraSdk::A1099::V2
         :'city',
         :'state',
         :'zip',
-        :'foreign_province',
+        :'non_us_province',
         :'country_code',
+        :'account_number',
+        :'office_code',
+        :'fatca_filing_requirement',
         :'validation_errors',
         :'state_and_local_withholding'
       ])
@@ -338,8 +379,8 @@ module AvalaraSdk::A1099::V2
         self.fishing_boat_proceeds = attributes[:'fishing_boat_proceeds']
       end
 
-      if attributes.key?(:'medical_and_health_care')
-        self.medical_and_health_care = attributes[:'medical_and_health_care']
+      if attributes.key?(:'medical_and_health_care_payments')
+        self.medical_and_health_care_payments = attributes[:'medical_and_health_care_payments']
       end
 
       if attributes.key?(:'substitute_payments')
@@ -354,20 +395,24 @@ module AvalaraSdk::A1099::V2
         self.crop_insurance_proceeds = attributes[:'crop_insurance_proceeds']
       end
 
-      if attributes.key?(:'excess_golden_parachute')
-        self.excess_golden_parachute = attributes[:'excess_golden_parachute']
+      if attributes.key?(:'excess_golden_parachute_payments')
+        self.excess_golden_parachute_payments = attributes[:'excess_golden_parachute_payments']
       end
 
-      if attributes.key?(:'gross_amount_paid_attorney')
-        self.gross_amount_paid_attorney = attributes[:'gross_amount_paid_attorney']
+      if attributes.key?(:'gross_proceeds_paid_to_attorney')
+        self.gross_proceeds_paid_to_attorney = attributes[:'gross_proceeds_paid_to_attorney']
+      end
+
+      if attributes.key?(:'fish_purchased_for_resale')
+        self.fish_purchased_for_resale = attributes[:'fish_purchased_for_resale']
       end
 
       if attributes.key?(:'section409_a_deferrals')
         self.section409_a_deferrals = attributes[:'section409_a_deferrals']
       end
 
-      if attributes.key?(:'section409_a_income')
-        self.section409_a_income = attributes[:'section409_a_income']
+      if attributes.key?(:'nonqualified_deferred_compensation')
+        self.nonqualified_deferred_compensation = attributes[:'nonqualified_deferred_compensation']
       end
 
       if attributes.key?(:'id')
@@ -452,6 +497,10 @@ module AvalaraSdk::A1099::V2
         self.address_verification_status = attributes[:'address_verification_status']
       end
 
+      if attributes.key?(:'e_delivery_status')
+        self.e_delivery_status = attributes[:'e_delivery_status']
+      end
+
       if attributes.key?(:'reference_id')
         self.reference_id = attributes[:'reference_id']
       end
@@ -466,6 +515,14 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'tin')
         self.tin = attributes[:'tin']
+      end
+
+      if attributes.key?(:'no_tin')
+        self.no_tin = attributes[:'no_tin']
+      end
+
+      if attributes.key?(:'second_tin_notice')
+        self.second_tin_notice = attributes[:'second_tin_notice']
       end
 
       if attributes.key?(:'recipient_name')
@@ -496,12 +553,24 @@ module AvalaraSdk::A1099::V2
         self.zip = attributes[:'zip']
       end
 
-      if attributes.key?(:'foreign_province')
-        self.foreign_province = attributes[:'foreign_province']
+      if attributes.key?(:'non_us_province')
+        self.non_us_province = attributes[:'non_us_province']
       end
 
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
+      end
+
+      if attributes.key?(:'account_number')
+        self.account_number = attributes[:'account_number']
+      end
+
+      if attributes.key?(:'office_code')
+        self.office_code = attributes[:'office_code']
+      end
+
+      if attributes.key?(:'fatca_filing_requirement')
+        self.fatca_filing_requirement = attributes[:'fatca_filing_requirement']
       end
 
       if attributes.key?(:'validation_errors')
@@ -638,14 +707,15 @@ module AvalaraSdk::A1099::V2
           other_income == o.other_income &&
           fed_income_tax_withheld == o.fed_income_tax_withheld &&
           fishing_boat_proceeds == o.fishing_boat_proceeds &&
-          medical_and_health_care == o.medical_and_health_care &&
+          medical_and_health_care_payments == o.medical_and_health_care_payments &&
           substitute_payments == o.substitute_payments &&
           direct_sales_indicator == o.direct_sales_indicator &&
           crop_insurance_proceeds == o.crop_insurance_proceeds &&
-          excess_golden_parachute == o.excess_golden_parachute &&
-          gross_amount_paid_attorney == o.gross_amount_paid_attorney &&
+          excess_golden_parachute_payments == o.excess_golden_parachute_payments &&
+          gross_proceeds_paid_to_attorney == o.gross_proceeds_paid_to_attorney &&
+          fish_purchased_for_resale == o.fish_purchased_for_resale &&
           section409_a_deferrals == o.section409_a_deferrals &&
-          section409_a_income == o.section409_a_income &&
+          nonqualified_deferred_compensation == o.nonqualified_deferred_compensation &&
           id == o.id &&
           type == o.type &&
           issuer_id == o.issuer_id &&
@@ -662,10 +732,13 @@ module AvalaraSdk::A1099::V2
           tin_match_status == o.tin_match_status &&
           address_verification == o.address_verification &&
           address_verification_status == o.address_verification_status &&
+          e_delivery_status == o.e_delivery_status &&
           reference_id == o.reference_id &&
           email == o.email &&
           tin_type == o.tin_type &&
           tin == o.tin &&
+          no_tin == o.no_tin &&
+          second_tin_notice == o.second_tin_notice &&
           recipient_name == o.recipient_name &&
           recipient_second_name == o.recipient_second_name &&
           address == o.address &&
@@ -673,8 +746,11 @@ module AvalaraSdk::A1099::V2
           city == o.city &&
           state == o.state &&
           zip == o.zip &&
-          foreign_province == o.foreign_province &&
+          non_us_province == o.non_us_province &&
           country_code == o.country_code &&
+          account_number == o.account_number &&
+          office_code == o.office_code &&
+          fatca_filing_requirement == o.fatca_filing_requirement &&
           validation_errors == o.validation_errors &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
@@ -690,7 +766,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [rents, royalties, other_income, fed_income_tax_withheld, fishing_boat_proceeds, medical_and_health_care, substitute_payments, direct_sales_indicator, crop_insurance_proceeds, excess_golden_parachute, gross_amount_paid_attorney, section409_a_deferrals, section409_a_income, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, reference_id, email, tin_type, tin, recipient_name, recipient_second_name, address, address2, city, state, zip, foreign_province, country_code, validation_errors, created_at, updated_at, state_and_local_withholding].hash
+      [rents, royalties, other_income, fed_income_tax_withheld, fishing_boat_proceeds, medical_and_health_care_payments, substitute_payments, direct_sales_indicator, crop_insurance_proceeds, excess_golden_parachute_payments, gross_proceeds_paid_to_attorney, fish_purchased_for_resale, section409_a_deferrals, nonqualified_deferred_compensation, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, e_delivery_status, reference_id, email, tin_type, tin, no_tin, second_tin_notice, recipient_name, recipient_second_name, address, address2, city, state, zip, non_us_province, country_code, account_number, office_code, fatca_filing_requirement, validation_errors, created_at, updated_at, state_and_local_withholding].hash
     end
 
     # Builds the object from hash

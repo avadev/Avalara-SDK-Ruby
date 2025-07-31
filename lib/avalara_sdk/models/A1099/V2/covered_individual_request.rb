@@ -30,43 +30,43 @@ module AvalaraSdk::A1099::V2
     attr_accessor :birth_date
 
     # Coverage indicator for all 12 months
-    attr_accessor :covered_month_indicator0
+    attr_accessor :covered_all_months
 
     # Coverage indicator for January
-    attr_accessor :covered_month_indicator1
+    attr_accessor :covered_january
 
     # Coverage indicator for February
-    attr_accessor :covered_month_indicator2
+    attr_accessor :covered_february
 
     # Coverage indicator for March
-    attr_accessor :covered_month_indicator3
+    attr_accessor :covered_march
 
     # Coverage indicator for April
-    attr_accessor :covered_month_indicator4
+    attr_accessor :covered_april
 
     # Coverage indicator for May
-    attr_accessor :covered_month_indicator5
+    attr_accessor :covered_may
 
     # Coverage indicator for June
-    attr_accessor :covered_month_indicator6
+    attr_accessor :covered_june
 
     # Coverage indicator for July
-    attr_accessor :covered_month_indicator7
+    attr_accessor :covered_july
 
     # Coverage indicator for August
-    attr_accessor :covered_month_indicator8
+    attr_accessor :covered_august
 
     # Coverage indicator for September
-    attr_accessor :covered_month_indicator9
+    attr_accessor :covered_september
 
     # Coverage indicator for October
-    attr_accessor :covered_month_indicator10
+    attr_accessor :covered_october
 
     # Coverage indicator for November
-    attr_accessor :covered_month_indicator11
+    attr_accessor :covered_november
 
     # Coverage indicator for December
-    attr_accessor :covered_month_indicator12
+    attr_accessor :covered_december
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
@@ -77,19 +77,19 @@ module AvalaraSdk::A1099::V2
         :'name_suffix' => :'nameSuffix',
         :'tin' => :'tin',
         :'birth_date' => :'birthDate',
-        :'covered_month_indicator0' => :'coveredMonthIndicator0',
-        :'covered_month_indicator1' => :'coveredMonthIndicator1',
-        :'covered_month_indicator2' => :'coveredMonthIndicator2',
-        :'covered_month_indicator3' => :'coveredMonthIndicator3',
-        :'covered_month_indicator4' => :'coveredMonthIndicator4',
-        :'covered_month_indicator5' => :'coveredMonthIndicator5',
-        :'covered_month_indicator6' => :'coveredMonthIndicator6',
-        :'covered_month_indicator7' => :'coveredMonthIndicator7',
-        :'covered_month_indicator8' => :'coveredMonthIndicator8',
-        :'covered_month_indicator9' => :'coveredMonthIndicator9',
-        :'covered_month_indicator10' => :'coveredMonthIndicator10',
-        :'covered_month_indicator11' => :'coveredMonthIndicator11',
-        :'covered_month_indicator12' => :'coveredMonthIndicator12'
+        :'covered_all_months' => :'coveredAllMonths',
+        :'covered_january' => :'coveredJanuary',
+        :'covered_february' => :'coveredFebruary',
+        :'covered_march' => :'coveredMarch',
+        :'covered_april' => :'coveredApril',
+        :'covered_may' => :'coveredMay',
+        :'covered_june' => :'coveredJune',
+        :'covered_july' => :'coveredJuly',
+        :'covered_august' => :'coveredAugust',
+        :'covered_september' => :'coveredSeptember',
+        :'covered_october' => :'coveredOctober',
+        :'covered_november' => :'coveredNovember',
+        :'covered_december' => :'coveredDecember'
       }
     end
 
@@ -107,19 +107,19 @@ module AvalaraSdk::A1099::V2
         :'name_suffix' => :'String',
         :'tin' => :'String',
         :'birth_date' => :'Time',
-        :'covered_month_indicator0' => :'Boolean',
-        :'covered_month_indicator1' => :'Boolean',
-        :'covered_month_indicator2' => :'Boolean',
-        :'covered_month_indicator3' => :'Boolean',
-        :'covered_month_indicator4' => :'Boolean',
-        :'covered_month_indicator5' => :'Boolean',
-        :'covered_month_indicator6' => :'Boolean',
-        :'covered_month_indicator7' => :'Boolean',
-        :'covered_month_indicator8' => :'Boolean',
-        :'covered_month_indicator9' => :'Boolean',
-        :'covered_month_indicator10' => :'Boolean',
-        :'covered_month_indicator11' => :'Boolean',
-        :'covered_month_indicator12' => :'Boolean'
+        :'covered_all_months' => :'Boolean',
+        :'covered_january' => :'Boolean',
+        :'covered_february' => :'Boolean',
+        :'covered_march' => :'Boolean',
+        :'covered_april' => :'Boolean',
+        :'covered_may' => :'Boolean',
+        :'covered_june' => :'Boolean',
+        :'covered_july' => :'Boolean',
+        :'covered_august' => :'Boolean',
+        :'covered_september' => :'Boolean',
+        :'covered_october' => :'Boolean',
+        :'covered_november' => :'Boolean',
+        :'covered_december' => :'Boolean'
       }
     end
 
@@ -174,56 +174,56 @@ module AvalaraSdk::A1099::V2
         self.birth_date = attributes[:'birth_date']
       end
 
-      if attributes.key?(:'covered_month_indicator0')
-        self.covered_month_indicator0 = attributes[:'covered_month_indicator0']
+      if attributes.key?(:'covered_all_months')
+        self.covered_all_months = attributes[:'covered_all_months']
       end
 
-      if attributes.key?(:'covered_month_indicator1')
-        self.covered_month_indicator1 = attributes[:'covered_month_indicator1']
+      if attributes.key?(:'covered_january')
+        self.covered_january = attributes[:'covered_january']
       end
 
-      if attributes.key?(:'covered_month_indicator2')
-        self.covered_month_indicator2 = attributes[:'covered_month_indicator2']
+      if attributes.key?(:'covered_february')
+        self.covered_february = attributes[:'covered_february']
       end
 
-      if attributes.key?(:'covered_month_indicator3')
-        self.covered_month_indicator3 = attributes[:'covered_month_indicator3']
+      if attributes.key?(:'covered_march')
+        self.covered_march = attributes[:'covered_march']
       end
 
-      if attributes.key?(:'covered_month_indicator4')
-        self.covered_month_indicator4 = attributes[:'covered_month_indicator4']
+      if attributes.key?(:'covered_april')
+        self.covered_april = attributes[:'covered_april']
       end
 
-      if attributes.key?(:'covered_month_indicator5')
-        self.covered_month_indicator5 = attributes[:'covered_month_indicator5']
+      if attributes.key?(:'covered_may')
+        self.covered_may = attributes[:'covered_may']
       end
 
-      if attributes.key?(:'covered_month_indicator6')
-        self.covered_month_indicator6 = attributes[:'covered_month_indicator6']
+      if attributes.key?(:'covered_june')
+        self.covered_june = attributes[:'covered_june']
       end
 
-      if attributes.key?(:'covered_month_indicator7')
-        self.covered_month_indicator7 = attributes[:'covered_month_indicator7']
+      if attributes.key?(:'covered_july')
+        self.covered_july = attributes[:'covered_july']
       end
 
-      if attributes.key?(:'covered_month_indicator8')
-        self.covered_month_indicator8 = attributes[:'covered_month_indicator8']
+      if attributes.key?(:'covered_august')
+        self.covered_august = attributes[:'covered_august']
       end
 
-      if attributes.key?(:'covered_month_indicator9')
-        self.covered_month_indicator9 = attributes[:'covered_month_indicator9']
+      if attributes.key?(:'covered_september')
+        self.covered_september = attributes[:'covered_september']
       end
 
-      if attributes.key?(:'covered_month_indicator10')
-        self.covered_month_indicator10 = attributes[:'covered_month_indicator10']
+      if attributes.key?(:'covered_october')
+        self.covered_october = attributes[:'covered_october']
       end
 
-      if attributes.key?(:'covered_month_indicator11')
-        self.covered_month_indicator11 = attributes[:'covered_month_indicator11']
+      if attributes.key?(:'covered_november')
+        self.covered_november = attributes[:'covered_november']
       end
 
-      if attributes.key?(:'covered_month_indicator12')
-        self.covered_month_indicator12 = attributes[:'covered_month_indicator12']
+      if attributes.key?(:'covered_december')
+        self.covered_december = attributes[:'covered_december']
       end
     end
 
@@ -253,19 +253,19 @@ module AvalaraSdk::A1099::V2
           name_suffix == o.name_suffix &&
           tin == o.tin &&
           birth_date == o.birth_date &&
-          covered_month_indicator0 == o.covered_month_indicator0 &&
-          covered_month_indicator1 == o.covered_month_indicator1 &&
-          covered_month_indicator2 == o.covered_month_indicator2 &&
-          covered_month_indicator3 == o.covered_month_indicator3 &&
-          covered_month_indicator4 == o.covered_month_indicator4 &&
-          covered_month_indicator5 == o.covered_month_indicator5 &&
-          covered_month_indicator6 == o.covered_month_indicator6 &&
-          covered_month_indicator7 == o.covered_month_indicator7 &&
-          covered_month_indicator8 == o.covered_month_indicator8 &&
-          covered_month_indicator9 == o.covered_month_indicator9 &&
-          covered_month_indicator10 == o.covered_month_indicator10 &&
-          covered_month_indicator11 == o.covered_month_indicator11 &&
-          covered_month_indicator12 == o.covered_month_indicator12
+          covered_all_months == o.covered_all_months &&
+          covered_january == o.covered_january &&
+          covered_february == o.covered_february &&
+          covered_march == o.covered_march &&
+          covered_april == o.covered_april &&
+          covered_may == o.covered_may &&
+          covered_june == o.covered_june &&
+          covered_july == o.covered_july &&
+          covered_august == o.covered_august &&
+          covered_september == o.covered_september &&
+          covered_october == o.covered_october &&
+          covered_november == o.covered_november &&
+          covered_december == o.covered_december
     end
 
     # @see the `==` method
@@ -277,7 +277,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [first_name, middle_name, last_name, name_suffix, tin, birth_date, covered_month_indicator0, covered_month_indicator1, covered_month_indicator2, covered_month_indicator3, covered_month_indicator4, covered_month_indicator5, covered_month_indicator6, covered_month_indicator7, covered_month_indicator8, covered_month_indicator9, covered_month_indicator10, covered_month_indicator11, covered_month_indicator12].hash
+      [first_name, middle_name, last_name, name_suffix, tin, birth_date, covered_all_months, covered_january, covered_february, covered_march, covered_april, covered_may, covered_june, covered_july, covered_august, covered_september, covered_october, covered_november, covered_december].hash
     end
 
     # Builds the object from hash

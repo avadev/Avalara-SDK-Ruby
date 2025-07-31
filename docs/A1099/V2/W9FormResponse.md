@@ -22,6 +22,7 @@
 | **tin** | **String** | The taxpayer identification number (TIN). | [optional] |
 | **backup_withholding** | **Boolean** | Indicates whether backup withholding applies. | [optional] |
 | **is1099able** | **Boolean** | Indicates whether the individual or entity should be issued a 1099 form. | [optional] |
+| **tin_match_status** | [**TinMatchStatusResponse**](TinMatchStatusResponse.md) | The TIN Match status from IRS. | [optional] |
 | **id** | **String** | The unique identifier for the form. | [optional] |
 | **type** | **String** | The form type. | [optional] |
 | **entry_status** | **String** | The form status. | [optional] |
@@ -61,6 +62,7 @@ instance = AvalaraSdk::A1099::V2::W9FormResponse.new(
   tin: 12-3456789,
   backup_withholding: false,
   is1099able: true,
+  tin_match_status: null,
   id: null,
   type: null,
   entry_status: null,

@@ -16,6 +16,7 @@ module AvalaraSdk::A1099::V2
       def openapi_one_of
         [
           :'Form1099DivRequest',
+          :'Form1099KRequest',
           :'Form1099MiscRequest',
           :'Form1099NecRequest'
         ]

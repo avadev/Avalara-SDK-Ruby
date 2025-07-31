@@ -15,6 +15,7 @@ AvalaraSdk::A1099::V2::IUpdateForm1099Request.openapi_one_of
 # =>
 # [
 #   :'Form1099DivRequest',
+#   :'Form1099KRequest',
 #   :'Form1099MiscRequest',
 #   :'Form1099NecRequest'
 # ]
@@ -45,6 +46,7 @@ AvalaraSdk::A1099::V2::IUpdateForm1099Request.build(data_that_doesnt_match)
 #### Return type
 
 - `Form1099DivRequest`
+- `Form1099KRequest`
 - `Form1099MiscRequest`
 - `Form1099NecRequest`
 - `nil` (if no type matches)

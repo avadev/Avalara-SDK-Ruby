@@ -17,6 +17,7 @@ module AvalaraSdk::A1099::V2
         [
           :'Form1042SResponse',
           :'Form1099DivResponse',
+          :'Form1099KResponse',
           :'Form1099MiscResponse',
           :'Form1099NecResponse',
           :'FormResponseBase'
