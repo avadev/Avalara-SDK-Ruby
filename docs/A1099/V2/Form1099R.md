@@ -22,7 +22,6 @@
 | **total_employee_contributions** | **Float** |  | [optional] |
 | **amount_allocable_to_irr** | **Float** |  | [optional] |
 | **first_year_designated_roth_contrib** | **String** |  | [optional] |
-| **fatca_requirement_indicator** | **Boolean** |  | [optional] |
 | **date_of_payment** | **String** |  | [optional] |
 | **id** | **String** |  | [optional] |
 | **type** | **String** |  | [optional] |
@@ -40,10 +39,14 @@
 | **tin_match_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
 | **address_verification** | **Boolean** |  | [optional] |
 | **address_verification_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
+| **e_delivery_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
 | **reference_id** | **String** |  | [optional] |
 | **email** | **String** |  | [optional] |
 | **tin_type** | **String** |  | [optional] |
+| **fatca_filing_requirement** | **Boolean** |  | [optional] |
 | **tin** | **String** |  | [optional] |
+| **no_tin** | **Boolean** |  | [optional] |
+| **second_tin_notice** | **Boolean** |  | [optional] |
 | **recipient_name** | **String** |  | [optional] |
 | **recipient_second_name** | **String** |  | [optional] |
 | **address** | **String** |  | [optional] |
@@ -51,8 +54,10 @@
 | **city** | **String** |  | [optional] |
 | **state** | **String** |  | [optional] |
 | **zip** | **String** |  | [optional] |
-| **foreign_province** | **String** |  | [optional] |
+| **non_us_province** | **String** |  | [optional] |
 | **country_code** | **String** |  | [optional] |
+| **account_number** | **String** |  | [optional] |
+| **office_code** | **String** |  | [optional] |
 | **validation_errors** | [**Array&lt;ValidationError&gt;**](ValidationError.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
 | **updated_at** | **Time** |  | [optional] |
@@ -82,7 +87,6 @@ instance = AvalaraSdk::A1099::V2::Form1099R.new(
   total_employee_contributions: null,
   amount_allocable_to_irr: null,
   first_year_designated_roth_contrib: null,
-  fatca_requirement_indicator: null,
   date_of_payment: null,
   id: null,
   type: null,
@@ -100,10 +104,14 @@ instance = AvalaraSdk::A1099::V2::Form1099R.new(
   tin_match_status: null,
   address_verification: null,
   address_verification_status: null,
+  e_delivery_status: null,
   reference_id: null,
   email: null,
   tin_type: null,
+  fatca_filing_requirement: null,
   tin: null,
+  no_tin: null,
+  second_tin_notice: null,
   recipient_name: null,
   recipient_second_name: null,
   address: null,
@@ -111,8 +119,10 @@ instance = AvalaraSdk::A1099::V2::Form1099R.new(
   city: null,
   state: null,
   zip: null,
-  foreign_province: null,
+  non_us_province: null,
   country_code: null,
+  account_number: null,
+  office_code: null,
   validation_errors: null,
   created_at: null,
   updated_at: null,

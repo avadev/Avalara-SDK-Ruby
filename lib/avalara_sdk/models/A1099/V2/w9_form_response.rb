@@ -10,7 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      class W9FormResponse
+      class W9FormResponse < W9FormBaseResponse
     # The name of the individual or entity associated with the form.
     attr_accessor :name
 
@@ -68,48 +68,6 @@ module AvalaraSdk::A1099::V2
     # The TIN Match status from IRS.
     attr_accessor :tin_match_status
 
-    # The unique identifier for the form.
-    attr_accessor :id
-
-    # The form type.
-    attr_accessor :type
-
-    # The form status.
-    attr_accessor :entry_status
-
-    # The timestamp for the latest status update.
-    attr_accessor :entry_status_date
-
-    # A reference identifier for the form.
-    attr_accessor :reference_id
-
-    # The ID of the associated company.
-    attr_accessor :company_id
-
-    # The display name associated with the form.
-    attr_accessor :display_name
-
-    # The email address of the individual associated with the form.
-    attr_accessor :email
-
-    # Indicates whether the form is archived.
-    attr_accessor :archived
-
-    # The signature of the form.
-    attr_accessor :signature
-
-    # The date the form was signed.
-    attr_accessor :signed_date
-
-    # The date when e-delivery was consented.
-    attr_accessor :e_delivery_consented_at
-
-    # The creation date of the form.
-    attr_accessor :created_at
-
-    # The last updated date of the form.
-    attr_accessor :updated_at
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -131,27 +89,13 @@ module AvalaraSdk::A1099::V2
         :'tin' => :'tin',
         :'backup_withholding' => :'backupWithholding',
         :'is1099able' => :'is1099able',
-        :'tin_match_status' => :'tinMatchStatus',
-        :'id' => :'id',
-        :'type' => :'type',
-        :'entry_status' => :'entryStatus',
-        :'entry_status_date' => :'entryStatusDate',
-        :'reference_id' => :'referenceId',
-        :'company_id' => :'companyId',
-        :'display_name' => :'displayName',
-        :'email' => :'email',
-        :'archived' => :'archived',
-        :'signature' => :'signature',
-        :'signed_date' => :'signedDate',
-        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
-        :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt'
+        :'tin_match_status' => :'tinMatchStatus'
       }
     end
 
-    # Returns all the JSON keys this model knows about
+    # Returns all the JSON keys this model knows about, including the ones defined in its parent(s)
     def self.acceptable_attributes
-      attribute_map.values
+      attribute_map.values.concat(superclass.acceptable_attributes)
     end
 
     # Attribute type mapping.
@@ -175,21 +119,7 @@ module AvalaraSdk::A1099::V2
         :'tin' => :'String',
         :'backup_withholding' => :'Boolean',
         :'is1099able' => :'Boolean',
-        :'tin_match_status' => :'TinMatchStatusResponse',
-        :'id' => :'String',
-        :'type' => :'String',
-        :'entry_status' => :'String',
-        :'entry_status_date' => :'Time',
-        :'reference_id' => :'String',
-        :'company_id' => :'String',
-        :'display_name' => :'String',
-        :'email' => :'String',
-        :'archived' => :'Boolean',
-        :'signature' => :'String',
-        :'signed_date' => :'Time',
-        :'e_delivery_consented_at' => :'Time',
-        :'created_at' => :'Time',
-        :'updated_at' => :'Time'
+        :'tin_match_status' => :'TinMatchStatusResponse'
       }
     end
 
@@ -205,12 +135,6 @@ module AvalaraSdk::A1099::V2
         :'state',
         :'zip',
         :'account_number',
-        :'entry_status_date',
-        :'reference_id',
-        :'email',
-        :'signature',
-        :'signed_date',
-        :'e_delivery_consented_at',
       ])
     end
 
@@ -235,6 +159,9 @@ module AvalaraSdk::A1099::V2
         end
         h[k.to_sym] = v
       }
+
+      # call parent's initialize
+      super(attributes)
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
@@ -311,69 +238,13 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'tin_match_status')
         self.tin_match_status = attributes[:'tin_match_status']
       end
-
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'entry_status')
-        self.entry_status = attributes[:'entry_status']
-      end
-
-      if attributes.key?(:'entry_status_date')
-        self.entry_status_date = attributes[:'entry_status_date']
-      end
-
-      if attributes.key?(:'reference_id')
-        self.reference_id = attributes[:'reference_id']
-      end
-
-      if attributes.key?(:'company_id')
-        self.company_id = attributes[:'company_id']
-      end
-
-      if attributes.key?(:'display_name')
-        self.display_name = attributes[:'display_name']
-      end
-
-      if attributes.key?(:'email')
-        self.email = attributes[:'email']
-      end
-
-      if attributes.key?(:'archived')
-        self.archived = attributes[:'archived']
-      end
-
-      if attributes.key?(:'signature')
-        self.signature = attributes[:'signature']
-      end
-
-      if attributes.key?(:'signed_date')
-        self.signed_date = attributes[:'signed_date']
-      end
-
-      if attributes.key?(:'e_delivery_consented_at')
-        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
-      invalid_properties = Array.new
+      invalid_properties = super
       invalid_properties
     end
 
@@ -381,7 +252,7 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      true
+      true && super
     end
 
     # Checks equality by comparing each attribute.
@@ -407,21 +278,7 @@ module AvalaraSdk::A1099::V2
           tin == o.tin &&
           backup_withholding == o.backup_withholding &&
           is1099able == o.is1099able &&
-          tin_match_status == o.tin_match_status &&
-          id == o.id &&
-          type == o.type &&
-          entry_status == o.entry_status &&
-          entry_status_date == o.entry_status_date &&
-          reference_id == o.reference_id &&
-          company_id == o.company_id &&
-          display_name == o.display_name &&
-          email == o.email &&
-          archived == o.archived &&
-          signature == o.signature &&
-          signed_date == o.signed_date &&
-          e_delivery_consented_at == o.e_delivery_consented_at &&
-          created_at == o.created_at &&
-          updated_at == o.updated_at
+          tin_match_status == o.tin_match_status && super(o)
     end
 
     # @see the `==` method
@@ -433,7 +290,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, business_name, business_classification, business_other, foreign_partner_owner_or_beneficiary, exempt_payee_code, exempt_fatca_code, foreign_country_indicator, address, foreign_address, city, state, zip, account_number, tin_type, tin, backup_withholding, is1099able, tin_match_status, id, type, entry_status, entry_status_date, reference_id, company_id, display_name, email, archived, signature, signed_date, e_delivery_consented_at, created_at, updated_at].hash
+      [name, business_name, business_classification, business_other, foreign_partner_owner_or_beneficiary, exempt_payee_code, exempt_fatca_code, foreign_country_indicator, address, foreign_address, city, state, zip, account_number, tin_type, tin, backup_withholding, is1099able, tin_match_status].hash
     end
 
     # Builds the object from hash
@@ -441,6 +298,7 @@ module AvalaraSdk::A1099::V2
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
+      super(attributes)
       attributes = attributes.transform_keys(&:to_sym)
       transformed_hash = {}
       openapi_types.each_pair do |key, type|
@@ -517,7 +375,7 @@ module AvalaraSdk::A1099::V2
     # Returns the object in the form of hash
     # @return [Hash] Returns the object in the form of hash
     def to_hash
-      hash = {}
+      hash = super
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
         if value.nil?

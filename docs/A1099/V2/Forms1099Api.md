@@ -42,7 +42,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 avalara_version = '2.0.0' # String | API version
 opts = {
   dry_run: true, # Boolean | 
-  x_correlation_id: '85d89e46-adbc-4a36-a615-347bd0ad3549', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'fc005c04-52f7-44d6-bf16-6551603a8324', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   bulk_upsert1099_forms_request: AvalaraSdk::A1099::V2::Form1042SList.new # BulkUpsert1099FormsRequest | 
 }
@@ -126,9 +126,9 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'ac2b2725-9848-49c3-9255-1d638490cc87', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '13eb4eb0-0e7d-41e3-adf3-61b131c1a92c', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  i_create_form1099_request: AvalaraSdk::A1099::V2::Form1099DivRequest.new({address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # ICreateForm1099Request | 
+  i_create_form1099_request: AvalaraSdk::A1099::V2::Form1099DivRequest.new # ICreateForm1099Request | 
 }
 
 begin
@@ -210,7 +210,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | The unique identifier of the desired form to delete.
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '0839267c-9208-438e-9fcd-3c193fd0216a', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '2bcc9cf0-9638-46d5-a792-be61566e0651', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -292,7 +292,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '4c3931c8-2cd4-42f3-9042-7c23336b9f32', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '6e842a03-8b64-4b02-8c5e-7073bf4e8a8c', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -376,7 +376,7 @@ id = 'id_example' # String | The ID of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
   mark_edelivered: true, # Boolean | Optional boolean that if set indicates that the form should be marked as having been successfully edelivered
-  x_correlation_id: '9133bfa6-8661-46dc-bbf2-4d45d0439e76', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '7b4aa70b-3a10-4fa0-bf19-7592170409b7', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -463,7 +463,7 @@ opts = {
   top: 56, # Integer | If nonzero, return no more than this number of results.     Used with skip to provide pagination for large datasets.     Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.
   skip: 56, # Integer | If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example issuerReferenceId ASC.    Supported sorting fields are:         issuerReferenceId       taxYear       createdAt       recipientName      updatedAt
-  x_correlation_id: '1d1f9e87-4684-46a4-9439-85058f82f858', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '7766bce5-4834-4907-81e9-dd0fd6c13079', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -549,9 +549,9 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'e59dff29-007e-4aa7-8b11-5ba83766a56a', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '9f622e4f-7992-4e4f-8e24-e628c5339402', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  i_update_form1099_request: AvalaraSdk::A1099::V2::Form1099DivRequest.new({address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # IUpdateForm1099Request | 
+  i_update_form1099_request: AvalaraSdk::A1099::V2::Form1099DivRequest.new # IUpdateForm1099Request | 
 }
 
 begin

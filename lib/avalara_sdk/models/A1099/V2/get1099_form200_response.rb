@@ -19,6 +19,7 @@ module AvalaraSdk::A1099::V2
           :'Form1095BListItemResponse',
           :'Form1099BaseResponse',
           :'Form1099DivListItemResponse',
+          :'Form1099IntListItemResponse',
           :'Form1099KListItemResponse',
           :'Form1099MiscListItemResponse',
           :'Form1099NecListItemResponse',

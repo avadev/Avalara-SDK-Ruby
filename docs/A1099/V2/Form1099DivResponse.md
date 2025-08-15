@@ -4,6 +4,25 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **total_ordinary_dividends** | **Float** |  | [optional] |
+| **qualified_dividends** | **Float** |  | [optional] |
+| **total_capital_gain_distributions** | **Float** |  | [optional] |
+| **unrecaptured_section1250_gain** | **Float** |  | [optional] |
+| **section1202_gain** | **Float** |  | [optional] |
+| **collectibles_gain** | **Float** |  | [optional] |
+| **section897_ordinary_dividends** | **Float** |  | [optional] |
+| **section897_capital_gain** | **Float** |  | [optional] |
+| **nondividend_distributions** | **Float** |  | [optional] |
+| **federal_income_tax_withheld** | **Float** |  | [optional] |
+| **section199_a_dividends** | **Float** |  | [optional] |
+| **investment_expenses** | **Float** |  | [optional] |
+| **foreign_tax_paid** | **Float** |  | [optional] |
+| **foreign_country_or_us_possession** | **String** |  | [optional] |
+| **cash_liquidation_distributions** | **Float** |  | [optional] |
+| **noncash_liquidation_distributions** | **Float** |  | [optional] |
+| **exempt_interest_dividends** | **Float** |  | [optional] |
+| **specified_private_activity_bond_interest_dividends** | **Float** |  | [optional] |
+| **fatca_filing_requirement** | **Boolean** |  | [optional] |
 | **type** | **String** |  | [optional][readonly] |
 | **created_at** | **Time** |  | [optional] |
 | **updated_at** | **Time** |  | [optional] |
@@ -49,6 +68,25 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::Form1099DivResponse.new(
+  total_ordinary_dividends: null,
+  qualified_dividends: null,
+  total_capital_gain_distributions: null,
+  unrecaptured_section1250_gain: null,
+  section1202_gain: null,
+  collectibles_gain: null,
+  section897_ordinary_dividends: null,
+  section897_capital_gain: null,
+  nondividend_distributions: null,
+  federal_income_tax_withheld: null,
+  section199_a_dividends: null,
+  investment_expenses: null,
+  foreign_tax_paid: null,
+  foreign_country_or_us_possession: null,
+  cash_liquidation_distributions: null,
+  noncash_liquidation_distributions: null,
+  exempt_interest_dividends: null,
+  specified_private_activity_bond_interest_dividends: null,
+  fatca_filing_requirement: null,
   type: 1099-NEC,
   created_at: null,
   updated_at: null,

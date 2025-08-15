@@ -1,0 +1,122 @@
+# AvalaraSdk::A1099::V2::Form1099Int
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **interest_income** | **Float** |  | [optional] |
+| **early_withdrawal_penalty** | **Float** |  | [optional] |
+| **us_savings_bonds_interest** | **Float** |  | [optional] |
+| **federal_income_tax_withheld** | **Float** |  | [optional] |
+| **investment_expenses** | **Float** |  | [optional] |
+| **foreign_tax_paid** | **Float** |  | [optional] |
+| **foreign_country** | **String** |  | [optional] |
+| **tax_exempt_interest** | **Float** |  | [optional] |
+| **specified_private_activity_bond_interest** | **Float** |  | [optional] |
+| **market_discount** | **Float** |  | [optional] |
+| **bond_premium** | **Float** |  | [optional] |
+| **bond_premium_on_treasury_obligations** | **Float** |  | [optional] |
+| **bond_premium_on_tax_exempt_bond** | **Float** |  | [optional] |
+| **tax_exempt_bond_cusip_number** | **String** |  | [optional] |
+| **id** | **String** |  | [optional] |
+| **type** | **String** |  | [optional] |
+| **issuer_id** | **Integer** |  | [optional] |
+| **issuer_reference_id** | **String** |  | [optional] |
+| **issuer_tin** | **String** |  | [optional] |
+| **tax_year** | **Integer** |  | [optional] |
+| **federal_efile** | **Boolean** |  | [optional] |
+| **federal_efile_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
+| **state_efile** | **Boolean** |  | [optional] |
+| **state_efile_status** | [**Array&lt;StateEfileStatusDetail&gt;**](StateEfileStatusDetail.md) |  | [optional] |
+| **postal_mail** | **Boolean** |  | [optional] |
+| **postal_mail_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
+| **tin_match** | **Boolean** |  | [optional] |
+| **tin_match_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
+| **address_verification** | **Boolean** |  | [optional] |
+| **address_verification_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
+| **e_delivery_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
+| **reference_id** | **String** |  | [optional] |
+| **email** | **String** |  | [optional] |
+| **tin_type** | **String** |  | [optional] |
+| **fatca_filing_requirement** | **Boolean** |  | [optional] |
+| **tin** | **String** |  | [optional] |
+| **no_tin** | **Boolean** |  | [optional] |
+| **second_tin_notice** | **Boolean** |  | [optional] |
+| **recipient_name** | **String** |  | [optional] |
+| **recipient_second_name** | **String** |  | [optional] |
+| **address** | **String** |  | [optional] |
+| **address2** | **String** |  | [optional] |
+| **city** | **String** |  | [optional] |
+| **state** | **String** |  | [optional] |
+| **zip** | **String** |  | [optional] |
+| **non_us_province** | **String** |  | [optional] |
+| **country_code** | **String** |  | [optional] |
+| **account_number** | **String** |  | [optional] |
+| **office_code** | **String** |  | [optional] |
+| **validation_errors** | [**Array&lt;ValidationError&gt;**](ValidationError.md) |  | [optional] |
+| **created_at** | **Time** |  | [optional] |
+| **updated_at** | **Time** |  | [optional] |
+| **state_and_local_withholding** | [**StateAndLocalWithholding**](StateAndLocalWithholding.md) |  | [optional] |
+
+## Example
+
+```ruby
+require 'avalara_sdk'
+
+instance = AvalaraSdk::A1099::V2::Form1099Int.new(
+  interest_income: null,
+  early_withdrawal_penalty: null,
+  us_savings_bonds_interest: null,
+  federal_income_tax_withheld: null,
+  investment_expenses: null,
+  foreign_tax_paid: null,
+  foreign_country: null,
+  tax_exempt_interest: null,
+  specified_private_activity_bond_interest: null,
+  market_discount: null,
+  bond_premium: null,
+  bond_premium_on_treasury_obligations: null,
+  bond_premium_on_tax_exempt_bond: null,
+  tax_exempt_bond_cusip_number: null,
+  id: null,
+  type: null,
+  issuer_id: null,
+  issuer_reference_id: null,
+  issuer_tin: null,
+  tax_year: null,
+  federal_efile: null,
+  federal_efile_status: null,
+  state_efile: null,
+  state_efile_status: null,
+  postal_mail: null,
+  postal_mail_status: null,
+  tin_match: null,
+  tin_match_status: null,
+  address_verification: null,
+  address_verification_status: null,
+  e_delivery_status: null,
+  reference_id: null,
+  email: null,
+  tin_type: null,
+  fatca_filing_requirement: null,
+  tin: null,
+  no_tin: null,
+  second_tin_notice: null,
+  recipient_name: null,
+  recipient_second_name: null,
+  address: null,
+  address2: null,
+  city: null,
+  state: null,
+  zip: null,
+  non_us_province: null,
+  country_code: null,
+  account_number: null,
+  office_code: null,
+  validation_errors: null,
+  created_at: null,
+  updated_at: null,
+  state_and_local_withholding: null
+)
+```
+

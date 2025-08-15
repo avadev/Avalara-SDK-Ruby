@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.8.1")
+        api_client.set_sdk_version("25.8.2")
         @api_client = api_client
       end
 
@@ -485,26 +485,27 @@ module AvalaraSdk::A1099
       end
 
       # List W9/W4/W8 forms
-      # List W9/W4/W8 forms.
-      # @param avalara_version [String] API version      # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] When true, returns a @recordSetCount in the result set      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-      # @return [PaginatedW9FormsModel]
+      # List W9/W4/W8 forms. Filterable/Sortable fields are: \"companyId\", \"type\", \"displayName\", \"entryStatus\", \"email\", \"archived\" and \"referenceId\".
+      # @param avalara_version [String] API version      # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] If true, return the global count of elements in the collection.      # @param count_only [Boolean] If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true.      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # @return [PaginatedQueryResultModelW9FormBaseResponse]
       def list_w9_forms(request_parameters)
         data, _status_code, _headers = list_w9_forms_with_http_info(request_parameters)
         data
       end
 
       # List W9/W4/W8 forms
-      # List W9/W4/W8 forms.
+      # List W9/W4/W8 forms. Filterable/Sortable fields are: \&quot;companyId\&quot;, \&quot;type\&quot;, \&quot;displayName\&quot;, \&quot;entryStatus\&quot;, \&quot;email\&quot;, \&quot;archived\&quot; and \&quot;referenceId\&quot;.
           
       # @param avalara_version [String] API version    
-      # @param filter [String] A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    
-      # @param top [Integer] If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records.    
+      # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    
+      # @param top [Integer] If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.    
       # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.    
       # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.    
-      # @param count [Boolean] When true, returns a @recordSetCount in the result set    
+      # @param count [Boolean] If true, return the global count of elements in the collection.    
+      # @param count_only [Boolean] If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true.    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @return [Array<(PaginatedW9FormsModel, Integer, Hash)>] PaginatedW9FormsModel data, response status code and response headers
+      # @return [Array<(PaginatedQueryResultModelW9FormBaseResponse, Integer, Hash)>] PaginatedQueryResultModelW9FormBaseResponse data, response status code and response headers
       def list_w9_forms_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -515,6 +516,7 @@ module AvalaraSdk::A1099
         skip = request_parameters.get_skip()
         order_by = request_parameters.get_order_by()
         count = request_parameters.get_count()
+        count_only = request_parameters.get_count_only()
         x_correlation_id = request_parameters.get_x_correlation_id()
         x_avalara_client = request_parameters.get_x_avalara_client()
         # verify the required parameter 'avalara_version' is set
@@ -541,6 +543,9 @@ module AvalaraSdk::A1099
         if !count.nil?
           query_params[:'count'] = count
         end
+        if !count_only.nil?
+          query_params[:'countOnly'] = count_only
+        end
 
         # header parameters
         header_params = {}
@@ -563,7 +568,7 @@ module AvalaraSdk::A1099
         post_body = {}
 
         # return_type
-        return_type = 'PaginatedW9FormsModel'
+        return_type = 'PaginatedQueryResultModelW9FormBaseResponse'
 
         # auth_names
         auth_names = ['bearer']
@@ -1020,11 +1025,12 @@ module AvalaraSdk::A1099
     # Represents the Request object for the ListW9Forms API
     #
     # @param  String $avalara_version API version (required)
-    # @param  String $filter A filter statement to identify specific records to retrieve. For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. (optional)
-    # @param  Integer $top If nonzero, return no more than this number of results. Used with skip to provide pagination for large datasets. Unless otherwise specified, the maximum number of records that can be returned from an API call is 1,000 records. (optional, default to 10)
-    # @param  Integer $skip If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. (optional, default to 0)
+    # @param  String $filter A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. (optional)
+    # @param  Integer $top If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets. (optional)
+    # @param  Integer $skip If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. (optional)
     # @param  String $order_by A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC. (optional)
-    # @param  Boolean $count When true, returns a @recordSetCount in the result set (optional)
+    # @param  Boolean $count If true, return the global count of elements in the collection. (optional)
+    # @param  Boolean $count_only If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true. (optional)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
@@ -1040,6 +1046,8 @@ module AvalaraSdk::A1099
         attr_accessor :order_by
 
         attr_accessor :count
+
+        attr_accessor :count_only
 
         attr_accessor :x_correlation_id
 
@@ -1094,6 +1102,14 @@ module AvalaraSdk::A1099
 
         def set_count(count)
             @count = count
+        end
+
+        def get_count_only()
+            return @count_only
+        end
+
+        def set_count_only(count_only)
+            @count_only = count_only
         end
 
         def get_x_correlation_id()

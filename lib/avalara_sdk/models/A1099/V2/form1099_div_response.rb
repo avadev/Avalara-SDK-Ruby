@@ -11,6 +11,44 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class Form1099DivResponse
+    attr_accessor :total_ordinary_dividends
+
+    attr_accessor :qualified_dividends
+
+    attr_accessor :total_capital_gain_distributions
+
+    attr_accessor :unrecaptured_section1250_gain
+
+    attr_accessor :section1202_gain
+
+    attr_accessor :collectibles_gain
+
+    attr_accessor :section897_ordinary_dividends
+
+    attr_accessor :section897_capital_gain
+
+    attr_accessor :nondividend_distributions
+
+    attr_accessor :federal_income_tax_withheld
+
+    attr_accessor :section199_a_dividends
+
+    attr_accessor :investment_expenses
+
+    attr_accessor :foreign_tax_paid
+
+    attr_accessor :foreign_country_or_us_possession
+
+    attr_accessor :cash_liquidation_distributions
+
+    attr_accessor :noncash_liquidation_distributions
+
+    attr_accessor :exempt_interest_dividends
+
+    attr_accessor :specified_private_activity_bond_interest_dividends
+
+    attr_accessor :fatca_filing_requirement
+
     attr_accessor :type
 
     attr_accessor :created_at
@@ -112,6 +150,25 @@ module AvalaraSdk::A1099::V2
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'total_ordinary_dividends' => :'totalOrdinaryDividends',
+        :'qualified_dividends' => :'qualifiedDividends',
+        :'total_capital_gain_distributions' => :'totalCapitalGainDistributions',
+        :'unrecaptured_section1250_gain' => :'unrecapturedSection1250Gain',
+        :'section1202_gain' => :'section1202Gain',
+        :'collectibles_gain' => :'collectiblesGain',
+        :'section897_ordinary_dividends' => :'section897OrdinaryDividends',
+        :'section897_capital_gain' => :'section897CapitalGain',
+        :'nondividend_distributions' => :'nondividendDistributions',
+        :'federal_income_tax_withheld' => :'federalIncomeTaxWithheld',
+        :'section199_a_dividends' => :'section199ADividends',
+        :'investment_expenses' => :'investmentExpenses',
+        :'foreign_tax_paid' => :'foreignTaxPaid',
+        :'foreign_country_or_us_possession' => :'foreignCountryOrUSPossession',
+        :'cash_liquidation_distributions' => :'cashLiquidationDistributions',
+        :'noncash_liquidation_distributions' => :'noncashLiquidationDistributions',
+        :'exempt_interest_dividends' => :'exemptInterestDividends',
+        :'specified_private_activity_bond_interest_dividends' => :'specifiedPrivateActivityBondInterestDividends',
+        :'fatca_filing_requirement' => :'fatcaFilingRequirement',
         :'type' => :'type',
         :'created_at' => :'createdAt',
         :'updated_at' => :'updatedAt',
@@ -161,6 +218,25 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'total_ordinary_dividends' => :'Float',
+        :'qualified_dividends' => :'Float',
+        :'total_capital_gain_distributions' => :'Float',
+        :'unrecaptured_section1250_gain' => :'Float',
+        :'section1202_gain' => :'Float',
+        :'collectibles_gain' => :'Float',
+        :'section897_ordinary_dividends' => :'Float',
+        :'section897_capital_gain' => :'Float',
+        :'nondividend_distributions' => :'Float',
+        :'federal_income_tax_withheld' => :'Float',
+        :'section199_a_dividends' => :'Float',
+        :'investment_expenses' => :'Float',
+        :'foreign_tax_paid' => :'Float',
+        :'foreign_country_or_us_possession' => :'String',
+        :'cash_liquidation_distributions' => :'Float',
+        :'noncash_liquidation_distributions' => :'Float',
+        :'exempt_interest_dividends' => :'Float',
+        :'specified_private_activity_bond_interest_dividends' => :'Float',
+        :'fatca_filing_requirement' => :'Boolean',
         :'type' => :'String',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
@@ -236,6 +312,82 @@ module AvalaraSdk::A1099::V2
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'total_ordinary_dividends')
+        self.total_ordinary_dividends = attributes[:'total_ordinary_dividends']
+      end
+
+      if attributes.key?(:'qualified_dividends')
+        self.qualified_dividends = attributes[:'qualified_dividends']
+      end
+
+      if attributes.key?(:'total_capital_gain_distributions')
+        self.total_capital_gain_distributions = attributes[:'total_capital_gain_distributions']
+      end
+
+      if attributes.key?(:'unrecaptured_section1250_gain')
+        self.unrecaptured_section1250_gain = attributes[:'unrecaptured_section1250_gain']
+      end
+
+      if attributes.key?(:'section1202_gain')
+        self.section1202_gain = attributes[:'section1202_gain']
+      end
+
+      if attributes.key?(:'collectibles_gain')
+        self.collectibles_gain = attributes[:'collectibles_gain']
+      end
+
+      if attributes.key?(:'section897_ordinary_dividends')
+        self.section897_ordinary_dividends = attributes[:'section897_ordinary_dividends']
+      end
+
+      if attributes.key?(:'section897_capital_gain')
+        self.section897_capital_gain = attributes[:'section897_capital_gain']
+      end
+
+      if attributes.key?(:'nondividend_distributions')
+        self.nondividend_distributions = attributes[:'nondividend_distributions']
+      end
+
+      if attributes.key?(:'federal_income_tax_withheld')
+        self.federal_income_tax_withheld = attributes[:'federal_income_tax_withheld']
+      end
+
+      if attributes.key?(:'section199_a_dividends')
+        self.section199_a_dividends = attributes[:'section199_a_dividends']
+      end
+
+      if attributes.key?(:'investment_expenses')
+        self.investment_expenses = attributes[:'investment_expenses']
+      end
+
+      if attributes.key?(:'foreign_tax_paid')
+        self.foreign_tax_paid = attributes[:'foreign_tax_paid']
+      end
+
+      if attributes.key?(:'foreign_country_or_us_possession')
+        self.foreign_country_or_us_possession = attributes[:'foreign_country_or_us_possession']
+      end
+
+      if attributes.key?(:'cash_liquidation_distributions')
+        self.cash_liquidation_distributions = attributes[:'cash_liquidation_distributions']
+      end
+
+      if attributes.key?(:'noncash_liquidation_distributions')
+        self.noncash_liquidation_distributions = attributes[:'noncash_liquidation_distributions']
+      end
+
+      if attributes.key?(:'exempt_interest_dividends')
+        self.exempt_interest_dividends = attributes[:'exempt_interest_dividends']
+      end
+
+      if attributes.key?(:'specified_private_activity_bond_interest_dividends')
+        self.specified_private_activity_bond_interest_dividends = attributes[:'specified_private_activity_bond_interest_dividends']
+      end
+
+      if attributes.key?(:'fatca_filing_requirement')
+        self.fatca_filing_requirement = attributes[:'fatca_filing_requirement']
+      end
 
       if attributes.key?(:'type')
         self.type = attributes[:'type']
@@ -406,7 +558,7 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C"])
+      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
@@ -416,7 +568,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C"])
+      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -450,6 +602,25 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          total_ordinary_dividends == o.total_ordinary_dividends &&
+          qualified_dividends == o.qualified_dividends &&
+          total_capital_gain_distributions == o.total_capital_gain_distributions &&
+          unrecaptured_section1250_gain == o.unrecaptured_section1250_gain &&
+          section1202_gain == o.section1202_gain &&
+          collectibles_gain == o.collectibles_gain &&
+          section897_ordinary_dividends == o.section897_ordinary_dividends &&
+          section897_capital_gain == o.section897_capital_gain &&
+          nondividend_distributions == o.nondividend_distributions &&
+          federal_income_tax_withheld == o.federal_income_tax_withheld &&
+          section199_a_dividends == o.section199_a_dividends &&
+          investment_expenses == o.investment_expenses &&
+          foreign_tax_paid == o.foreign_tax_paid &&
+          foreign_country_or_us_possession == o.foreign_country_or_us_possession &&
+          cash_liquidation_distributions == o.cash_liquidation_distributions &&
+          noncash_liquidation_distributions == o.noncash_liquidation_distributions &&
+          exempt_interest_dividends == o.exempt_interest_dividends &&
+          specified_private_activity_bond_interest_dividends == o.specified_private_activity_bond_interest_dividends &&
+          fatca_filing_requirement == o.fatca_filing_requirement &&
           type == o.type &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
@@ -499,7 +670,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, created_at, updated_at, state_and_local_withholding, tin_type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, recipient_name, recipient_tin, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, no_tin, second_tin_notice, address_verification, federal_efile_status, e_delivery_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, validation_errors].hash
+      [total_ordinary_dividends, qualified_dividends, total_capital_gain_distributions, unrecaptured_section1250_gain, section1202_gain, collectibles_gain, section897_ordinary_dividends, section897_capital_gain, nondividend_distributions, federal_income_tax_withheld, section199_a_dividends, investment_expenses, foreign_tax_paid, foreign_country_or_us_possession, cash_liquidation_distributions, noncash_liquidation_distributions, exempt_interest_dividends, specified_private_activity_bond_interest_dividends, fatca_filing_requirement, type, created_at, updated_at, state_and_local_withholding, tin_type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, recipient_name, recipient_tin, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, no_tin, second_tin_notice, address_verification, federal_efile_status, e_delivery_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, validation_errors].hash
     end
 
     # Builds the object from hash

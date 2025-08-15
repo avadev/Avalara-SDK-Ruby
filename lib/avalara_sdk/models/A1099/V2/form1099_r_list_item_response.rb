@@ -65,9 +65,6 @@ module AvalaraSdk::A1099::V2
     # First year of designated Roth contribution
     attr_accessor :first_year_designated_roth_contrib
 
-    # FATCA filing requirement
-    attr_accessor :fatca_requirement_indicator
-
     # Date of payment
     attr_accessor :date_of_payment
 
@@ -208,7 +205,6 @@ module AvalaraSdk::A1099::V2
         :'total_employee_contributions' => :'totalEmployeeContributions',
         :'amount_allocable_to_irr' => :'amountAllocableToIrr',
         :'first_year_designated_roth_contrib' => :'firstYearDesignatedRothContrib',
-        :'fatca_requirement_indicator' => :'fatcaRequirementIndicator',
         :'date_of_payment' => :'dateOfPayment',
         :'id' => :'id',
         :'type' => :'type',
@@ -278,7 +274,6 @@ module AvalaraSdk::A1099::V2
         :'total_employee_contributions' => :'Float',
         :'amount_allocable_to_irr' => :'Float',
         :'first_year_designated_roth_contrib' => :'String',
-        :'fatca_requirement_indicator' => :'Boolean',
         :'date_of_payment' => :'String',
         :'id' => :'String',
         :'type' => :'String',
@@ -343,7 +338,6 @@ module AvalaraSdk::A1099::V2
         :'total_employee_contributions',
         :'amount_allocable_to_irr',
         :'first_year_designated_roth_contrib',
-        :'fatca_requirement_indicator',
         :'date_of_payment',
         :'issuer_reference_id',
         :'issuer_tin',
@@ -466,10 +460,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'first_year_designated_roth_contrib')
         self.first_year_designated_roth_contrib = attributes[:'first_year_designated_roth_contrib']
-      end
-
-      if attributes.key?(:'fatca_requirement_indicator')
-        self.fatca_requirement_indicator = attributes[:'fatca_requirement_indicator']
       end
 
       if attributes.key?(:'date_of_payment')
@@ -781,7 +771,6 @@ module AvalaraSdk::A1099::V2
           total_employee_contributions == o.total_employee_contributions &&
           amount_allocable_to_irr == o.amount_allocable_to_irr &&
           first_year_designated_roth_contrib == o.first_year_designated_roth_contrib &&
-          fatca_requirement_indicator == o.fatca_requirement_indicator &&
           date_of_payment == o.date_of_payment &&
           id == o.id &&
           type == o.type &&
@@ -833,7 +822,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [gross_distributions, taxable_amount, taxable_amount_not_determined, total_distribution_indicator, capital_gain, fed_income_tax_withheld, employee_contributions, net_unrealized_appreciation, distribution_code_required, distribution_code_optional, ira_sep_simple_indicator, total_ira_sep_simple_distribution, other, other_percent, percentage_total_distribution, total_employee_contributions, amount_allocable_to_irr, first_year_designated_roth_contrib, fatca_requirement_indicator, date_of_payment, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, e_delivery_status, reference_id, email, tin_type, tin, no_tin, second_tin_notice, recipient_name, recipient_second_name, address, address2, city, state, zip, non_us_province, country_code, account_number, office_code, fatca_filing_requirement, validation_errors, created_at, updated_at, state_and_local_withholding].hash
+      [gross_distributions, taxable_amount, taxable_amount_not_determined, total_distribution_indicator, capital_gain, fed_income_tax_withheld, employee_contributions, net_unrealized_appreciation, distribution_code_required, distribution_code_optional, ira_sep_simple_indicator, total_ira_sep_simple_distribution, other, other_percent, percentage_total_distribution, total_employee_contributions, amount_allocable_to_irr, first_year_designated_roth_contrib, date_of_payment, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, e_delivery_status, reference_id, email, tin_type, tin, no_tin, second_tin_notice, recipient_name, recipient_second_name, address, address2, city, state, zip, non_us_province, country_code, account_number, office_code, fatca_filing_requirement, validation_errors, created_at, updated_at, state_and_local_withholding].hash
     end
 
     # Builds the object from hash
