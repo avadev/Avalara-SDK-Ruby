@@ -26,16 +26,16 @@
 | **recipient_name** | **String** | Recipient name | [optional] |
 | **tin_type** | **String** | Type of TIN (Tax ID Number). Will be one of:  * SSN  * EIN  * ITIN  * ATIN | [optional] |
 | **recipient_second_name** | **String** | Recipient second name | [optional] |
-| **address** | **String** | Address |  |
+| **address** | **String** | Address | [optional] |
 | **address2** | **String** | Address line 2 | [optional] |
-| **city** | **String** | City |  |
+| **city** | **String** | City | [optional] |
 | **state** | **String** | US state. Required if CountryCode is \&quot;US\&quot;. | [optional] |
 | **zip** | **String** | Zip/postal code | [optional] |
 | **email** | **String** | Recipient email address | [optional] |
 | **account_number** | **String** | Account number | [optional] |
 | **office_code** | **String** | Office code | [optional] |
 | **non_us_province** | **String** | Foreign province | [optional] |
-| **country_code** | **String** | Country code, as defined at https://www.irs.gov/e-file-providers/country-codes |  |
+| **country_code** | **String** | Country code, as defined at https://www.irs.gov/e-file-providers/country-codes | [optional] |
 | **federal_e_file** | **Boolean** | Boolean indicating that federal e-filing should be scheduled for this form | [optional] |
 | **postal_mail** | **Boolean** | Boolean indicating that postal mailing to the recipient should be scheduled for this form | [optional] |
 | **state_e_file** | **Boolean** | Boolean indicating that state e-filing should be scheduled for this form | [optional] |

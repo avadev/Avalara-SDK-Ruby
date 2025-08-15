@@ -126,8 +126,8 @@ instance = AvalaraSdk::A1099::V2::Form1099KListItemResponse.new(
   office_code: null,
   fatca_filing_requirement: null,
   validation_errors: null,
-  created_at: 2025-07-31T02:07:40.939073500Z,
-  updated_at: 2025-07-31T02:07:40.939074300Z,
+  created_at: 2025-08-15T15:39:30.279309800Z,
+  updated_at: 2025-08-15T15:39:30.279310500Z,
   state_and_local_withholding: null
 )
 ```

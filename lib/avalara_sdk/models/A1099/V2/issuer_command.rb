@@ -106,6 +106,7 @@ module AvalaraSdk::A1099::V2
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
         :'name_dba',
         :'tin',
         :'reference_id',

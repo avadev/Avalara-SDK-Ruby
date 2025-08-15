@@ -16,10 +16,13 @@ module AvalaraSdk::A1099::V2
       def openapi_one_of
         [
           :'Form1042SResponse',
+          :'Form1095BResponse',
           :'Form1099DivResponse',
+          :'Form1099IntResponse',
           :'Form1099KResponse',
           :'Form1099MiscResponse',
           :'Form1099NecResponse',
+          :'Form1099RResponse',
           :'FormResponseBase'
         ]
       end

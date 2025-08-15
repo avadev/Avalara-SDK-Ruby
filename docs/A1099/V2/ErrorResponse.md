@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **title** | **String** |  | [optional] |
-| **errors** | [**Array&lt;ErrorResponseErrorsInner&gt;**](ErrorResponseErrorsInner.md) |  | [optional] |
+| **errors** | [**Array&lt;ErrorResponseItem&gt;**](ErrorResponseItem.md) |  | [optional] |
 
 ## Example
 

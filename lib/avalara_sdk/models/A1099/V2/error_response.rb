@@ -32,7 +32,7 @@ module AvalaraSdk::A1099::V2
     def self.openapi_types
       {
         :'title' => :'String',
-        :'errors' => :'Array<ErrorResponseErrorsInner>'
+        :'errors' => :'Array<ErrorResponseItem>'
       }
     end
 

@@ -18,6 +18,7 @@ AvalaraSdk::A1099::V2::BulkUpsert1099FormsRequest.openapi_one_of
 #   :'Form1095BList',
 #   :'Form1095CList',
 #   :'Form1099DivList',
+#   :'Form1099IntList',
 #   :'Form1099KList',
 #   :'Form1099MiscList',
 #   :'Form1099NecList',
@@ -53,6 +54,7 @@ AvalaraSdk::A1099::V2::BulkUpsert1099FormsRequest.build(data_that_doesnt_match)
 - `Form1095BList`
 - `Form1095CList`
 - `Form1099DivList`
+- `Form1099IntList`
 - `Form1099KList`
 - `Form1099MiscList`
 - `Form1099NecList`

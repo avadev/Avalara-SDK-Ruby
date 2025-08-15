@@ -19,6 +19,7 @@ module AvalaraSdk::A1099::V2
           :'Form1095BList',
           :'Form1095CList',
           :'Form1099DivList',
+          :'Form1099IntList',
           :'Form1099KList',
           :'Form1099MiscList',
           :'Form1099NecList',

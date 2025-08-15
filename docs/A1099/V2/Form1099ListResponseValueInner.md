@@ -18,6 +18,7 @@ AvalaraSdk::A1099::V2::Form1099ListResponseValueInner.openapi_one_of
 #   :'Form1095BListItemResponse',
 #   :'Form1099BaseResponse',
 #   :'Form1099DivListItemResponse',
+#   :'Form1099IntListItemResponse',
 #   :'Form1099KListItemResponse',
 #   :'Form1099MiscListItemResponse',
 #   :'Form1099NecListItemResponse',
@@ -53,6 +54,7 @@ AvalaraSdk::A1099::V2::Form1099ListResponseValueInner.build(data_that_doesnt_mat
 - `Form1095BListItemResponse`
 - `Form1099BaseResponse`
 - `Form1099DivListItemResponse`
+- `Form1099IntListItemResponse`
 - `Form1099KListItemResponse`
 - `Form1099MiscListItemResponse`
 - `Form1099NecListItemResponse`

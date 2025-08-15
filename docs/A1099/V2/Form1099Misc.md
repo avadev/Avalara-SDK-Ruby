@@ -9,15 +9,15 @@
 | **other_income** | **Float** |  | [optional] |
 | **fed_income_tax_withheld** | **Float** |  | [optional] |
 | **fishing_boat_proceeds** | **Float** |  | [optional] |
-| **medical_and_health_care** | **Float** |  | [optional] |
-| **nonemployee_compensation** | **Float** |  | [optional] |
+| **medical_and_health_care_payments** | **Float** |  | [optional] |
 | **substitute_payments** | **Float** |  | [optional] |
 | **direct_sales_indicator** | **Boolean** |  | [optional] |
 | **crop_insurance_proceeds** | **Float** |  | [optional] |
-| **excess_golden_parachute** | **Float** |  | [optional] |
-| **gross_amount_paid_attorney** | **Float** |  | [optional] |
+| **excess_golden_parachute_payments** | **Float** |  | [optional] |
+| **gross_proceeds_paid_to_attorney** | **Float** |  | [optional] |
+| **fish_purchased_for_resale** | **Float** |  | [optional] |
 | **section409_a_deferrals** | **Float** |  | [optional] |
-| **section409_a_income** | **Float** |  | [optional] |
+| **nonqualified_deferred_compensation** | **Float** |  | [optional] |
 | **id** | **String** |  | [optional] |
 | **type** | **String** |  | [optional] |
 | **issuer_id** | **Integer** |  | [optional] |
@@ -34,10 +34,14 @@
 | **tin_match_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
 | **address_verification** | **Boolean** |  | [optional] |
 | **address_verification_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
+| **e_delivery_status** | [**Form1099StatusDetail**](Form1099StatusDetail.md) |  | [optional] |
 | **reference_id** | **String** |  | [optional] |
 | **email** | **String** |  | [optional] |
 | **tin_type** | **String** |  | [optional] |
+| **fatca_filing_requirement** | **Boolean** |  | [optional] |
 | **tin** | **String** |  | [optional] |
+| **no_tin** | **Boolean** |  | [optional] |
+| **second_tin_notice** | **Boolean** |  | [optional] |
 | **recipient_name** | **String** |  | [optional] |
 | **recipient_second_name** | **String** |  | [optional] |
 | **address** | **String** |  | [optional] |
@@ -45,8 +49,10 @@
 | **city** | **String** |  | [optional] |
 | **state** | **String** |  | [optional] |
 | **zip** | **String** |  | [optional] |
-| **foreign_province** | **String** |  | [optional] |
+| **non_us_province** | **String** |  | [optional] |
 | **country_code** | **String** |  | [optional] |
+| **account_number** | **String** |  | [optional] |
+| **office_code** | **String** |  | [optional] |
 | **validation_errors** | [**Array&lt;ValidationError&gt;**](ValidationError.md) |  | [optional] |
 | **created_at** | **Time** |  | [optional] |
 | **updated_at** | **Time** |  | [optional] |
@@ -63,15 +69,15 @@ instance = AvalaraSdk::A1099::V2::Form1099Misc.new(
   other_income: null,
   fed_income_tax_withheld: null,
   fishing_boat_proceeds: null,
-  medical_and_health_care: null,
-  nonemployee_compensation: null,
+  medical_and_health_care_payments: null,
   substitute_payments: null,
   direct_sales_indicator: null,
   crop_insurance_proceeds: null,
-  excess_golden_parachute: null,
-  gross_amount_paid_attorney: null,
+  excess_golden_parachute_payments: null,
+  gross_proceeds_paid_to_attorney: null,
+  fish_purchased_for_resale: null,
   section409_a_deferrals: null,
-  section409_a_income: null,
+  nonqualified_deferred_compensation: null,
   id: null,
   type: null,
   issuer_id: null,
@@ -88,10 +94,14 @@ instance = AvalaraSdk::A1099::V2::Form1099Misc.new(
   tin_match_status: null,
   address_verification: null,
   address_verification_status: null,
+  e_delivery_status: null,
   reference_id: null,
   email: null,
   tin_type: null,
+  fatca_filing_requirement: null,
   tin: null,
+  no_tin: null,
+  second_tin_notice: null,
   recipient_name: null,
   recipient_second_name: null,
   address: null,
@@ -99,8 +109,10 @@ instance = AvalaraSdk::A1099::V2::Form1099Misc.new(
   city: null,
   state: null,
   zip: null,
-  foreign_province: null,
+  non_us_province: null,
   country_code: null,
+  account_number: null,
+  office_code: null,
   validation_errors: null,
   created_at: null,
   updated_at: null,

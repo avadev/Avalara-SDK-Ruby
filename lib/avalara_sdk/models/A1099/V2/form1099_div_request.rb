@@ -222,24 +222,24 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'total_ordinary_dividends' => :'String',
-        :'qualified_dividends' => :'String',
-        :'total_capital_gain_distributions' => :'String',
-        :'unrecaptured_section1250_gain' => :'String',
-        :'section1202_gain' => :'String',
-        :'collectibles_gain' => :'String',
-        :'section897_ordinary_dividends' => :'String',
-        :'section897_capital_gain' => :'String',
-        :'nondividend_distributions' => :'String',
-        :'federal_income_tax_withheld' => :'String',
-        :'section199_a_dividends' => :'String',
-        :'investment_expenses' => :'String',
-        :'foreign_tax_paid' => :'String',
+        :'total_ordinary_dividends' => :'Float',
+        :'qualified_dividends' => :'Float',
+        :'total_capital_gain_distributions' => :'Float',
+        :'unrecaptured_section1250_gain' => :'Float',
+        :'section1202_gain' => :'Float',
+        :'collectibles_gain' => :'Float',
+        :'section897_ordinary_dividends' => :'Float',
+        :'section897_capital_gain' => :'Float',
+        :'nondividend_distributions' => :'Float',
+        :'federal_income_tax_withheld' => :'Float',
+        :'section199_a_dividends' => :'Float',
+        :'investment_expenses' => :'Float',
+        :'foreign_tax_paid' => :'Float',
         :'foreign_country_or_us_possession' => :'String',
-        :'cash_liquidation_distributions' => :'String',
-        :'noncash_liquidation_distributions' => :'String',
-        :'exempt_interest_dividends' => :'String',
-        :'specified_private_activity_bond_interest_dividends' => :'String',
+        :'cash_liquidation_distributions' => :'Float',
+        :'noncash_liquidation_distributions' => :'Float',
+        :'exempt_interest_dividends' => :'Float',
+        :'specified_private_activity_bond_interest_dividends' => :'Float',
         :'fatca_filing_requirement' => :'Boolean',
         :'type' => :'String',
         :'issuer_id' => :'String',
@@ -293,13 +293,19 @@ module AvalaraSdk::A1099::V2
         :'fatca_filing_requirement',
         :'issuer_id',
         :'reference_id',
+        :'recipient_tin',
         :'recipient_name',
         :'recipient_second_name',
+        :'address',
         :'address2',
+        :'city',
+        :'state',
+        :'zip',
         :'email',
         :'account_number',
         :'office_code',
         :'non_us_province',
+        :'country_code',
         :'second_tin_notice',
         :'state_and_local_withholding'
       ])
@@ -433,8 +439,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'address')
         self.address = attributes[:'address']
-      else
-        self.address = nil
       end
 
       if attributes.key?(:'address2')
@@ -443,8 +447,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
-      else
-        self.city = nil
       end
 
       if attributes.key?(:'state')
@@ -473,8 +475,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
-      else
-        self.country_code = nil
       end
 
       if attributes.key?(:'federal_e_file')
@@ -515,30 +515,6 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @address.nil?
-        invalid_properties.push('invalid value for "address", address cannot be nil.')
-      end
-
-      if @address.to_s.length < 1
-        invalid_properties.push('invalid value for "address", the character length must be great than or equal to 1.')
-      end
-
-      if @city.nil?
-        invalid_properties.push('invalid value for "city", city cannot be nil.')
-      end
-
-      if @city.to_s.length < 1
-        invalid_properties.push('invalid value for "city", the character length must be great than or equal to 1.')
-      end
-
-      if @country_code.nil?
-        invalid_properties.push('invalid value for "country_code", country_code cannot be nil.')
-      end
-
-      if @country_code.to_s.length < 1
-        invalid_properties.push('invalid value for "country_code", the character length must be great than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -546,23 +522,17 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C"])
+      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
-      return false if @address.nil?
-      return false if @address.to_s.length < 1
-      return false if @city.nil?
-      return false if @city.to_s.length < 1
-      return false if @country_code.nil?
-      return false if @country_code.to_s.length < 1
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C"])
+      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -577,48 +547,6 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
       end
       @tin_type = tin_type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address Value to be assigned
-    def address=(address)
-      if address.nil?
-        fail ArgumentError, 'address cannot be nil'
-      end
-
-      if address.to_s.length < 1
-        fail ArgumentError, 'invalid value for "address", the character length must be great than or equal to 1.'
-      end
-
-      @address = address
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] city Value to be assigned
-    def city=(city)
-      if city.nil?
-        fail ArgumentError, 'city cannot be nil'
-      end
-
-      if city.to_s.length < 1
-        fail ArgumentError, 'invalid value for "city", the character length must be great than or equal to 1.'
-      end
-
-      @city = city
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] country_code Value to be assigned
-    def country_code=(country_code)
-      if country_code.nil?
-        fail ArgumentError, 'country_code cannot be nil'
-      end
-
-      if country_code.to_s.length < 1
-        fail ArgumentError, 'invalid value for "country_code", the character length must be great than or equal to 1.'
-      end
-
-      @country_code = country_code
     end
 
     # Checks equality by comparing each attribute.

@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Use **username/password** or generate a **license key** from: *Avalara Portal → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
 
 
 =end
@@ -47,8 +47,6 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :first_year_designated_roth_contrib
 
-    attr_accessor :fatca_requirement_indicator
-
     attr_accessor :date_of_payment
 
     attr_accessor :id
@@ -83,13 +81,21 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :address_verification_status
 
+    attr_accessor :e_delivery_status
+
     attr_accessor :reference_id
 
     attr_accessor :email
 
     attr_accessor :tin_type
 
+    attr_accessor :fatca_filing_requirement
+
     attr_accessor :tin
+
+    attr_accessor :no_tin
+
+    attr_accessor :second_tin_notice
 
     attr_accessor :recipient_name
 
@@ -105,9 +111,13 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :zip
 
-    attr_accessor :foreign_province
+    attr_accessor :non_us_province
 
     attr_accessor :country_code
+
+    attr_accessor :account_number
+
+    attr_accessor :office_code
 
     attr_accessor :validation_errors
 
@@ -138,7 +148,6 @@ module AvalaraSdk::A1099::V2
         :'total_employee_contributions' => :'totalEmployeeContributions',
         :'amount_allocable_to_irr' => :'amountAllocableToIrr',
         :'first_year_designated_roth_contrib' => :'firstYearDesignatedRothContrib',
-        :'fatca_requirement_indicator' => :'fatcaRequirementIndicator',
         :'date_of_payment' => :'dateOfPayment',
         :'id' => :'id',
         :'type' => :'type',
@@ -156,10 +165,14 @@ module AvalaraSdk::A1099::V2
         :'tin_match_status' => :'tinMatchStatus',
         :'address_verification' => :'addressVerification',
         :'address_verification_status' => :'addressVerificationStatus',
+        :'e_delivery_status' => :'eDeliveryStatus',
         :'reference_id' => :'referenceId',
         :'email' => :'email',
         :'tin_type' => :'tinType',
+        :'fatca_filing_requirement' => :'fatcaFilingRequirement',
         :'tin' => :'tin',
+        :'no_tin' => :'noTin',
+        :'second_tin_notice' => :'secondTinNotice',
         :'recipient_name' => :'recipientName',
         :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
@@ -167,8 +180,10 @@ module AvalaraSdk::A1099::V2
         :'city' => :'city',
         :'state' => :'state',
         :'zip' => :'zip',
-        :'foreign_province' => :'foreignProvince',
+        :'non_us_province' => :'nonUsProvince',
         :'country_code' => :'countryCode',
+        :'account_number' => :'accountNumber',
+        :'office_code' => :'officeCode',
         :'validation_errors' => :'validationErrors',
         :'created_at' => :'createdAt',
         :'updated_at' => :'updatedAt',
@@ -202,7 +217,6 @@ module AvalaraSdk::A1099::V2
         :'total_employee_contributions' => :'Float',
         :'amount_allocable_to_irr' => :'Float',
         :'first_year_designated_roth_contrib' => :'String',
-        :'fatca_requirement_indicator' => :'Boolean',
         :'date_of_payment' => :'String',
         :'id' => :'String',
         :'type' => :'String',
@@ -220,10 +234,14 @@ module AvalaraSdk::A1099::V2
         :'tin_match_status' => :'Form1099StatusDetail',
         :'address_verification' => :'Boolean',
         :'address_verification_status' => :'Form1099StatusDetail',
+        :'e_delivery_status' => :'Form1099StatusDetail',
         :'reference_id' => :'String',
         :'email' => :'String',
         :'tin_type' => :'String',
+        :'fatca_filing_requirement' => :'Boolean',
         :'tin' => :'String',
+        :'no_tin' => :'Boolean',
+        :'second_tin_notice' => :'Boolean',
         :'recipient_name' => :'String',
         :'recipient_second_name' => :'String',
         :'address' => :'String',
@@ -231,8 +249,10 @@ module AvalaraSdk::A1099::V2
         :'city' => :'String',
         :'state' => :'String',
         :'zip' => :'String',
-        :'foreign_province' => :'String',
+        :'non_us_province' => :'String',
         :'country_code' => :'String',
+        :'account_number' => :'String',
+        :'office_code' => :'String',
         :'validation_errors' => :'Array<ValidationError>',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
@@ -261,7 +281,6 @@ module AvalaraSdk::A1099::V2
         :'total_employee_contributions',
         :'amount_allocable_to_irr',
         :'first_year_designated_roth_contrib',
-        :'fatca_requirement_indicator',
         :'date_of_payment',
         :'issuer_reference_id',
         :'issuer_tin',
@@ -269,10 +288,13 @@ module AvalaraSdk::A1099::V2
         :'postal_mail_status',
         :'tin_match_status',
         :'address_verification_status',
+        :'e_delivery_status',
         :'reference_id',
         :'email',
         :'tin_type',
+        :'fatca_filing_requirement',
         :'tin',
+        :'second_tin_notice',
         :'recipient_name',
         :'recipient_second_name',
         :'address',
@@ -280,8 +302,10 @@ module AvalaraSdk::A1099::V2
         :'city',
         :'state',
         :'zip',
-        :'foreign_province',
+        :'non_us_province',
         :'country_code',
+        :'account_number',
+        :'office_code',
         :'validation_errors',
         :'state_and_local_withholding'
       ])
@@ -381,10 +405,6 @@ module AvalaraSdk::A1099::V2
         self.first_year_designated_roth_contrib = attributes[:'first_year_designated_roth_contrib']
       end
 
-      if attributes.key?(:'fatca_requirement_indicator')
-        self.fatca_requirement_indicator = attributes[:'fatca_requirement_indicator']
-      end
-
       if attributes.key?(:'date_of_payment')
         self.date_of_payment = attributes[:'date_of_payment']
       end
@@ -455,6 +475,10 @@ module AvalaraSdk::A1099::V2
         self.address_verification_status = attributes[:'address_verification_status']
       end
 
+      if attributes.key?(:'e_delivery_status')
+        self.e_delivery_status = attributes[:'e_delivery_status']
+      end
+
       if attributes.key?(:'reference_id')
         self.reference_id = attributes[:'reference_id']
       end
@@ -467,8 +491,20 @@ module AvalaraSdk::A1099::V2
         self.tin_type = attributes[:'tin_type']
       end
 
+      if attributes.key?(:'fatca_filing_requirement')
+        self.fatca_filing_requirement = attributes[:'fatca_filing_requirement']
+      end
+
       if attributes.key?(:'tin')
         self.tin = attributes[:'tin']
+      end
+
+      if attributes.key?(:'no_tin')
+        self.no_tin = attributes[:'no_tin']
+      end
+
+      if attributes.key?(:'second_tin_notice')
+        self.second_tin_notice = attributes[:'second_tin_notice']
       end
 
       if attributes.key?(:'recipient_name')
@@ -499,12 +535,20 @@ module AvalaraSdk::A1099::V2
         self.zip = attributes[:'zip']
       end
 
-      if attributes.key?(:'foreign_province')
-        self.foreign_province = attributes[:'foreign_province']
+      if attributes.key?(:'non_us_province')
+        self.non_us_province = attributes[:'non_us_province']
       end
 
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
+      end
+
+      if attributes.key?(:'account_number')
+        self.account_number = attributes[:'account_number']
+      end
+
+      if attributes.key?(:'office_code')
+        self.office_code = attributes[:'office_code']
       end
 
       if attributes.key?(:'validation_errors')
@@ -576,7 +620,6 @@ module AvalaraSdk::A1099::V2
           total_employee_contributions == o.total_employee_contributions &&
           amount_allocable_to_irr == o.amount_allocable_to_irr &&
           first_year_designated_roth_contrib == o.first_year_designated_roth_contrib &&
-          fatca_requirement_indicator == o.fatca_requirement_indicator &&
           date_of_payment == o.date_of_payment &&
           id == o.id &&
           type == o.type &&
@@ -594,10 +637,14 @@ module AvalaraSdk::A1099::V2
           tin_match_status == o.tin_match_status &&
           address_verification == o.address_verification &&
           address_verification_status == o.address_verification_status &&
+          e_delivery_status == o.e_delivery_status &&
           reference_id == o.reference_id &&
           email == o.email &&
           tin_type == o.tin_type &&
+          fatca_filing_requirement == o.fatca_filing_requirement &&
           tin == o.tin &&
+          no_tin == o.no_tin &&
+          second_tin_notice == o.second_tin_notice &&
           recipient_name == o.recipient_name &&
           recipient_second_name == o.recipient_second_name &&
           address == o.address &&
@@ -605,8 +652,10 @@ module AvalaraSdk::A1099::V2
           city == o.city &&
           state == o.state &&
           zip == o.zip &&
-          foreign_province == o.foreign_province &&
+          non_us_province == o.non_us_province &&
           country_code == o.country_code &&
+          account_number == o.account_number &&
+          office_code == o.office_code &&
           validation_errors == o.validation_errors &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
@@ -622,7 +671,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [gross_distributions, taxable_amount, taxable_amount_not_determined, total_distribution_indicator, capital_gain, fed_income_tax_withheld, employee_contributions, net_unrealized_appreciation, distribution_code_required, distribution_code_optional, ira_sep_simple_indicator, total_ira_sep_simple_distribution, other, other_percent, percentage_total_distribution, total_employee_contributions, amount_allocable_to_irr, first_year_designated_roth_contrib, fatca_requirement_indicator, date_of_payment, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, reference_id, email, tin_type, tin, recipient_name, recipient_second_name, address, address2, city, state, zip, foreign_province, country_code, validation_errors, created_at, updated_at, state_and_local_withholding].hash
+      [gross_distributions, taxable_amount, taxable_amount_not_determined, total_distribution_indicator, capital_gain, fed_income_tax_withheld, employee_contributions, net_unrealized_appreciation, distribution_code_required, distribution_code_optional, ira_sep_simple_indicator, total_ira_sep_simple_distribution, other, other_percent, percentage_total_distribution, total_employee_contributions, amount_allocable_to_irr, first_year_designated_roth_contrib, date_of_payment, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, e_delivery_status, reference_id, email, tin_type, fatca_filing_requirement, tin, no_tin, second_tin_notice, recipient_name, recipient_second_name, address, address2, city, state, zip, non_us_province, country_code, account_number, office_code, validation_errors, created_at, updated_at, state_and_local_withholding].hash
     end
 
     # Builds the object from hash

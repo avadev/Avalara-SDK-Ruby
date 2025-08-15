@@ -4,24 +4,24 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **total_ordinary_dividends** | **String** | Total ordinary dividends | [optional] |
-| **qualified_dividends** | **String** | Qualified dividends | [optional] |
-| **total_capital_gain_distributions** | **String** | Total capital gain distributions | [optional] |
-| **unrecaptured_section1250_gain** | **String** | Unrecaptured Section 1250 gain | [optional] |
-| **section1202_gain** | **String** | Section 1202 gain | [optional] |
-| **collectibles_gain** | **String** | Collectibles (28%) gain | [optional] |
-| **section897_ordinary_dividends** | **String** | Section 897 ordinary dividends | [optional] |
-| **section897_capital_gain** | **String** | Section 897 capital gain | [optional] |
-| **nondividend_distributions** | **String** | Nondividend distributions | [optional] |
-| **federal_income_tax_withheld** | **String** | Federal income tax withheld | [optional] |
-| **section199_a_dividends** | **String** | Section 199A dividends | [optional] |
-| **investment_expenses** | **String** | Investment expenses | [optional] |
-| **foreign_tax_paid** | **String** | Foreign tax paid | [optional] |
+| **total_ordinary_dividends** | **Float** | Total ordinary dividends | [optional] |
+| **qualified_dividends** | **Float** | Qualified dividends | [optional] |
+| **total_capital_gain_distributions** | **Float** | Total capital gain distributions | [optional] |
+| **unrecaptured_section1250_gain** | **Float** | Unrecaptured Section 1250 gain | [optional] |
+| **section1202_gain** | **Float** | Section 1202 gain | [optional] |
+| **collectibles_gain** | **Float** | Collectibles (28%) gain | [optional] |
+| **section897_ordinary_dividends** | **Float** | Section 897 ordinary dividends | [optional] |
+| **section897_capital_gain** | **Float** | Section 897 capital gain | [optional] |
+| **nondividend_distributions** | **Float** | Nondividend distributions | [optional] |
+| **federal_income_tax_withheld** | **Float** | Federal income tax withheld | [optional] |
+| **section199_a_dividends** | **Float** | Section 199A dividends | [optional] |
+| **investment_expenses** | **Float** | Investment expenses | [optional] |
+| **foreign_tax_paid** | **Float** | Foreign tax paid | [optional] |
 | **foreign_country_or_us_possession** | **String** | Foreign country or U.S. possession | [optional] |
-| **cash_liquidation_distributions** | **String** | Cash liquidation distributions | [optional] |
-| **noncash_liquidation_distributions** | **String** | Noncash liquidation distributions | [optional] |
-| **exempt_interest_dividends** | **String** | Exempt-interest dividends | [optional] |
-| **specified_private_activity_bond_interest_dividends** | **String** | Specified private activity bond interest dividends | [optional] |
+| **cash_liquidation_distributions** | **Float** | Cash liquidation distributions | [optional] |
+| **noncash_liquidation_distributions** | **Float** | Noncash liquidation distributions | [optional] |
+| **exempt_interest_dividends** | **Float** | Exempt-interest dividends | [optional] |
+| **specified_private_activity_bond_interest_dividends** | **Float** | Specified private activity bond interest dividends | [optional] |
 | **fatca_filing_requirement** | **Boolean** | FATCA filing requirement | [optional] |
 | **id** | **String** | ID of the form | [readonly] |
 | **type** | **String** | Type of the form. Will be one of:  * 940  * 941  * 943  * 944  * 945  * 1042  * 1042-S  * 1095-B  * 1095-C  * 1097-BTC  * 1098  * 1098-C  * 1098-E  * 1098-Q  * 1098-T  * 3921  * 3922  * 5498  * 5498-ESA  * 5498-SA  * 1099-MISC  * 1099-A  * 1099-B  * 1099-C  * 1099-CAP  * 1099-DIV  * 1099-G  * 1099-INT  * 1099-K  * 1099-LS  * 1099-LTC  * 1099-NEC  * 1099-OID  * 1099-PATR  * 1099-Q  * 1099-R  * 1099-S  * 1099-SA  * T4A  * W-2  * W-2G  * 1099-HC |  |
@@ -122,8 +122,8 @@ instance = AvalaraSdk::A1099::V2::Form1099DivListItemResponse.new(
   account_number: null,
   office_code: null,
   validation_errors: null,
-  created_at: 2025-07-31T02:07:40.939073500Z,
-  updated_at: 2025-07-31T02:07:40.939074300Z,
+  created_at: 2025-08-15T15:39:30.279309800Z,
+  updated_at: 2025-08-15T15:39:30.279310500Z,
   state_and_local_withholding: null
 )
 ```

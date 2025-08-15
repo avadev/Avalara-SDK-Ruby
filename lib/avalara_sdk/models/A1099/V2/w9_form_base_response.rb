@@ -14,9 +14,6 @@ module AvalaraSdk::A1099::V2
     # The unique identifier for the form.
     attr_accessor :id
 
-    # The form type.
-    attr_accessor :type
-
     # The form status.
     attr_accessor :entry_status
 
@@ -53,11 +50,13 @@ module AvalaraSdk::A1099::V2
     # The last updated date of the form.
     attr_accessor :updated_at
 
+    # The type of the response object.
+    attr_accessor :type
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
-        :'type' => :'type',
         :'entry_status' => :'entryStatus',
         :'entry_status_date' => :'entryStatusDate',
         :'reference_id' => :'referenceId',
@@ -69,7 +68,8 @@ module AvalaraSdk::A1099::V2
         :'signed_date' => :'signedDate',
         :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
         :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt'
+        :'updated_at' => :'updatedAt',
+        :'type' => :'type'
       }
     end
 
@@ -82,7 +82,6 @@ module AvalaraSdk::A1099::V2
     def self.openapi_types
       {
         :'id' => :'String',
-        :'type' => :'String',
         :'entry_status' => :'String',
         :'entry_status_date' => :'Time',
         :'reference_id' => :'String',
@@ -94,7 +93,8 @@ module AvalaraSdk::A1099::V2
         :'signed_date' => :'Time',
         :'e_delivery_consented_at' => :'Time',
         :'created_at' => :'Time',
-        :'updated_at' => :'Time'
+        :'updated_at' => :'Time',
+        :'type' => :'String'
       }
     end
 
@@ -108,6 +108,11 @@ module AvalaraSdk::A1099::V2
         :'signed_date',
         :'e_delivery_consented_at',
       ])
+    end
+
+    # discriminator's property name in OpenAPI v3
+    def self.openapi_discriminator_name
+      :'type'
     end
 
     # Initializes the object
@@ -127,10 +132,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
       end
 
       if attributes.key?(:'entry_status')
@@ -180,6 +181,10 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
       end
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -203,7 +208,6 @@ module AvalaraSdk::A1099::V2
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
-          type == o.type &&
           entry_status == o.entry_status &&
           entry_status_date == o.entry_status_date &&
           reference_id == o.reference_id &&
@@ -215,7 +219,8 @@ module AvalaraSdk::A1099::V2
           signed_date == o.signed_date &&
           e_delivery_consented_at == o.e_delivery_consented_at &&
           created_at == o.created_at &&
-          updated_at == o.updated_at
+          updated_at == o.updated_at &&
+          type == o.type
     end
 
     # @see the `==` method
@@ -227,7 +232,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, type, entry_status, entry_status_date, reference_id, company_id, display_name, email, archived, signature, signed_date, e_delivery_consented_at, created_at, updated_at].hash
+      [id, entry_status, entry_status_date, reference_id, company_id, display_name, email, archived, signature, signed_date, e_delivery_consented_at, created_at, updated_at, type].hash
     end
 
     # Builds the object from hash

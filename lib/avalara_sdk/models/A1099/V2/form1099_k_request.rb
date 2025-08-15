@@ -139,6 +139,9 @@ module AvalaraSdk::A1099::V2
     # Second TIN notice in three years
     attr_accessor :second_tin_notice
 
+    # Fatca filing requirement
+    attr_accessor :fatca_filing_requirement
+
     # Boolean indicating that address verification should be scheduled for this form
     attr_accessor :address_verification
 
@@ -213,6 +216,7 @@ module AvalaraSdk::A1099::V2
         :'tin_match' => :'tinMatch',
         :'no_tin' => :'noTin',
         :'second_tin_notice' => :'secondTinNotice',
+        :'fatca_filing_requirement' => :'fatcaFilingRequirement',
         :'address_verification' => :'addressVerification',
         :'state_and_local_withholding' => :'stateAndLocalWithholding'
       }
@@ -269,6 +273,7 @@ module AvalaraSdk::A1099::V2
         :'tin_match' => :'Boolean',
         :'no_tin' => :'Boolean',
         :'second_tin_notice' => :'Boolean',
+        :'fatca_filing_requirement' => :'Boolean',
         :'address_verification' => :'Boolean',
         :'state_and_local_withholding' => :'StateAndLocalWithholdingRequest'
       }
@@ -295,13 +300,19 @@ module AvalaraSdk::A1099::V2
         :'december',
         :'issuer_id',
         :'reference_id',
+        :'recipient_tin',
         :'recipient_name',
         :'recipient_second_name',
+        :'address',
         :'address2',
+        :'city',
+        :'state',
+        :'zip',
         :'email',
         :'account_number',
         :'office_code',
         :'non_us_province',
+        :'country_code',
         :'second_tin_notice',
         :'state_and_local_withholding'
       ])
@@ -439,8 +450,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'address')
         self.address = attributes[:'address']
-      else
-        self.address = nil
       end
 
       if attributes.key?(:'address2')
@@ -449,8 +458,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
-      else
-        self.city = nil
       end
 
       if attributes.key?(:'state')
@@ -479,8 +486,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
-      else
-        self.country_code = nil
       end
 
       if attributes.key?(:'federal_e_file')
@@ -507,6 +512,10 @@ module AvalaraSdk::A1099::V2
         self.second_tin_notice = attributes[:'second_tin_notice']
       end
 
+      if attributes.key?(:'fatca_filing_requirement')
+        self.fatca_filing_requirement = attributes[:'fatca_filing_requirement']
+      end
+
       if attributes.key?(:'address_verification')
         self.address_verification = attributes[:'address_verification']
       end
@@ -521,30 +530,6 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @address.nil?
-        invalid_properties.push('invalid value for "address", address cannot be nil.')
-      end
-
-      if @address.to_s.length < 1
-        invalid_properties.push('invalid value for "address", the character length must be great than or equal to 1.')
-      end
-
-      if @city.nil?
-        invalid_properties.push('invalid value for "city", city cannot be nil.')
-      end
-
-      if @city.to_s.length < 1
-        invalid_properties.push('invalid value for "city", the character length must be great than or equal to 1.')
-      end
-
-      if @country_code.nil?
-        invalid_properties.push('invalid value for "country_code", country_code cannot be nil.')
-      end
-
-      if @country_code.to_s.length < 1
-        invalid_properties.push('invalid value for "country_code", the character length must be great than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -556,16 +541,10 @@ module AvalaraSdk::A1099::V2
       return false unless filer_type_validator.valid?(@filer_type)
       payment_type_validator = EnumAttributeValidator.new('String', ["MerchantPaymentCard", "ThirdPartyNetwork"])
       return false unless payment_type_validator.valid?(@payment_type)
-      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C"])
+      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
-      return false if @address.nil?
-      return false if @address.to_s.length < 1
-      return false if @city.nil?
-      return false if @city.to_s.length < 1
-      return false if @country_code.nil?
-      return false if @country_code.to_s.length < 1
       true
     end
 
@@ -592,7 +571,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C"])
+      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -607,48 +586,6 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
       end
       @tin_type = tin_type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] address Value to be assigned
-    def address=(address)
-      if address.nil?
-        fail ArgumentError, 'address cannot be nil'
-      end
-
-      if address.to_s.length < 1
-        fail ArgumentError, 'invalid value for "address", the character length must be great than or equal to 1.'
-      end
-
-      @address = address
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] city Value to be assigned
-    def city=(city)
-      if city.nil?
-        fail ArgumentError, 'city cannot be nil'
-      end
-
-      if city.to_s.length < 1
-        fail ArgumentError, 'invalid value for "city", the character length must be great than or equal to 1.'
-      end
-
-      @city = city
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] country_code Value to be assigned
-    def country_code=(country_code)
-      if country_code.nil?
-        fail ArgumentError, 'country_code cannot be nil'
-      end
-
-      if country_code.to_s.length < 1
-        fail ArgumentError, 'invalid value for "country_code", the character length must be great than or equal to 1.'
-      end
-
-      @country_code = country_code
     end
 
     # Checks equality by comparing each attribute.
@@ -699,6 +636,7 @@ module AvalaraSdk::A1099::V2
           tin_match == o.tin_match &&
           no_tin == o.no_tin &&
           second_tin_notice == o.second_tin_notice &&
+          fatca_filing_requirement == o.fatca_filing_requirement &&
           address_verification == o.address_verification &&
           state_and_local_withholding == o.state_and_local_withholding
     end
@@ -712,7 +650,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [filer_type, payment_type, payment_settlement_entity_name_phone_number, gross_amount_payment_card, card_not_present_transactions, merchant_category_code, payment_transaction_number, federal_income_tax_withheld, january, february, march, april, may, june, july, august, sept, october, november, december, type, issuer_id, reference_id, recipient_tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, no_tin, second_tin_notice, address_verification, state_and_local_withholding].hash
+      [filer_type, payment_type, payment_settlement_entity_name_phone_number, gross_amount_payment_card, card_not_present_transactions, merchant_category_code, payment_transaction_number, federal_income_tax_withheld, january, february, march, april, may, june, july, august, sept, october, november, december, type, issuer_id, reference_id, recipient_tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_e_file, postal_mail, state_e_file, tin_match, no_tin, second_tin_notice, fatca_filing_requirement, address_verification, state_and_local_withholding].hash
     end
 
     # Builds the object from hash

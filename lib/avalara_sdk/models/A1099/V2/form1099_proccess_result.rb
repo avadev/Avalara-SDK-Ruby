@@ -13,10 +13,13 @@ module AvalaraSdk::A1099::V2
       class Form1099ProccessResult
     attr_accessor :job_data
 
+    attr_accessor :processed_forms
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'job_data' => :'jobData'
+        :'job_data' => :'jobData',
+        :'processed_forms' => :'processedForms'
       }
     end
 
@@ -28,13 +31,15 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'job_data' => :'Data'
+        :'job_data' => :'Data',
+        :'processed_forms' => :'Array<Form1099ProccessResultProcessedFormsInner>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'processed_forms'
       ])
     end
 
@@ -56,6 +61,12 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'job_data')
         self.job_data = attributes[:'job_data']
       end
+
+      if attributes.key?(:'processed_forms')
+        if (value = attributes[:'processed_forms']).is_a?(Array)
+          self.processed_forms = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -73,12 +84,19 @@ module AvalaraSdk::A1099::V2
       true
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] processed_forms Value to be assigned
+    def processed_forms=(processed_forms)
+      @processed_forms = processed_forms
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          job_data == o.job_data
+          job_data == o.job_data &&
+          processed_forms == o.processed_forms
     end
 
     # @see the `==` method
@@ -90,7 +108,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [job_data].hash
+      [job_data, processed_forms].hash
     end
 
     # Builds the object from hash

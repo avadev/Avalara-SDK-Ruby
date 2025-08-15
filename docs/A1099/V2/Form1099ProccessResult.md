@@ -5,6 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **job_data** | [**Data**](Data.md) |  | [optional] |
+| **processed_forms** | [**Array&lt;Form1099ProccessResultProcessedFormsInner&gt;**](Form1099ProccessResultProcessedFormsInner.md) |  | [optional] |
 
 ## Example
 
@@ -12,7 +13,8 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::Form1099ProccessResult.new(
-  job_data: null
+  job_data: null,
+  processed_forms: null
 )
 ```
 
