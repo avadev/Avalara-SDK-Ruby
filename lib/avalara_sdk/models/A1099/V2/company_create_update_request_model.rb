@@ -11,44 +11,62 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class CompanyCreateUpdateRequestModel
+    # Legal name. Not the DBA name.
     attr_accessor :name
 
-    attr_accessor :email
-
-    attr_accessor :address
-
-    attr_accessor :city
-
-    attr_accessor :state
-
-    attr_accessor :zip
-
-    attr_accessor :telephone
-
-    attr_accessor :tin
-
+    # Doing Business As (DBA) name or continuation of a long legal name.
     attr_accessor :dba_name
 
+    # Contact email address. For inquiries by vendors/employees.
+    attr_accessor :email
+
+    # Address.
+    attr_accessor :address
+
+    # City.
+    attr_accessor :city
+
+    # Two-letter US state or Canadian province code (required for US/CA addresses).
+    attr_accessor :state
+
+    # ZIP/postal code.
+    attr_accessor :zip
+
+    # Contact phone number (must contain at least 10 digits, max 15 characters).
+    attr_accessor :telephone
+
+    # Federal Tax Identification Number (TIN). EIN/Tax ID (required for US companies).
+    attr_accessor :tin
+
+    # Internal reference ID. Never shown to any agency or recipient.
     attr_accessor :reference_id
 
+    # Indicates whether the company authorizes IRS TIN matching.
     attr_accessor :do_tin_match
 
+    # Group name for organizing companies (creates or finds group by name).
     attr_accessor :group_name
 
+    # Province or region for non-US/CA addresses.
     attr_accessor :foreign_province
 
+    # Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
     attr_accessor :country_code
 
+    # Boolean to enable automatic reminder emails (default: false).
     attr_accessor :resend_requests
 
+    # Days between reminder emails (7-365, required if resendRequests is true).
     attr_accessor :resend_interval_days
 
+    # Maximum number of reminder attempts (1-52, required if resendRequests is true).
     attr_accessor :max_reminder_attempts
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
+        :'dba_name' => :'dbaName',
         :'email' => :'email',
         :'address' => :'address',
         :'city' => :'city',
@@ -56,7 +74,6 @@ module AvalaraSdk::A1099::V2
         :'zip' => :'zip',
         :'telephone' => :'telephone',
         :'tin' => :'tin',
-        :'dba_name' => :'dbaName',
         :'reference_id' => :'referenceId',
         :'do_tin_match' => :'doTinMatch',
         :'group_name' => :'groupName',
@@ -77,6 +94,7 @@ module AvalaraSdk::A1099::V2
     def self.openapi_types
       {
         :'name' => :'String',
+        :'dba_name' => :'String',
         :'email' => :'String',
         :'address' => :'String',
         :'city' => :'String',
@@ -84,7 +102,6 @@ module AvalaraSdk::A1099::V2
         :'zip' => :'String',
         :'telephone' => :'String',
         :'tin' => :'String',
-        :'dba_name' => :'String',
         :'reference_id' => :'String',
         :'do_tin_match' => :'Boolean',
         :'group_name' => :'String',
@@ -99,16 +116,24 @@ module AvalaraSdk::A1099::V2
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'dba_name',
+        :'email',
+        :'address',
+        :'city',
+        :'state',
+        :'zip',
+        :'telephone',
+        :'tin',
+        :'reference_id',
+        :'do_tin_match',
+        :'group_name',
+        :'foreign_province',
+        :'country_code',
+        :'resend_requests',
         :'resend_interval_days',
         :'max_reminder_attempts'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'BaseCompanyModel'
-      ]
     end
 
     # Initializes the object
@@ -128,18 +153,30 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      else
+        self.name = nil
+      end
+
+      if attributes.key?(:'dba_name')
+        self.dba_name = attributes[:'dba_name']
       end
 
       if attributes.key?(:'email')
         self.email = attributes[:'email']
+      else
+        self.email = nil
       end
 
       if attributes.key?(:'address')
         self.address = attributes[:'address']
+      else
+        self.address = nil
       end
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
+      else
+        self.city = nil
       end
 
       if attributes.key?(:'state')
@@ -148,18 +185,20 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'zip')
         self.zip = attributes[:'zip']
+      else
+        self.zip = nil
       end
 
       if attributes.key?(:'telephone')
         self.telephone = attributes[:'telephone']
+      else
+        self.telephone = nil
       end
 
       if attributes.key?(:'tin')
         self.tin = attributes[:'tin']
-      end
-
-      if attributes.key?(:'dba_name')
-        self.dba_name = attributes[:'dba_name']
+      else
+        self.tin = nil
       end
 
       if attributes.key?(:'reference_id')
@@ -180,6 +219,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
+      else
+        self.country_code = nil
       end
 
       if attributes.key?(:'resend_requests')
@@ -216,6 +257,7 @@ module AvalaraSdk::A1099::V2
       return true if self.equal?(o)
       self.class == o.class &&
           name == o.name &&
+          dba_name == o.dba_name &&
           email == o.email &&
           address == o.address &&
           city == o.city &&
@@ -223,7 +265,6 @@ module AvalaraSdk::A1099::V2
           zip == o.zip &&
           telephone == o.telephone &&
           tin == o.tin &&
-          dba_name == o.dba_name &&
           reference_id == o.reference_id &&
           do_tin_match == o.do_tin_match &&
           group_name == o.group_name &&
@@ -243,7 +284,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, email, address, city, state, zip, telephone, tin, dba_name, reference_id, do_tin_match, group_name, foreign_province, country_code, resend_requests, resend_interval_days, max_reminder_attempts].hash
+      [name, dba_name, email, address, city, state, zip, telephone, tin, reference_id, do_tin_match, group_name, foreign_province, country_code, resend_requests, resend_interval_days, max_reminder_attempts].hash
     end
 
     # Builds the object from hash

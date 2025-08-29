@@ -11,20 +11,28 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class StateAndLocalWithholding
+    # Amount of state tax that was withheld
     attr_accessor :state_tax_withheld
 
+    # US state
     attr_accessor :state
 
+    # State ID number of the entity issuing the form
     attr_accessor :state_id_number
 
+    # Amount of state income
     attr_accessor :state_income
 
+    # Amount of local tax that was withheld
     attr_accessor :local_tax_withheld
 
+    # Locality name
     attr_accessor :locality
 
+    # Locality ID number of the entity issuing the form
     attr_accessor :locality_id_number
 
+    # Amount of local income
     attr_accessor :local_income
 
     # Attribute mapping from ruby-style variable name to JSON key.

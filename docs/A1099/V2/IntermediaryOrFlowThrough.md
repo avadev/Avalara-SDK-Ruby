@@ -4,17 +4,17 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **ein** | **String** |  | [optional] |
-| **chap3_status_code** | **String** |  | [optional] |
-| **chap4_status_code** | **String** |  | [optional] |
-| **name** | **String** |  | [optional] |
-| **giin** | **String** |  | [optional] |
-| **country_code** | **String** |  | [optional] |
-| **foreign_tin** | **String** |  | [optional] |
-| **address** | **String** |  | [optional] |
-| **city** | **String** |  | [optional] |
-| **state** | **String** |  | [optional] |
-| **zip** | **String** |  | [optional] |
+| **ein** | **String** | EIN (Employer Identification Number) of the intermediary or flow-through entity | [optional] |
+| **chap3_status_code** | **String** | Chapter 3 status code for the intermediary or flow-through entity | [optional] |
+| **chap4_status_code** | **String** | Chapter 4 status code for the intermediary or flow-through entity | [optional] |
+| **name** | **String** | Name of the intermediary or flow-through entity | [optional] |
+| **giin** | **String** | GIIN (Global Intermediary Identification Number) of the intermediary or flow-through entity | [optional] |
+| **country_code** | **String** | Country code for the intermediary or flow-through entity | [optional] |
+| **foreign_tin** | **String** | Foreign TIN of the intermediary or flow-through entity | [optional] |
+| **address** | **String** | Address of the intermediary or flow-through entity | [optional] |
+| **city** | **String** | City of the intermediary or flow-through entity | [optional] |
+| **state** | **String** | State of the intermediary or flow-through entity | [optional] |
+| **zip** | **String** | Zip code of the intermediary or flow-through entity | [optional] |
 
 ## Example
 

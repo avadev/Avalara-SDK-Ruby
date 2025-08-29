@@ -10,16 +10,19 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      class PrimaryWithholdingAgent
-    attr_accessor :primary_withholding_agent_name
+      # Primary withholding agent information for tax forms
+  class PrimaryWithholdingAgent
+    # Name of the primary withholding agent
+    attr_accessor :name
 
-    attr_accessor :primary_withholding_agent_ein
+    # EIN (Employer Identification Number) of the primary withholding agent.
+    attr_accessor :ein
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'primary_withholding_agent_name' => :'primaryWithholdingAgentName',
-        :'primary_withholding_agent_ein' => :'primaryWithholdingAgentEin'
+        :'name' => :'name',
+        :'ein' => :'ein'
       }
     end
 
@@ -31,16 +34,16 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'primary_withholding_agent_name' => :'String',
-        :'primary_withholding_agent_ein' => :'String'
+        :'name' => :'String',
+        :'ein' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'primary_withholding_agent_name',
-        :'primary_withholding_agent_ein'
+        :'name',
+        :'ein'
       ])
     end
 
@@ -59,12 +62,16 @@ module AvalaraSdk::A1099::V2
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'primary_withholding_agent_name')
-        self.primary_withholding_agent_name = attributes[:'primary_withholding_agent_name']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
-      if attributes.key?(:'primary_withholding_agent_ein')
-        self.primary_withholding_agent_ein = attributes[:'primary_withholding_agent_ein']
+      if attributes.key?(:'ein')
+        self.ein = attributes[:'ein']
+      else
+        self.ein = nil
       end
     end
 
@@ -88,8 +95,8 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          primary_withholding_agent_name == o.primary_withholding_agent_name &&
-          primary_withholding_agent_ein == o.primary_withholding_agent_ein
+          name == o.name &&
+          ein == o.ein
     end
 
     # @see the `==` method
@@ -101,7 +108,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [primary_withholding_agent_name, primary_withholding_agent_ein].hash
+      [name, ein].hash
     end
 
     # Builds the object from hash

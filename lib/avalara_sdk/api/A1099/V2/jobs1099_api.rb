@@ -339,7 +339,7 @@ module AvalaraSdk::A1099
         end
 
         def get_avalara_version()
-            return @avalara_version || '2.0'
+            return @avalara_version || '2.0' || '2.0'
         end
 
         def set_avalara_version(avalara_version)

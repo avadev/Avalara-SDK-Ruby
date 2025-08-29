@@ -23,11 +23,11 @@
 | **tin** | **String** | The taxpayer identification number (TIN). | [optional] |
 | **backup_withholding** | **Boolean** | Indicates whether backup withholding applies. | [optional] |
 | **is1099able** | **Boolean** | Indicates whether the individual or entity should be issued a 1099 form. | [optional] |
-| **company_id** | **String** | The ID of the associated company. | [optional] |
-| **reference_id** | **String** | A reference identifier for the form. | [optional] |
-| **email** | **String** | The email address of the individual associated with the form. | [optional] |
 | **e_delivery_consented_at** | **Time** | The date when e-delivery was consented. | [optional] |
 | **signature** | **String** | The signature of the form. | [optional] |
+| **company_id** | **String** | The ID of the associated company. |  |
+| **reference_id** | **String** | A reference identifier for the form. | [optional] |
+| **email** | **String** | The email address of the individual associated with the form. | [optional] |
 
 ## Example
 
@@ -54,11 +54,11 @@ instance = AvalaraSdk::A1099::V2::W9FormRequest.new(
   tin: null,
   backup_withholding: null,
   is1099able: null,
+  e_delivery_consented_at: null,
+  signature: null,
   company_id: null,
   reference_id: null,
-  email: null,
-  e_delivery_consented_at: null,
-  signature: null
+  email: null
 )
 ```
 

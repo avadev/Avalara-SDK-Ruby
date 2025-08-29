@@ -68,6 +68,12 @@ module AvalaraSdk::A1099::V2
     # Indicates whether the individual or entity should be issued a 1099 form.
     attr_accessor :is1099able
 
+    # The date when e-delivery was consented.
+    attr_accessor :e_delivery_consented_at
+
+    # The signature of the form.
+    attr_accessor :signature
+
     # The ID of the associated company.
     attr_accessor :company_id
 
@@ -76,12 +82,6 @@ module AvalaraSdk::A1099::V2
 
     # The email address of the individual associated with the form.
     attr_accessor :email
-
-    # The date when e-delivery was consented.
-    attr_accessor :e_delivery_consented_at
-
-    # The signature of the form.
-    attr_accessor :signature
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -127,11 +127,11 @@ module AvalaraSdk::A1099::V2
         :'tin' => :'tin',
         :'backup_withholding' => :'backupWithholding',
         :'is1099able' => :'is1099able',
+        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
+        :'signature' => :'signature',
         :'company_id' => :'companyId',
         :'reference_id' => :'referenceId',
-        :'email' => :'email',
-        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
-        :'signature' => :'signature'
+        :'email' => :'email'
       }
     end
 
@@ -162,11 +162,11 @@ module AvalaraSdk::A1099::V2
         :'tin' => :'String',
         :'backup_withholding' => :'Boolean',
         :'is1099able' => :'Boolean',
+        :'e_delivery_consented_at' => :'Time',
+        :'signature' => :'String',
         :'company_id' => :'String',
         :'reference_id' => :'String',
-        :'email' => :'String',
-        :'e_delivery_consented_at' => :'Time',
-        :'signature' => :'String'
+        :'email' => :'String'
       }
     end
 
@@ -182,10 +182,10 @@ module AvalaraSdk::A1099::V2
         :'state',
         :'zip',
         :'account_number',
-        :'reference_id',
-        :'email',
         :'e_delivery_consented_at',
-        :'signature'
+        :'signature',
+        :'reference_id',
+        :'email'
       ])
     end
 
@@ -287,8 +287,18 @@ module AvalaraSdk::A1099::V2
         self.is1099able = attributes[:'is1099able']
       end
 
+      if attributes.key?(:'e_delivery_consented_at')
+        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
+      end
+
+      if attributes.key?(:'signature')
+        self.signature = attributes[:'signature']
+      end
+
       if attributes.key?(:'company_id')
         self.company_id = attributes[:'company_id']
+      else
+        self.company_id = nil
       end
 
       if attributes.key?(:'reference_id')
@@ -298,14 +308,6 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'email')
         self.email = attributes[:'email']
       end
-
-      if attributes.key?(:'e_delivery_consented_at')
-        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
-      end
-
-      if attributes.key?(:'signature')
-        self.signature = attributes[:'signature']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -313,6 +315,14 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @company_id.nil?
+        invalid_properties.push('invalid value for "company_id", company_id cannot be nil.')
+      end
+
+      if @company_id.to_s.length < 1
+        invalid_properties.push('invalid value for "company_id", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -322,6 +332,8 @@ module AvalaraSdk::A1099::V2
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
       return false unless type_validator.valid?(@type)
+      return false if @company_id.nil?
+      return false if @company_id.to_s.length < 1
       true
     end
 
@@ -333,6 +345,20 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] company_id Value to be assigned
+    def company_id=(company_id)
+      if company_id.nil?
+        fail ArgumentError, 'company_id cannot be nil'
+      end
+
+      if company_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "company_id", the character length must be great than or equal to 1.'
+      end
+
+      @company_id = company_id
     end
 
     # Checks equality by comparing each attribute.
@@ -359,11 +385,11 @@ module AvalaraSdk::A1099::V2
           tin == o.tin &&
           backup_withholding == o.backup_withholding &&
           is1099able == o.is1099able &&
+          e_delivery_consented_at == o.e_delivery_consented_at &&
+          signature == o.signature &&
           company_id == o.company_id &&
           reference_id == o.reference_id &&
-          email == o.email &&
-          e_delivery_consented_at == o.e_delivery_consented_at &&
-          signature == o.signature
+          email == o.email
     end
 
     # @see the `==` method
@@ -375,7 +401,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, name, business_name, business_classification, business_other, foreign_partner_owner_or_beneficiary, exempt_payee_code, exempt_fatca_code, foreign_country_indicator, address, foreign_address, city, state, zip, account_number, tin_type, tin, backup_withholding, is1099able, company_id, reference_id, email, e_delivery_consented_at, signature].hash
+      [type, name, business_name, business_classification, business_other, foreign_partner_owner_or_beneficiary, exempt_payee_code, exempt_fatca_code, foreign_country_indicator, address, foreign_address, city, state, zip, account_number, tin_type, tin, backup_withholding, is1099able, e_delivery_consented_at, signature, company_id, reference_id, email].hash
     end
 
     # Builds the object from hash
