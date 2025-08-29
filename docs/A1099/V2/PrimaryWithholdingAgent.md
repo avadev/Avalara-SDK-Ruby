@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **primary_withholding_agent_name** | **String** |  | [optional] |
-| **primary_withholding_agent_ein** | **String** |  | [optional] |
+| **name** | **String** | Name of the primary withholding agent |  |
+| **ein** | **String** | EIN (Employer Identification Number) of the primary withholding agent. |  |
 
 ## Example
 
@@ -13,8 +13,8 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::PrimaryWithholdingAgent.new(
-  primary_withholding_agent_name: null,
-  primary_withholding_agent_ein: null
+  name: null,
+  ein: null
 )
 ```
 

@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.8.2")
+        api_client.set_sdk_version("25.8.3")
         @api_client = api_client
       end
 
@@ -225,6 +225,93 @@ module AvalaraSdk::A1099
         end
       end
     
+      # Create a minimal W9/W4/W8 form and sends the e-mail request
+      # Create a minimal W9/W4/W8 form and sends the e-mail request.
+      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param create_and_send_w9_form_email_request [CreateAndSendW9FormEmailRequest] Form to be created
+      # @return [CreateW9Form201Response]
+      def create_and_send_w9_form_email(request_parameters)
+        data, _status_code, _headers = create_and_send_w9_form_email_with_http_info(request_parameters)
+        data
+      end
+
+      # Create a minimal W9/W4/W8 form and sends the e-mail request
+      # Create a minimal W9/W4/W8 form and sends the e-mail request.
+          
+      # @param avalara_version [String] API version    
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
+      # @param create_and_send_w9_form_email_request [CreateAndSendW9FormEmailRequest] Form to be created    
+      # @return [Array<(CreateW9Form201Response, Integer, Hash)>] CreateW9Form201Response data, response status code and response headers
+      def create_and_send_w9_form_email_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        avalara_version = request_parameters.get_avalara_version()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        create_and_send_w9_form_email_request = request_parameters.get_create_and_send_w9_form_email_request()
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.create_and_send_w9_form_email"
+        end
+        # resource path
+        local_var_path = '/w9/forms/$create-and-send-email'
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        # HTTP header 'Content-Type'
+        content_type = @api_client.select_header_content_type(['application/json', 'text/json', 'application/*+json'])
+        if !content_type.nil?
+            header_params['Content-Type'] = content_type
+        end
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body =  @api_client.object_to_http_body(create_and_send_w9_form_email_request) || {}
+
+        # return_type
+        return_type = 'CreateW9Form201Response'
+
+        # auth_names
+        auth_names = ['bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"FormsW9Api.create_and_send_w9_form_email",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes, false, :A1099)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
       # Create a W9/W4/W8 form
       # Create a W9/W4/W8 form.
       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param create_w9_form_request [CreateW9FormRequest] Form to be created
@@ -595,22 +682,22 @@ module AvalaraSdk::A1099
       end
 
       # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
-      # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
+      # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.   If the form is not in 'Requested' status, it will either use an existing descendant form   in 'Requested' status or create a new minimal form and send the email request.
       # @param id [String] The ID of the W9/W4/W8 form.      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-      # @return [IW9FormDataModelsOneOf]
+      # @return [CreateW9Form201Response]
       def send_w9_form_email(request_parameters)
         data, _status_code, _headers = send_w9_form_email_with_http_info(request_parameters)
         data
       end
 
       # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
-      # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.
+      # Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.   If the form is not in &#39;Requested&#39; status, it will either use an existing descendant form   in &#39;Requested&#39; status or create a new minimal form and send the email request.
           
       # @param id [String] The ID of the W9/W4/W8 form.    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @return [Array<(IW9FormDataModelsOneOf, Integer, Hash)>] IW9FormDataModelsOneOf data, response status code and response headers
+      # @return [Array<(CreateW9Form201Response, Integer, Hash)>] CreateW9Form201Response data, response status code and response headers
       def send_w9_form_email_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -654,7 +741,7 @@ module AvalaraSdk::A1099
         post_body = {}
 
         # return_type
-        return_type = 'IW9FormDataModelsOneOf'
+        return_type = 'CreateW9Form201Response'
 
         # auth_names
         auth_names = ['bearer']
@@ -868,6 +955,57 @@ module AvalaraSdk::A1099
         end
         return data, response.code, response.headers
       end
+    end
+    # Represents the Request object for the CreateAndSendW9FormEmail API
+    #
+    # @param  String $avalara_version API version (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
+    # @param  CreateAndSendW9FormEmailRequest $create_and_send_w9_form_email_request Form to be created (optional)
+    #
+    class CreateAndSendW9FormEmailRequestSdk
+        attr_accessor :avalara_version
+
+        attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
+
+        attr_accessor :create_and_send_w9_form_email_request
+
+        def initialize()
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '2.0'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
+        def get_create_and_send_w9_form_email_request()
+            return @create_and_send_w9_form_email_request
+        end
+
+        def set_create_and_send_w9_form_email_request(create_and_send_w9_form_email_request)
+            @create_and_send_w9_form_email_request = create_and_send_w9_form_email_request
+        end
     end
     # Represents the Request object for the CreateW9Form API
     #

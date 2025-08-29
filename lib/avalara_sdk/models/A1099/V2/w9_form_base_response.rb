@@ -14,11 +14,8 @@ module AvalaraSdk::A1099::V2
     # The unique identifier for the form.
     attr_accessor :id
 
-    # The form status.
+    # The entry status information for the form.
     attr_accessor :entry_status
-
-    # The timestamp for the latest status update.
-    attr_accessor :entry_status_date
 
     # A reference identifier for the form.
     attr_accessor :reference_id
@@ -34,6 +31,9 @@ module AvalaraSdk::A1099::V2
 
     # Indicates whether the form is archived.
     attr_accessor :archived
+
+    # Form ID of previous version.
+    attr_accessor :ancestor_id
 
     # The signature of the form.
     attr_accessor :signature
@@ -58,12 +58,12 @@ module AvalaraSdk::A1099::V2
       {
         :'id' => :'id',
         :'entry_status' => :'entryStatus',
-        :'entry_status_date' => :'entryStatusDate',
         :'reference_id' => :'referenceId',
         :'company_id' => :'companyId',
         :'display_name' => :'displayName',
         :'email' => :'email',
         :'archived' => :'archived',
+        :'ancestor_id' => :'ancestorId',
         :'signature' => :'signature',
         :'signed_date' => :'signedDate',
         :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
@@ -82,13 +82,13 @@ module AvalaraSdk::A1099::V2
     def self.openapi_types
       {
         :'id' => :'String',
-        :'entry_status' => :'String',
-        :'entry_status_date' => :'Time',
+        :'entry_status' => :'EntryStatusResponse',
         :'reference_id' => :'String',
         :'company_id' => :'String',
         :'display_name' => :'String',
         :'email' => :'String',
         :'archived' => :'Boolean',
+        :'ancestor_id' => :'String',
         :'signature' => :'String',
         :'signed_date' => :'Time',
         :'e_delivery_consented_at' => :'Time',
@@ -101,9 +101,9 @@ module AvalaraSdk::A1099::V2
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'entry_status_date',
         :'reference_id',
         :'email',
+        :'ancestor_id',
         :'signature',
         :'signed_date',
         :'e_delivery_consented_at',
@@ -138,10 +138,6 @@ module AvalaraSdk::A1099::V2
         self.entry_status = attributes[:'entry_status']
       end
 
-      if attributes.key?(:'entry_status_date')
-        self.entry_status_date = attributes[:'entry_status_date']
-      end
-
       if attributes.key?(:'reference_id')
         self.reference_id = attributes[:'reference_id']
       end
@@ -160,6 +156,10 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'archived')
         self.archived = attributes[:'archived']
+      end
+
+      if attributes.key?(:'ancestor_id')
+        self.ancestor_id = attributes[:'ancestor_id']
       end
 
       if attributes.key?(:'signature')
@@ -209,12 +209,12 @@ module AvalaraSdk::A1099::V2
       self.class == o.class &&
           id == o.id &&
           entry_status == o.entry_status &&
-          entry_status_date == o.entry_status_date &&
           reference_id == o.reference_id &&
           company_id == o.company_id &&
           display_name == o.display_name &&
           email == o.email &&
           archived == o.archived &&
+          ancestor_id == o.ancestor_id &&
           signature == o.signature &&
           signed_date == o.signed_date &&
           e_delivery_consented_at == o.e_delivery_consented_at &&
@@ -232,7 +232,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, entry_status, entry_status_date, reference_id, company_id, display_name, email, archived, signature, signed_date, e_delivery_consented_at, created_at, updated_at, type].hash
+      [id, entry_status, reference_id, company_id, display_name, email, archived, ancestor_id, signature, signed_date, e_delivery_consented_at, created_at, updated_at, type].hash
     end
 
     # Builds the object from hash

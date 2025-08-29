@@ -11,66 +11,68 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class IssuerResponse
-    # Unique identifier set when the record is created
+    # Unique identifier set when the record is created.
     attr_accessor :id
 
-    # Legal name, not DBA
-    attr_accessor :name
-
-    # Optional DBA name or continuation of a long legal name
-    attr_accessor :name_dba
-
-    # Tax identification number
-    attr_accessor :tin
-
-    # Optional identifier for your reference, never shown to any agency or recipient.  We will also prefix download filenames with this value, if present.  Can only include letters, numbers, dashes, underscores and spaces.
-    attr_accessor :reference_id
-
-    # Telephone number
-    attr_accessor :telephone
-
-    # Tax year
-    attr_accessor :tax_year
-
-    # If there is a transfer agent, use the address of the transfer agent.
-    attr_accessor :country_code
-
-    # Email address
-    attr_accessor :email
-
-    # Address
-    attr_accessor :address
-
-    # City
-    attr_accessor :city
-
-    # State
-    attr_accessor :state
-
-    # Zip code
-    attr_accessor :zip
-
-    # Foreign province
-    attr_accessor :foreign_province
-
-    # Transfer Agent's Name
-    attr_accessor :transfer_agent_name
-
-    # Last year of filing for this payer
-    attr_accessor :last_filing
-
-    # Date time when the issuer was created
+    # Date time when the record was created.
     attr_accessor :created_at
 
-    # Date time when the issuer was updated
+    # Date time when the record was last updated.
     attr_accessor :updated_at
+
+    # Legal name. Not the DBA name.
+    attr_accessor :name
+
+    # Doing Business As (DBA) name or continuation of a long legal name. Use either this or 'transferAgentName'.
+    attr_accessor :dba_name
+
+    # Federal Tax Identification Number (TIN).
+    attr_accessor :tin
+
+    # Internal reference ID. Never shown to any agency or recipient. If present, it will prefix download filenames. Allowed characters: letters, numbers, dashes, underscores, and spaces.
+    attr_accessor :reference_id
+
+    # Contact phone number (must contain at least 10 digits, max 15 characters). For recipient inquiries.
+    attr_accessor :telephone
+
+    # Tax year for which the forms are being filed (e.g., 2024). Must be within current tax year and current tax year - 4.
+    attr_accessor :tax_year
+
+    # Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes. If there is a transfer agent, use the transfer agent's shipping address.
+    attr_accessor :country_code
+
+    # Contact email address. For recipient inquiries.
+    attr_accessor :email
+
+    # Address.
+    attr_accessor :address
+
+    # City.
+    attr_accessor :city
+
+    # Two-letter US state or Canadian province code (required for US/CA addresses).
+    attr_accessor :state
+
+    # ZIP/postal code.
+    attr_accessor :zip
+
+    # Province or region for non-US/CA addresses.
+    attr_accessor :foreign_province
+
+    # Name of the transfer agent, if applicable — optional; use either this or 'dbaName'.
+    attr_accessor :transfer_agent_name
+
+    # Indicates if this is the issuer's final year filing.
+    attr_accessor :last_filing
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'id' => :'id',
+        :'created_at' => :'createdAt',
+        :'updated_at' => :'updatedAt',
         :'name' => :'name',
-        :'name_dba' => :'nameDba',
+        :'dba_name' => :'dbaName',
         :'tin' => :'tin',
         :'reference_id' => :'referenceId',
         :'telephone' => :'telephone',
@@ -83,9 +85,7 @@ module AvalaraSdk::A1099::V2
         :'zip' => :'zip',
         :'foreign_province' => :'foreignProvince',
         :'transfer_agent_name' => :'transferAgentName',
-        :'last_filing' => :'lastFiling',
-        :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt'
+        :'last_filing' => :'lastFiling'
       }
     end
 
@@ -98,8 +98,10 @@ module AvalaraSdk::A1099::V2
     def self.openapi_types
       {
         :'id' => :'String',
+        :'created_at' => :'Time',
+        :'updated_at' => :'Time',
         :'name' => :'String',
-        :'name_dba' => :'String',
+        :'dba_name' => :'String',
         :'tin' => :'String',
         :'reference_id' => :'String',
         :'telephone' => :'String',
@@ -112,15 +114,18 @@ module AvalaraSdk::A1099::V2
         :'zip' => :'String',
         :'foreign_province' => :'String',
         :'transfer_agent_name' => :'String',
-        :'last_filing' => :'Boolean',
-        :'created_at' => :'Time',
-        :'updated_at' => :'Time'
+        :'last_filing' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'dba_name',
+        :'tin',
+        :'reference_id',
+        :'telephone',
         :'tax_year',
         :'country_code',
         :'email',
@@ -130,7 +135,15 @@ module AvalaraSdk::A1099::V2
         :'zip',
         :'foreign_province',
         :'transfer_agent_name',
+        :'last_filing'
       ])
+    end
+
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'IssuerCommand'
+      ]
     end
 
     # Initializes the object
@@ -152,12 +165,22 @@ module AvalaraSdk::A1099::V2
         self.id = attributes[:'id']
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
       end
 
-      if attributes.key?(:'name_dba')
-        self.name_dba = attributes[:'name_dba']
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
+
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      else
+        self.name = nil
+      end
+
+      if attributes.key?(:'dba_name')
+        self.dba_name = attributes[:'dba_name']
       end
 
       if attributes.key?(:'tin')
@@ -170,10 +193,14 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'telephone')
         self.telephone = attributes[:'telephone']
+      else
+        self.telephone = nil
       end
 
       if attributes.key?(:'tax_year')
         self.tax_year = attributes[:'tax_year']
+      else
+        self.tax_year = nil
       end
 
       if attributes.key?(:'country_code')
@@ -182,22 +209,32 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'email')
         self.email = attributes[:'email']
+      else
+        self.email = nil
       end
 
       if attributes.key?(:'address')
         self.address = attributes[:'address']
+      else
+        self.address = nil
       end
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
+      else
+        self.city = nil
       end
 
       if attributes.key?(:'state')
         self.state = attributes[:'state']
+      else
+        self.state = nil
       end
 
       if attributes.key?(:'zip')
         self.zip = attributes[:'zip']
+      else
+        self.zip = nil
       end
 
       if attributes.key?(:'foreign_province')
@@ -210,14 +247,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'last_filing')
         self.last_filing = attributes[:'last_filing']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
+      else
+        self.last_filing = nil
       end
     end
 
@@ -242,8 +273,10 @@ module AvalaraSdk::A1099::V2
       return true if self.equal?(o)
       self.class == o.class &&
           id == o.id &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at &&
           name == o.name &&
-          name_dba == o.name_dba &&
+          dba_name == o.dba_name &&
           tin == o.tin &&
           reference_id == o.reference_id &&
           telephone == o.telephone &&
@@ -256,9 +289,7 @@ module AvalaraSdk::A1099::V2
           zip == o.zip &&
           foreign_province == o.foreign_province &&
           transfer_agent_name == o.transfer_agent_name &&
-          last_filing == o.last_filing &&
-          created_at == o.created_at &&
-          updated_at == o.updated_at
+          last_filing == o.last_filing
     end
 
     # @see the `==` method
@@ -270,7 +301,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, name, name_dba, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing, created_at, updated_at].hash
+      [id, created_at, updated_at, name, dba_name, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing].hash
     end
 
     # Builds the object from hash

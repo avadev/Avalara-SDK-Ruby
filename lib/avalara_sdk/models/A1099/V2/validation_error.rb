@@ -11,8 +11,10 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class ValidationError
+    # The field containing the error
     attr_accessor :field
 
+    # The list of error messages
     attr_accessor :errors
 
     # Attribute mapping from ruby-style variable name to JSON key.

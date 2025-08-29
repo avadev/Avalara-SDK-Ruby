@@ -10,27 +10,39 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      class IntermediaryOrFlowThrough
+      # Intermediary or flow-through entity information for tax forms
+  class IntermediaryOrFlowThrough
+    # EIN (Employer Identification Number) of the intermediary or flow-through entity
     attr_accessor :ein
 
+    # Chapter 3 status code for the intermediary or flow-through entity
     attr_accessor :chap3_status_code
 
+    # Chapter 4 status code for the intermediary or flow-through entity
     attr_accessor :chap4_status_code
 
+    # Name of the intermediary or flow-through entity
     attr_accessor :name
 
+    # GIIN (Global Intermediary Identification Number) of the intermediary or flow-through entity
     attr_accessor :giin
 
+    # Country code for the intermediary or flow-through entity
     attr_accessor :country_code
 
+    # Foreign TIN of the intermediary or flow-through entity
     attr_accessor :foreign_tin
 
+    # Address of the intermediary or flow-through entity
     attr_accessor :address
 
+    # City of the intermediary or flow-through entity
     attr_accessor :city
 
+    # State of the intermediary or flow-through entity
     attr_accessor :state
 
+    # Zip code of the intermediary or flow-through entity
     attr_accessor :zip
 
     # Attribute mapping from ruby-style variable name to JSON key.

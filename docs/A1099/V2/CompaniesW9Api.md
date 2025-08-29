@@ -1,6 +1,6 @@
 # AvalaraSdk::A1099::V2::CompaniesW9Api
 
-All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/avalara1099*
+All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -13,7 +13,7 @@ All URIs are relative to *https://api-ava1099.eta.sbx.us-east-1.aws.avalara.io/a
 
 ## create_company
 
-> <CompanyResponseModel> create_company(avalara_version, opts)
+> <CompanyResponse> create_company(avalara_version, opts)
 
 Create a company
 
@@ -39,9 +39,9 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '5ba3a8b6-bf05-4aaa-b8cb-d06c7cfea0f7', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '68cce84c-ae6e-4cef-bdc6-4620c710b5e5', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  company_create_update_request_model: AvalaraSdk::A1099::V2::CompanyCreateUpdateRequestModel.new # CompanyCreateUpdateRequestModel | The company to create
+  create_company_request: AvalaraSdk::A1099::V2::CompanyCreateUpdateRequestModel.new({name: 'name_example', email: 'email_example', address: 'address_example', city: 'city_example', zip: 'zip_example', telephone: 'telephone_example', tin: 'tin_example', country_code: 'country_code_example'}) # CreateCompanyRequest | The company to create
 }
 
 begin
@@ -57,7 +57,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CompanyResponseModel>, Integer, Hash)> create_company_with_http_info(avalara_version, opts)
+> <Array(<CompanyResponse>, Integer, Hash)> create_company_with_http_info(avalara_version, opts)
 
 ```ruby
 begin
@@ -65,7 +65,7 @@ begin
   data, status_code, headers = api_instance.create_company_with_http_info(avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CompanyResponseModel>
+  p data # => <CompanyResponse>
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling CompaniesW9Api->create_company_with_http_info: #{e}"
 end
@@ -78,11 +78,11 @@ end
 | **avalara_version** | **String** | API version |  |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
-| **company_create_update_request_model** | [**CompanyCreateUpdateRequestModel**](CompanyCreateUpdateRequestModel.md) | The company to create | [optional] |
+| **create_company_request** | [**CreateCompanyRequest**](CreateCompanyRequest.md) | The company to create | [optional] |
 
 ### Return type
 
-[**CompanyResponseModel**](CompanyResponseModel.md)
+[**CompanyResponse**](CompanyResponse.md)
 
 ### Authorization
 
@@ -123,7 +123,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 id = 'id_example' # String | The company to delete
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '07a8ecdb-0465-469d-8bff-49fce135d5e4', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'f2e08ea9-6e1e-4828-91f9-4926ff26dbe4', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -210,7 +210,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: 'f047fdc5-a6e4-4290-8c5c-d4da96ad0699', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'f431c7bb-9661-447a-8f5f-b17b3d55a06c', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -298,7 +298,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 id = 'id_example' # String | Id of the company
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '3f7b5971-06e7-4459-84af-61db7fdcb027', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'c5c11797-5ea9-4ec3-85ba-ed4e0ee63300', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -354,7 +354,7 @@ end
 
 ## update_company
 
-> <CompanyResponseModel> update_company(id, avalara_version, opts)
+> <CompanyResponse> update_company(id, avalara_version, opts)
 
 Update a company
 
@@ -381,9 +381,9 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 id = 'id_example' # String | The ID of the company to update
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '1cd32062-b0bc-46a0-8311-a973b8fb3d56', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '86a26d78-90b6-4ca0-a10b-0221d11dd34a', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  company_create_update_request_model: AvalaraSdk::A1099::V2::CompanyCreateUpdateRequestModel.new # CompanyCreateUpdateRequestModel | The updated company data
+  create_company_request: AvalaraSdk::A1099::V2::CompanyCreateUpdateRequestModel.new({name: 'name_example', email: 'email_example', address: 'address_example', city: 'city_example', zip: 'zip_example', telephone: 'telephone_example', tin: 'tin_example', country_code: 'country_code_example'}) # CreateCompanyRequest | The updated company data
 }
 
 begin
@@ -399,7 +399,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<CompanyResponseModel>, Integer, Hash)> update_company_with_http_info(id, avalara_version, opts)
+> <Array(<CompanyResponse>, Integer, Hash)> update_company_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
@@ -407,7 +407,7 @@ begin
   data, status_code, headers = api_instance.update_company_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <CompanyResponseModel>
+  p data # => <CompanyResponse>
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling CompaniesW9Api->update_company_with_http_info: #{e}"
 end
@@ -421,11 +421,11 @@ end
 | **avalara_version** | **String** | API version |  |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
-| **company_create_update_request_model** | [**CompanyCreateUpdateRequestModel**](CompanyCreateUpdateRequestModel.md) | The updated company data | [optional] |
+| **create_company_request** | [**CreateCompanyRequest**](CreateCompanyRequest.md) | The updated company data | [optional] |
 
 ### Return type
 
-[**CompanyResponseModel**](CompanyResponseModel.md)
+[**CompanyResponse**](CompanyResponse.md)
 
 ### Authorization
 

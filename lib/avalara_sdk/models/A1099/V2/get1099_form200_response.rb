@@ -15,15 +15,15 @@ module AvalaraSdk::A1099::V2
       # List of class defined in oneOf (OpenAPI v3)
       def openapi_one_of
         [
-          :'Form1042SListItemResponse',
-          :'Form1095BListItemResponse',
-          :'Form1099BaseResponse',
-          :'Form1099DivListItemResponse',
-          :'Form1099IntListItemResponse',
-          :'Form1099KListItemResponse',
-          :'Form1099MiscListItemResponse',
-          :'Form1099NecListItemResponse',
-          :'Form1099RListItemResponse'
+          :'Form1042S',
+          :'Form1095B',
+          :'Form1095C',
+          :'Form1099Div',
+          :'Form1099Int',
+          :'Form1099K',
+          :'Form1099Misc',
+          :'Form1099Nec',
+          :'Form1099R'
         ]
       end
 

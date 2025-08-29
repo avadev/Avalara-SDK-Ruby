@@ -10,124 +10,184 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      class Form1099K
+      # Form 1099-K: Payment Card and Third Party Network Transactions
+  class Form1099K
+    # Filer type (PSE or EPF)
     attr_accessor :filer_type
 
+    # Payment type (payment card or third party network)
     attr_accessor :payment_type
 
+    # Payment settlement entity name and phone number
     attr_accessor :payment_settlement_entity_name_phone_number
 
+    # Gross amount of payment card/third party network transactions
     attr_accessor :gross_amount_payment_card
 
+    # Card not present transactions
     attr_accessor :card_not_present_transactions
 
+    # Merchant category code
     attr_accessor :merchant_category_code
 
+    # Number of payment transactions
     attr_accessor :payment_transaction_number
 
+    # Federal income tax withheld
     attr_accessor :federal_income_tax_withheld
 
+    # January gross payments
     attr_accessor :january
 
+    # February gross payments
     attr_accessor :february
 
+    # March gross payments
     attr_accessor :march
 
+    # April gross payments
     attr_accessor :april
 
+    # May gross payments
     attr_accessor :may
 
+    # June gross payments
     attr_accessor :june
 
+    # July gross payments
     attr_accessor :july
 
+    # August gross payments
     attr_accessor :august
 
-    attr_accessor :sept
+    # September gross payments
+    attr_accessor :september
 
+    # October gross payments
     attr_accessor :october
 
+    # November gross payments
     attr_accessor :november
 
+    # December gross payments
     attr_accessor :december
 
-    attr_accessor :id
-
+    # Form type
     attr_accessor :type
 
+    # Form ID. Unique identifier set when the record is created.
+    attr_accessor :id
+
+    # Issuer ID - only required when creating forms
     attr_accessor :issuer_id
 
+    # Issuer Reference ID - only required when creating forms
     attr_accessor :issuer_reference_id
 
+    # Issuer TIN - readonly
     attr_accessor :issuer_tin
 
+    # Tax Year - only required when creating forms
     attr_accessor :tax_year
 
-    attr_accessor :federal_efile
-
-    attr_accessor :federal_efile_status
-
-    attr_accessor :state_efile
-
-    attr_accessor :state_efile_status
-
-    attr_accessor :postal_mail
-
-    attr_accessor :postal_mail_status
-
-    attr_accessor :tin_match
-
-    attr_accessor :tin_match_status
-
-    attr_accessor :address_verification
-
-    attr_accessor :address_verification_status
-
-    attr_accessor :e_delivery_status
-
+    # Internal reference ID. Never shown to any agency or recipient.
     attr_accessor :reference_id
 
-    attr_accessor :email
-
-    attr_accessor :tin_type
-
-    attr_accessor :fatca_filing_requirement
-
+    # Recipient's Federal Tax Identification Number (TIN).
     attr_accessor :tin
 
-    attr_accessor :no_tin
-
-    attr_accessor :second_tin_notice
-
+    # Recipient name
     attr_accessor :recipient_name
 
+    # Type of TIN (Tax ID Number)
+    attr_accessor :tin_type
+
+    # Recipient second name
     attr_accessor :recipient_second_name
 
+    # Address.
     attr_accessor :address
 
+    # Address line 2.
     attr_accessor :address2
 
+    # City.
     attr_accessor :city
 
+    # Two-letter US state or Canadian province code (required for US/CA addresses).
     attr_accessor :state
 
+    # ZIP/postal code.
     attr_accessor :zip
 
-    attr_accessor :non_us_province
+    # Recipient's Contact email address.
+    attr_accessor :email
 
-    attr_accessor :country_code
-
+    # Account number
     attr_accessor :account_number
 
+    # Office code
     attr_accessor :office_code
 
+    # Province or region for non-US/CA addresses.
+    attr_accessor :non_us_province
+
+    # Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
+    attr_accessor :country_code
+
+    # Date when federal e-filing should be scheduled for this form
+    attr_accessor :federal_efile_date
+
+    # Boolean indicating that postal mailing to the recipient should be scheduled for this form
+    attr_accessor :postal_mail
+
+    # Date when state e-filing should be scheduled for this form
+    attr_accessor :state_efile_date
+
+    # Date when recipient e-delivery should be scheduled for this form
+    attr_accessor :recipient_edelivery_date
+
+    # Boolean indicating that TIN Matching should be scheduled for this form
+    attr_accessor :tin_match
+
+    # No TIN indicator
+    attr_accessor :no_tin
+
+    # Boolean indicating that address verification should be scheduled for this form
+    attr_accessor :address_verification
+
+    # State and local withholding information
+    attr_accessor :state_and_local_withholding
+
+    # Second TIN notice
+    attr_accessor :second_tin_notice
+
+    # Federal e-file status
+    attr_accessor :federal_efile_status
+
+    # State e-file status
+    attr_accessor :state_efile_status
+
+    # Postal mail to recipient status
+    attr_accessor :postal_mail_status
+
+    # TIN Match status
+    attr_accessor :tin_match_status
+
+    # Address verification status
+    attr_accessor :address_verification_status
+
+    # EDelivery status
+    attr_accessor :e_delivery_status
+
+    # Validation errors
     attr_accessor :validation_errors
 
+    # Date time when the record was created.
     attr_accessor :created_at
 
+    # Date time when the record was last updated.
     attr_accessor :updated_at
-
-    attr_accessor :state_and_local_withholding
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -170,49 +230,49 @@ module AvalaraSdk::A1099::V2
         :'june' => :'june',
         :'july' => :'july',
         :'august' => :'august',
-        :'sept' => :'sept',
+        :'september' => :'september',
         :'october' => :'october',
         :'november' => :'november',
         :'december' => :'december',
-        :'id' => :'id',
         :'type' => :'type',
+        :'id' => :'id',
         :'issuer_id' => :'issuerId',
         :'issuer_reference_id' => :'issuerReferenceId',
         :'issuer_tin' => :'issuerTin',
         :'tax_year' => :'taxYear',
-        :'federal_efile' => :'federalEfile',
-        :'federal_efile_status' => :'federalEfileStatus',
-        :'state_efile' => :'stateEfile',
-        :'state_efile_status' => :'stateEfileStatus',
-        :'postal_mail' => :'postalMail',
-        :'postal_mail_status' => :'postalMailStatus',
-        :'tin_match' => :'tinMatch',
-        :'tin_match_status' => :'tinMatchStatus',
-        :'address_verification' => :'addressVerification',
-        :'address_verification_status' => :'addressVerificationStatus',
-        :'e_delivery_status' => :'eDeliveryStatus',
         :'reference_id' => :'referenceId',
-        :'email' => :'email',
-        :'tin_type' => :'tinType',
-        :'fatca_filing_requirement' => :'fatcaFilingRequirement',
         :'tin' => :'tin',
-        :'no_tin' => :'noTin',
-        :'second_tin_notice' => :'secondTinNotice',
         :'recipient_name' => :'recipientName',
+        :'tin_type' => :'tinType',
         :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
         :'address2' => :'address2',
         :'city' => :'city',
         :'state' => :'state',
         :'zip' => :'zip',
-        :'non_us_province' => :'nonUsProvince',
-        :'country_code' => :'countryCode',
+        :'email' => :'email',
         :'account_number' => :'accountNumber',
         :'office_code' => :'officeCode',
+        :'non_us_province' => :'nonUsProvince',
+        :'country_code' => :'countryCode',
+        :'federal_efile_date' => :'federalEfileDate',
+        :'postal_mail' => :'postalMail',
+        :'state_efile_date' => :'stateEfileDate',
+        :'recipient_edelivery_date' => :'recipientEdeliveryDate',
+        :'tin_match' => :'tinMatch',
+        :'no_tin' => :'noTin',
+        :'address_verification' => :'addressVerification',
+        :'state_and_local_withholding' => :'stateAndLocalWithholding',
+        :'second_tin_notice' => :'secondTinNotice',
+        :'federal_efile_status' => :'federalEfileStatus',
+        :'state_efile_status' => :'stateEfileStatus',
+        :'postal_mail_status' => :'postalMailStatus',
+        :'tin_match_status' => :'tinMatchStatus',
+        :'address_verification_status' => :'addressVerificationStatus',
+        :'e_delivery_status' => :'eDeliveryStatus',
         :'validation_errors' => :'validationErrors',
         :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt',
-        :'state_and_local_withholding' => :'stateAndLocalWithholding'
+        :'updated_at' => :'updatedAt'
       }
     end
 
@@ -240,58 +300,62 @@ module AvalaraSdk::A1099::V2
         :'june' => :'Float',
         :'july' => :'Float',
         :'august' => :'Float',
-        :'sept' => :'Float',
+        :'september' => :'Float',
         :'october' => :'Float',
         :'november' => :'Float',
         :'december' => :'Float',
-        :'id' => :'String',
         :'type' => :'String',
-        :'issuer_id' => :'Integer',
+        :'id' => :'String',
+        :'issuer_id' => :'String',
         :'issuer_reference_id' => :'String',
         :'issuer_tin' => :'String',
         :'tax_year' => :'Integer',
-        :'federal_efile' => :'Boolean',
-        :'federal_efile_status' => :'Form1099StatusDetail',
-        :'state_efile' => :'Boolean',
-        :'state_efile_status' => :'Array<StateEfileStatusDetail>',
-        :'postal_mail' => :'Boolean',
-        :'postal_mail_status' => :'Form1099StatusDetail',
-        :'tin_match' => :'Boolean',
-        :'tin_match_status' => :'Form1099StatusDetail',
-        :'address_verification' => :'Boolean',
-        :'address_verification_status' => :'Form1099StatusDetail',
-        :'e_delivery_status' => :'Form1099StatusDetail',
         :'reference_id' => :'String',
-        :'email' => :'String',
-        :'tin_type' => :'String',
-        :'fatca_filing_requirement' => :'Boolean',
         :'tin' => :'String',
-        :'no_tin' => :'Boolean',
-        :'second_tin_notice' => :'Boolean',
         :'recipient_name' => :'String',
+        :'tin_type' => :'String',
         :'recipient_second_name' => :'String',
         :'address' => :'String',
         :'address2' => :'String',
         :'city' => :'String',
         :'state' => :'String',
         :'zip' => :'String',
-        :'non_us_province' => :'String',
-        :'country_code' => :'String',
+        :'email' => :'String',
         :'account_number' => :'String',
         :'office_code' => :'String',
+        :'non_us_province' => :'String',
+        :'country_code' => :'String',
+        :'federal_efile_date' => :'Date',
+        :'postal_mail' => :'Boolean',
+        :'state_efile_date' => :'Date',
+        :'recipient_edelivery_date' => :'Date',
+        :'tin_match' => :'Boolean',
+        :'no_tin' => :'Boolean',
+        :'address_verification' => :'Boolean',
+        :'state_and_local_withholding' => :'StateAndLocalWithholding',
+        :'second_tin_notice' => :'Boolean',
+        :'federal_efile_status' => :'Form1099StatusDetail',
+        :'state_efile_status' => :'Array<StateEfileStatusDetail>',
+        :'postal_mail_status' => :'Form1099StatusDetail',
+        :'tin_match_status' => :'Form1099StatusDetail',
+        :'address_verification_status' => :'Form1099StatusDetail',
+        :'e_delivery_status' => :'Form1099StatusDetail',
         :'validation_errors' => :'Array<ValidationError>',
         :'created_at' => :'Time',
-        :'updated_at' => :'Time',
-        :'state_and_local_withholding' => :'StateAndLocalWithholding'
+        :'updated_at' => :'Time'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'filer_type',
+        :'payment_type',
         :'payment_settlement_entity_name_phone_number',
+        :'gross_amount_payment_card',
         :'card_not_present_transactions',
         :'merchant_category_code',
+        :'payment_transaction_number',
         :'federal_income_tax_withheld',
         :'january',
         :'february',
@@ -301,36 +365,45 @@ module AvalaraSdk::A1099::V2
         :'june',
         :'july',
         :'august',
-        :'sept',
+        :'september',
         :'october',
         :'november',
         :'december',
+        :'id',
+        :'issuer_id',
         :'issuer_reference_id',
         :'issuer_tin',
-        :'state_efile_status',
-        :'postal_mail_status',
-        :'tin_match_status',
-        :'address_verification_status',
-        :'e_delivery_status',
+        :'tax_year',
         :'reference_id',
-        :'email',
-        :'tin_type',
-        :'fatca_filing_requirement',
         :'tin',
-        :'second_tin_notice',
         :'recipient_name',
+        :'tin_type',
         :'recipient_second_name',
         :'address',
         :'address2',
         :'city',
         :'state',
         :'zip',
-        :'non_us_province',
-        :'country_code',
+        :'email',
         :'account_number',
         :'office_code',
+        :'non_us_province',
+        :'country_code',
+        :'federal_efile_date',
+        :'postal_mail',
+        :'state_efile_date',
+        :'recipient_edelivery_date',
+        :'tin_match',
+        :'no_tin',
+        :'address_verification',
+        :'state_and_local_withholding',
+        :'federal_efile_status',
+        :'state_efile_status',
+        :'postal_mail_status',
+        :'tin_match_status',
+        :'address_verification_status',
+        :'e_delivery_status',
         :'validation_errors',
-        :'state_and_local_withholding'
       ])
     end
 
@@ -420,8 +493,8 @@ module AvalaraSdk::A1099::V2
         self.august = attributes[:'august']
       end
 
-      if attributes.key?(:'sept')
-        self.sept = attributes[:'sept']
+      if attributes.key?(:'september')
+        self.september = attributes[:'september']
       end
 
       if attributes.key?(:'october')
@@ -436,12 +509,14 @@ module AvalaraSdk::A1099::V2
         self.december = attributes[:'december']
       end
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
       if attributes.key?(:'type')
         self.type = attributes[:'type']
+      else
+        self.type = nil
+      end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
       end
 
       if attributes.key?(:'issuer_id')
@@ -460,82 +535,22 @@ module AvalaraSdk::A1099::V2
         self.tax_year = attributes[:'tax_year']
       end
 
-      if attributes.key?(:'federal_efile')
-        self.federal_efile = attributes[:'federal_efile']
-      end
-
-      if attributes.key?(:'federal_efile_status')
-        self.federal_efile_status = attributes[:'federal_efile_status']
-      end
-
-      if attributes.key?(:'state_efile')
-        self.state_efile = attributes[:'state_efile']
-      end
-
-      if attributes.key?(:'state_efile_status')
-        if (value = attributes[:'state_efile_status']).is_a?(Array)
-          self.state_efile_status = value
-        end
-      end
-
-      if attributes.key?(:'postal_mail')
-        self.postal_mail = attributes[:'postal_mail']
-      end
-
-      if attributes.key?(:'postal_mail_status')
-        self.postal_mail_status = attributes[:'postal_mail_status']
-      end
-
-      if attributes.key?(:'tin_match')
-        self.tin_match = attributes[:'tin_match']
-      end
-
-      if attributes.key?(:'tin_match_status')
-        self.tin_match_status = attributes[:'tin_match_status']
-      end
-
-      if attributes.key?(:'address_verification')
-        self.address_verification = attributes[:'address_verification']
-      end
-
-      if attributes.key?(:'address_verification_status')
-        self.address_verification_status = attributes[:'address_verification_status']
-      end
-
-      if attributes.key?(:'e_delivery_status')
-        self.e_delivery_status = attributes[:'e_delivery_status']
-      end
-
       if attributes.key?(:'reference_id')
         self.reference_id = attributes[:'reference_id']
-      end
-
-      if attributes.key?(:'email')
-        self.email = attributes[:'email']
-      end
-
-      if attributes.key?(:'tin_type')
-        self.tin_type = attributes[:'tin_type']
-      end
-
-      if attributes.key?(:'fatca_filing_requirement')
-        self.fatca_filing_requirement = attributes[:'fatca_filing_requirement']
       end
 
       if attributes.key?(:'tin')
         self.tin = attributes[:'tin']
       end
 
-      if attributes.key?(:'no_tin')
-        self.no_tin = attributes[:'no_tin']
-      end
-
-      if attributes.key?(:'second_tin_notice')
-        self.second_tin_notice = attributes[:'second_tin_notice']
-      end
-
       if attributes.key?(:'recipient_name')
         self.recipient_name = attributes[:'recipient_name']
+      else
+        self.recipient_name = nil
+      end
+
+      if attributes.key?(:'tin_type')
+        self.tin_type = attributes[:'tin_type']
       end
 
       if attributes.key?(:'recipient_second_name')
@@ -544,6 +559,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'address')
         self.address = attributes[:'address']
+      else
+        self.address = nil
       end
 
       if attributes.key?(:'address2')
@@ -552,6 +569,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
+      else
+        self.city = nil
       end
 
       if attributes.key?(:'state')
@@ -562,12 +581,8 @@ module AvalaraSdk::A1099::V2
         self.zip = attributes[:'zip']
       end
 
-      if attributes.key?(:'non_us_province')
-        self.non_us_province = attributes[:'non_us_province']
-      end
-
-      if attributes.key?(:'country_code')
-        self.country_code = attributes[:'country_code']
+      if attributes.key?(:'email')
+        self.email = attributes[:'email']
       end
 
       if attributes.key?(:'account_number')
@@ -576,6 +591,78 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'office_code')
         self.office_code = attributes[:'office_code']
+      end
+
+      if attributes.key?(:'non_us_province')
+        self.non_us_province = attributes[:'non_us_province']
+      end
+
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
+      else
+        self.country_code = nil
+      end
+
+      if attributes.key?(:'federal_efile_date')
+        self.federal_efile_date = attributes[:'federal_efile_date']
+      end
+
+      if attributes.key?(:'postal_mail')
+        self.postal_mail = attributes[:'postal_mail']
+      end
+
+      if attributes.key?(:'state_efile_date')
+        self.state_efile_date = attributes[:'state_efile_date']
+      end
+
+      if attributes.key?(:'recipient_edelivery_date')
+        self.recipient_edelivery_date = attributes[:'recipient_edelivery_date']
+      end
+
+      if attributes.key?(:'tin_match')
+        self.tin_match = attributes[:'tin_match']
+      end
+
+      if attributes.key?(:'no_tin')
+        self.no_tin = attributes[:'no_tin']
+      end
+
+      if attributes.key?(:'address_verification')
+        self.address_verification = attributes[:'address_verification']
+      end
+
+      if attributes.key?(:'state_and_local_withholding')
+        self.state_and_local_withholding = attributes[:'state_and_local_withholding']
+      end
+
+      if attributes.key?(:'second_tin_notice')
+        self.second_tin_notice = attributes[:'second_tin_notice']
+      end
+
+      if attributes.key?(:'federal_efile_status')
+        self.federal_efile_status = attributes[:'federal_efile_status']
+      end
+
+      if attributes.key?(:'state_efile_status')
+        if (value = attributes[:'state_efile_status']).is_a?(Array)
+          self.state_efile_status = value
+        end
+      end
+
+      if attributes.key?(:'postal_mail_status')
+        self.postal_mail_status = attributes[:'postal_mail_status']
+      end
+
+      if attributes.key?(:'tin_match_status')
+        self.tin_match_status = attributes[:'tin_match_status']
+      end
+
+      if attributes.key?(:'address_verification_status')
+        self.address_verification_status = attributes[:'address_verification_status']
+      end
+
+      if attributes.key?(:'e_delivery_status')
+        self.e_delivery_status = attributes[:'e_delivery_status']
       end
 
       if attributes.key?(:'validation_errors')
@@ -591,10 +678,6 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
       end
-
-      if attributes.key?(:'state_and_local_withholding')
-        self.state_and_local_withholding = attributes[:'state_and_local_withholding']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -602,6 +685,10 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @type.nil?
+        invalid_properties.push('invalid value for "type", type cannot be nil.')
+      end
+
       invalid_properties
     end
 
@@ -613,6 +700,11 @@ module AvalaraSdk::A1099::V2
       return false unless filer_type_validator.valid?(@filer_type)
       payment_type_validator = EnumAttributeValidator.new('String', ["MerchantPaymentCard", "ThirdPartyNetwork"])
       return false unless payment_type_validator.valid?(@payment_type)
+      return false if @type.nil?
+      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
+      return false unless type_validator.valid?(@type)
+      tin_type_validator = EnumAttributeValidator.new('String', ["Empty", "EIN", "SSN", "ITIN", "ATIN"])
+      return false unless tin_type_validator.valid?(@tin_type)
       true
     end
 
@@ -634,6 +726,26 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"payment_type\", must be one of #{validator.allowable_values}."
       end
       @payment_type = payment_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tin_type Object to be assigned
+    def tin_type=(tin_type)
+      validator = EnumAttributeValidator.new('String', ["Empty", "EIN", "SSN", "ITIN", "ATIN"])
+      unless validator.valid?(tin_type)
+        fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
+      end
+      @tin_type = tin_type
     end
 
     # Custom attribute writer method with validation
@@ -669,49 +781,49 @@ module AvalaraSdk::A1099::V2
           june == o.june &&
           july == o.july &&
           august == o.august &&
-          sept == o.sept &&
+          september == o.september &&
           october == o.october &&
           november == o.november &&
           december == o.december &&
-          id == o.id &&
           type == o.type &&
+          id == o.id &&
           issuer_id == o.issuer_id &&
           issuer_reference_id == o.issuer_reference_id &&
           issuer_tin == o.issuer_tin &&
           tax_year == o.tax_year &&
-          federal_efile == o.federal_efile &&
-          federal_efile_status == o.federal_efile_status &&
-          state_efile == o.state_efile &&
-          state_efile_status == o.state_efile_status &&
-          postal_mail == o.postal_mail &&
-          postal_mail_status == o.postal_mail_status &&
-          tin_match == o.tin_match &&
-          tin_match_status == o.tin_match_status &&
-          address_verification == o.address_verification &&
-          address_verification_status == o.address_verification_status &&
-          e_delivery_status == o.e_delivery_status &&
           reference_id == o.reference_id &&
-          email == o.email &&
-          tin_type == o.tin_type &&
-          fatca_filing_requirement == o.fatca_filing_requirement &&
           tin == o.tin &&
-          no_tin == o.no_tin &&
-          second_tin_notice == o.second_tin_notice &&
           recipient_name == o.recipient_name &&
+          tin_type == o.tin_type &&
           recipient_second_name == o.recipient_second_name &&
           address == o.address &&
           address2 == o.address2 &&
           city == o.city &&
           state == o.state &&
           zip == o.zip &&
-          non_us_province == o.non_us_province &&
-          country_code == o.country_code &&
+          email == o.email &&
           account_number == o.account_number &&
           office_code == o.office_code &&
+          non_us_province == o.non_us_province &&
+          country_code == o.country_code &&
+          federal_efile_date == o.federal_efile_date &&
+          postal_mail == o.postal_mail &&
+          state_efile_date == o.state_efile_date &&
+          recipient_edelivery_date == o.recipient_edelivery_date &&
+          tin_match == o.tin_match &&
+          no_tin == o.no_tin &&
+          address_verification == o.address_verification &&
+          state_and_local_withholding == o.state_and_local_withholding &&
+          second_tin_notice == o.second_tin_notice &&
+          federal_efile_status == o.federal_efile_status &&
+          state_efile_status == o.state_efile_status &&
+          postal_mail_status == o.postal_mail_status &&
+          tin_match_status == o.tin_match_status &&
+          address_verification_status == o.address_verification_status &&
+          e_delivery_status == o.e_delivery_status &&
           validation_errors == o.validation_errors &&
           created_at == o.created_at &&
-          updated_at == o.updated_at &&
-          state_and_local_withholding == o.state_and_local_withholding
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -723,7 +835,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [filer_type, payment_type, payment_settlement_entity_name_phone_number, gross_amount_payment_card, card_not_present_transactions, merchant_category_code, payment_transaction_number, federal_income_tax_withheld, january, february, march, april, may, june, july, august, sept, october, november, december, id, type, issuer_id, issuer_reference_id, issuer_tin, tax_year, federal_efile, federal_efile_status, state_efile, state_efile_status, postal_mail, postal_mail_status, tin_match, tin_match_status, address_verification, address_verification_status, e_delivery_status, reference_id, email, tin_type, fatca_filing_requirement, tin, no_tin, second_tin_notice, recipient_name, recipient_second_name, address, address2, city, state, zip, non_us_province, country_code, account_number, office_code, validation_errors, created_at, updated_at, state_and_local_withholding].hash
+      [filer_type, payment_type, payment_settlement_entity_name_phone_number, gross_amount_payment_card, card_not_present_transactions, merchant_category_code, payment_transaction_number, federal_income_tax_withheld, january, february, march, april, may, june, july, august, september, october, november, december, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, no_tin, address_verification, state_and_local_withholding, second_tin_notice, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at].hash
     end
 
     # Builds the object from hash
