@@ -39,7 +39,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '8e57d48c-bb4e-4088-9beb-bf2323243c9f', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '84a816ef-95df-4fb7-8d8a-95bc8a8d8fe9', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   create_company_request: AvalaraSdk::A1099::V2::CompanyCreateUpdateRequestModel.new({name: 'name_example', email: 'email_example', address: 'address_example', city: 'city_example', zip: 'zip_example', telephone: 'telephone_example', tin: 'tin_example', country_code: 'country_code_example'}) # CreateCompanyRequest | The company to create
 }
@@ -123,7 +123,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 id = 'id_example' # String | The company to delete
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '3e231f13-24a7-49dc-a92e-1e04f5d7ca28', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '22a14d95-22c8-4e2d-a6f9-a60235ff2fb6', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -210,7 +210,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: '0b03049b-b1d4-4b5c-83df-dba2d815fce0', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'b20f7fbd-d0ac-4f59-a75d-ca2afa4b1e91', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -298,7 +298,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 id = 'id_example' # String | Id of the company
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'b5657869-263a-424d-81ed-4f845a37bf20', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '06bf1c2a-d8be-473a-9d6d-a5100b9d7402', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -381,7 +381,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 id = 'id_example' # String | The ID of the company to update
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'e0cf793c-bc52-406b-9bdf-15b8e91e2ce8', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'b3aa843f-04a8-48cf-9a55-08fd136a6e0c', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   create_company_request: AvalaraSdk::A1099::V2::CompanyCreateUpdateRequestModel.new({name: 'name_example', email: 'email_example', address: 'address_example', city: 'city_example', zip: 'zip_example', telephone: 'telephone_example', tin: 'tin_example', country_code: 'country_code_example'}) # CreateCompanyRequest | The updated company data
 }
