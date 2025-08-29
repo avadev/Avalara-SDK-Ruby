@@ -299,6 +299,12 @@ module AvalaraSdk::A1099::V2
     # Certifies signer has the capacity to sign for the beneficial owner.
     attr_accessor :capacity_to_sign_certification
 
+    # The date when e-delivery was consented.
+    attr_accessor :e_delivery_consented_at
+
+    # The signature of the form.
+    attr_accessor :signature
+
     # The ID of the associated company.
     attr_accessor :company_id
 
@@ -307,12 +313,6 @@ module AvalaraSdk::A1099::V2
 
     # The email address of the individual associated with the form.
     attr_accessor :email
-
-    # The date when e-delivery was consented.
-    attr_accessor :e_delivery_consented_at
-
-    # The signature of the form.
-    attr_accessor :signature
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -435,11 +435,11 @@ module AvalaraSdk::A1099::V2
         :'substantial_us_owners' => :'substantialUsOwners',
         :'signer_name' => :'signerName',
         :'capacity_to_sign_certification' => :'capacityToSignCertification',
+        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
+        :'signature' => :'signature',
         :'company_id' => :'companyId',
         :'reference_id' => :'referenceId',
-        :'email' => :'email',
-        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
-        :'signature' => :'signature'
+        :'email' => :'email'
       }
     end
 
@@ -547,11 +547,11 @@ module AvalaraSdk::A1099::V2
         :'substantial_us_owners' => :'Array<SubstantialUsOwnerRequest>',
         :'signer_name' => :'String',
         :'capacity_to_sign_certification' => :'Boolean',
+        :'e_delivery_consented_at' => :'Time',
+        :'signature' => :'String',
         :'company_id' => :'String',
         :'reference_id' => :'String',
-        :'email' => :'String',
-        :'e_delivery_consented_at' => :'Time',
-        :'signature' => :'String'
+        :'email' => :'String'
       }
     end
 
@@ -643,10 +643,10 @@ module AvalaraSdk::A1099::V2
         :'direct_reporting_nffe_sponsoring_entity',
         :'signer_name',
         :'capacity_to_sign_certification',
-        :'reference_id',
-        :'email',
         :'e_delivery_consented_at',
-        :'signature'
+        :'signature',
+        :'reference_id',
+        :'email'
       ])
     end
 
@@ -1058,8 +1058,18 @@ module AvalaraSdk::A1099::V2
         self.capacity_to_sign_certification = attributes[:'capacity_to_sign_certification']
       end
 
+      if attributes.key?(:'e_delivery_consented_at')
+        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
+      end
+
+      if attributes.key?(:'signature')
+        self.signature = attributes[:'signature']
+      end
+
       if attributes.key?(:'company_id')
         self.company_id = attributes[:'company_id']
+      else
+        self.company_id = nil
       end
 
       if attributes.key?(:'reference_id')
@@ -1069,14 +1079,6 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'email')
         self.email = attributes[:'email']
       end
-
-      if attributes.key?(:'e_delivery_consented_at')
-        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
-      end
-
-      if attributes.key?(:'signature')
-        self.signature = attributes[:'signature']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -1084,6 +1086,14 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @company_id.nil?
+        invalid_properties.push('invalid value for "company_id", company_id cannot be nil.')
+      end
+
+      if @company_id.to_s.length < 1
+        invalid_properties.push('invalid value for "company_id", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -1093,6 +1103,8 @@ module AvalaraSdk::A1099::V2
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
       return false unless type_validator.valid?(@type)
+      return false if @company_id.nil?
+      return false if @company_id.to_s.length < 1
       true
     end
 
@@ -1104,6 +1116,20 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] company_id Value to be assigned
+    def company_id=(company_id)
+      if company_id.nil?
+        fail ArgumentError, 'company_id cannot be nil'
+      end
+
+      if company_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "company_id", the character length must be great than or equal to 1.'
+      end
+
+      @company_id = company_id
     end
 
     # Checks equality by comparing each attribute.
@@ -1207,11 +1233,11 @@ module AvalaraSdk::A1099::V2
           substantial_us_owners == o.substantial_us_owners &&
           signer_name == o.signer_name &&
           capacity_to_sign_certification == o.capacity_to_sign_certification &&
+          e_delivery_consented_at == o.e_delivery_consented_at &&
+          signature == o.signature &&
           company_id == o.company_id &&
           reference_id == o.reference_id &&
-          email == o.email &&
-          e_delivery_consented_at == o.e_delivery_consented_at &&
-          signature == o.signature
+          email == o.email
     end
 
     # @see the `==` method
@@ -1223,7 +1249,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, name, citizenship_country, disregarded_entity, entity_type, making_treaty_claim, fatca_status, residence_address, residence_city, residence_state, residence_zip, residence_country, residence_is_mailing, mailing_address, mailing_city, mailing_state, mailing_zip, mailing_country, tin, giin, foreign_tin_not_required, foreign_tin, reference_number, disregarded_entity_fatca_status, disregarded_address, disregarded_city, disregarded_state, disregarded_zip, disregarded_country, disregarded_entity_giin, treaty_country_certification, treaty_country, benefit_limitation_certification, benefit_limitation, qualified_resident_status_certification, treaty_article, withholding_rate, income_type, treaty_reasons, ffi_sponsoring_entity, investment_entity_certification, controlled_foreign_corporation_certification, compliant_nonregistering_local_bank_certification, compliant_ffi_low_value_accounts_certification, sponsored_closely_held_entity_sponsoring_entity, sponsored_closely_held_investment_vehicle_certification, compliant_limited_life_debt_entity_certification, investment_entity_no_financial_accounts_certification, owner_documented_ffi_certification, owner_documented_ffi_reporting_statement_certification, owner_documented_ffi_auditor_letter_certification, owner_documented_ffi_trust_beneficiaries_certification, restricted_distributor_certification, restricted_distributor_agreement_certification, restricted_distributor_preexisting_sales_compliance_certification, nonreporting_iga_ffi_certification, iga_country, iga_model, iga_legal_status_treatment, iga_ffi_trustee_or_sponsor, iga_ffi_trustee_is_foreign, non_commercial_financial_activity_certification, internation_organization_certification, intergovernmental_organization_certification, treaty_qualified_pension_fund_certification, qualified_retirement_fund_certification, narrow_participation_retirement_fund_certification, section401_a_equivalent_pension_plan_certification, investment_entity_for_retirement_funds_certification, exempt_beneficial_owner_sponsored_retirement_fund_certification, exempt_beneficial_owner_owned_investment_entity_certification, territory_financial_institution_certification, excepted_nonfinancial_group_entity_certification, excepted_nonfinancial_start_up_certification, startup_formation_or_resolution_date, excepted_nonfinancial_entity_in_liquidation_or_bankruptcy_certification, nonfinancial_entity_filing_date, section501_c_organization_certification, determination_letter_date, nonprofit_organization_certification, publicly_traded_nffe_certification, publicly_traded_nffe_securities_market, nffe_affiliate_of_publicly_traded_entity_certification, publicly_traded_entity, nffe_affiliate_of_publicly_traded_entity_securities_market, excepted_territory_nffe_certification, active_nffe_certification, passive_nffe_certification, passive_nffe_no_substantial_us_owners_certification, passive_nffe_substantial_us_owners_provided_certification, excepted_inter_affiliate_ffi_certification, sponsored_direct_reporting_nffe_certification, direct_reporting_nffe_sponsoring_entity, substantial_us_owners, signer_name, capacity_to_sign_certification, company_id, reference_id, email, e_delivery_consented_at, signature].hash
+      [type, name, citizenship_country, disregarded_entity, entity_type, making_treaty_claim, fatca_status, residence_address, residence_city, residence_state, residence_zip, residence_country, residence_is_mailing, mailing_address, mailing_city, mailing_state, mailing_zip, mailing_country, tin, giin, foreign_tin_not_required, foreign_tin, reference_number, disregarded_entity_fatca_status, disregarded_address, disregarded_city, disregarded_state, disregarded_zip, disregarded_country, disregarded_entity_giin, treaty_country_certification, treaty_country, benefit_limitation_certification, benefit_limitation, qualified_resident_status_certification, treaty_article, withholding_rate, income_type, treaty_reasons, ffi_sponsoring_entity, investment_entity_certification, controlled_foreign_corporation_certification, compliant_nonregistering_local_bank_certification, compliant_ffi_low_value_accounts_certification, sponsored_closely_held_entity_sponsoring_entity, sponsored_closely_held_investment_vehicle_certification, compliant_limited_life_debt_entity_certification, investment_entity_no_financial_accounts_certification, owner_documented_ffi_certification, owner_documented_ffi_reporting_statement_certification, owner_documented_ffi_auditor_letter_certification, owner_documented_ffi_trust_beneficiaries_certification, restricted_distributor_certification, restricted_distributor_agreement_certification, restricted_distributor_preexisting_sales_compliance_certification, nonreporting_iga_ffi_certification, iga_country, iga_model, iga_legal_status_treatment, iga_ffi_trustee_or_sponsor, iga_ffi_trustee_is_foreign, non_commercial_financial_activity_certification, internation_organization_certification, intergovernmental_organization_certification, treaty_qualified_pension_fund_certification, qualified_retirement_fund_certification, narrow_participation_retirement_fund_certification, section401_a_equivalent_pension_plan_certification, investment_entity_for_retirement_funds_certification, exempt_beneficial_owner_sponsored_retirement_fund_certification, exempt_beneficial_owner_owned_investment_entity_certification, territory_financial_institution_certification, excepted_nonfinancial_group_entity_certification, excepted_nonfinancial_start_up_certification, startup_formation_or_resolution_date, excepted_nonfinancial_entity_in_liquidation_or_bankruptcy_certification, nonfinancial_entity_filing_date, section501_c_organization_certification, determination_letter_date, nonprofit_organization_certification, publicly_traded_nffe_certification, publicly_traded_nffe_securities_market, nffe_affiliate_of_publicly_traded_entity_certification, publicly_traded_entity, nffe_affiliate_of_publicly_traded_entity_securities_market, excepted_territory_nffe_certification, active_nffe_certification, passive_nffe_certification, passive_nffe_no_substantial_us_owners_certification, passive_nffe_substantial_us_owners_provided_certification, excepted_inter_affiliate_ffi_certification, sponsored_direct_reporting_nffe_certification, direct_reporting_nffe_sponsoring_entity, substantial_us_owners, signer_name, capacity_to_sign_certification, e_delivery_consented_at, signature, company_id, reference_id, email].hash
     end
 
     # Builds the object from hash

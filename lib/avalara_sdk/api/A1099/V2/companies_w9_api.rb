@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.8.2")
+        api_client.set_sdk_version("25.8.3")
         @api_client = api_client
       end
 
@@ -227,8 +227,8 @@ module AvalaraSdk::A1099
     
       # Create a company
       # Create a company.
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The company to create
-      # @return [CompanyResponseModel]
+      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param create_company_request [CreateCompanyRequest] The company to create
+      # @return [CompanyResponse]
       def create_company(request_parameters)
         data, _status_code, _headers = create_company_with_http_info(request_parameters)
         data
@@ -240,8 +240,8 @@ module AvalaraSdk::A1099
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The company to create    
-      # @return [Array<(CompanyResponseModel, Integer, Hash)>] CompanyResponseModel data, response status code and response headers
+      # @param create_company_request [CreateCompanyRequest] The company to create    
+      # @return [Array<(CompanyResponse, Integer, Hash)>] CompanyResponse data, response status code and response headers
       def create_company_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -249,7 +249,7 @@ module AvalaraSdk::A1099
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
         x_avalara_client = request_parameters.get_x_avalara_client()
-        company_create_update_request_model = request_parameters.get_company_create_update_request_model()
+        create_company_request = request_parameters.get_create_company_request()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling CompaniesW9Api.create_company"
@@ -283,10 +283,10 @@ module AvalaraSdk::A1099
         form_params = {}
 
         # http body (model)
-        post_body =  @api_client.object_to_http_body(company_create_update_request_model) || {}
+        post_body =  @api_client.object_to_http_body(create_company_request) || {}
 
         # return_type
-        return_type = 'CompanyResponseModel'
+        return_type = 'CompanyResponse'
 
         # auth_names
         auth_names = ['bearer']
@@ -596,8 +596,8 @@ module AvalaraSdk::A1099
 
       # Update a company
       # Update a company.
-      # @param id [String] The ID of the company to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The updated company data
-      # @return [CompanyResponseModel]
+      # @param id [String] The ID of the company to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param create_company_request [CreateCompanyRequest] The updated company data
+      # @return [CompanyResponse]
       def update_company(request_parameters)
         data, _status_code, _headers = update_company_with_http_info(request_parameters)
         data
@@ -610,8 +610,8 @@ module AvalaraSdk::A1099
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @param company_create_update_request_model [CompanyCreateUpdateRequestModel] The updated company data    
-      # @return [Array<(CompanyResponseModel, Integer, Hash)>] CompanyResponseModel data, response status code and response headers
+      # @param create_company_request [CreateCompanyRequest] The updated company data    
+      # @return [Array<(CompanyResponse, Integer, Hash)>] CompanyResponse data, response status code and response headers
       def update_company_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -620,7 +620,7 @@ module AvalaraSdk::A1099
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
         x_avalara_client = request_parameters.get_x_avalara_client()
-        company_create_update_request_model = request_parameters.get_company_create_update_request_model()
+        create_company_request = request_parameters.get_create_company_request()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling CompaniesW9Api.update_company"
@@ -658,10 +658,10 @@ module AvalaraSdk::A1099
         form_params = {}
 
         # http body (model)
-        post_body =  @api_client.object_to_http_body(company_create_update_request_model) || {}
+        post_body =  @api_client.object_to_http_body(create_company_request) || {}
 
         # return_type
-        return_type = 'CompanyResponseModel'
+        return_type = 'CompanyResponse'
 
         # auth_names
         auth_names = ['bearer']
@@ -692,7 +692,7 @@ module AvalaraSdk::A1099
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
-    # @param  CompanyCreateUpdateRequestModel $company_create_update_request_model The company to create (optional)
+    # @param  CreateCompanyRequest $create_company_request The company to create (optional)
     #
     class CreateCompanyRequestSdk
         attr_accessor :avalara_version
@@ -701,7 +701,7 @@ module AvalaraSdk::A1099
 
         attr_accessor :x_avalara_client
 
-        attr_accessor :company_create_update_request_model
+        attr_accessor :create_company_request
 
         def initialize()
         end
@@ -730,12 +730,12 @@ module AvalaraSdk::A1099
             @x_avalara_client = x_avalara_client
         end
 
-        def get_company_create_update_request_model()
-            return @company_create_update_request_model
+        def get_create_company_request()
+            return @create_company_request
         end
 
-        def set_company_create_update_request_model(company_create_update_request_model)
-            @company_create_update_request_model = company_create_update_request_model
+        def set_create_company_request(create_company_request)
+            @create_company_request = create_company_request
         end
     end
     # Represents the Request object for the DeleteCompany API
@@ -952,7 +952,7 @@ module AvalaraSdk::A1099
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
-    # @param  CompanyCreateUpdateRequestModel $company_create_update_request_model The updated company data (optional)
+    # @param  CreateCompanyRequest $create_company_request The updated company data (optional)
     #
     class UpdateCompanyRequestSdk
         attr_accessor :id
@@ -963,7 +963,7 @@ module AvalaraSdk::A1099
 
         attr_accessor :x_avalara_client
 
-        attr_accessor :company_create_update_request_model
+        attr_accessor :create_company_request
 
         def initialize()
         end
@@ -1000,12 +1000,12 @@ module AvalaraSdk::A1099
             @x_avalara_client = x_avalara_client
         end
 
-        def get_company_create_update_request_model()
-            return @company_create_update_request_model
+        def get_create_company_request()
+            return @create_company_request
         end
 
-        def set_company_create_update_request_model(company_create_update_request_model)
-            @company_create_update_request_model = company_create_update_request_model
+        def set_create_company_request(create_company_request)
+            @create_company_request = create_company_request
         end
     end
   end

@@ -11,6 +11,12 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class W9FormBaseRequest
+    # The date when e-delivery was consented.
+    attr_accessor :e_delivery_consented_at
+
+    # The signature of the form.
+    attr_accessor :signature
+
     # The form type.
     attr_accessor :type
 
@@ -22,12 +28,6 @@ module AvalaraSdk::A1099::V2
 
     # The email address of the individual associated with the form.
     attr_accessor :email
-
-    # The date when e-delivery was consented.
-    attr_accessor :e_delivery_consented_at
-
-    # The signature of the form.
-    attr_accessor :signature
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -54,12 +54,12 @@ module AvalaraSdk::A1099::V2
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
+        :'signature' => :'signature',
         :'type' => :'type',
         :'company_id' => :'companyId',
         :'reference_id' => :'referenceId',
-        :'email' => :'email',
-        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
-        :'signature' => :'signature'
+        :'email' => :'email'
       }
     end
 
@@ -71,23 +71,30 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'e_delivery_consented_at' => :'Time',
+        :'signature' => :'String',
         :'type' => :'String',
         :'company_id' => :'String',
         :'reference_id' => :'String',
-        :'email' => :'String',
-        :'e_delivery_consented_at' => :'Time',
-        :'signature' => :'String'
+        :'email' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'reference_id',
-        :'email',
         :'e_delivery_consented_at',
-        :'signature'
+        :'signature',
+        :'reference_id',
+        :'email'
       ])
+    end
+
+    # List of class defined in allOf (OpenAPI v3)
+    def self.openapi_all_of
+      [
+      :'W9FormBaseMinimalRequest'
+      ]
     end
 
     # Initializes the object
@@ -105,12 +112,22 @@ module AvalaraSdk::A1099::V2
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'e_delivery_consented_at')
+        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
+      end
+
+      if attributes.key?(:'signature')
+        self.signature = attributes[:'signature']
+      end
+
       if attributes.key?(:'type')
         self.type = attributes[:'type']
       end
 
       if attributes.key?(:'company_id')
         self.company_id = attributes[:'company_id']
+      else
+        self.company_id = nil
       end
 
       if attributes.key?(:'reference_id')
@@ -120,14 +137,6 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'email')
         self.email = attributes[:'email']
       end
-
-      if attributes.key?(:'e_delivery_consented_at')
-        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
-      end
-
-      if attributes.key?(:'signature')
-        self.signature = attributes[:'signature']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -135,6 +144,14 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
+      if @company_id.nil?
+        invalid_properties.push('invalid value for "company_id", company_id cannot be nil.')
+      end
+
+      if @company_id.to_s.length < 1
+        invalid_properties.push('invalid value for "company_id", the character length must be great than or equal to 1.')
+      end
+
       invalid_properties
     end
 
@@ -144,6 +161,8 @@ module AvalaraSdk::A1099::V2
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
       return false unless type_validator.valid?(@type)
+      return false if @company_id.nil?
+      return false if @company_id.to_s.length < 1
       true
     end
 
@@ -157,17 +176,31 @@ module AvalaraSdk::A1099::V2
       @type = type
     end
 
+    # Custom attribute writer method with validation
+    # @param [Object] company_id Value to be assigned
+    def company_id=(company_id)
+      if company_id.nil?
+        fail ArgumentError, 'company_id cannot be nil'
+      end
+
+      if company_id.to_s.length < 1
+        fail ArgumentError, 'invalid value for "company_id", the character length must be great than or equal to 1.'
+      end
+
+      @company_id = company_id
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          e_delivery_consented_at == o.e_delivery_consented_at &&
+          signature == o.signature &&
           type == o.type &&
           company_id == o.company_id &&
           reference_id == o.reference_id &&
-          email == o.email &&
-          e_delivery_consented_at == o.e_delivery_consented_at &&
-          signature == o.signature
+          email == o.email
     end
 
     # @see the `==` method
@@ -179,7 +212,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, company_id, reference_id, email, e_delivery_consented_at, signature].hash
+      [e_delivery_consented_at, signature, type, company_id, reference_id, email].hash
     end
 
     # Builds the object from hash

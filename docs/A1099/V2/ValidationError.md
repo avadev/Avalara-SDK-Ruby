@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **field** | **String** |  | [optional] |
-| **errors** | **Array&lt;String&gt;** |  | [optional] |
+| **field** | **String** | The field containing the error | [optional] |
+| **errors** | **Array&lt;String&gt;** | The list of error messages | [optional] |
 
 ## Example
 
