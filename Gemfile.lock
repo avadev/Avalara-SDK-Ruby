@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    avalara_sdk (25.8.2)
+    avalara_sdk (25.8.3)
       faraday (~> 1.0, >= 1.0.1)
 
 GEM
