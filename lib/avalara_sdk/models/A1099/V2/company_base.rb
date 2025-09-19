@@ -10,48 +10,78 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      class W9FormBaseMinimalRequest
-    # The form type.
-    attr_accessor :type
+      class CompanyBase
+    # Legal name. Not the DBA name.
+    attr_accessor :name
 
-    # The ID of the associated company. Required when creating a form.
-    attr_accessor :company_id
+    # Doing Business As (DBA) name or continuation of a long legal name.
+    attr_accessor :dba_name
 
-    # A reference identifier for the form.
-    attr_accessor :reference_id
-
-    # The email address of the individual associated with the form.
+    # Contact email address. For inquiries by vendors/employees.
     attr_accessor :email
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    # Address.
+    attr_accessor :address
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
+    # City.
+    attr_accessor :city
 
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Two-letter US state or Canadian province code (required for US/CA addresses).
+    attr_accessor :state
+
+    # ZIP/postal code.
+    attr_accessor :zip
+
+    # Contact phone number (must contain at least 10 digits, max 15 characters).
+    attr_accessor :telephone
+
+    # Federal Tax Identification Number (TIN). EIN/Tax ID (required for US companies).
+    attr_accessor :tin
+
+    # Internal reference ID. Never shown to any agency or recipient.
+    attr_accessor :reference_id
+
+    # Indicates whether the company authorizes IRS TIN matching.
+    attr_accessor :do_tin_match
+
+    # Group name for organizing companies (creates or finds group by name).
+    attr_accessor :group_name
+
+    # Province or region for non-US/CA addresses.
+    attr_accessor :foreign_province
+
+    # Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
+    attr_accessor :country_code
+
+    # Boolean to enable automatic reminder emails (default: false).
+    attr_accessor :resend_requests
+
+    # Days between reminder emails (7-365, required if resendRequests is true).
+    attr_accessor :resend_interval_days
+
+    # Maximum number of reminder attempts (1-52, required if resendRequests is true).
+    attr_accessor :max_reminder_attempts
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'company_id' => :'companyId',
+        :'name' => :'name',
+        :'dba_name' => :'dbaName',
+        :'email' => :'email',
+        :'address' => :'address',
+        :'city' => :'city',
+        :'state' => :'state',
+        :'zip' => :'zip',
+        :'telephone' => :'telephone',
+        :'tin' => :'tin',
         :'reference_id' => :'referenceId',
-        :'email' => :'email'
+        :'do_tin_match' => :'doTinMatch',
+        :'group_name' => :'groupName',
+        :'foreign_province' => :'foreignProvince',
+        :'country_code' => :'countryCode',
+        :'resend_requests' => :'resendRequests',
+        :'resend_interval_days' => :'resendIntervalDays',
+        :'max_reminder_attempts' => :'maxReminderAttempts'
       }
     end
 
@@ -63,18 +93,46 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'company_id' => :'String',
+        :'name' => :'String',
+        :'dba_name' => :'String',
+        :'email' => :'String',
+        :'address' => :'String',
+        :'city' => :'String',
+        :'state' => :'String',
+        :'zip' => :'String',
+        :'telephone' => :'String',
+        :'tin' => :'String',
         :'reference_id' => :'String',
-        :'email' => :'String'
+        :'do_tin_match' => :'Boolean',
+        :'group_name' => :'String',
+        :'foreign_province' => :'String',
+        :'country_code' => :'String',
+        :'resend_requests' => :'Boolean',
+        :'resend_interval_days' => :'Integer',
+        :'max_reminder_attempts' => :'Integer'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'dba_name',
+        :'email',
+        :'address',
+        :'city',
+        :'state',
+        :'zip',
+        :'telephone',
+        :'tin',
         :'reference_id',
-        :'email'
+        :'do_tin_match',
+        :'group_name',
+        :'foreign_province',
+        :'country_code',
+        :'resend_requests',
+        :'resend_interval_days',
+        :'max_reminder_attempts'
       ])
     end
 
@@ -82,31 +140,99 @@ module AvalaraSdk::A1099::V2
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::W9FormBaseMinimalRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::CompanyBase` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::W9FormBaseMinimalRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::CompanyBase`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
-      if attributes.key?(:'company_id')
-        self.company_id = attributes[:'company_id']
+      if attributes.key?(:'dba_name')
+        self.dba_name = attributes[:'dba_name']
+      end
+
+      if attributes.key?(:'email')
+        self.email = attributes[:'email']
+      else
+        self.email = nil
+      end
+
+      if attributes.key?(:'address')
+        self.address = attributes[:'address']
+      else
+        self.address = nil
+      end
+
+      if attributes.key?(:'city')
+        self.city = attributes[:'city']
+      else
+        self.city = nil
+      end
+
+      if attributes.key?(:'state')
+        self.state = attributes[:'state']
+      end
+
+      if attributes.key?(:'zip')
+        self.zip = attributes[:'zip']
+      else
+        self.zip = nil
+      end
+
+      if attributes.key?(:'telephone')
+        self.telephone = attributes[:'telephone']
+      else
+        self.telephone = nil
+      end
+
+      if attributes.key?(:'tin')
+        self.tin = attributes[:'tin']
+      else
+        self.tin = nil
       end
 
       if attributes.key?(:'reference_id')
         self.reference_id = attributes[:'reference_id']
       end
 
-      if attributes.key?(:'email')
-        self.email = attributes[:'email']
+      if attributes.key?(:'do_tin_match')
+        self.do_tin_match = attributes[:'do_tin_match']
+      end
+
+      if attributes.key?(:'group_name')
+        self.group_name = attributes[:'group_name']
+      end
+
+      if attributes.key?(:'foreign_province')
+        self.foreign_province = attributes[:'foreign_province']
+      end
+
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
+      else
+        self.country_code = nil
+      end
+
+      if attributes.key?(:'resend_requests')
+        self.resend_requests = attributes[:'resend_requests']
+      end
+
+      if attributes.key?(:'resend_interval_days')
+        self.resend_interval_days = attributes[:'resend_interval_days']
+      end
+
+      if attributes.key?(:'max_reminder_attempts')
+        self.max_reminder_attempts = attributes[:'max_reminder_attempts']
       end
     end
 
@@ -122,19 +248,7 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
-      return false unless type_validator.valid?(@type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -142,10 +256,23 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          company_id == o.company_id &&
+          name == o.name &&
+          dba_name == o.dba_name &&
+          email == o.email &&
+          address == o.address &&
+          city == o.city &&
+          state == o.state &&
+          zip == o.zip &&
+          telephone == o.telephone &&
+          tin == o.tin &&
           reference_id == o.reference_id &&
-          email == o.email
+          do_tin_match == o.do_tin_match &&
+          group_name == o.group_name &&
+          foreign_province == o.foreign_province &&
+          country_code == o.country_code &&
+          resend_requests == o.resend_requests &&
+          resend_interval_days == o.resend_interval_days &&
+          max_reminder_attempts == o.max_reminder_attempts
     end
 
     # @see the `==` method
@@ -157,7 +284,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, company_id, reference_id, email].hash
+      [name, dba_name, email, address, city, state, zip, telephone, tin, reference_id, do_tin_match, group_name, foreign_province, country_code, resend_requests, resend_interval_days, max_reminder_attempts].hash
     end
 
     # Builds the object from hash

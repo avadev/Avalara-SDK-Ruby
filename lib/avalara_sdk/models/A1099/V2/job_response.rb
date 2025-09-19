@@ -285,12 +285,6 @@ module AvalaraSdk::A1099::V2
       @status = status
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] processed_forms Value to be assigned
-    def processed_forms=(processed_forms)
-      @processed_forms = processed_forms
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

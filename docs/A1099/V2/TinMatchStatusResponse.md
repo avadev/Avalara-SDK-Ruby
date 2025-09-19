@@ -15,7 +15,7 @@ require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::TinMatchStatusResponse.new(
   time: null,
-  status: None,
+  status: null,
   irs_response: null
 )
 ```

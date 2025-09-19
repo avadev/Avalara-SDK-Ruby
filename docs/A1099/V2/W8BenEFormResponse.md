@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **type** | **String** | The form type (always \&quot;W8BenE\&quot; for this model). | [optional][readonly] |
 | **name** | **String** | The name of the individual or entity associated with the form. | [optional] |
 | **citizenship_country** | **String** | The country of citizenship. | [optional] |
 | **disregarded_entity** | **String** | The name of the disregarded entity receiving the payment (if applicable). | [optional] |
@@ -21,7 +22,7 @@
 | **mailing_state** | **String** | The state of the mailing address. | [optional] |
 | **mailing_zip** | **String** | The ZIP code of the mailing address. | [optional] |
 | **mailing_country** | **String** | The country of the mailing address. | [optional] |
-| **tin_type** | **String** | The type of TIN provided. | [optional] |
+| **tin_type** | **String** | Tax Identification Number (TIN) type. | [optional] |
 | **tin** | **String** | The taxpayer identification number (TIN). | [optional] |
 | **giin** | **String** | The global intermediary identification number (GIIN). | [optional] |
 | **foreign_tin_not_required** | **Boolean** | Indicates whether a foreign TIN is not required. | [optional] |
@@ -100,6 +101,19 @@
 | **substantial_us_owners** | [**Array&lt;SubstantialUsOwnerResponse&gt;**](SubstantialUsOwnerResponse.md) | The list of substantial U.S. owners of passive NFFE. | [optional] |
 | **signer_name** | **String** | The name of the signer. | [optional] |
 | **capacity_to_sign_certification** | **Boolean** | Certifies signer has the capacity to sign for the beneficial owner. | [optional] |
+| **id** | **String** | The unique identifier for the form. | [optional] |
+| **entry_status** | [**EntryStatusResponse**](EntryStatusResponse.md) | The entry status information for the form. | [optional] |
+| **reference_id** | **String** | A reference identifier for the form. | [optional] |
+| **company_id** | **String** | The ID of the associated company. | [optional] |
+| **display_name** | **String** | The display name associated with the form. | [optional] |
+| **email** | **String** | The email address of the individual associated with the form. | [optional] |
+| **archived** | **Boolean** | Indicates whether the form is archived. | [optional] |
+| **ancestor_id** | **String** | Form ID of previous version. | [optional] |
+| **signature** | **String** | The signature of the form. | [optional] |
+| **signed_date** | **Time** | The date the form was signed. | [optional] |
+| **e_delivery_consented_at** | **Time** | The date when e-delivery was consented. | [optional] |
+| **created_at** | **Time** | The creation date of the form. | [optional] |
+| **updated_at** | **Time** | The last updated date of the form. | [optional] |
 
 ## Example
 
@@ -107,29 +121,30 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::W8BenEFormResponse.new(
-  name: Global Enterprises LLC,
-  citizenship_country: USA,
-  disregarded_entity: Subsidiary LLC,
-  entity_type: Corporation,
-  making_treaty_claim: false,
-  fatca_status: Active,
-  residence_address: 123 International Blvd,
-  residence_city: Metropolis,
-  residence_state: NY,
-  residence_zip: 10118,
-  residence_country: USA,
-  residence_is_mailing: false,
-  mailing_address: P.O. Box 123,
-  mailing_city: Metropolis,
-  mailing_state: NY,
-  mailing_zip: 10119,
-  mailing_country: USA,
-  tin_type: ,
-  tin: 123-45-6789,
-  giin: GIIN12345678,
-  foreign_tin_not_required: true,
+  type: null,
+  name: null,
+  citizenship_country: null,
+  disregarded_entity: null,
+  entity_type: null,
+  making_treaty_claim: null,
+  fatca_status: null,
+  residence_address: null,
+  residence_city: null,
+  residence_state: null,
+  residence_zip: null,
+  residence_country: null,
+  residence_is_mailing: null,
+  mailing_address: null,
+  mailing_city: null,
+  mailing_state: null,
+  mailing_zip: null,
+  mailing_country: null,
+  tin_type: null,
+  tin: null,
+  giin: null,
+  foreign_tin_not_required: null,
   foreign_tin: null,
-  reference_number: W8BENE12345,
+  reference_number: null,
   disregarded_entity_fatca_status: null,
   disregarded_address: null,
   disregarded_city: null,
@@ -137,72 +152,85 @@ instance = AvalaraSdk::A1099::V2::W8BenEFormResponse.new(
   disregarded_zip: null,
   disregarded_country: null,
   disregarded_entity_giin: null,
-  treaty_country_certification: false,
+  treaty_country_certification: null,
   treaty_country: null,
-  benefit_limitation_certification: false,
+  benefit_limitation_certification: null,
   benefit_limitation: null,
-  qualified_resident_status_certification: false,
+  qualified_resident_status_certification: null,
   treaty_article: null,
   withholding_rate: null,
   income_type: null,
   treaty_reasons: null,
   ffi_sponsoring_entity: null,
-  investment_entity_certification: false,
-  controlled_foreign_corporation_certification: false,
-  compliant_nonregistering_local_bank_certification: false,
-  compliant_ffi_low_value_accounts_certification: false,
+  investment_entity_certification: null,
+  controlled_foreign_corporation_certification: null,
+  compliant_nonregistering_local_bank_certification: null,
+  compliant_ffi_low_value_accounts_certification: null,
   sponsored_closely_held_entity_sponsoring_entity: null,
-  sponsored_closely_held_investment_vehicle_certification: false,
-  compliant_limited_life_debt_entity_certification: false,
-  investment_entity_no_financial_accounts_certification: false,
-  owner_documented_ffi_certification: false,
-  owner_documented_ffi_reporting_statement_certification: false,
-  owner_documented_ffi_auditor_letter_certification: false,
-  owner_documented_ffi_trust_beneficiaries_certification: false,
-  restricted_distributor_certification: false,
-  restricted_distributor_agreement_certification: false,
-  restricted_distributor_preexisting_sales_compliance_certification: false,
-  nonreporting_iga_ffi_certification: false,
+  sponsored_closely_held_investment_vehicle_certification: null,
+  compliant_limited_life_debt_entity_certification: null,
+  investment_entity_no_financial_accounts_certification: null,
+  owner_documented_ffi_certification: null,
+  owner_documented_ffi_reporting_statement_certification: null,
+  owner_documented_ffi_auditor_letter_certification: null,
+  owner_documented_ffi_trust_beneficiaries_certification: null,
+  restricted_distributor_certification: null,
+  restricted_distributor_agreement_certification: null,
+  restricted_distributor_preexisting_sales_compliance_certification: null,
+  nonreporting_iga_ffi_certification: null,
   iga_country: null,
   iga_model: null,
   iga_legal_status_treatment: null,
   iga_ffi_trustee_or_sponsor: null,
   iga_ffi_trustee_is_foreign: null,
-  non_commercial_financial_activity_certification: false,
-  internation_organization_certification: false,
-  intergovernmental_organization_certification: false,
-  treaty_qualified_pension_fund_certification: false,
-  qualified_retirement_fund_certification: false,
-  narrow_participation_retirement_fund_certification: false,
-  section401_a_equivalent_pension_plan_certification: false,
-  investment_entity_for_retirement_funds_certification: false,
-  exempt_beneficial_owner_sponsored_retirement_fund_certification: false,
-  exempt_beneficial_owner_owned_investment_entity_certification: false,
-  territory_financial_institution_certification: false,
-  excepted_nonfinancial_group_entity_certification: false,
-  excepted_nonfinancial_start_up_certification: false,
+  non_commercial_financial_activity_certification: null,
+  internation_organization_certification: null,
+  intergovernmental_organization_certification: null,
+  treaty_qualified_pension_fund_certification: null,
+  qualified_retirement_fund_certification: null,
+  narrow_participation_retirement_fund_certification: null,
+  section401_a_equivalent_pension_plan_certification: null,
+  investment_entity_for_retirement_funds_certification: null,
+  exempt_beneficial_owner_sponsored_retirement_fund_certification: null,
+  exempt_beneficial_owner_owned_investment_entity_certification: null,
+  territory_financial_institution_certification: null,
+  excepted_nonfinancial_group_entity_certification: null,
+  excepted_nonfinancial_start_up_certification: null,
   startup_formation_or_resolution_date: null,
-  excepted_nonfinancial_entity_in_liquidation_or_bankruptcy_certification: false,
+  excepted_nonfinancial_entity_in_liquidation_or_bankruptcy_certification: null,
   nonfinancial_entity_filing_date: null,
-  section501_c_organization_certification: false,
+  section501_c_organization_certification: null,
   determination_letter_date: null,
-  nonprofit_organization_certification: false,
-  publicly_traded_nffe_certification: false,
+  nonprofit_organization_certification: null,
+  publicly_traded_nffe_certification: null,
   publicly_traded_nffe_securities_market: null,
-  nffe_affiliate_of_publicly_traded_entity_certification: false,
+  nffe_affiliate_of_publicly_traded_entity_certification: null,
   publicly_traded_entity: null,
   nffe_affiliate_of_publicly_traded_entity_securities_market: null,
-  excepted_territory_nffe_certification: false,
-  active_nffe_certification: false,
-  passive_nffe_certification: false,
-  passive_nffe_no_substantial_us_owners_certification: false,
-  passive_nffe_substantial_us_owners_provided_certification: false,
-  excepted_inter_affiliate_ffi_certification: false,
-  sponsored_direct_reporting_nffe_certification: false,
+  excepted_territory_nffe_certification: null,
+  active_nffe_certification: null,
+  passive_nffe_certification: null,
+  passive_nffe_no_substantial_us_owners_certification: null,
+  passive_nffe_substantial_us_owners_provided_certification: null,
+  excepted_inter_affiliate_ffi_certification: null,
+  sponsored_direct_reporting_nffe_certification: null,
   direct_reporting_nffe_sponsoring_entity: null,
-  substantial_us_owners: [],
+  substantial_us_owners: null,
   signer_name: null,
-  capacity_to_sign_certification: false
+  capacity_to_sign_certification: null,
+  id: null,
+  entry_status: null,
+  reference_id: null,
+  company_id: null,
+  display_name: null,
+  email: null,
+  archived: null,
+  ancestor_id: null,
+  signature: null,
+  signed_date: null,
+  e_delivery_consented_at: null,
+  created_at: null,
+  updated_at: null
 )
 ```
 

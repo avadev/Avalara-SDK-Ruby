@@ -9,7 +9,7 @@
 | **employee_first_name** | **String** | The first name of the employee. |  |
 | **employee_last_name** | **String** | The last name of the employee. |  |
 | **office_code** | **String** | The office code associated with the form. | [optional] |
-| **company_id** | **String** | The ID of the associated company. |  |
+| **company_id** | **String** | The ID of the associated company. Required when creating a form. | [optional] |
 | **reference_id** | **String** | A reference identifier for the form. | [optional] |
 
 ## Example
@@ -18,7 +18,7 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::W4FormMinimalRequest.new(
-  type: W4,
+  type: null,
   email: null,
   employee_first_name: null,
   employee_last_name: null,

@@ -39,7 +39,7 @@ module AvalaraSdk::A1099::V2
     # Covered individuals information
     attr_accessor :covered_individuals
 
-    # Form type
+    # Form type.
     attr_accessor :type
 
     # Form ID. Unique identifier set when the record is created.
@@ -48,13 +48,13 @@ module AvalaraSdk::A1099::V2
     # Issuer ID - only required when creating forms
     attr_accessor :issuer_id
 
-    # Issuer Reference ID - only required when creating forms
+    # Issuer Reference ID - only required when creating forms via $bulk-upsert
     attr_accessor :issuer_reference_id
 
     # Issuer TIN - readonly
     attr_accessor :issuer_tin
 
-    # Tax Year - only required when creating forms
+    # Tax Year - only required when creating forms via $bulk-upsert
     attr_accessor :tax_year
 
     # Internal reference ID. Never shown to any agency or recipient.
@@ -66,7 +66,7 @@ module AvalaraSdk::A1099::V2
     # Recipient name
     attr_accessor :recipient_name
 
-    # Type of TIN (Tax ID Number)
+    # Tax Identification Number (TIN) type.  Available values: - EIN: Employer Identification Number - SSN: Social Security Number - ITIN: Individual Taxpayer Identification Number - ATIN: Adoption Taxpayer Identification Number
     attr_accessor :tin_type
 
     # Recipient second name
@@ -102,16 +102,16 @@ module AvalaraSdk::A1099::V2
     # Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
     attr_accessor :country_code
 
-    # Date when federal e-filing should be scheduled for this form
+    # Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
     attr_accessor :federal_efile_date
 
     # Boolean indicating that postal mailing to the recipient should be scheduled for this form
     attr_accessor :postal_mail
 
-    # Date when state e-filing should be scheduled for this form
+    # Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
     attr_accessor :state_efile_date
 
-    # Date when recipient e-delivery should be scheduled for this form
+    # Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
     attr_accessor :recipient_edelivery_date
 
     # Boolean indicating that TIN Matching should be scheduled for this form
@@ -129,22 +129,22 @@ module AvalaraSdk::A1099::V2
     # Second TIN notice
     attr_accessor :second_tin_notice
 
-    # Federal e-file status
+    # Federal e-file status.  Available values:  - unscheduled: Form has not been scheduled for federal e-filing  - scheduled: Form is scheduled for federal e-filing  - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - sent: Form has been sent to the IRS  - accepted: Form was accepted by the IRS  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - corrected: A correction has been sent to the IRS  - corrected_accepted: Correction was accepted by the IRS  - rejected: Form was rejected by the IRS  - corrected_rejected: Correction was rejected by the IRS  - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
     attr_accessor :federal_efile_status
 
-    # State e-file status
+    # State e-file status.  Available values:  - unscheduled: Form has not been scheduled for state e-filing  - scheduled: Form is scheduled for state e-filing  - airlocked: Form is in process of being uploaded to the state  - sent: Form has been sent to the state  - rejected: Form was rejected by the state  - accepted: Form was accepted by the state  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlocked: Correction is in process of being uploaded to the state  - corrected_sent: Correction has been sent to the state  - corrected_rejected: Correction was rejected by the state  - corrected_accepted: Correction was accepted by the state
     attr_accessor :state_efile_status
 
-    # Postal mail to recipient status
+    # Postal mail to recipient status.  Available values:  - unscheduled: Postal mail has not been scheduled  - pending: Postal mail is pending to be sent  - sent: Postal mail has been sent  - delivered: Postal mail has been delivered
     attr_accessor :postal_mail_status
 
-    # TIN Match status
+    # TIN Match status.  Available values:  - none: TIN matching has not been performed  - pending: TIN matching request is pending  - matched: Name/TIN combination matches IRS records  - unknown: TIN is missing, invalid, or request contains errors  - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
     attr_accessor :tin_match_status
 
-    # Address verification status
+    # Address verification status.  Available values:  - unknown: Address verification has not been checked  - pending: Address verification is in progress  - failed: Address verification failed  - incomplete: Address verification is incomplete  - unchanged: User declined address changes  - verified: Address has been verified and accepted
     attr_accessor :address_verification_status
 
-    # EDelivery status
+    # EDelivery status.  Available values:  - unscheduled: E-delivery has not been scheduled  - scheduled: E-delivery is scheduled to be sent  - sent: E-delivery has been sent to recipient  - bounced: E-delivery bounced back (invalid email)  - refused: E-delivery was refused by recipient  - bad_verify: E-delivery failed verification  - accepted: E-delivery was accepted by recipient  - bad_verify_limit: E-delivery failed verification limit reached  - second_delivery: Second e-delivery attempt  - undelivered: E-delivery is undelivered (temporary state allowing resend)
     attr_accessor :e_delivery_status
 
     # Validation errors
@@ -329,6 +329,7 @@ module AvalaraSdk::A1099::V2
         :'no_tin',
         :'address_verification',
         :'state_and_local_withholding',
+        :'second_tin_notice',
         :'federal_efile_status',
         :'state_efile_status',
         :'postal_mail_status',
@@ -604,9 +605,9 @@ module AvalaraSdk::A1099::V2
       return false unless plan_start_month_validator.valid?(@plan_start_month)
       return false if @offer_and_coverages.nil?
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
+      type_validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B", "Form1042S", "Form1095C", "Form1099Int"])
       return false unless type_validator.valid?(@type)
-      tin_type_validator = EnumAttributeValidator.new('String', ["Empty", "EIN", "SSN", "ITIN", "ATIN"])
+      tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
       true
     end
@@ -621,30 +622,10 @@ module AvalaraSdk::A1099::V2
       @plan_start_month = plan_start_month
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] offer_and_coverages Value to be assigned
-    def offer_and_coverages=(offer_and_coverages)
-      if offer_and_coverages.nil?
-        fail ArgumentError, 'offer_and_coverages cannot be nil'
-      end
-
-      @offer_and_coverages = offer_and_coverages
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] covered_individuals Value to be assigned
-    def covered_individuals=(covered_individuals)
-      if covered_individuals.nil?
-        fail ArgumentError, 'covered_individuals cannot be nil'
-      end
-
-      @covered_individuals = covered_individuals
-    end
-
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
+      validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B", "Form1042S", "Form1095C", "Form1099Int"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -654,23 +635,11 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tin_type Object to be assigned
     def tin_type=(tin_type)
-      validator = EnumAttributeValidator.new('String', ["Empty", "EIN", "SSN", "ITIN", "ATIN"])
+      validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       unless validator.valid?(tin_type)
         fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
       end
       @tin_type = tin_type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] state_efile_status Value to be assigned
-    def state_efile_status=(state_efile_status)
-      @state_efile_status = state_efile_status
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] validation_errors Value to be assigned
-    def validation_errors=(validation_errors)
-      @validation_errors = validation_errors
     end
 
     # Checks equality by comparing each attribute.

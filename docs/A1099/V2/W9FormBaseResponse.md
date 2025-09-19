@@ -4,6 +4,7 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **type** | **String** | The form type. | [optional][readonly] |
 | **id** | **String** | The unique identifier for the form. | [optional] |
 | **entry_status** | [**EntryStatusResponse**](EntryStatusResponse.md) | The entry status information for the form. | [optional] |
 | **reference_id** | **String** | A reference identifier for the form. | [optional] |
@@ -17,7 +18,6 @@
 | **e_delivery_consented_at** | **Time** | The date when e-delivery was consented. | [optional] |
 | **created_at** | **Time** | The creation date of the form. | [optional] |
 | **updated_at** | **Time** | The last updated date of the form. | [optional] |
-| **type** | **String** | The type of the response object. | [optional] |
 
 ## Example
 
@@ -25,6 +25,7 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::W9FormBaseResponse.new(
+  type: null,
   id: null,
   entry_status: null,
   reference_id: null,
@@ -37,8 +38,7 @@ instance = AvalaraSdk::A1099::V2::W9FormBaseResponse.new(
   signed_date: null,
   e_delivery_consented_at: null,
   created_at: null,
-  updated_at: null,
-  type: null
+  updated_at: null
 )
 ```
 

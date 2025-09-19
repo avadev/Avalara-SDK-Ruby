@@ -23,7 +23,7 @@ module AvalaraSdk::A1099::V2
     # A reference number for the form.
     attr_accessor :reference_number
 
-    # The ID of the associated company.
+    # The ID of the associated company. Required when creating a form.
     attr_accessor :company_id
 
     # A reference identifier for the form.
@@ -132,8 +132,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'company_id')
         self.company_id = attributes[:'company_id']
-      else
-        self.company_id = nil
       end
 
       if attributes.key?(:'reference_id')
@@ -162,14 +160,6 @@ module AvalaraSdk::A1099::V2
         invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
       end
 
-      if @company_id.nil?
-        invalid_properties.push('invalid value for "company_id", company_id cannot be nil.')
-      end
-
-      if @company_id.to_s.length < 1
-        invalid_properties.push('invalid value for "company_id", the character length must be great than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -183,8 +173,6 @@ module AvalaraSdk::A1099::V2
       return false if @email.to_s.length < 1
       return false if @name.nil?
       return false if @name.to_s.length < 1
-      return false if @company_id.nil?
-      return false if @company_id.to_s.length < 1
       true
     end
 
@@ -224,20 +212,6 @@ module AvalaraSdk::A1099::V2
       end
 
       @name = name
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] company_id Value to be assigned
-    def company_id=(company_id)
-      if company_id.nil?
-        fail ArgumentError, 'company_id cannot be nil'
-      end
-
-      if company_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "company_id", the character length must be great than or equal to 1.'
-      end
-
-      @company_id = company_id
     end
 
     # Checks equality by comparing each attribute.

@@ -154,7 +154,7 @@ module AvalaraSdk::A1099::V2
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
-      :'CompanyCreateUpdateRequestModel'
+      :'CompanyBase'
       ]
     end
 

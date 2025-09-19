@@ -42,9 +42,9 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '876394c1-80f7-4f02-a857-3899965a96bf', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '96f3173e-05e5-496d-b7a2-8f3c8711164f', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  create_and_send_w9_form_email_request: AvalaraSdk::A1099::V2::W4FormMinimalRequest.new({email: 'email_example', employee_first_name: 'employee_first_name_example', employee_last_name: 'employee_last_name_example', company_id: 'company_id_example'}) # CreateAndSendW9FormEmailRequest | Form to be created
+  create_and_send_w9_form_email_request: AvalaraSdk::A1099::V2::W4FormMinimalRequest.new({email: 'email_example', employee_first_name: 'employee_first_name_example', employee_last_name: 'employee_last_name_example'}) # CreateAndSendW9FormEmailRequest | Form to be created
 }
 
 begin
@@ -125,9 +125,9 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '4f7d2a74-9904-4300-b8c4-d5eadabea39b', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '4fef31cf-2985-471b-83bb-59b4bf4cee0e', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  create_w9_form_request: AvalaraSdk::A1099::V2::W4FormRequest.new({company_id: 'company_id_example'}) # CreateW9FormRequest | Form to be created
+  create_w9_form_request: AvalaraSdk::A1099::V2::W4FormRequest.new({employee_first_name: 'employee_first_name_example', employee_last_name: 'employee_last_name_example', tin_type: 'tin_type_example', tin: 'tin_example'}) # CreateW9FormRequest | Form to be created
 }
 
 begin
@@ -209,7 +209,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | ID of the form to delete
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '897b8ec0-bd1d-404b-b128-05268ad1823d', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'b1cd71dd-2fd3-483d-b611-0dd8306b5201', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -291,7 +291,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | ID of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '5aacb16c-2a0a-4896-a0d2-a121f2b5d1d8', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '6d803604-fec0-4f42-9114-e77ddd25d823', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -379,7 +379,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: '779b71e3-fc48-49be-b680-e44e47b3d963', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '5473c6dd-8986-4b62-b027-9a94c94f9401', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -444,7 +444,7 @@ end
 
 Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form
 
-Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.   If the form is not in 'Requested' status, it will either use an existing descendant form   in 'Requested' status or create a new minimal form and send the email request.
+Send an email to the vendor/payee requesting they fill out a W9/W4/W8 form.  If the form is not in 'Requested' status, it will either use an existing descendant form  in 'Requested' status or create a new minimal form and send the email request.
 
 ### Examples
 
@@ -467,7 +467,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | The ID of the W9/W4/W8 form.
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '8f5afdc6-9616-494f-940c-c66b87b43d27', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '1204a47d-7c4d-4b63-8776-560f89e236e6', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -523,7 +523,7 @@ end
 
 ## update_w9_form
 
-> <IW9FormDataModelsOneOf> update_w9_form(id, avalara_version, opts)
+> <CreateW9Form201Response> update_w9_form(id, avalara_version, opts)
 
 Update a W9/W4/W8 form
 
@@ -550,9 +550,9 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | ID of the form to update
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'e0842c54-95c7-488a-882a-ce34cb46e87d', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '2f240777-dd4f-4aaf-b4b6-fcb22df6de90', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  iw9_form_data_models_one_of: AvalaraSdk::A1099::V2::W4FormDataModel.new # IW9FormDataModelsOneOf | Form to be updated
+  create_w9_form_request: AvalaraSdk::A1099::V2::W4FormRequest.new({employee_first_name: 'employee_first_name_example', employee_last_name: 'employee_last_name_example', tin_type: 'tin_type_example', tin: 'tin_example'}) # CreateW9FormRequest | Form to be updated
 }
 
 begin
@@ -568,7 +568,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IW9FormDataModelsOneOf>, Integer, Hash)> update_w9_form_with_http_info(id, avalara_version, opts)
+> <Array(<CreateW9Form201Response>, Integer, Hash)> update_w9_form_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
@@ -576,7 +576,7 @@ begin
   data, status_code, headers = api_instance.update_w9_form_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IW9FormDataModelsOneOf>
+  p data # => <CreateW9Form201Response>
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling FormsW9Api->update_w9_form_with_http_info: #{e}"
 end
@@ -590,11 +590,11 @@ end
 | **avalara_version** | **String** | API version |  |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
-| **iw9_form_data_models_one_of** | [**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md) | Form to be updated | [optional] |
+| **create_w9_form_request** | [**CreateW9FormRequest**](CreateW9FormRequest.md) | Form to be updated | [optional] |
 
 ### Return type
 
-[**IW9FormDataModelsOneOf**](IW9FormDataModelsOneOf.md)
+[**CreateW9Form201Response**](CreateW9Form201Response.md)
 
 ### Authorization
 
@@ -635,7 +635,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | Id of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'ba11f0c0-e9ed-4667-8137-0026b63b63cf', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'ba65d92c-2a2a-4b4e-9731-c7b385d7fb59', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   file: File.new('/path/to/some/file') # File | 
 }

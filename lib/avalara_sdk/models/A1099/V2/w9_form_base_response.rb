@@ -11,6 +11,9 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class W9FormBaseResponse
+    # The form type.
+    attr_accessor :type
+
     # The unique identifier for the form.
     attr_accessor :id
 
@@ -50,12 +53,32 @@ module AvalaraSdk::A1099::V2
     # The last updated date of the form.
     attr_accessor :updated_at
 
-    # The type of the response object.
-    attr_accessor :type
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'type' => :'type',
         :'id' => :'id',
         :'entry_status' => :'entryStatus',
         :'reference_id' => :'referenceId',
@@ -68,8 +91,7 @@ module AvalaraSdk::A1099::V2
         :'signed_date' => :'signedDate',
         :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
         :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt',
-        :'type' => :'type'
+        :'updated_at' => :'updatedAt'
       }
     end
 
@@ -81,6 +103,7 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'type' => :'String',
         :'id' => :'String',
         :'entry_status' => :'EntryStatusResponse',
         :'reference_id' => :'String',
@@ -93,8 +116,7 @@ module AvalaraSdk::A1099::V2
         :'signed_date' => :'Time',
         :'e_delivery_consented_at' => :'Time',
         :'created_at' => :'Time',
-        :'updated_at' => :'Time',
-        :'type' => :'String'
+        :'updated_at' => :'Time'
       }
     end
 
@@ -108,11 +130,6 @@ module AvalaraSdk::A1099::V2
         :'signed_date',
         :'e_delivery_consented_at',
       ])
-    end
-
-    # discriminator's property name in OpenAPI v3
-    def self.openapi_discriminator_name
-      :'type'
     end
 
     # Initializes the object
@@ -129,6 +146,10 @@ module AvalaraSdk::A1099::V2
         end
         h[k.to_sym] = v
       }
+
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
 
       if attributes.key?(:'id')
         self.id = attributes[:'id']
@@ -181,10 +202,6 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
       end
-
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -199,7 +216,19 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
+      return false unless type_validator.valid?(@type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -207,6 +236,7 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          type == o.type &&
           id == o.id &&
           entry_status == o.entry_status &&
           reference_id == o.reference_id &&
@@ -219,8 +249,7 @@ module AvalaraSdk::A1099::V2
           signed_date == o.signed_date &&
           e_delivery_consented_at == o.e_delivery_consented_at &&
           created_at == o.created_at &&
-          updated_at == o.updated_at &&
-          type == o.type
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -232,7 +261,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, entry_status, reference_id, company_id, display_name, email, archived, ancestor_id, signature, signed_date, e_delivery_consented_at, created_at, updated_at, type].hash
+      [type, id, entry_status, reference_id, company_id, display_name, email, archived, ancestor_id, signature, signed_date, e_delivery_consented_at, created_at, updated_at].hash
     end
 
     # Builds the object from hash

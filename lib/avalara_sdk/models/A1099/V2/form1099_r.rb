@@ -10,7 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      # Form 1099-R: Distributions From Pensions, Annuities, Retirement or Profit-Sharing Plans, IRAs, Insurance Contracts, etc.
+      # Form 1099-R: Distributions From Pensions, Annuities, Retirement or Profit-Sharing Plans, IRAs, Insurance Contracts, etc.                *At least one of the following amounts must be provided:*   Gross distribution, Taxable amount, Capital gain, Employee contributions/Designated Roth contributions or insurance premiums,  Net unrealized appreciation in employer's securities, Other amount, Total employee contributions,  Traditional IRA/SEP/SIMPLE or Roth conversion amount, or Amount allocable to IRR within 5 years
   class Form1099R
     # Gross distribution
     attr_accessor :gross_distribution
@@ -36,10 +36,10 @@ module AvalaraSdk::A1099::V2
     # Net unrealized appreciation in employer's securities
     attr_accessor :net_unrealized_appreciation_in_employer_securities
 
-    # Distribution code
+    # Distribution code.    Available values:  - 1: Early distribution, no known exception (in most cases, under age 59½)  - 2: Early distribution, exception applies (under age 59½)  - 3: Disability  - 4: Death  - 5: Prohibited transaction  - 6: Section 1035 exchange (a tax-free exchange of life insurance, annuity, qualified long-term care insurance, or endowment contracts)  - 7: Normal distribution  - 8: Excess contributions plus earnings/excess deferrals (and/or earnings) taxable in payment year  - 9: Cost of current life insurance protection (premiums paid by a trustee or custodian for current insurance protection)  - A: May be eligible for 10-year tax option  - B: Designated Roth account distribution  - C: Reportable Death Benefits Under Section 6050Y(c)  - D: Annuity payments from nonqualified annuity payments and distributions from life insurance contracts that may be subject to tax under section 1411  - E: Distribution under Employee Plans Compliance Resolution System (EPCRS)  - F: Charitable gift annuity  - G: Direct rollover and rollover contribution  - H: Direct rollover of distribution from a designated Roth account to a Roth IRA  - J: Early distribution from a Roth IRA (This code may be used with a Code 8 or P)  - K: Distribution of IRA Assets Not Having A Readily Available FMV  - L: Loans treated as deemed distributions under section 72(p)  - M: Qualified Plan Loan Offsets  - N: Recharacterized IRA contribution made for year following payment year  - P: Excess contributions plus earnings/excess deferrals taxable for year prior to payment year  - Q: Qualified distribution from a Roth IRA (Distribution from a Roth IRA when the 5-year holding period has been met, and the recipient has reached 59½, has died, or is disabled)  - R: Recharacterized IRA contribution made for year prior to payment year  - S: Early distribution from a SIMPLE IRA in first 2 years no known exceptions  - T: Roth IRA distribution exception applies because participant has reached 59½, died or is disabled, but it is unknown if the 5-year period has been met  - U: Distribution from ESOP under Section 404(k)  - W: Charges or payments for purchasing qualified long-term care insurance contracts under combined arrangements
     attr_accessor :distribution_code
 
-    # Second distribution code
+    # Second distribution code. Must be a valid combination with the first distribution code.  See DistributionCode property documentation for code descriptions.    Valid combinations based on first distribution code:  - 1: _, 8, B, D, K, L, M, P  - 2: _, 8, B, D, K, L, M, P  - 3: _, D  - 4: _, 8, A, B, D, G, H, K, L, M, P  - 5: _  - 6: _, W  - 7: _, A, B, D, K, L, M  - 8: _, 1, 2, 4, B, J, K  - 9: _  - A: 4, 7  - B: _, 1, 2, 4, 7, 8, G, L, M, P, U  - C: _, D  - D: 1, 2, 3, 4, 7, C  - E: _  - F: _  - G: _, 4, B, K  - H: _, 4  - J: _, 8, P  - K: 1, 2, 4, 7, 8, G  - L: _, 1, 2, 4, 7, B  - M: _, 1, 2, 4, 7, B  - N: _  - P: _, 1, 2, 4, B, J  - Q: _  - R: _  - S: _  - T: _  - U: _, B  - W: _, 6                (_ indicates no second distribution code)    (format: firstDistributionCode: availableSecondDistributionCodes)
     attr_accessor :second_distribution_code
 
     # IRA/SEP/SIMPLE
@@ -69,10 +69,10 @@ module AvalaraSdk::A1099::V2
     # Date of payment
     attr_accessor :date_of_payment
 
-    # FATCA filing requirement
+    # FATCA filing requirement.
     attr_accessor :fatca_filing_requirement
 
-    # Form type
+    # Form type.
     attr_accessor :type
 
     # Form ID. Unique identifier set when the record is created.
@@ -81,13 +81,13 @@ module AvalaraSdk::A1099::V2
     # Issuer ID - only required when creating forms
     attr_accessor :issuer_id
 
-    # Issuer Reference ID - only required when creating forms
+    # Issuer Reference ID - only required when creating forms via $bulk-upsert
     attr_accessor :issuer_reference_id
 
     # Issuer TIN - readonly
     attr_accessor :issuer_tin
 
-    # Tax Year - only required when creating forms
+    # Tax Year - only required when creating forms via $bulk-upsert
     attr_accessor :tax_year
 
     # Internal reference ID. Never shown to any agency or recipient.
@@ -99,7 +99,7 @@ module AvalaraSdk::A1099::V2
     # Recipient name
     attr_accessor :recipient_name
 
-    # Type of TIN (Tax ID Number)
+    # Tax Identification Number (TIN) type.  Available values: - EIN: Employer Identification Number - SSN: Social Security Number - ITIN: Individual Taxpayer Identification Number - ATIN: Adoption Taxpayer Identification Number
     attr_accessor :tin_type
 
     # Recipient second name
@@ -135,16 +135,16 @@ module AvalaraSdk::A1099::V2
     # Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes.
     attr_accessor :country_code
 
-    # Date when federal e-filing should be scheduled for this form
+    # Date when federal e-filing should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
     attr_accessor :federal_efile_date
 
     # Boolean indicating that postal mailing to the recipient should be scheduled for this form
     attr_accessor :postal_mail
 
-    # Date when state e-filing should be scheduled for this form
+    # Date when state e-filing should be scheduled. Must be on or after federalEfileDate. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
     attr_accessor :state_efile_date
 
-    # Date when recipient e-delivery should be scheduled for this form
+    # Date when recipient e-delivery should be scheduled. If set between current date and beginning of blackout period, scheduled to that date. If in the past or blackout period, scheduled to next available date. For blackout period information, see https://www.track1099.com/info/IRS_info. Set to null to leave unscheduled.
     attr_accessor :recipient_edelivery_date
 
     # Boolean indicating that TIN Matching should be scheduled for this form
@@ -162,22 +162,22 @@ module AvalaraSdk::A1099::V2
     # Second TIN notice
     attr_accessor :second_tin_notice
 
-    # Federal e-file status
+    # Federal e-file status.  Available values:  - unscheduled: Form has not been scheduled for federal e-filing  - scheduled: Form is scheduled for federal e-filing  - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - sent: Form has been sent to the IRS  - accepted: Form was accepted by the IRS  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - corrected: A correction has been sent to the IRS  - corrected_accepted: Correction was accepted by the IRS  - rejected: Form was rejected by the IRS  - corrected_rejected: Correction was rejected by the IRS  - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
     attr_accessor :federal_efile_status
 
-    # State e-file status
+    # State e-file status.  Available values:  - unscheduled: Form has not been scheduled for state e-filing  - scheduled: Form is scheduled for state e-filing  - airlocked: Form is in process of being uploaded to the state  - sent: Form has been sent to the state  - rejected: Form was rejected by the state  - accepted: Form was accepted by the state  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlocked: Correction is in process of being uploaded to the state  - corrected_sent: Correction has been sent to the state  - corrected_rejected: Correction was rejected by the state  - corrected_accepted: Correction was accepted by the state
     attr_accessor :state_efile_status
 
-    # Postal mail to recipient status
+    # Postal mail to recipient status.  Available values:  - unscheduled: Postal mail has not been scheduled  - pending: Postal mail is pending to be sent  - sent: Postal mail has been sent  - delivered: Postal mail has been delivered
     attr_accessor :postal_mail_status
 
-    # TIN Match status
+    # TIN Match status.  Available values:  - none: TIN matching has not been performed  - pending: TIN matching request is pending  - matched: Name/TIN combination matches IRS records  - unknown: TIN is missing, invalid, or request contains errors  - rejected: Name/TIN combination does not match IRS records or TIN not currently issued
     attr_accessor :tin_match_status
 
-    # Address verification status
+    # Address verification status.  Available values:  - unknown: Address verification has not been checked  - pending: Address verification is in progress  - failed: Address verification failed  - incomplete: Address verification is incomplete  - unchanged: User declined address changes  - verified: Address has been verified and accepted
     attr_accessor :address_verification_status
 
-    # EDelivery status
+    # EDelivery status.  Available values:  - unscheduled: E-delivery has not been scheduled  - scheduled: E-delivery is scheduled to be sent  - sent: E-delivery has been sent to recipient  - bounced: E-delivery bounced back (invalid email)  - refused: E-delivery was refused by recipient  - bad_verify: E-delivery failed verification  - accepted: E-delivery was accepted by recipient  - bad_verify_limit: E-delivery failed verification limit reached  - second_delivery: Second e-delivery attempt  - undelivered: E-delivery is undelivered (temporary state allowing resend)
     attr_accessor :e_delivery_status
 
     # Validation errors
@@ -397,6 +397,7 @@ module AvalaraSdk::A1099::V2
         :'no_tin',
         :'address_verification',
         :'state_and_local_withholding',
+        :'second_tin_notice',
         :'federal_efile_status',
         :'state_efile_status',
         :'postal_mail_status',
@@ -463,6 +464,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'distribution_code')
         self.distribution_code = attributes[:'distribution_code']
+      else
+        self.distribution_code = nil
       end
 
       if attributes.key?(:'second_distribution_code')
@@ -696,18 +699,42 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      distribution_code_validator = EnumAttributeValidator.new('String', ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "W"])
+      return false unless distribution_code_validator.valid?(@distribution_code)
+      second_distribution_code_validator = EnumAttributeValidator.new('String', ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "W"])
+      return false unless second_distribution_code_validator.valid?(@second_distribution_code)
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
+      type_validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B", "Form1042S", "Form1095C", "Form1099Int"])
       return false unless type_validator.valid?(@type)
-      tin_type_validator = EnumAttributeValidator.new('String', ["Empty", "EIN", "SSN", "ITIN", "ATIN"])
+      tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] distribution_code Object to be assigned
+    def distribution_code=(distribution_code)
+      validator = EnumAttributeValidator.new('String', ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "W"])
+      unless validator.valid?(distribution_code)
+        fail ArgumentError, "invalid value for \"distribution_code\", must be one of #{validator.allowable_values}."
+      end
+      @distribution_code = distribution_code
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] second_distribution_code Object to be assigned
+    def second_distribution_code=(second_distribution_code)
+      validator = EnumAttributeValidator.new('String', ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "W"])
+      unless validator.valid?(second_distribution_code)
+        fail ArgumentError, "invalid value for \"second_distribution_code\", must be one of #{validator.allowable_values}."
+      end
+      @second_distribution_code = second_distribution_code
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1099-NEC", "1099-MISC", "1099-DIV", "1099-R", "1099-K", "1095-B", "1042-S", "1095-C", "1099-INT"])
+      validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B", "Form1042S", "Form1095C", "Form1099Int"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -717,23 +744,11 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] tin_type Object to be assigned
     def tin_type=(tin_type)
-      validator = EnumAttributeValidator.new('String', ["Empty", "EIN", "SSN", "ITIN", "ATIN"])
+      validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       unless validator.valid?(tin_type)
         fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
       end
       @tin_type = tin_type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] state_efile_status Value to be assigned
-    def state_efile_status=(state_efile_status)
-      @state_efile_status = state_efile_status
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] validation_errors Value to be assigned
-    def validation_errors=(validation_errors)
-      @validation_errors = validation_errors
     end
 
     # Checks equality by comparing each attribute.

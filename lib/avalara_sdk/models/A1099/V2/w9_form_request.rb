@@ -20,7 +20,7 @@ module AvalaraSdk::A1099::V2
     # The name of the business associated with the form.
     attr_accessor :business_name
 
-    # The classification of the business.
+    # The classification of the business.  Available values:  - Individual: Individual/sole proprietor  - C Corporation: C Corporation  - S Corporation: S Corporation  - Partnership: Partnership  - Trust/estate: Trust/estate  - LLC-C: Limited liability company (C Corporation)  - LLC-S: Limited liability company (S Corporation)  - LLC-P: Limited liability company (Partnership)  - Other: Other (requires BusinessOther field to be populated)
     attr_accessor :business_classification
 
     # The classification description when \"businessClassification\" is \"Other\".
@@ -56,7 +56,7 @@ module AvalaraSdk::A1099::V2
     # The account number associated with the form.
     attr_accessor :account_number
 
-    # The type of TIN provided.
+    # Tax Identification Number (TIN) type. SSN/ITIN (for individuals) and EIN (for businesses).
     attr_accessor :tin_type
 
     # The taxpayer identification number (TIN).
@@ -74,7 +74,7 @@ module AvalaraSdk::A1099::V2
     # The signature of the form.
     attr_accessor :signature
 
-    # The ID of the associated company.
+    # The ID of the associated company. Required when creating a form.
     attr_accessor :company_id
 
     # A reference identifier for the form.
@@ -217,6 +217,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
       if attributes.key?(:'business_name')
@@ -225,6 +227,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'business_classification')
         self.business_classification = attributes[:'business_classification']
+      else
+        self.business_classification = nil
       end
 
       if attributes.key?(:'business_other')
@@ -249,6 +253,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'address')
         self.address = attributes[:'address']
+      else
+        self.address = nil
       end
 
       if attributes.key?(:'foreign_address')
@@ -257,14 +263,20 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'city')
         self.city = attributes[:'city']
+      else
+        self.city = nil
       end
 
       if attributes.key?(:'state')
         self.state = attributes[:'state']
+      else
+        self.state = nil
       end
 
       if attributes.key?(:'zip')
         self.zip = attributes[:'zip']
+      else
+        self.zip = nil
       end
 
       if attributes.key?(:'account_number')
@@ -273,10 +285,14 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'tin_type')
         self.tin_type = attributes[:'tin_type']
+      else
+        self.tin_type = nil
       end
 
       if attributes.key?(:'tin')
         self.tin = attributes[:'tin']
+      else
+        self.tin = nil
       end
 
       if attributes.key?(:'backup_withholding')
@@ -297,8 +313,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'company_id')
         self.company_id = attributes[:'company_id']
-      else
-        self.company_id = nil
       end
 
       if attributes.key?(:'reference_id')
@@ -315,12 +329,24 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @company_id.nil?
-        invalid_properties.push('invalid value for "company_id", company_id cannot be nil.')
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      if @company_id.to_s.length < 1
-        invalid_properties.push('invalid value for "company_id", the character length must be great than or equal to 1.')
+      if @business_classification.nil?
+        invalid_properties.push('invalid value for "business_classification", business_classification cannot be nil.')
+      end
+
+      if @address.nil?
+        invalid_properties.push('invalid value for "address", address cannot be nil.')
+      end
+
+      if @tin_type.nil?
+        invalid_properties.push('invalid value for "tin_type", tin_type cannot be nil.')
+      end
+
+      if @tin.nil?
+        invalid_properties.push('invalid value for "tin", tin cannot be nil.')
       end
 
       invalid_properties
@@ -332,8 +358,11 @@ module AvalaraSdk::A1099::V2
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
       return false unless type_validator.valid?(@type)
-      return false if @company_id.nil?
-      return false if @company_id.to_s.length < 1
+      return false if @name.nil?
+      return false if @business_classification.nil?
+      return false if @address.nil?
+      return false if @tin_type.nil?
+      return false if @tin.nil?
       true
     end
 
@@ -345,20 +374,6 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] company_id Value to be assigned
-    def company_id=(company_id)
-      if company_id.nil?
-        fail ArgumentError, 'company_id cannot be nil'
-      end
-
-      if company_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "company_id", the character length must be great than or equal to 1.'
-      end
-
-      @company_id = company_id
     end
 
     # Checks equality by comparing each attribute.

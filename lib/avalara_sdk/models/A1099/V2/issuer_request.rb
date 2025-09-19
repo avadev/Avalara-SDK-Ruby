@@ -10,56 +10,70 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      class W8BenFormMinimalRequest
-    # The form type (always \"w8ben\" for this model).
-    attr_accessor :type
-
-    # The email address of the individual associated with the form.
-    attr_accessor :email
-
-    # The name of the individual or entity associated with the form.
+      class IssuerRequest
+    # Legal name. Not the DBA name.
     attr_accessor :name
 
-    # A reference number for the form.
-    attr_accessor :reference_number
+    # Doing Business As (DBA) name or continuation of a long legal name. Use either this or 'transferAgentName'.
+    attr_accessor :dba_name
 
-    # The ID of the associated company. Required when creating a form.
-    attr_accessor :company_id
+    # Federal Tax Identification Number (TIN).
+    attr_accessor :tin
 
-    # A reference identifier for the form.
+    # Internal reference ID. Never shown to any agency or recipient. If present, it will prefix download filenames. Allowed characters: letters, numbers, dashes, underscores, and spaces.
     attr_accessor :reference_id
 
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
+    # Contact phone number (must contain at least 10 digits, max 15 characters). For recipient inquiries.
+    attr_accessor :telephone
 
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
+    # Tax year for which the forms are being filed (e.g., 2024). Must be within current tax year and current tax year - 4.
+    attr_accessor :tax_year
 
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+    # Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes. If there is a transfer agent, use the transfer agent's shipping address.
+    attr_accessor :country_code
+
+    # Contact email address. For recipient inquiries.
+    attr_accessor :email
+
+    # Address.
+    attr_accessor :address
+
+    # City.
+    attr_accessor :city
+
+    # Two-letter US state or Canadian province code (required for US/CA addresses).
+    attr_accessor :state
+
+    # ZIP/postal code.
+    attr_accessor :zip
+
+    # Province or region for non-US/CA addresses.
+    attr_accessor :foreign_province
+
+    # Name of the transfer agent, if applicable — optional; use either this or 'dbaName'.
+    attr_accessor :transfer_agent_name
+
+    # Indicates if this is the issuer's final year filing.
+    attr_accessor :last_filing
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'email' => :'email',
         :'name' => :'name',
-        :'reference_number' => :'referenceNumber',
-        :'company_id' => :'companyId',
-        :'reference_id' => :'referenceId'
+        :'dba_name' => :'dbaName',
+        :'tin' => :'tin',
+        :'reference_id' => :'referenceId',
+        :'telephone' => :'telephone',
+        :'tax_year' => :'taxYear',
+        :'country_code' => :'countryCode',
+        :'email' => :'email',
+        :'address' => :'address',
+        :'city' => :'city',
+        :'state' => :'state',
+        :'zip' => :'zip',
+        :'foreign_province' => :'foreignProvince',
+        :'transfer_agent_name' => :'transferAgentName',
+        :'last_filing' => :'lastFiling'
       }
     end
 
@@ -71,27 +85,49 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'email' => :'String',
         :'name' => :'String',
-        :'reference_number' => :'String',
-        :'company_id' => :'String',
-        :'reference_id' => :'String'
+        :'dba_name' => :'String',
+        :'tin' => :'String',
+        :'reference_id' => :'String',
+        :'telephone' => :'String',
+        :'tax_year' => :'Integer',
+        :'country_code' => :'String',
+        :'email' => :'String',
+        :'address' => :'String',
+        :'city' => :'String',
+        :'state' => :'String',
+        :'zip' => :'String',
+        :'foreign_province' => :'String',
+        :'transfer_agent_name' => :'String',
+        :'last_filing' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'reference_number',
-        :'reference_id'
+        :'name',
+        :'dba_name',
+        :'tin',
+        :'reference_id',
+        :'telephone',
+        :'tax_year',
+        :'country_code',
+        :'email',
+        :'address',
+        :'city',
+        :'state',
+        :'zip',
+        :'foreign_province',
+        :'transfer_agent_name',
+        :'last_filing'
       ])
     end
 
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
-      :'W9FormBaseMinimalRequest'
+      :'IssuerBase'
       ]
     end
 
@@ -99,19 +135,49 @@ module AvalaraSdk::A1099::V2
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::W8BenFormMinimalRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::IssuerRequest` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::W8BenFormMinimalRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::IssuerRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
+      if attributes.key?(:'name')
+        self.name = attributes[:'name']
+      else
+        self.name = nil
+      end
+
+      if attributes.key?(:'dba_name')
+        self.dba_name = attributes[:'dba_name']
+      end
+
+      if attributes.key?(:'tin')
+        self.tin = attributes[:'tin']
+      end
+
+      if attributes.key?(:'reference_id')
+        self.reference_id = attributes[:'reference_id']
+      end
+
+      if attributes.key?(:'telephone')
+        self.telephone = attributes[:'telephone']
+      else
+        self.telephone = nil
+      end
+
+      if attributes.key?(:'tax_year')
+        self.tax_year = attributes[:'tax_year']
+      else
+        self.tax_year = nil
+      end
+
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
       end
 
       if attributes.key?(:'email')
@@ -120,22 +186,42 @@ module AvalaraSdk::A1099::V2
         self.email = nil
       end
 
-      if attributes.key?(:'name')
-        self.name = attributes[:'name']
+      if attributes.key?(:'address')
+        self.address = attributes[:'address']
       else
-        self.name = nil
+        self.address = nil
       end
 
-      if attributes.key?(:'reference_number')
-        self.reference_number = attributes[:'reference_number']
+      if attributes.key?(:'city')
+        self.city = attributes[:'city']
+      else
+        self.city = nil
       end
 
-      if attributes.key?(:'company_id')
-        self.company_id = attributes[:'company_id']
+      if attributes.key?(:'state')
+        self.state = attributes[:'state']
+      else
+        self.state = nil
       end
 
-      if attributes.key?(:'reference_id')
-        self.reference_id = attributes[:'reference_id']
+      if attributes.key?(:'zip')
+        self.zip = attributes[:'zip']
+      else
+        self.zip = nil
+      end
+
+      if attributes.key?(:'foreign_province')
+        self.foreign_province = attributes[:'foreign_province']
+      end
+
+      if attributes.key?(:'transfer_agent_name')
+        self.transfer_agent_name = attributes[:'transfer_agent_name']
+      end
+
+      if attributes.key?(:'last_filing')
+        self.last_filing = attributes[:'last_filing']
+      else
+        self.last_filing = nil
       end
     end
 
@@ -144,22 +230,6 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @email.nil?
-        invalid_properties.push('invalid value for "email", email cannot be nil.')
-      end
-
-      if @email.to_s.length < 1
-        invalid_properties.push('invalid value for "email", the character length must be great than or equal to 1.')
-      end
-
-      if @name.nil?
-        invalid_properties.push('invalid value for "name", name cannot be nil.')
-      end
-
-      if @name.to_s.length < 1
-        invalid_properties.push('invalid value for "name", the character length must be great than or equal to 1.')
-      end
-
       invalid_properties
     end
 
@@ -167,51 +237,7 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
-      return false unless type_validator.valid?(@type)
-      return false if @email.nil?
-      return false if @email.to_s.length < 1
-      return false if @name.nil?
-      return false if @name.to_s.length < 1
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] email Value to be assigned
-    def email=(email)
-      if email.nil?
-        fail ArgumentError, 'email cannot be nil'
-      end
-
-      if email.to_s.length < 1
-        fail ArgumentError, 'invalid value for "email", the character length must be great than or equal to 1.'
-      end
-
-      @email = email
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] name Value to be assigned
-    def name=(name)
-      if name.nil?
-        fail ArgumentError, 'name cannot be nil'
-      end
-
-      if name.to_s.length < 1
-        fail ArgumentError, 'invalid value for "name", the character length must be great than or equal to 1.'
-      end
-
-      @name = name
     end
 
     # Checks equality by comparing each attribute.
@@ -219,12 +245,21 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          email == o.email &&
           name == o.name &&
-          reference_number == o.reference_number &&
-          company_id == o.company_id &&
-          reference_id == o.reference_id
+          dba_name == o.dba_name &&
+          tin == o.tin &&
+          reference_id == o.reference_id &&
+          telephone == o.telephone &&
+          tax_year == o.tax_year &&
+          country_code == o.country_code &&
+          email == o.email &&
+          address == o.address &&
+          city == o.city &&
+          state == o.state &&
+          zip == o.zip &&
+          foreign_province == o.foreign_province &&
+          transfer_agent_name == o.transfer_agent_name &&
+          last_filing == o.last_filing
     end
 
     # @see the `==` method
@@ -236,7 +271,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, email, name, reference_number, company_id, reference_id].hash
+      [name, dba_name, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing].hash
     end
 
     # Builds the object from hash

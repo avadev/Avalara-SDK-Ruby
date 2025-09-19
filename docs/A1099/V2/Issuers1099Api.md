@@ -39,9 +39,9 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '26a8ae54-5655-49b3-b01a-f4203094a5ef', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '5c70e4f3-3885-4757-84f3-86323c1af033', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  create_issuer_request: AvalaraSdk::A1099::V2::IssuerCommand.new({name: 'name_example', telephone: 'telephone_example', tax_year: 37, email: 'email_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # CreateIssuerRequest | The issuer to create
+  issuer_request: AvalaraSdk::A1099::V2::IssuerRequest.new({name: 'name_example', telephone: 'telephone_example', tax_year: 37, email: 'email_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # IssuerRequest | The issuer to create
 }
 
 begin
@@ -78,7 +78,7 @@ end
 | **avalara_version** | **String** | API version |  |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
-| **create_issuer_request** | [**CreateIssuerRequest**](CreateIssuerRequest.md) | The issuer to create | [optional] |
+| **issuer_request** | [**IssuerRequest**](IssuerRequest.md) | The issuer to create | [optional] |
 
 ### Return type
 
@@ -123,7 +123,7 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 id = 'id_example' # String | Id of the issuer to delete
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'b8d102b3-3e63-4e6e-9735-25f17b0c69a7', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'ebe59aa0-745c-44da-b86b-67ad7994619c', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -205,7 +205,7 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 id = 'id_example' # String | Id of the issuer to retrieve
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'fc90ea70-0e20-46ed-a73c-80e99e89f3d5', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'cfc604e9-15ae-4c65-a59f-123475fad2ef', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -293,7 +293,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: '8c33cfd6-f102-4192-9001-24fed7baee29', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '3302a30f-61fc-4b94-af04-c683c6064eed', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -381,9 +381,9 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 id = 'id_example' # String | Id of the issuer to update
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'c353a7ba-0386-49f8-97a8-378cd39452ea', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '4f30c58e-f8fd-4635-99d4-ea710f1d0182', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  create_issuer_request: AvalaraSdk::A1099::V2::IssuerCommand.new({name: 'name_example', telephone: 'telephone_example', tax_year: 37, email: 'email_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # CreateIssuerRequest | The issuer to update
+  issuer_request: AvalaraSdk::A1099::V2::IssuerRequest.new({name: 'name_example', telephone: 'telephone_example', tax_year: 37, email: 'email_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # IssuerRequest | The issuer to update
 }
 
 begin
@@ -420,7 +420,7 @@ end
 | **avalara_version** | **String** | API version |  |
 | **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
 | **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
-| **create_issuer_request** | [**CreateIssuerRequest**](CreateIssuerRequest.md) | The issuer to update | [optional] |
+| **issuer_request** | [**IssuerRequest**](IssuerRequest.md) | The issuer to update | [optional] |
 
 ### Return type
 

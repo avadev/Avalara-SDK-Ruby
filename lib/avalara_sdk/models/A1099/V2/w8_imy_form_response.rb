@@ -10,7 +10,10 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      class W8ImyFormResponse < W9FormBaseResponse
+      class W8ImyFormResponse
+    # The form type (always \"W8Imy\" for this model).
+    attr_accessor :type
+
     # The name of the individual or entity associated with the form.
     attr_accessor :name
 
@@ -59,7 +62,7 @@ module AvalaraSdk::A1099::V2
     # The country of the mailing address.
     attr_accessor :mailing_country
 
-    # The type of TIN provided.
+    # Tax Identification Number (TIN) type.
     attr_accessor :tin_type
 
     # The taxpayer identification number (TIN).
@@ -344,9 +347,71 @@ module AvalaraSdk::A1099::V2
     # The name of the signer.
     attr_accessor :signer_name
 
+    # The unique identifier for the form.
+    attr_accessor :id
+
+    # The entry status information for the form.
+    attr_accessor :entry_status
+
+    # A reference identifier for the form.
+    attr_accessor :reference_id
+
+    # The ID of the associated company.
+    attr_accessor :company_id
+
+    # The display name associated with the form.
+    attr_accessor :display_name
+
+    # The email address of the individual associated with the form.
+    attr_accessor :email
+
+    # Indicates whether the form is archived.
+    attr_accessor :archived
+
+    # Form ID of previous version.
+    attr_accessor :ancestor_id
+
+    # The signature of the form.
+    attr_accessor :signature
+
+    # The date the form was signed.
+    attr_accessor :signed_date
+
+    # The date when e-delivery was consented.
+    attr_accessor :e_delivery_consented_at
+
+    # The creation date of the form.
+    attr_accessor :created_at
+
+    # The last updated date of the form.
+    attr_accessor :updated_at
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'type' => :'type',
         :'name' => :'name',
         :'citizenship_country' => :'citizenshipCountry',
         :'disregarded_entity' => :'disregardedEntity',
@@ -457,18 +522,32 @@ module AvalaraSdk::A1099::V2
         :'passive_nffe_certification' => :'passiveNffeCertification',
         :'sponsored_direct_reporting_nffe_certification' => :'sponsoredDirectReportingNffeCertification',
         :'direct_reporting_nffe_sponsoring_entity' => :'directReportingNffeSponsoringEntity',
-        :'signer_name' => :'signerName'
+        :'signer_name' => :'signerName',
+        :'id' => :'id',
+        :'entry_status' => :'entryStatus',
+        :'reference_id' => :'referenceId',
+        :'company_id' => :'companyId',
+        :'display_name' => :'displayName',
+        :'email' => :'email',
+        :'archived' => :'archived',
+        :'ancestor_id' => :'ancestorId',
+        :'signature' => :'signature',
+        :'signed_date' => :'signedDate',
+        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
+        :'created_at' => :'createdAt',
+        :'updated_at' => :'updatedAt'
       }
     end
 
-    # Returns all the JSON keys this model knows about, including the ones defined in its parent(s)
+    # Returns all the JSON keys this model knows about
     def self.acceptable_attributes
-      attribute_map.values.concat(superclass.acceptable_attributes)
+      attribute_map.values
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'type' => :'String',
         :'name' => :'String',
         :'citizenship_country' => :'String',
         :'disregarded_entity' => :'String',
@@ -579,7 +658,20 @@ module AvalaraSdk::A1099::V2
         :'passive_nffe_certification' => :'Boolean',
         :'sponsored_direct_reporting_nffe_certification' => :'Boolean',
         :'direct_reporting_nffe_sponsoring_entity' => :'String',
-        :'signer_name' => :'String'
+        :'signer_name' => :'String',
+        :'id' => :'String',
+        :'entry_status' => :'EntryStatusResponse',
+        :'reference_id' => :'String',
+        :'company_id' => :'String',
+        :'display_name' => :'String',
+        :'email' => :'String',
+        :'archived' => :'Boolean',
+        :'ancestor_id' => :'String',
+        :'signature' => :'String',
+        :'signed_date' => :'Time',
+        :'e_delivery_consented_at' => :'Time',
+        :'created_at' => :'Time',
+        :'updated_at' => :'Time'
       }
     end
 
@@ -618,7 +710,13 @@ module AvalaraSdk::A1099::V2
         :'publicly_traded_entity',
         :'nffe_affiliate_of_publicly_traded_entity_securities_market',
         :'direct_reporting_nffe_sponsoring_entity',
-        :'signer_name'
+        :'signer_name',
+        :'reference_id',
+        :'email',
+        :'ancestor_id',
+        :'signature',
+        :'signed_date',
+        :'e_delivery_consented_at',
       ])
     end
 
@@ -644,8 +742,9 @@ module AvalaraSdk::A1099::V2
         h[k.to_sym] = v
       }
 
-      # call parent's initialize
-      super(attributes)
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
@@ -1090,13 +1189,65 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'signer_name')
         self.signer_name = attributes[:'signer_name']
       end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'entry_status')
+        self.entry_status = attributes[:'entry_status']
+      end
+
+      if attributes.key?(:'reference_id')
+        self.reference_id = attributes[:'reference_id']
+      end
+
+      if attributes.key?(:'company_id')
+        self.company_id = attributes[:'company_id']
+      end
+
+      if attributes.key?(:'display_name')
+        self.display_name = attributes[:'display_name']
+      end
+
+      if attributes.key?(:'email')
+        self.email = attributes[:'email']
+      end
+
+      if attributes.key?(:'archived')
+        self.archived = attributes[:'archived']
+      end
+
+      if attributes.key?(:'ancestor_id')
+        self.ancestor_id = attributes[:'ancestor_id']
+      end
+
+      if attributes.key?(:'signature')
+        self.signature = attributes[:'signature']
+      end
+
+      if attributes.key?(:'signed_date')
+        self.signed_date = attributes[:'signed_date']
+      end
+
+      if attributes.key?(:'e_delivery_consented_at')
+        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
-      invalid_properties = super
+      invalid_properties = Array.new
       invalid_properties
     end
 
@@ -1104,7 +1255,19 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      true && super
+      type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
+      return false unless type_validator.valid?(@type)
+      true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -1112,6 +1275,7 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          type == o.type &&
           name == o.name &&
           citizenship_country == o.citizenship_country &&
           disregarded_entity == o.disregarded_entity &&
@@ -1222,7 +1386,20 @@ module AvalaraSdk::A1099::V2
           passive_nffe_certification == o.passive_nffe_certification &&
           sponsored_direct_reporting_nffe_certification == o.sponsored_direct_reporting_nffe_certification &&
           direct_reporting_nffe_sponsoring_entity == o.direct_reporting_nffe_sponsoring_entity &&
-          signer_name == o.signer_name && super(o)
+          signer_name == o.signer_name &&
+          id == o.id &&
+          entry_status == o.entry_status &&
+          reference_id == o.reference_id &&
+          company_id == o.company_id &&
+          display_name == o.display_name &&
+          email == o.email &&
+          archived == o.archived &&
+          ancestor_id == o.ancestor_id &&
+          signature == o.signature &&
+          signed_date == o.signed_date &&
+          e_delivery_consented_at == o.e_delivery_consented_at &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -1234,7 +1411,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, citizenship_country, disregarded_entity, entity_type, fatca_status, residence_address, residence_city, residence_state, residence_zip, residence_country, residence_is_mailing, mailing_address, mailing_city, mailing_state, mailing_zip, mailing_country, tin_type, tin, giin, foreign_tin, reference_number, disregarded_entity_fatca_status, disregarded_address, disregarded_city, disregarded_state, disregarded_zip, disregarded_country, disregarded_entity_giin, qualified_intermediary_certification, qi_primary_withholding_responsibility_certification, qi_withholding_responsibility_for_ptp_sales_certification, qi_nominee_withholding_responsibility_for_ptp_distributions_certification, qi_securities_lender_substitute_dividend_withholding_certification, qi_withholding_and1099_reporting_responsibility_certification, qi_form1099_or_fatca_reporting_responsibility_certification, qi_opt_out_of_form1099_reporting_certification, qi_withholding_rate_pool_certification, qi_intermediary_or_flow_through_entity_documentation_certification, qualified_derivatives_dealer_certification, qdd_corporation, qdd_partnership, qdd_disregarded_entity, nonqualified_intermediary_certification, nqi_withholding_statement_transmission_certification, nqi_withholding_rate_pool_compliance_certification, nqi_qualified_securities_lender_certification, nqi_alternative_withholding_statement_verification_certification, territory_financial_institution_certification, tfi_treated_as_us_person_certification, tfi_withholding_statement_transmission_certification, tfi_treated_as_us_person_for_ptp_sales_certification, tfi_nominee_us_person_for_ptp_distributions_certification, tfi_not_nominee_for_ptp_distributions_certification, us_branch_non_effectively_connected_income_certification, us_branch_agreement_to_be_treated_as_us_person_certification, us_branch_withholding_statement_and_compliance_certification, us_branch_acting_as_us_person_for_ptp_sales_certification, us_branch_nominee_for_ptp_distributions_certification, us_branch_not_nominee_for_ptp_distributions_certification, withholding_foreign_partnership_or_trust_certification, nonwithholding_foreign_entity_withholding_statement_certification, foreign_entity_partner_in_lower_tier_partnership_certification, foreign_partnership_amount_realized_section1446_f_certification, foreign_partnership_modified_amount_realized_certification, foreign_grantor_trust_amount_realized_allocation_certification, alternative_withholding_statement_reliance_certification, np_ffi_with_exempt_beneficial_owners_certification, ffi_sponsoring_entity, investment_entity_certification, controlled_foreign_corporation_certification, owner_documented_ffi_certification, owner_documented_ffi_reporting_statement_certification, owner_documented_ffi_auditor_letter_certification, compliant_nonregistering_local_bank_certification, compliant_ffi_low_value_accounts_certification, sponsored_closely_held_entity_sponsoring_entity, sponsored_closely_held_investment_vehicle_certification, compliant_limited_life_debt_entity_certification, investment_entity_no_financial_accounts_certification, restricted_distributor_certification, restricted_distributor_agreement_certification, restricted_distributor_preexisting_sales_compliance_certification, foreign_central_bank_of_issue_certification, nonreporting_iga_ffi_certification, iga_country, iga_model, iga_legal_status_treatment, iga_ffi_trustee_or_sponsor, iga_ffi_trustee_is_foreign, treaty_qualified_pension_fund_certification, qualified_retirement_fund_certification, narrow_participation_retirement_fund_certification, section401_a_equivalent_pension_plan_certification, investment_entity_for_retirement_funds_certification, exempt_beneficial_owner_sponsored_retirement_fund_certification, excepted_nonfinancial_group_entity_certification, excepted_nonfinancial_start_up_certification, startup_formation_or_resolution_date, excepted_nonfinancial_entity_in_liquidation_or_bankruptcy_certification, nonfinancial_entity_filing_date, publicly_traded_nffe_certification, publicly_traded_nffe_securities_market, nffe_affiliate_of_publicly_traded_entity_certification, publicly_traded_entity, nffe_affiliate_of_publicly_traded_entity_securities_market, excepted_territory_nffe_certification, active_nffe_certification, passive_nffe_certification, sponsored_direct_reporting_nffe_certification, direct_reporting_nffe_sponsoring_entity, signer_name].hash
+      [type, name, citizenship_country, disregarded_entity, entity_type, fatca_status, residence_address, residence_city, residence_state, residence_zip, residence_country, residence_is_mailing, mailing_address, mailing_city, mailing_state, mailing_zip, mailing_country, tin_type, tin, giin, foreign_tin, reference_number, disregarded_entity_fatca_status, disregarded_address, disregarded_city, disregarded_state, disregarded_zip, disregarded_country, disregarded_entity_giin, qualified_intermediary_certification, qi_primary_withholding_responsibility_certification, qi_withholding_responsibility_for_ptp_sales_certification, qi_nominee_withholding_responsibility_for_ptp_distributions_certification, qi_securities_lender_substitute_dividend_withholding_certification, qi_withholding_and1099_reporting_responsibility_certification, qi_form1099_or_fatca_reporting_responsibility_certification, qi_opt_out_of_form1099_reporting_certification, qi_withholding_rate_pool_certification, qi_intermediary_or_flow_through_entity_documentation_certification, qualified_derivatives_dealer_certification, qdd_corporation, qdd_partnership, qdd_disregarded_entity, nonqualified_intermediary_certification, nqi_withholding_statement_transmission_certification, nqi_withholding_rate_pool_compliance_certification, nqi_qualified_securities_lender_certification, nqi_alternative_withholding_statement_verification_certification, territory_financial_institution_certification, tfi_treated_as_us_person_certification, tfi_withholding_statement_transmission_certification, tfi_treated_as_us_person_for_ptp_sales_certification, tfi_nominee_us_person_for_ptp_distributions_certification, tfi_not_nominee_for_ptp_distributions_certification, us_branch_non_effectively_connected_income_certification, us_branch_agreement_to_be_treated_as_us_person_certification, us_branch_withholding_statement_and_compliance_certification, us_branch_acting_as_us_person_for_ptp_sales_certification, us_branch_nominee_for_ptp_distributions_certification, us_branch_not_nominee_for_ptp_distributions_certification, withholding_foreign_partnership_or_trust_certification, nonwithholding_foreign_entity_withholding_statement_certification, foreign_entity_partner_in_lower_tier_partnership_certification, foreign_partnership_amount_realized_section1446_f_certification, foreign_partnership_modified_amount_realized_certification, foreign_grantor_trust_amount_realized_allocation_certification, alternative_withholding_statement_reliance_certification, np_ffi_with_exempt_beneficial_owners_certification, ffi_sponsoring_entity, investment_entity_certification, controlled_foreign_corporation_certification, owner_documented_ffi_certification, owner_documented_ffi_reporting_statement_certification, owner_documented_ffi_auditor_letter_certification, compliant_nonregistering_local_bank_certification, compliant_ffi_low_value_accounts_certification, sponsored_closely_held_entity_sponsoring_entity, sponsored_closely_held_investment_vehicle_certification, compliant_limited_life_debt_entity_certification, investment_entity_no_financial_accounts_certification, restricted_distributor_certification, restricted_distributor_agreement_certification, restricted_distributor_preexisting_sales_compliance_certification, foreign_central_bank_of_issue_certification, nonreporting_iga_ffi_certification, iga_country, iga_model, iga_legal_status_treatment, iga_ffi_trustee_or_sponsor, iga_ffi_trustee_is_foreign, treaty_qualified_pension_fund_certification, qualified_retirement_fund_certification, narrow_participation_retirement_fund_certification, section401_a_equivalent_pension_plan_certification, investment_entity_for_retirement_funds_certification, exempt_beneficial_owner_sponsored_retirement_fund_certification, excepted_nonfinancial_group_entity_certification, excepted_nonfinancial_start_up_certification, startup_formation_or_resolution_date, excepted_nonfinancial_entity_in_liquidation_or_bankruptcy_certification, nonfinancial_entity_filing_date, publicly_traded_nffe_certification, publicly_traded_nffe_securities_market, nffe_affiliate_of_publicly_traded_entity_certification, publicly_traded_entity, nffe_affiliate_of_publicly_traded_entity_securities_market, excepted_territory_nffe_certification, active_nffe_certification, passive_nffe_certification, sponsored_direct_reporting_nffe_certification, direct_reporting_nffe_sponsoring_entity, signer_name, id, entry_status, reference_id, company_id, display_name, email, archived, ancestor_id, signature, signed_date, e_delivery_consented_at, created_at, updated_at].hash
     end
 
     # Builds the object from hash
@@ -1242,7 +1419,6 @@ module AvalaraSdk::A1099::V2
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      super(attributes)
       attributes = attributes.transform_keys(&:to_sym)
       transformed_hash = {}
       openapi_types.each_pair do |key, type|
@@ -1319,7 +1495,7 @@ module AvalaraSdk::A1099::V2
     # Returns the object in the form of hash
     # @return [Hash] Returns the object in the form of hash
     def to_hash
-      hash = super
+      hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
         if value.nil?

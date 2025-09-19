@@ -26,25 +26,25 @@ module AvalaraSdk::A1099::V2
     # The name suffix of the employee.
     attr_accessor :employee_name_suffix
 
-    # The type of TIN provided.
+    # Tax Identification Number (TIN) type.
     attr_accessor :tin_type
 
     # The taxpayer identification number (TIN).
     attr_accessor :tin
 
-    # The address of the employee.
+    # The address of the employee. Required unless exempt.
     attr_accessor :address
 
-    # The city of residence of the employee.
+    # The city of residence of the employee. Required unless exempt.
     attr_accessor :city
 
-    # The state of residence of the employee.
+    # The state of residence of the employee. Required unless exempt.
     attr_accessor :state
 
-    # The ZIP code of residence of the employee.
+    # The ZIP code of residence of the employee. Required unless exempt.
     attr_accessor :zip
 
-    # The marital status of the employee.
+    # The marital status of the employee. Required unless exempt.  Available values:  - Single: Single or Married filing separately  - Married: Married filing jointly or qualifying surviving spouse  - MarriedBut: Head of household. Check only if you're unmarried and pay more than half the costs of keeping up a home for yourself and a qualifying individual.
     attr_accessor :marital_status
 
     # Indicates whether the last name differs from prior records.
@@ -77,7 +77,7 @@ module AvalaraSdk::A1099::V2
     # The signature of the form.
     attr_accessor :signature
 
-    # The ID of the associated company.
+    # The ID of the associated company. Required when creating a form.
     attr_accessor :company_id
 
     # A reference identifier for the form.
@@ -226,6 +226,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'employee_first_name')
         self.employee_first_name = attributes[:'employee_first_name']
+      else
+        self.employee_first_name = nil
       end
 
       if attributes.key?(:'employee_middle_name')
@@ -234,6 +236,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'employee_last_name')
         self.employee_last_name = attributes[:'employee_last_name']
+      else
+        self.employee_last_name = nil
       end
 
       if attributes.key?(:'employee_name_suffix')
@@ -242,10 +246,14 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'tin_type')
         self.tin_type = attributes[:'tin_type']
+      else
+        self.tin_type = nil
       end
 
       if attributes.key?(:'tin')
         self.tin = attributes[:'tin']
+      else
+        self.tin = nil
       end
 
       if attributes.key?(:'address')
@@ -310,8 +318,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'company_id')
         self.company_id = attributes[:'company_id']
-      else
-        self.company_id = nil
       end
 
       if attributes.key?(:'reference_id')
@@ -328,12 +334,20 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @company_id.nil?
-        invalid_properties.push('invalid value for "company_id", company_id cannot be nil.')
+      if @employee_first_name.nil?
+        invalid_properties.push('invalid value for "employee_first_name", employee_first_name cannot be nil.')
       end
 
-      if @company_id.to_s.length < 1
-        invalid_properties.push('invalid value for "company_id", the character length must be great than or equal to 1.')
+      if @employee_last_name.nil?
+        invalid_properties.push('invalid value for "employee_last_name", employee_last_name cannot be nil.')
+      end
+
+      if @tin_type.nil?
+        invalid_properties.push('invalid value for "tin_type", tin_type cannot be nil.')
+      end
+
+      if @tin.nil?
+        invalid_properties.push('invalid value for "tin", tin cannot be nil.')
       end
 
       invalid_properties
@@ -345,8 +359,10 @@ module AvalaraSdk::A1099::V2
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
       return false unless type_validator.valid?(@type)
-      return false if @company_id.nil?
-      return false if @company_id.to_s.length < 1
+      return false if @employee_first_name.nil?
+      return false if @employee_last_name.nil?
+      return false if @tin_type.nil?
+      return false if @tin.nil?
       true
     end
 
@@ -358,20 +374,6 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] company_id Value to be assigned
-    def company_id=(company_id)
-      if company_id.nil?
-        fail ArgumentError, 'company_id cannot be nil'
-      end
-
-      if company_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "company_id", the character length must be great than or equal to 1.'
-      end
-
-      @company_id = company_id
     end
 
     # Checks equality by comparing each attribute.

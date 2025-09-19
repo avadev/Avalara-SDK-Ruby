@@ -19,7 +19,7 @@ All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
 
 Create or update multiple 1099/1095/W2/1042S forms
 
-This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.
+This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
 
 ### Examples
 
@@ -42,7 +42,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 avalara_version = '2.0.0' # String | API version
 opts = {
   dry_run: true, # Boolean | defaults to false. If true, it will NOT change the DB. It will just return a report of what would've have been changed in the DB
-  x_correlation_id: '16e56e1f-e623-4f23-9904-21c29b5b4545', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '5ef65de0-c394-4aa2-b249-d8bfcbe9b23a', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   form1099_list_request: AvalaraSdk::A1099::V2::Form1099ListRequest.new # Form1099ListRequest | 
 }
@@ -104,7 +104,7 @@ end
 
 Create a 1099/1095/W2/1042S form
 
-Create a 1099/1095/W2/1042S form.
+Create a 1099/1095/W2/1042S form.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
 
 ### Examples
 
@@ -126,9 +126,9 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'e4a7bf40-da9f-452a-b2db-c8b64721610b', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '5b55b569-4e1e-44d3-920c-65153461c426', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: '1099-NEC', recipient_name: 'recipient_name_example', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
+  get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: 'Form1099Nec', recipient_name: 'recipient_name_example', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
 }
 
 begin
@@ -210,7 +210,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | The unique identifier of the desired form to delete.
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '8e01e950-8e1c-4b1b-9120-2e2452c6d590', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'e82ee14f-7146-41a5-b856-28f403d65e29', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -292,7 +292,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '7b8174a3-a873-4a05-a619-f362955f4608', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'f5198e72-fc87-4a4d-a09a-b2aa6cf70c38', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -376,7 +376,7 @@ id = 'id_example' # String | The ID of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
   mark_edelivered: true, # Boolean | Optional boolean that if set indicates that the form should be marked as having been successfully edelivered
-  x_correlation_id: 'a4dd3a23-ae45-45a5-8612-75e2fe4c1f36', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '7fdfd0b2-cebf-4f25-8a65-6dd03811e77d', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -465,7 +465,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: 'f808e46a-fc55-4dd7-960d-13c6ba8176f2', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '97f7596c-99c0-4879-b47c-57df572a32c9', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -530,7 +530,7 @@ end
 
 Update a 1099/1095/W2/1042S form
 
-Update a 1099/1095/W2/1042S form.
+Update a 1099/1095/W2/1042S form.    **Date Update Rules:**    Possible to update scheduled dates (same validation rules apply).  Cannot change from scheduled to unscheduled status - must delete form and create new one.  If dates are between current date and blackout period, scheduled to that date.  If dates are in past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.
 
 ### Examples
 
@@ -553,9 +553,9 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '944ee583-b810-471c-852c-d3c6f8b93a4b', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '560aa857-d5ba-484b-9375-a14e9e57d7a8', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: '1099-NEC', recipient_name: 'recipient_name_example', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
+  get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: 'Form1099Nec', recipient_name: 'recipient_name_example', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
 }
 
 begin
