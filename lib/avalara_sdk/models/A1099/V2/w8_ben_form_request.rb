@@ -92,7 +92,7 @@ module AvalaraSdk::A1099::V2
     # The signature of the form.
     attr_accessor :signature
 
-    # The ID of the associated company.
+    # The ID of the associated company. Required when creating a form.
     attr_accessor :company_id
 
     # A reference identifier for the form.
@@ -253,10 +253,14 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
       if attributes.key?(:'citizenship_country')
         self.citizenship_country = attributes[:'citizenship_country']
+      else
+        self.citizenship_country = nil
       end
 
       if attributes.key?(:'residence_address')
@@ -277,6 +281,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'residence_country')
         self.residence_country = attributes[:'residence_country']
+      else
+        self.residence_country = nil
       end
 
       if attributes.key?(:'residence_is_mailing')
@@ -301,6 +307,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'mailing_country')
         self.mailing_country = attributes[:'mailing_country']
+      else
+        self.mailing_country = nil
       end
 
       if attributes.key?(:'tin')
@@ -357,8 +365,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'company_id')
         self.company_id = attributes[:'company_id']
-      else
-        self.company_id = nil
       end
 
       if attributes.key?(:'reference_id')
@@ -375,12 +381,16 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @company_id.nil?
-        invalid_properties.push('invalid value for "company_id", company_id cannot be nil.')
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      if @company_id.to_s.length < 1
-        invalid_properties.push('invalid value for "company_id", the character length must be great than or equal to 1.')
+      if @citizenship_country.nil?
+        invalid_properties.push('invalid value for "citizenship_country", citizenship_country cannot be nil.')
+      end
+
+      if @residence_country.nil?
+        invalid_properties.push('invalid value for "residence_country", residence_country cannot be nil.')
       end
 
       invalid_properties
@@ -392,8 +402,9 @@ module AvalaraSdk::A1099::V2
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
       return false unless type_validator.valid?(@type)
-      return false if @company_id.nil?
-      return false if @company_id.to_s.length < 1
+      return false if @name.nil?
+      return false if @citizenship_country.nil?
+      return false if @residence_country.nil?
       true
     end
 
@@ -405,20 +416,6 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] company_id Value to be assigned
-    def company_id=(company_id)
-      if company_id.nil?
-        fail ArgumentError, 'company_id cannot be nil'
-      end
-
-      if company_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "company_id", the character length must be great than or equal to 1.'
-      end
-
-      @company_id = company_id
     end
 
     # Checks equality by comparing each attribute.

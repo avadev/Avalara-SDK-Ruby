@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.8.3")
+        api_client.set_sdk_version("25.9.0")
         @api_client = api_client
       end
 
@@ -227,7 +227,7 @@ module AvalaraSdk::A1099
     
       # Create an issuer
       # Create an issuer (also known as a Payer).
-      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param create_issuer_request [CreateIssuerRequest] The issuer to create
+      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param issuer_request [IssuerRequest] The issuer to create
       # @return [IssuerResponse]
       def create_issuer(request_parameters)
         data, _status_code, _headers = create_issuer_with_http_info(request_parameters)
@@ -240,7 +240,7 @@ module AvalaraSdk::A1099
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @param create_issuer_request [CreateIssuerRequest] The issuer to create    
+      # @param issuer_request [IssuerRequest] The issuer to create    
       # @return [Array<(IssuerResponse, Integer, Hash)>] IssuerResponse data, response status code and response headers
       def create_issuer_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -249,7 +249,7 @@ module AvalaraSdk::A1099
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
         x_avalara_client = request_parameters.get_x_avalara_client()
-        create_issuer_request = request_parameters.get_create_issuer_request()
+        issuer_request = request_parameters.get_issuer_request()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
           fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Issuers1099Api.create_issuer"
@@ -283,7 +283,7 @@ module AvalaraSdk::A1099
         form_params = {}
 
         # http body (model)
-        post_body =  @api_client.object_to_http_body(create_issuer_request) || {}
+        post_body =  @api_client.object_to_http_body(issuer_request) || {}
 
         # return_type
         return_type = 'IssuerResponse'
@@ -596,7 +596,7 @@ module AvalaraSdk::A1099
 
       # Update an issuer
       # Update an issuer (also known as a Payer).
-      # @param id [String] Id of the issuer to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param create_issuer_request [CreateIssuerRequest] The issuer to update
+      # @param id [String] Id of the issuer to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param issuer_request [IssuerRequest] The issuer to update
       # @return [nil]
       def update_issuer(request_parameters)
         update_issuer_with_http_info(request_parameters)
@@ -610,7 +610,7 @@ module AvalaraSdk::A1099
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @param create_issuer_request [CreateIssuerRequest] The issuer to update    
+      # @param issuer_request [IssuerRequest] The issuer to update    
       # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
       def update_issuer_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -620,7 +620,7 @@ module AvalaraSdk::A1099
         avalara_version = request_parameters.get_avalara_version()
         x_correlation_id = request_parameters.get_x_correlation_id()
         x_avalara_client = request_parameters.get_x_avalara_client()
-        create_issuer_request = request_parameters.get_create_issuer_request()
+        issuer_request = request_parameters.get_issuer_request()
         # verify the required parameter 'id' is set
         if @api_client.config.client_side_validation && id.nil?
           fail ArgumentError, "Missing the required parameter 'id' when calling Issuers1099Api.update_issuer"
@@ -658,7 +658,7 @@ module AvalaraSdk::A1099
         form_params = {}
 
         # http body (model)
-        post_body =  @api_client.object_to_http_body(create_issuer_request) || {}
+        post_body =  @api_client.object_to_http_body(issuer_request) || {}
 
         # return_type
         return_type = ''
@@ -692,7 +692,7 @@ module AvalaraSdk::A1099
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
-    # @param  CreateIssuerRequest $create_issuer_request The issuer to create (optional)
+    # @param  IssuerRequest $issuer_request The issuer to create (optional)
     #
     class CreateIssuerRequestSdk
         attr_accessor :avalara_version
@@ -701,7 +701,7 @@ module AvalaraSdk::A1099
 
         attr_accessor :x_avalara_client
 
-        attr_accessor :create_issuer_request
+        attr_accessor :issuer_request
 
         def initialize()
         end
@@ -730,12 +730,12 @@ module AvalaraSdk::A1099
             @x_avalara_client = x_avalara_client
         end
 
-        def get_create_issuer_request()
-            return @create_issuer_request
+        def get_issuer_request()
+            return @issuer_request
         end
 
-        def set_create_issuer_request(create_issuer_request)
-            @create_issuer_request = create_issuer_request
+        def set_issuer_request(issuer_request)
+            @issuer_request = issuer_request
         end
     end
     # Represents the Request object for the DeleteIssuer API
@@ -952,7 +952,7 @@ module AvalaraSdk::A1099
     # @param  String $avalara_version API version (required)
     # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
-    # @param  CreateIssuerRequest $create_issuer_request The issuer to update (optional)
+    # @param  IssuerRequest $issuer_request The issuer to update (optional)
     #
     class UpdateIssuerRequestSdk
         attr_accessor :id
@@ -963,7 +963,7 @@ module AvalaraSdk::A1099
 
         attr_accessor :x_avalara_client
 
-        attr_accessor :create_issuer_request
+        attr_accessor :issuer_request
 
         def initialize()
         end
@@ -1000,12 +1000,12 @@ module AvalaraSdk::A1099
             @x_avalara_client = x_avalara_client
         end
 
-        def get_create_issuer_request()
-            return @create_issuer_request
+        def get_issuer_request()
+            return @issuer_request
         end
 
-        def set_create_issuer_request(create_issuer_request)
-            @create_issuer_request = create_issuer_request
+        def set_issuer_request(issuer_request)
+            @issuer_request = issuer_request
         end
     end
   end

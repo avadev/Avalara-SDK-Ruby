@@ -85,12 +85,6 @@ module AvalaraSdk::A1099::V2
       true
     end
 
-    # Custom attribute writer method with validation
-    # @param [Object] errors Value to be assigned
-    def errors=(errors)
-      @errors = errors
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)

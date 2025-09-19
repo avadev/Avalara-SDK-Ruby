@@ -13,7 +13,7 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::Form1099ListRequest.new(
-  type: 1099-NEC,
+  type: null,
   forms: null
 )
 ```

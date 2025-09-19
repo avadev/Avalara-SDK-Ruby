@@ -33,7 +33,7 @@ require 'avalara_sdk'
 instance = AvalaraSdk::A1099::V2::JobResponse.new(
   id: null,
   type: null,
-  status: InProgress,
+  status: null,
   error_message: null,
   total_processed: null,
   total_rows: null,

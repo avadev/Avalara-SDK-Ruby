@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.8.3")
+        api_client.set_sdk_version("25.9.0")
         @api_client = api_client
       end
 
@@ -226,7 +226,7 @@ module AvalaraSdk::A1099
       end
     
       # Create or update multiple 1099/1095/W2/1042S forms
-      # This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.
+      # This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
       # @param avalara_version [String] API version      # @param dry_run [Boolean] defaults to false. If true, it will NOT change the DB. It will just return a report of what would&#39;ve have been changed in the DB      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param form1099_list_request [Form1099ListRequest] 
       # @return [JobResponse]
       def bulk_upsert1099_forms(request_parameters)
@@ -235,7 +235,7 @@ module AvalaraSdk::A1099
       end
 
       # Create or update multiple 1099/1095/W2/1042S forms
-      # This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.
+      # This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
           
       # @param avalara_version [String] API version    
       # @param dry_run [Boolean] defaults to false. If true, it will NOT change the DB. It will just return a report of what would&#39;ve have been changed in the DB    
@@ -318,7 +318,7 @@ module AvalaraSdk::A1099
       end
 
       # Create a 1099/1095/W2/1042S form
-      # Create a 1099/1095/W2/1042S form.
+      # Create a 1099/1095/W2/1042S form.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param get1099_form200_response [Get1099Form200Response] 
       # @return [Get1099Form200Response]
       def create1099_form(request_parameters)
@@ -327,7 +327,7 @@ module AvalaraSdk::A1099
       end
 
       # Create a 1099/1095/W2/1042S form
-      # Create a 1099/1095/W2/1042S form.
+      # Create a 1099/1095/W2/1042S form.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
           
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
@@ -778,7 +778,7 @@ module AvalaraSdk::A1099
       end
 
       # Update a 1099/1095/W2/1042S form
-      # Update a 1099/1095/W2/1042S form.
+      # Update a 1099/1095/W2/1042S form.    **Date Update Rules:**    Possible to update scheduled dates (same validation rules apply).  Cannot change from scheduled to unscheduled status - must delete form and create new one.  If dates are between current date and blackout period, scheduled to that date.  If dates are in past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.
       # @param id [String]       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param get1099_form200_response [Get1099Form200Response] 
       # @return [Get1099Form200Response]
       def update1099_form(request_parameters)
@@ -787,7 +787,7 @@ module AvalaraSdk::A1099
       end
 
       # Update a 1099/1095/W2/1042S form
-      # Update a 1099/1095/W2/1042S form.
+      # Update a 1099/1095/W2/1042S form.    **Date Update Rules:**    Possible to update scheduled dates (same validation rules apply).  Cannot change from scheduled to unscheduled status - must delete form and create new one.  If dates are between current date and blackout period, scheduled to that date.  If dates are in past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.
           
       # @param id [String]     
       # @param avalara_version [String] API version    

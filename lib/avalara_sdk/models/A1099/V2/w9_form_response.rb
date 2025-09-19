@@ -10,7 +10,10 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      class W9FormResponse < W9FormBaseResponse
+      class W9FormResponse
+    # The form type (always \"W9\" for this model).
+    attr_accessor :type
+
     # The name of the individual or entity associated with the form.
     attr_accessor :name
 
@@ -53,7 +56,7 @@ module AvalaraSdk::A1099::V2
     # The account number associated with the form.
     attr_accessor :account_number
 
-    # The type of TIN provided.
+    # Tax Identification Number (TIN) type.
     attr_accessor :tin_type
 
     # The taxpayer identification number (TIN).
@@ -68,9 +71,71 @@ module AvalaraSdk::A1099::V2
     # The TIN Match status from IRS.
     attr_accessor :tin_match_status
 
+    # The unique identifier for the form.
+    attr_accessor :id
+
+    # The entry status information for the form.
+    attr_accessor :entry_status
+
+    # A reference identifier for the form.
+    attr_accessor :reference_id
+
+    # The ID of the associated company.
+    attr_accessor :company_id
+
+    # The display name associated with the form.
+    attr_accessor :display_name
+
+    # The email address of the individual associated with the form.
+    attr_accessor :email
+
+    # Indicates whether the form is archived.
+    attr_accessor :archived
+
+    # Form ID of previous version.
+    attr_accessor :ancestor_id
+
+    # The signature of the form.
+    attr_accessor :signature
+
+    # The date the form was signed.
+    attr_accessor :signed_date
+
+    # The date when e-delivery was consented.
+    attr_accessor :e_delivery_consented_at
+
+    # The creation date of the form.
+    attr_accessor :created_at
+
+    # The last updated date of the form.
+    attr_accessor :updated_at
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'type' => :'type',
         :'name' => :'name',
         :'business_name' => :'businessName',
         :'business_classification' => :'businessClassification',
@@ -89,18 +154,32 @@ module AvalaraSdk::A1099::V2
         :'tin' => :'tin',
         :'backup_withholding' => :'backupWithholding',
         :'is1099able' => :'is1099able',
-        :'tin_match_status' => :'tinMatchStatus'
+        :'tin_match_status' => :'tinMatchStatus',
+        :'id' => :'id',
+        :'entry_status' => :'entryStatus',
+        :'reference_id' => :'referenceId',
+        :'company_id' => :'companyId',
+        :'display_name' => :'displayName',
+        :'email' => :'email',
+        :'archived' => :'archived',
+        :'ancestor_id' => :'ancestorId',
+        :'signature' => :'signature',
+        :'signed_date' => :'signedDate',
+        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
+        :'created_at' => :'createdAt',
+        :'updated_at' => :'updatedAt'
       }
     end
 
-    # Returns all the JSON keys this model knows about, including the ones defined in its parent(s)
+    # Returns all the JSON keys this model knows about
     def self.acceptable_attributes
-      attribute_map.values.concat(superclass.acceptable_attributes)
+      attribute_map.values
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'type' => :'String',
         :'name' => :'String',
         :'business_name' => :'String',
         :'business_classification' => :'String',
@@ -119,7 +198,20 @@ module AvalaraSdk::A1099::V2
         :'tin' => :'String',
         :'backup_withholding' => :'Boolean',
         :'is1099able' => :'Boolean',
-        :'tin_match_status' => :'TinMatchStatusResponse'
+        :'tin_match_status' => :'TinMatchStatusResponse',
+        :'id' => :'String',
+        :'entry_status' => :'EntryStatusResponse',
+        :'reference_id' => :'String',
+        :'company_id' => :'String',
+        :'display_name' => :'String',
+        :'email' => :'String',
+        :'archived' => :'Boolean',
+        :'ancestor_id' => :'String',
+        :'signature' => :'String',
+        :'signed_date' => :'Time',
+        :'e_delivery_consented_at' => :'Time',
+        :'created_at' => :'Time',
+        :'updated_at' => :'Time'
       }
     end
 
@@ -135,6 +227,12 @@ module AvalaraSdk::A1099::V2
         :'state',
         :'zip',
         :'account_number',
+        :'reference_id',
+        :'email',
+        :'ancestor_id',
+        :'signature',
+        :'signed_date',
+        :'e_delivery_consented_at',
       ])
     end
 
@@ -160,8 +258,9 @@ module AvalaraSdk::A1099::V2
         h[k.to_sym] = v
       }
 
-      # call parent's initialize
-      super(attributes)
+      if attributes.key?(:'type')
+        self.type = attributes[:'type']
+      end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
@@ -238,13 +337,65 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'tin_match_status')
         self.tin_match_status = attributes[:'tin_match_status']
       end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'entry_status')
+        self.entry_status = attributes[:'entry_status']
+      end
+
+      if attributes.key?(:'reference_id')
+        self.reference_id = attributes[:'reference_id']
+      end
+
+      if attributes.key?(:'company_id')
+        self.company_id = attributes[:'company_id']
+      end
+
+      if attributes.key?(:'display_name')
+        self.display_name = attributes[:'display_name']
+      end
+
+      if attributes.key?(:'email')
+        self.email = attributes[:'email']
+      end
+
+      if attributes.key?(:'archived')
+        self.archived = attributes[:'archived']
+      end
+
+      if attributes.key?(:'ancestor_id')
+        self.ancestor_id = attributes[:'ancestor_id']
+      end
+
+      if attributes.key?(:'signature')
+        self.signature = attributes[:'signature']
+      end
+
+      if attributes.key?(:'signed_date')
+        self.signed_date = attributes[:'signed_date']
+      end
+
+      if attributes.key?(:'e_delivery_consented_at')
+        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
-      invalid_properties = super
+      invalid_properties = Array.new
       invalid_properties
     end
 
@@ -252,7 +403,19 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      true && super
+      type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
+      return false unless type_validator.valid?(@type)
+      true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] type Object to be assigned
+    def type=(type)
+      validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
+      unless validator.valid?(type)
+        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
+      end
+      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -260,6 +423,7 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          type == o.type &&
           name == o.name &&
           business_name == o.business_name &&
           business_classification == o.business_classification &&
@@ -278,7 +442,20 @@ module AvalaraSdk::A1099::V2
           tin == o.tin &&
           backup_withholding == o.backup_withholding &&
           is1099able == o.is1099able &&
-          tin_match_status == o.tin_match_status && super(o)
+          tin_match_status == o.tin_match_status &&
+          id == o.id &&
+          entry_status == o.entry_status &&
+          reference_id == o.reference_id &&
+          company_id == o.company_id &&
+          display_name == o.display_name &&
+          email == o.email &&
+          archived == o.archived &&
+          ancestor_id == o.ancestor_id &&
+          signature == o.signature &&
+          signed_date == o.signed_date &&
+          e_delivery_consented_at == o.e_delivery_consented_at &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -290,7 +467,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, business_name, business_classification, business_other, foreign_partner_owner_or_beneficiary, exempt_payee_code, exempt_fatca_code, foreign_country_indicator, address, foreign_address, city, state, zip, account_number, tin_type, tin, backup_withholding, is1099able, tin_match_status].hash
+      [type, name, business_name, business_classification, business_other, foreign_partner_owner_or_beneficiary, exempt_payee_code, exempt_fatca_code, foreign_country_indicator, address, foreign_address, city, state, zip, account_number, tin_type, tin, backup_withholding, is1099able, tin_match_status, id, entry_status, reference_id, company_id, display_name, email, archived, ancestor_id, signature, signed_date, e_delivery_consented_at, created_at, updated_at].hash
     end
 
     # Builds the object from hash
@@ -298,7 +475,6 @@ module AvalaraSdk::A1099::V2
     # @return [Object] Returns the model itself
     def self.build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
-      super(attributes)
       attributes = attributes.transform_keys(&:to_sym)
       transformed_hash = {}
       openapi_types.each_pair do |key, type|
@@ -375,7 +551,7 @@ module AvalaraSdk::A1099::V2
     # Returns the object in the form of hash
     # @return [Hash] Returns the object in the form of hash
     def to_hash
-      hash = super
+      hash = {}
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
         if value.nil?

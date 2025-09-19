@@ -23,10 +23,10 @@ module AvalaraSdk::A1099::V2
     # The name of the disregarded entity receiving the payment (if applicable).
     attr_accessor :disregarded_entity
 
-    # The entity type.
+    # The entity type.  Available values:  - 1: QI (including a QDD). Complete Part III.  - 2: Nonqualified intermediary. Complete Part IV.  - 3: Territory financial institution. Complete Part V.  - 4: U.S. branch. Complete Part VI.  - 5: Withholding foreign partnership. Complete Part VII.  - 6: Withholding foreign trust. Complete Part VII.  - 7: Nonwithholding foreign partnership. Complete Part VIII.  - 8: Nonwithholding foreign simple trust. Complete Part VIII.  - 9: Nonwithholding foreign grantor trust. Complete Part VIII.
     attr_accessor :entity_type
 
-    # The FATCA status.
+    # The FATCA status.  Available values:  - 1: Nonparticipating foreign financial institution (FFI) (including an FFI related to a Reporting IGA FFI other than a deemed-compliant FFI, participating FFI, or exempt beneficial owner). Complete Part IX (if applicable).  - 2: Participating FFI.  - 3: Reporting Model 1 FFI.  - 4: Reporting Model 2 FFI.  - 5: Registered deemed-compliant FFI (other than a reporting Model 1 FFI, sponsored FFI, or nonreporting IGA FFI covered in Part XIX).  - 6: Territory financial institution. Complete Part V.  - 7: Sponsored FFI (other than a certified deemed-compliant sponsored, closely held investment vehicle). Complete Part X.  - 8: Certified deemed-compliant nonregistering local bank. Complete Part XII.  - 9: Certified deemed-compliant FFI with only low-value accounts. Complete Part XIII.  - 10: Certified deemed-compliant sponsored, closely held investment vehicle. Complete Part XIV.  - 11: Certified deemed-compliant limited life debt investment entity. Complete Part XV.  - 12: Certain investment entities that do not maintain financial accounts. Complete Part XVI.  - 13: Owner-documented FFI. Complete Part XI.  - 14: Restricted distributor. Complete Part XVII.  - 15: Foreign central bank of issue. Complete Part XVIII.  - 16: Nonreporting IGA FFI. Complete Part XIX.  - 17: Exempt retirement plans. Complete Part XX.  - 18: Excepted nonfinancial group entity. Complete Part XXI.  - 19: Excepted nonfinancial start-up company. Complete Part XXII.  - 20: Excepted nonfinancial entity in liquidation or bankruptcy. Complete Part XXIII.  - 21: Publicly traded NFFE or NFFE affiliate of a publicly traded corporation. Complete Part XXIV.  - 22: Excepted territory NFFE. Complete Part XXV.  - 23: Active NFFE. Complete Part XXVI.  - 24: Passive NFFE. Complete Part XXVII.  - 25: Direct reporting NFFE.  - 26: Sponsored direct reporting NFFE. Complete Part XXVIII.
     attr_accessor :fatca_status
 
     # The residential address of the individual or entity.
@@ -62,7 +62,7 @@ module AvalaraSdk::A1099::V2
     # The country of the mailing address.
     attr_accessor :mailing_country
 
-    # The type of TIN provided.
+    # Tax Identification Number (TIN) type.  Available values: - QI-EIN: Qualified Intermediary EIN - WP-EIN: Withholding Partnership EIN - WT-EIN: Withholding Trust EIN - EIN: Employer Identification Number
     attr_accessor :tin_type
 
     # The taxpayer identification number (TIN).
@@ -77,7 +77,7 @@ module AvalaraSdk::A1099::V2
     # A reference number for the form.
     attr_accessor :reference_number
 
-    # The FATCA status of disregarded entity or branch receiving payment.
+    # The FATCA status of disregarded entity or branch receiving payment.  Available values:  - 1: Branch treated as nonparticipating FFI.  - 2: Participating FFI.  - 3: Reporting Model 1 FFI.  - 4: Reporting Model 2 FFI.  - 5: U.S. Branch
     attr_accessor :disregarded_entity_fatca_status
 
     # The address for disregarded entities.
@@ -269,7 +269,7 @@ module AvalaraSdk::A1099::V2
     # The country for the applicable IGA with the United States.
     attr_accessor :iga_country
 
-    # The applicable IGA model.
+    # The applicable IGA model.  Available values:  - 1: Model 1 IGA  - 2: Model 2 IGA
     attr_accessor :iga_model
 
     # Specifies how the applicable IGA is treated under the IGA provisions or Treasury regulations.
@@ -353,7 +353,7 @@ module AvalaraSdk::A1099::V2
     # The signature of the form.
     attr_accessor :signature
 
-    # The ID of the associated company.
+    # The ID of the associated company. Required when creating a form.
     attr_accessor :company_id
 
     # A reference identifier for the form.
@@ -775,10 +775,14 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
+      else
+        self.name = nil
       end
 
       if attributes.key?(:'citizenship_country')
         self.citizenship_country = attributes[:'citizenship_country']
+      else
+        self.citizenship_country = nil
       end
 
       if attributes.key?(:'disregarded_entity')
@@ -787,6 +791,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'entity_type')
         self.entity_type = attributes[:'entity_type']
+      else
+        self.entity_type = nil
       end
 
       if attributes.key?(:'fatca_status')
@@ -811,6 +817,8 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'residence_country')
         self.residence_country = attributes[:'residence_country']
+      else
+        self.residence_country = nil
       end
 
       if attributes.key?(:'residence_is_mailing')
@@ -1227,8 +1235,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'company_id')
         self.company_id = attributes[:'company_id']
-      else
-        self.company_id = nil
       end
 
       if attributes.key?(:'reference_id')
@@ -1245,12 +1251,20 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @company_id.nil?
-        invalid_properties.push('invalid value for "company_id", company_id cannot be nil.')
+      if @name.nil?
+        invalid_properties.push('invalid value for "name", name cannot be nil.')
       end
 
-      if @company_id.to_s.length < 1
-        invalid_properties.push('invalid value for "company_id", the character length must be great than or equal to 1.')
+      if @citizenship_country.nil?
+        invalid_properties.push('invalid value for "citizenship_country", citizenship_country cannot be nil.')
+      end
+
+      if @entity_type.nil?
+        invalid_properties.push('invalid value for "entity_type", entity_type cannot be nil.')
+      end
+
+      if @residence_country.nil?
+        invalid_properties.push('invalid value for "residence_country", residence_country cannot be nil.')
       end
 
       invalid_properties
@@ -1262,8 +1276,10 @@ module AvalaraSdk::A1099::V2
       warn '[DEPRECATED] the `valid?` method is obsolete'
       type_validator = EnumAttributeValidator.new('String', ["W4", "W8Ben", "W8BenE", "W8Imy", "W9"])
       return false unless type_validator.valid?(@type)
-      return false if @company_id.nil?
-      return false if @company_id.to_s.length < 1
+      return false if @name.nil?
+      return false if @citizenship_country.nil?
+      return false if @entity_type.nil?
+      return false if @residence_country.nil?
       true
     end
 
@@ -1275,20 +1291,6 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] company_id Value to be assigned
-    def company_id=(company_id)
-      if company_id.nil?
-        fail ArgumentError, 'company_id cannot be nil'
-      end
-
-      if company_id.to_s.length < 1
-        fail ArgumentError, 'invalid value for "company_id", the character length must be great than or equal to 1.'
-      end
-
-      @company_id = company_id
     end
 
     # Checks equality by comparing each attribute.
