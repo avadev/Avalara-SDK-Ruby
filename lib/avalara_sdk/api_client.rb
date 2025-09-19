@@ -135,8 +135,16 @@ module AvalaraSdk
     relative_url = build_request_url(path).sub(%r{^/}, '')
 
     header_params = @default_headers.merge(opts[:header_params] || {})
-    header_params['X-Avalara-Client'] =
-      "#{@config.app_name};#{@config.app_version};RubySdk;#{@sdk_version};#{@config.machine_name}"
+
+    sdk_client_header = "#{@config.app_name};#{@config.app_version};RubySdk;#{@sdk_version};#{@config.machine_name}"
+    
+    # Always set X-Avalara-SDK-Client to SDK info
+    header_params['X-Avalara-SDK-Client'] = sdk_client_header
+    
+    # If X-Avalara-Client is null/empty, set it to SDK info as well
+    if header_params['X-Avalara-Client'].nil? || header_params['X-Avalara-Client'].empty?
+      header_params['X-Avalara-Client'] = sdk_client_header
+    end
 
     query_params = opts[:query_params] || {}
     form_params  = opts[:form_params]  || {}
