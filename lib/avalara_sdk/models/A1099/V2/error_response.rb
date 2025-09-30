@@ -11,8 +11,10 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class ErrorResponse
+    # A summary of the problem type.
     attr_accessor :title
 
+    # A list of errors detailing the problem type.
     attr_accessor :errors
 
     # Attribute mapping from ruby-style variable name to JSON key.

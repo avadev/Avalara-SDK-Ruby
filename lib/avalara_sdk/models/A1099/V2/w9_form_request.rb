@@ -29,10 +29,10 @@ module AvalaraSdk::A1099::V2
     # Indicates whether the individual is a foreign partner, owner, or beneficiary.
     attr_accessor :foreign_partner_owner_or_beneficiary
 
-    # The exempt payee code.
+    # The exempt payee code. Allowed values (1–13):  - 1 — Organization exempt under §501(a) or IRA; custodial account under §403(b)(7)  - 2 — U.S. government or its agencies/instrumentalities  - 3 — U.S. state, DC, U.S. territory/possession, or their political subdivisions/agencies/instrumentalities  - 4 — Foreign government or its political subdivisions/agencies/instrumentalities  - 5 — Corporation  - 6 — Dealer in securities or commodities required to register in the U.S., DC, or U.S. territory/possession  - 7 — Futures commission merchant registered with the CFTC  - 8 — Real estate investment trust (REIT)  - 9 — Entity registered at all times during the tax year under the Investment Company Act of 1940  - 10 — Common trust fund operated by a bank under §584(a)  - 11 — Financial institution (see §581)  - 12 — Broker (nominee/custodian)  - 13 — Trust exempt under §664 or described in §4947
     attr_accessor :exempt_payee_code
 
-    # The exemption from FATCA reporting code.
+    # The exemption from FATCA reporting code. Allowed values (A–M):  - A — Tax‑exempt organization under §501(a) or IRA (§7701(a)(37))  - B — U.S. government or any of its agencies/instrumentalities  - C — U.S. state, DC, territory/possession, or their political subdivisions/instrumentalities  - D — Corporation whose stock is regularly traded on an established securities market  - E — Corporation that is a member of the same expanded affiliated group as a D corporation  - F — Registered dealer in securities/commodities/derivatives  - G — REIT (Real Estate Investment Trust)  - H — Regulated investment company (§851) or entity registered all year under the Investment Company Act of 1940  - I — Common trust fund (§584(a))  - J — Bank (§581)  - K — Broker  - L — Charitable remainder trust (§664) or trust described in §4947(a)(1)  - M — Trust under §403(b) plan or §457(g) plan
     attr_accessor :exempt_fatca_code
 
     # Indicates whether the individual or entity is in a foreign country.
@@ -360,7 +360,11 @@ module AvalaraSdk::A1099::V2
       return false unless type_validator.valid?(@type)
       return false if @name.nil?
       return false if @business_classification.nil?
+      business_classification_validator = EnumAttributeValidator.new('String', ["Individual", "CCorporation", "SCorporation", "Partnership", "TrustEstate", "LlcC", "LlcS", "LlcP", "Other"])
+      return false unless business_classification_validator.valid?(@business_classification)
       return false if @address.nil?
+      state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      return false unless state_validator.valid?(@state)
       return false if @tin_type.nil?
       return false if @tin.nil?
       true
@@ -374,6 +378,26 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] business_classification Object to be assigned
+    def business_classification=(business_classification)
+      validator = EnumAttributeValidator.new('String', ["Individual", "CCorporation", "SCorporation", "Partnership", "TrustEstate", "LlcC", "LlcS", "LlcP", "Other"])
+      unless validator.valid?(business_classification)
+        fail ArgumentError, "invalid value for \"business_classification\", must be one of #{validator.allowable_values}."
+      end
+      @business_classification = business_classification
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] state Object to be assigned
+    def state=(state)
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      unless validator.valid?(state)
+        fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
+      end
+      @state = state
     end
 
     # Checks equality by comparing each attribute.

@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **title** | **String** |  | [optional] |
-| **errors** | [**Array&lt;ErrorResponseItem&gt;**](ErrorResponseItem.md) |  | [optional] |
+| **title** | **String** | A summary of the problem type. | [optional] |
+| **errors** | [**Array&lt;ErrorResponseItem&gt;**](ErrorResponseItem.md) | A list of errors detailing the problem type. | [optional] |
 
 ## Example
 

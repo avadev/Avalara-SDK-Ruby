@@ -23,10 +23,10 @@ module AvalaraSdk::A1099::V2
     # The name of the disregarded entity receiving the payment (if applicable).
     attr_accessor :disregarded_entity
 
-    # The entity type.  Available values:  - 1: QI (including a QDD). Complete Part III.  - 2: Nonqualified intermediary. Complete Part IV.  - 3: Territory financial institution. Complete Part V.  - 4: U.S. branch. Complete Part VI.  - 5: Withholding foreign partnership. Complete Part VII.  - 6: Withholding foreign trust. Complete Part VII.  - 7: Nonwithholding foreign partnership. Complete Part VIII.  - 8: Nonwithholding foreign simple trust. Complete Part VIII.  - 9: Nonwithholding foreign grantor trust. Complete Part VIII.
+    # Represents the entity type for W-8IMY tax forms.  W-8IMY forms only accept entity types 1-9, which is a subset of the full EntityType enum.
     attr_accessor :entity_type
 
-    # The FATCA status.  Available values:  - 1: Nonparticipating foreign financial institution (FFI) (including an FFI related to a Reporting IGA FFI other than a deemed-compliant FFI, participating FFI, or exempt beneficial owner). Complete Part IX (if applicable).  - 2: Participating FFI.  - 3: Reporting Model 1 FFI.  - 4: Reporting Model 2 FFI.  - 5: Registered deemed-compliant FFI (other than a reporting Model 1 FFI, sponsored FFI, or nonreporting IGA FFI covered in Part XIX).  - 6: Territory financial institution. Complete Part V.  - 7: Sponsored FFI (other than a certified deemed-compliant sponsored, closely held investment vehicle). Complete Part X.  - 8: Certified deemed-compliant nonregistering local bank. Complete Part XII.  - 9: Certified deemed-compliant FFI with only low-value accounts. Complete Part XIII.  - 10: Certified deemed-compliant sponsored, closely held investment vehicle. Complete Part XIV.  - 11: Certified deemed-compliant limited life debt investment entity. Complete Part XV.  - 12: Certain investment entities that do not maintain financial accounts. Complete Part XVI.  - 13: Owner-documented FFI. Complete Part XI.  - 14: Restricted distributor. Complete Part XVII.  - 15: Foreign central bank of issue. Complete Part XVIII.  - 16: Nonreporting IGA FFI. Complete Part XIX.  - 17: Exempt retirement plans. Complete Part XX.  - 18: Excepted nonfinancial group entity. Complete Part XXI.  - 19: Excepted nonfinancial start-up company. Complete Part XXII.  - 20: Excepted nonfinancial entity in liquidation or bankruptcy. Complete Part XXIII.  - 21: Publicly traded NFFE or NFFE affiliate of a publicly traded corporation. Complete Part XXIV.  - 22: Excepted territory NFFE. Complete Part XXV.  - 23: Active NFFE. Complete Part XXVI.  - 24: Passive NFFE. Complete Part XXVII.  - 25: Direct reporting NFFE.  - 26: Sponsored direct reporting NFFE. Complete Part XXVIII.
+    # Represents the FATCA status types specifically for W8-IMY forms.  This is a subset of the full FatcaStatus enum, restricted to values 1-26 for W8-IMY forms.
     attr_accessor :fatca_status
 
     # The residential address of the individual or entity.
@@ -1279,7 +1279,15 @@ module AvalaraSdk::A1099::V2
       return false if @name.nil?
       return false if @citizenship_country.nil?
       return false if @entity_type.nil?
+      entity_type_validator = EnumAttributeValidator.new('String', ["QI", "NonqualifiedIntermediary", "TerritoryFinancialInstitution", "USBranch", "WithholdingForeignPartnership", "WithholdingForeignTrust", "NonwithholdingForeignPartnership", "NonwithholdingForeignSimpleTrust", "NonwithholdingForeignGrantorTrust"])
+      return false unless entity_type_validator.valid?(@entity_type)
+      fatca_status_validator = EnumAttributeValidator.new('String', ["NonparticipatingFFI", "ParticipatingFFI", "ReportingModel1FFI", "ReportingModel2FFI", "RegisteredDeemedCompliantFFI", "TerritoryFinancialInstitution", "SponsoredFFI", "CertifiedDeemedCompliantNonregisteringLocalBank", "CertifiedDeemedCompliantFFIWithLowValueAccounts", "CertifiedDeemedCompliantSponsoredCloselyHeldInvestmentVehicle", "CertifiedDeemedCompliantLimitedLifeDebtInvestmentEntity", "CertainInvestmentEntitiesWithoutFinancialAccounts", "OwnerDocumentedFFI", "RestrictedDistributor", "ForeignCentralBankOfIssue", "NonreportingIGAFFI", "ExemptRetirementPlans", "ExceptedNonfinancialGroupEntity", "ExceptedNonfinancialStartUpCompany", "ExceptedNonfinancialEntityInLiquidationOrBankruptcy", "PubliclyTradedNFFEOrAffiliateOfPubliclyTradedCorporation", "ExceptedTerritoryNFFE", "ActiveNFFE", "PassiveNFFE", "DirectReportingNFFE", "SponsoredDirectReportingNFFE"])
+      return false unless fatca_status_validator.valid?(@fatca_status)
       return false if @residence_country.nil?
+      disregarded_entity_fatca_status_validator = EnumAttributeValidator.new('String', ["1", "2", "3", "4", "5"])
+      return false unless disregarded_entity_fatca_status_validator.valid?(@disregarded_entity_fatca_status)
+      iga_model_validator = EnumAttributeValidator.new('String', ["1", "2"])
+      return false unless iga_model_validator.valid?(@iga_model)
       true
     end
 
@@ -1291,6 +1299,46 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] entity_type Object to be assigned
+    def entity_type=(entity_type)
+      validator = EnumAttributeValidator.new('String', ["QI", "NonqualifiedIntermediary", "TerritoryFinancialInstitution", "USBranch", "WithholdingForeignPartnership", "WithholdingForeignTrust", "NonwithholdingForeignPartnership", "NonwithholdingForeignSimpleTrust", "NonwithholdingForeignGrantorTrust"])
+      unless validator.valid?(entity_type)
+        fail ArgumentError, "invalid value for \"entity_type\", must be one of #{validator.allowable_values}."
+      end
+      @entity_type = entity_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] fatca_status Object to be assigned
+    def fatca_status=(fatca_status)
+      validator = EnumAttributeValidator.new('String', ["NonparticipatingFFI", "ParticipatingFFI", "ReportingModel1FFI", "ReportingModel2FFI", "RegisteredDeemedCompliantFFI", "TerritoryFinancialInstitution", "SponsoredFFI", "CertifiedDeemedCompliantNonregisteringLocalBank", "CertifiedDeemedCompliantFFIWithLowValueAccounts", "CertifiedDeemedCompliantSponsoredCloselyHeldInvestmentVehicle", "CertifiedDeemedCompliantLimitedLifeDebtInvestmentEntity", "CertainInvestmentEntitiesWithoutFinancialAccounts", "OwnerDocumentedFFI", "RestrictedDistributor", "ForeignCentralBankOfIssue", "NonreportingIGAFFI", "ExemptRetirementPlans", "ExceptedNonfinancialGroupEntity", "ExceptedNonfinancialStartUpCompany", "ExceptedNonfinancialEntityInLiquidationOrBankruptcy", "PubliclyTradedNFFEOrAffiliateOfPubliclyTradedCorporation", "ExceptedTerritoryNFFE", "ActiveNFFE", "PassiveNFFE", "DirectReportingNFFE", "SponsoredDirectReportingNFFE"])
+      unless validator.valid?(fatca_status)
+        fail ArgumentError, "invalid value for \"fatca_status\", must be one of #{validator.allowable_values}."
+      end
+      @fatca_status = fatca_status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] disregarded_entity_fatca_status Object to be assigned
+    def disregarded_entity_fatca_status=(disregarded_entity_fatca_status)
+      validator = EnumAttributeValidator.new('String', ["1", "2", "3", "4", "5"])
+      unless validator.valid?(disregarded_entity_fatca_status)
+        fail ArgumentError, "invalid value for \"disregarded_entity_fatca_status\", must be one of #{validator.allowable_values}."
+      end
+      @disregarded_entity_fatca_status = disregarded_entity_fatca_status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] iga_model Object to be assigned
+    def iga_model=(iga_model)
+      validator = EnumAttributeValidator.new('String', ["1", "2"])
+      unless validator.valid?(iga_model)
+        fail ArgumentError, "invalid value for \"iga_model\", must be one of #{validator.allowable_values}."
+      end
+      @iga_model = iga_model
     end
 
     # Checks equality by comparing each attribute.

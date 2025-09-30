@@ -11,8 +11,10 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class ErrorResponseItem
+    # An identifier for this occurrence of the problem.  It is the name of a request's field when specific to that field.  Otherwise, for other types of errors, its value is empty.
     attr_accessor :type
 
+    # An explanation specific to this occurrence of the problem.
     attr_accessor :detail
 
     # Attribute mapping from ruby-style variable name to JSON key.
