@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **type** | **String** |  | [optional] |
-| **detail** | **String** |  | [optional] |
+| **type** | **String** | An identifier for this occurrence of the problem.  It is the name of a request&#39;s field when specific to that field.  Otherwise, for other types of errors, its value is empty. | [optional] |
+| **detail** | **String** | An explanation specific to this occurrence of the problem. | [optional] |
 
 ## Example
 

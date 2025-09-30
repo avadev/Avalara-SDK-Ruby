@@ -363,6 +363,10 @@ module AvalaraSdk::A1099::V2
       return false if @employee_last_name.nil?
       return false if @tin_type.nil?
       return false if @tin.nil?
+      state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      return false unless state_validator.valid?(@state)
+      marital_status_validator = EnumAttributeValidator.new('String', ["Single", "Married", "MarriedBut"])
+      return false unless marital_status_validator.valid?(@marital_status)
       true
     end
 
@@ -374,6 +378,26 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] state Object to be assigned
+    def state=(state)
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      unless validator.valid?(state)
+        fail ArgumentError, "invalid value for \"state\", must be one of #{validator.allowable_values}."
+      end
+      @state = state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] marital_status Object to be assigned
+    def marital_status=(marital_status)
+      validator = EnumAttributeValidator.new('String', ["Single", "Married", "MarriedBut"])
+      unless validator.valid?(marital_status)
+        fail ArgumentError, "invalid value for \"marital_status\", must be one of #{validator.allowable_values}."
+      end
+      @marital_status = marital_status
     end
 
     # Checks equality by comparing each attribute.
