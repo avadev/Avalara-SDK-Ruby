@@ -23,13 +23,13 @@ module AvalaraSdk::A1099::V2
     # The name of the disregarded entity receiving the payment (if applicable).
     attr_accessor :disregarded_entity
 
-    # The entity type.  Available values:  - 1: Corporation  - 2: Disregarded entity  - 3: Partnership  - 4: Simple trust  - 5: Grantor trust  - 6: Complex trust  - 7: Estate  - 8: Foreign Government - Controlled Entity  - 9: Central Bank of Issue  - 10: Tax-exempt organization  - 11: Private foundation  - 12: International organization  - 13: Foreign Government - Controlled Integral Part
+    # Represents the entity type for tax forms.  Each value corresponds to a specific entity classification.  - 1: Corporation  - 2: Disregarded entity  - 3: Partnership  - 4: Simple trust  - 5: Grantor trust  - 6: Complex trust  - 7: Estate  - 8: Foreign Government - Controlled Entity  - 9: Central Bank of Issue  - 10: Tax-exempt organization  - 11: Private foundation  - 12: International organization  - 13: Foreign Government - Controlled Integral Part
     attr_accessor :entity_type
 
     # Indicates whether the entity is making a treaty claim.
     attr_accessor :making_treaty_claim
 
-    # The FATCA status.  Available values:  - 1: Nonparticipating FFI (including a limited FFI or an FFI related to a Reporting IGA FFI other than a deemed-compliant FFI, participating FFI, or exempt beneficial owner)  - 2: Participating FFI  - 3: Reporting Model 1 FFI  - 4: Reporting Model 2 FFI  - 5: Registered deemed-compliant FFI (other than a reporting Model 1 FFI, sponsored FFI, or nonreporting IGA FFI covered in Part XII)  - 6: Sponsored FFI that has not obtained a GIIN  - 7: Certified deemed-compliant nonregistering local bank  - 8: Certified deemed-compliant FFI with only low-value accounts  - 9: Certified deemed-compliant sponsored, closely held investment vehicle  - 10: Certified deemed-compliant limited life debt investment entity  - 11: Certified deemed-compliant investment advisors and investment managers  - 12: Owner-documented FFI  - 13: Restricted distributor  - 14: Nonreporting IGA FFI  - 15: Foreign government, government of a U.S. possession, or foreign central bank of issue  - 16: International organization  - 17: Exempt retirement plans  - 18: Entity wholly owned by exempt beneficial owners  - 19: Territory financial institution  - 20: Nonfinancial group entity  - 21: Excepted nonfinancial start-up company  - 22: Excepted nonfinancial entity in liquidation or bankruptcy  - 23: 501(c) organization  - 24: Nonprofit organization  - 25: Publicly traded NFFE or NFFE affiliate of a publicly traded corporation  - 26: Excepted territory NFFE  - 27: Active NFFE  - 28: Passive NFFE  - 29: Excepted inter-affiliate FFI  - 30: Direct reporting NFFE  - 31: Sponsored direct reporting NFFE  - 32: Account that is not a financial account
+    # Represents the FATCA status types for tax forms.  Used for W8-BEN-E forms and FATCA compliance validations.  Values correspond to numeric identifiers used in forms.  - 1: Nonparticipating FFI (including a limited FFI or an FFI related to a Reporting IGA FFI other than a deemed-compliant FFI, participating FFI, or exempt beneficial owner)  - 2: Participating FFI  - 3: Reporting Model 1 FFI  - 4: Reporting Model 2 FFI  - 5: Registered deemed-compliant FFI (other than a reporting Model 1 FFI, sponsored FFI, or nonreporting IGA FFI covered in Part XII)  - 6: Sponsored FFI that has not obtained a GIIN  - 7: Certified deemed-compliant nonregistering local bank  - 8: Certified deemed-compliant FFI with only low-value accounts  - 9: Certified deemed-compliant sponsored, closely held investment vehicle  - 10: Certified deemed-compliant limited life debt investment entity  - 11: Certified deemed-compliant investment advisors and investment managers  - 12: Owner-documented FFI  - 13: Restricted distributor  - 14: Nonreporting IGA FFI  - 15: Foreign government, government of a U.S. possession, or foreign central bank of issue  - 16: International organization  - 17: Exempt retirement plans  - 18: Entity wholly owned by exempt beneficial owners  - 19: Territory financial institution  - 20: Nonfinancial group entity  - 21: Excepted nonfinancial start-up company  - 22: Excepted nonfinancial entity in liquidation or bankruptcy  - 23: 501(c) organization  - 24: Nonprofit organization  - 25: Publicly traded NFFE or NFFE affiliate of a publicly traded corporation  - 26: Excepted territory NFFE  - 27: Active NFFE  - 28: Passive NFFE  - 29: Excepted inter-affiliate FFI  - 30: Direct reporting NFFE  - 31: Sponsored direct reporting NFFE  - 32: Account that is not a financial account
     attr_accessor :fatca_status
 
     # The residential address of the individual or entity.
@@ -80,7 +80,7 @@ module AvalaraSdk::A1099::V2
     # A reference number for the form.
     attr_accessor :reference_number
 
-    # The FATCA status of disregarded entity or branch receiving payment.  Available values:  - 1: Limited Branch  - 2: U.S. Branch  - 3: Participating FFI  - 4: Reporting Model 1 FFI  - 5: Reporting Model 2 FFI
+    # The FATCA status of disregarded entity or branch receiving payment.  Available values:  - 1: Branch treated as nonparticipating FFI  - 2: U.S. Branch  - 3: Participating FFI  - 4: Reporting Model 1 FFI  - 5: Reporting Model 2 FFI
     attr_accessor :disregarded_entity_fatca_status
 
     # The address for disregarded entities.
@@ -110,7 +110,7 @@ module AvalaraSdk::A1099::V2
     # Certifies that the beneficial owner is eligible for treaty benefits and meets any limitation on benefits requirements.
     attr_accessor :benefit_limitation_certification
 
-    # The benefit limitation for tax treaty claims.  Available values:  - 1: Government  - 2: Tax exempt pension trust or pension fund  - 3: Other tax exempt organization  - 4: Publicly traded corporation  - 5: Subsidiary of a publicly traded corporation  - 6: Company that meets the ownership and base erosion test  - 7: Company that meets the derivative benefits test  - 8: Company with an item of income that meets active trade or business test  - 9: Favorable discretionary determination by the U.S. competent authority received  - 10: Other
+    # The benefit limitation for tax treaty claims.  Available values:  - 1: Government  - 2: Tax exempt pension trust or pension fund  - 3: Other tax exempt organization  - 4: Publicly traded corporation  - 5: Subsidiary of a publicly traded corporation  - 6: Company that meets the ownership and base erosion test  - 7: Company that meets the derivative benefits test  - 8: Company with an item of income that meets active trade or business test  - 9: Favorable discretionary determination by the U.S. competent authority received  - 10: Other  - 11: No LOB article in treaty
     attr_accessor :benefit_limitation
 
     # Certifies that the beneficial owner claims treaty benefits and meets the qualified resident status for specific U.S. source income.
@@ -1126,8 +1126,24 @@ module AvalaraSdk::A1099::V2
       return false if @name.nil?
       return false if @citizenship_country.nil?
       return false if @entity_type.nil?
+      entity_type_validator = EnumAttributeValidator.new('String', ["Corporation", "DisregardedEntity", "Partnership", "SimpleTrust", "GrantorTrust", "ComplexTrust", "Estate", "ForeignGovernmentControlledEntity", "CentralBankOfIssue", "TaxExemptOrganization", "PrivateFoundation", "InternationalOrganization", "ForeignGovernmentControlledIntegralPart"])
+      return false unless entity_type_validator.valid?(@entity_type)
       return false if @fatca_status.nil?
+      fatca_status_validator = EnumAttributeValidator.new('String', ["NonparticipatingFFI", "ParticipatingFFI", "ReportingModel1FFI", "ReportingModel2FFI", "RegisteredDeemedCompliantFFI", "SponsoredFFIWithoutGIIN", "CertifiedDeemedCompliantNonregisteringLocalBank", "CertifiedDeemedCompliantFFIWithLowValueAccounts", "CertifiedDeemedCompliantSponsoredCloselyHeldInvestmentVehicle", "CertifiedDeemedCompliantLimitedLifeDebtInvestmentEntity", "CertainInvestmentEntitiesWithoutFinancialAccounts", "OwnerDocumentedFFI", "RestrictedDistributor", "NonreportingIGAFFI", "ForeignGovernmentOrUSPossessionOrForeignCentralBank", "InternationalOrganization", "ExemptRetirementPlans", "EntityWhollyOwnedByExemptBeneficialOwners", "TerritoryFinancialInstitution", "NonfinancialGroupEntity", "ExceptedNonfinancialStartUpCompany", "ExceptedNonfinancialEntityInLiquidationOrBankruptcy", "Organization501c", "NonprofitOrganization", "PubliclyTradedNFFEOrAffiliateOfPubliclyTradedCorporation", "ExceptedTerritoryNFFE", "ActiveNFFE", "PassiveNFFE", "ExceptedInterAffiliateFFI", "DirectReportingNFFE", "SponsoredDirectReportingNFFE", "AccountThatIsNotFinancialAccount"])
+      return false unless fatca_status_validator.valid?(@fatca_status)
+      residence_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      return false unless residence_state_validator.valid?(@residence_state)
       return false if @residence_country.nil?
+      mailing_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      return false unless mailing_state_validator.valid?(@mailing_state)
+      disregarded_entity_fatca_status_validator = EnumAttributeValidator.new('String', ["BranchTreatedAsNonparticipatingFFI", "USBranch", "ParticipatingFFI", "ReportingModel1FFI", "ReportingModel2FFI"])
+      return false unless disregarded_entity_fatca_status_validator.valid?(@disregarded_entity_fatca_status)
+      disregarded_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      return false unless disregarded_state_validator.valid?(@disregarded_state)
+      benefit_limitation_validator = EnumAttributeValidator.new('String', ["Government", "TaxExemptPensionTrustOrPensionFund", "OtherTaxExemptOrganization", "PubliclyTradedCorporation", "SubsidiaryOfPubliclyTradedCorporation", "CompanyThatMeetsOwnershipAndBaseErosionTest", "CompanyThatMeetsDerivativeBenefitsTest", "CompanyWithItemOfIncomeThatMeetsActiveTradeOrBusinessTest", "FavorableDiscretionaryDeterminationByUSCompetentAuthorityReceived", "Other", "NoLOBArticleInTreaty"])
+      return false unless benefit_limitation_validator.valid?(@benefit_limitation)
+      iga_model_validator = EnumAttributeValidator.new('String', ["Model1IGA", "Model2IGA"])
+      return false unless iga_model_validator.valid?(@iga_model)
       true
     end
 
@@ -1139,6 +1155,86 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] entity_type Object to be assigned
+    def entity_type=(entity_type)
+      validator = EnumAttributeValidator.new('String', ["Corporation", "DisregardedEntity", "Partnership", "SimpleTrust", "GrantorTrust", "ComplexTrust", "Estate", "ForeignGovernmentControlledEntity", "CentralBankOfIssue", "TaxExemptOrganization", "PrivateFoundation", "InternationalOrganization", "ForeignGovernmentControlledIntegralPart"])
+      unless validator.valid?(entity_type)
+        fail ArgumentError, "invalid value for \"entity_type\", must be one of #{validator.allowable_values}."
+      end
+      @entity_type = entity_type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] fatca_status Object to be assigned
+    def fatca_status=(fatca_status)
+      validator = EnumAttributeValidator.new('String', ["NonparticipatingFFI", "ParticipatingFFI", "ReportingModel1FFI", "ReportingModel2FFI", "RegisteredDeemedCompliantFFI", "SponsoredFFIWithoutGIIN", "CertifiedDeemedCompliantNonregisteringLocalBank", "CertifiedDeemedCompliantFFIWithLowValueAccounts", "CertifiedDeemedCompliantSponsoredCloselyHeldInvestmentVehicle", "CertifiedDeemedCompliantLimitedLifeDebtInvestmentEntity", "CertainInvestmentEntitiesWithoutFinancialAccounts", "OwnerDocumentedFFI", "RestrictedDistributor", "NonreportingIGAFFI", "ForeignGovernmentOrUSPossessionOrForeignCentralBank", "InternationalOrganization", "ExemptRetirementPlans", "EntityWhollyOwnedByExemptBeneficialOwners", "TerritoryFinancialInstitution", "NonfinancialGroupEntity", "ExceptedNonfinancialStartUpCompany", "ExceptedNonfinancialEntityInLiquidationOrBankruptcy", "Organization501c", "NonprofitOrganization", "PubliclyTradedNFFEOrAffiliateOfPubliclyTradedCorporation", "ExceptedTerritoryNFFE", "ActiveNFFE", "PassiveNFFE", "ExceptedInterAffiliateFFI", "DirectReportingNFFE", "SponsoredDirectReportingNFFE", "AccountThatIsNotFinancialAccount"])
+      unless validator.valid?(fatca_status)
+        fail ArgumentError, "invalid value for \"fatca_status\", must be one of #{validator.allowable_values}."
+      end
+      @fatca_status = fatca_status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] residence_state Object to be assigned
+    def residence_state=(residence_state)
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      unless validator.valid?(residence_state)
+        fail ArgumentError, "invalid value for \"residence_state\", must be one of #{validator.allowable_values}."
+      end
+      @residence_state = residence_state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] mailing_state Object to be assigned
+    def mailing_state=(mailing_state)
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      unless validator.valid?(mailing_state)
+        fail ArgumentError, "invalid value for \"mailing_state\", must be one of #{validator.allowable_values}."
+      end
+      @mailing_state = mailing_state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] disregarded_entity_fatca_status Object to be assigned
+    def disregarded_entity_fatca_status=(disregarded_entity_fatca_status)
+      validator = EnumAttributeValidator.new('String', ["BranchTreatedAsNonparticipatingFFI", "USBranch", "ParticipatingFFI", "ReportingModel1FFI", "ReportingModel2FFI"])
+      unless validator.valid?(disregarded_entity_fatca_status)
+        fail ArgumentError, "invalid value for \"disregarded_entity_fatca_status\", must be one of #{validator.allowable_values}."
+      end
+      @disregarded_entity_fatca_status = disregarded_entity_fatca_status
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] disregarded_state Object to be assigned
+    def disregarded_state=(disregarded_state)
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      unless validator.valid?(disregarded_state)
+        fail ArgumentError, "invalid value for \"disregarded_state\", must be one of #{validator.allowable_values}."
+      end
+      @disregarded_state = disregarded_state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] benefit_limitation Object to be assigned
+    def benefit_limitation=(benefit_limitation)
+      validator = EnumAttributeValidator.new('String', ["Government", "TaxExemptPensionTrustOrPensionFund", "OtherTaxExemptOrganization", "PubliclyTradedCorporation", "SubsidiaryOfPubliclyTradedCorporation", "CompanyThatMeetsOwnershipAndBaseErosionTest", "CompanyThatMeetsDerivativeBenefitsTest", "CompanyWithItemOfIncomeThatMeetsActiveTradeOrBusinessTest", "FavorableDiscretionaryDeterminationByUSCompetentAuthorityReceived", "Other", "NoLOBArticleInTreaty"])
+      unless validator.valid?(benefit_limitation)
+        fail ArgumentError, "invalid value for \"benefit_limitation\", must be one of #{validator.allowable_values}."
+      end
+      @benefit_limitation = benefit_limitation
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] iga_model Object to be assigned
+    def iga_model=(iga_model)
+      validator = EnumAttributeValidator.new('String', ["Model1IGA", "Model2IGA"])
+      unless validator.valid?(iga_model)
+        fail ArgumentError, "invalid value for \"iga_model\", must be one of #{validator.allowable_values}."
+      end
+      @iga_model = iga_model
     end
 
     # Checks equality by comparing each attribute.

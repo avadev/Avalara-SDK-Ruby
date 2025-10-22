@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.10.0")
+        api_client.set_sdk_version("25.10.1")
         @api_client = api_client
       end
 
@@ -554,6 +554,92 @@ module AvalaraSdk::A1099
 
         new_options = {
           :operation => :"FormsW9Api.get_w9_form",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:GET, local_var_path, new_options, required_scopes, false, :A1099)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
+      # Download the PDF for a W9/W4/W8 form.
+      # Returns the PDF file for a W9/W4/W8 form.
+      # @param id [String] Id of the form      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # @return [nil]
+      def get_w9_form_pdf(request_parameters)
+        get_w9_form_pdf_with_http_info(request_parameters)
+        nil
+      end
+
+      # Download the PDF for a W9/W4/W8 form.
+      # Returns the PDF file for a W9/W4/W8 form.
+          
+      # @param id [String] Id of the form    
+      # @param avalara_version [String] API version    
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
+      # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+      def get_w9_form_pdf_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        id = request_parameters.get_id()
+        avalara_version = request_parameters.get_avalara_version()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        # verify the required parameter 'id' is set
+        if @api_client.config.client_side_validation && id.nil?
+          fail ArgumentError, "Missing the required parameter 'id' when calling FormsW9Api.get_w9_form_pdf"
+        end
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling FormsW9Api.get_w9_form_pdf"
+        end
+        # resource path
+        local_var_path = '/w9/forms/{id}/pdf'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/pdf', 'application/json'])
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body = {}
+
+        # return_type
+        return_type = ''
+
+        # auth_names
+        auth_names = ['bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"FormsW9Api.get_w9_form_pdf",
           :header_params => header_params,
           :query_params => query_params,
           :form_params => form_params,
@@ -1117,6 +1203,57 @@ module AvalaraSdk::A1099
     # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
     #
     class GetW9FormRequestSdk
+        attr_accessor :id
+
+        attr_accessor :avalara_version
+
+        attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
+
+        def initialize()
+        end
+
+        def get_id()
+            return @id
+        end
+
+        def set_id(id)
+            @id = id
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '2.0'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+    end
+    # Represents the Request object for the GetW9FormPdf API
+    #
+    # @param  String $id Id of the form (required)
+    # @param  String $avalara_version API version (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
+    #
+    class GetW9FormPdfRequestSdk
         attr_accessor :id
 
         attr_accessor :avalara_version
