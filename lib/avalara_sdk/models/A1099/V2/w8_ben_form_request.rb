@@ -17,7 +17,7 @@ module AvalaraSdk::A1099::V2
     # The name of the individual or entity associated with the form.
     attr_accessor :name
 
-    # The country of citizenship.
+    # The country of citizenship.. Allowed values: US, AF, AX, AL, AG, AQ, AN, AO, AV, AY (and 248 more)
     attr_accessor :citizenship_country
 
     # The residential address of the individual or entity.
@@ -26,13 +26,13 @@ module AvalaraSdk::A1099::V2
     # The city of residence.
     attr_accessor :residence_city
 
-    # The state of residence.
+    # The state of residence. Required for US and Canada.. Allowed values: AA, AE, AK, AL, AP, AR, AS, AZ, CA, CO (and 65 more)
     attr_accessor :residence_state
 
     # The ZIP code of the residence.
     attr_accessor :residence_zip
 
-    # The country of residence.
+    # The country of residence.. Allowed values: US, AF, AX, AL, AG, AQ, AN, AO, AV, AY (and 248 more)
     attr_accessor :residence_country
 
     # Indicates whether the residence address is the mailing address.
@@ -44,13 +44,13 @@ module AvalaraSdk::A1099::V2
     # The city of the mailing address.
     attr_accessor :mailing_city
 
-    # The state of the mailing address.
+    # The state of the mailing address. Required for US and Canada.. Allowed values: AA, AE, AK, AL, AP, AR, AS, AZ, CA, CO (and 65 more)
     attr_accessor :mailing_state
 
     # The ZIP code of the mailing address.
     attr_accessor :mailing_zip
 
-    # The country of the mailing address.
+    # The country of the mailing address.. Allowed values: US, AF, AX, AL, AG, AQ, AN, AO, AV, AY (and 248 more)
     attr_accessor :mailing_country
 
     # The taxpayer identification number (TIN).
@@ -68,7 +68,7 @@ module AvalaraSdk::A1099::V2
     # The birthday of the individual associated with the form.
     attr_accessor :birthday
 
-    # The country for which the treaty applies.
+    # The country for which the treaty applies.. Allowed values: US, AF, AX, AL, AG, AQ, AN, AO, AV, AY (and 248 more)
     attr_accessor :treaty_country
 
     # The specific article of the treaty being claimed.
@@ -77,7 +77,7 @@ module AvalaraSdk::A1099::V2
     # The reasons for claiming treaty benefits.
     attr_accessor :treaty_reasons
 
-    # The withholding rate applied as per the treaty.
+    # The withholding rate applied as per the treaty. Must be a percentage with up to two decimals (e.g., 12.50, 0).. Allowed values: 0, 0.0, 0.00, 5, 5.5, 10, 12.50, 15, 20, 25 (and 1 more)
     attr_accessor :withholding_rate
 
     # The type of income covered by the treaty.
@@ -404,7 +404,21 @@ module AvalaraSdk::A1099::V2
       return false unless type_validator.valid?(@type)
       return false if @name.nil?
       return false if @citizenship_country.nil?
+      citizenship_country_validator = EnumAttributeValidator.new('String', ["US", "AF", "AX", "AL", "AG", "AQ", "AN", "AO", "AV", "AY", "AC", "AR", "AM", "AA", "AT", "AS", "AU", "AJ", "BF", "BA", "FQ", "BG", "BB", "BO", "BE", "BH", "BN", "BD", "BT", "BL", "BK", "BC", "BV", "BR", "IO", "VI", "BX", "BU", "UV", "BM", "BY", "CB", "CM", "CA", "CV", "CJ", "CT", "CD", "CI", "CH", "KT", "IP", "CK", "CO", "CN", "CF", "CG", "CW", "CR", "CS", "IV", "HR", "CU", "UC", "CY", "EZ", "DA", "DX", "DJ", "DO", "DR", "TT", "EC", "EG", "ES", "EK", "ER", "EN", "ET", "FK", "FO", "FM", "FJ", "FI", "FR", "FP", "FS", "GB", "GA", "GG", "GM", "GH", "GI", "GR", "GL", "GJ", "GQ", "GT", "GK", "GV", "PU", "GY", "HA", "HM", "VT", "HO", "HK", "HQ", "HU", "IC", "IN", "ID", "IR", "IZ", "EI", "IS", "IT", "JM", "JN", "JA", "DQ", "JE", "JQ", "JO", "KZ", "KE", "KQ", "KR", "KN", "KS", "KV", "KU", "KG", "LA", "LG", "LE", "LT", "LI", "LY", "LS", "LH", "LU", "MC", "MK", "MA", "MI", "MY", "MV", "ML", "MT", "IM", "RM", "MR", "MP", "MX", "MQ", "MD", "MN", "MG", "MJ", "MH", "MO", "MZ", "WA", "NR", "BQ", "NP", "NL", "NC", "NZ", "NU", "NG", "NI", "NE", "NF", "CQ", "NO", "MU", "OC", "PK", "PS", "LQ", "PM", "PP", "PF", "PA", "PE", "RP", "PC", "PL", "PO", "RQ", "QA", "RO", "RS", "RW", "TB", "RN", "WS", "SM", "TP", "SA", "SG", "RI", "SE", "SL", "SN", "NN", "LO", "SI", "BP", "SO", "SF", "SX", "SP", "PG", "CE", "SH", "SC", "ST", "SB", "VC", "SU", "NS", "SV", "WZ", "SW", "SZ", "SY", "TW", "TI", "TZ", "TH", "TO", "TL", "TN", "TD", "TS", "TU", "TX", "TK", "TV", "UG", "UP", "AE", "UK", "UY", "UZ", "NH", "VE", "VM", "VQ", "WQ", "WF", "WI", "YM", "ZA", "ZI"])
+      return false unless citizenship_country_validator.valid?(@citizenship_country)
+      residence_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
+      return false unless residence_state_validator.valid?(@residence_state)
       return false if @residence_country.nil?
+      residence_country_validator = EnumAttributeValidator.new('String', ["US", "AF", "AX", "AL", "AG", "AQ", "AN", "AO", "AV", "AY", "AC", "AR", "AM", "AA", "AT", "AS", "AU", "AJ", "BF", "BA", "FQ", "BG", "BB", "BO", "BE", "BH", "BN", "BD", "BT", "BL", "BK", "BC", "BV", "BR", "IO", "VI", "BX", "BU", "UV", "BM", "BY", "CB", "CM", "CA", "CV", "CJ", "CT", "CD", "CI", "CH", "KT", "IP", "CK", "CO", "CN", "CF", "CG", "CW", "CR", "CS", "IV", "HR", "CU", "UC", "CY", "EZ", "DA", "DX", "DJ", "DO", "DR", "TT", "EC", "EG", "ES", "EK", "ER", "EN", "ET", "FK", "FO", "FM", "FJ", "FI", "FR", "FP", "FS", "GB", "GA", "GG", "GM", "GH", "GI", "GR", "GL", "GJ", "GQ", "GT", "GK", "GV", "PU", "GY", "HA", "HM", "VT", "HO", "HK", "HQ", "HU", "IC", "IN", "ID", "IR", "IZ", "EI", "IS", "IT", "JM", "JN", "JA", "DQ", "JE", "JQ", "JO", "KZ", "KE", "KQ", "KR", "KN", "KS", "KV", "KU", "KG", "LA", "LG", "LE", "LT", "LI", "LY", "LS", "LH", "LU", "MC", "MK", "MA", "MI", "MY", "MV", "ML", "MT", "IM", "RM", "MR", "MP", "MX", "MQ", "MD", "MN", "MG", "MJ", "MH", "MO", "MZ", "WA", "NR", "BQ", "NP", "NL", "NC", "NZ", "NU", "NG", "NI", "NE", "NF", "CQ", "NO", "MU", "OC", "PK", "PS", "LQ", "PM", "PP", "PF", "PA", "PE", "RP", "PC", "PL", "PO", "RQ", "QA", "RO", "RS", "RW", "TB", "RN", "WS", "SM", "TP", "SA", "SG", "RI", "SE", "SL", "SN", "NN", "LO", "SI", "BP", "SO", "SF", "SX", "SP", "PG", "CE", "SH", "SC", "ST", "SB", "VC", "SU", "NS", "SV", "WZ", "SW", "SZ", "SY", "TW", "TI", "TZ", "TH", "TO", "TL", "TN", "TD", "TS", "TU", "TX", "TK", "TV", "UG", "UP", "AE", "UK", "UY", "UZ", "NH", "VE", "VM", "VQ", "WQ", "WF", "WI", "YM", "ZA", "ZI"])
+      return false unless residence_country_validator.valid?(@residence_country)
+      mailing_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
+      return false unless mailing_state_validator.valid?(@mailing_state)
+      mailing_country_validator = EnumAttributeValidator.new('String', ["US", "AF", "AX", "AL", "AG", "AQ", "AN", "AO", "AV", "AY", "AC", "AR", "AM", "AA", "AT", "AS", "AU", "AJ", "BF", "BA", "FQ", "BG", "BB", "BO", "BE", "BH", "BN", "BD", "BT", "BL", "BK", "BC", "BV", "BR", "IO", "VI", "BX", "BU", "UV", "BM", "BY", "CB", "CM", "CA", "CV", "CJ", "CT", "CD", "CI", "CH", "KT", "IP", "CK", "CO", "CN", "CF", "CG", "CW", "CR", "CS", "IV", "HR", "CU", "UC", "CY", "EZ", "DA", "DX", "DJ", "DO", "DR", "TT", "EC", "EG", "ES", "EK", "ER", "EN", "ET", "FK", "FO", "FM", "FJ", "FI", "FR", "FP", "FS", "GB", "GA", "GG", "GM", "GH", "GI", "GR", "GL", "GJ", "GQ", "GT", "GK", "GV", "PU", "GY", "HA", "HM", "VT", "HO", "HK", "HQ", "HU", "IC", "IN", "ID", "IR", "IZ", "EI", "IS", "IT", "JM", "JN", "JA", "DQ", "JE", "JQ", "JO", "KZ", "KE", "KQ", "KR", "KN", "KS", "KV", "KU", "KG", "LA", "LG", "LE", "LT", "LI", "LY", "LS", "LH", "LU", "MC", "MK", "MA", "MI", "MY", "MV", "ML", "MT", "IM", "RM", "MR", "MP", "MX", "MQ", "MD", "MN", "MG", "MJ", "MH", "MO", "MZ", "WA", "NR", "BQ", "NP", "NL", "NC", "NZ", "NU", "NG", "NI", "NE", "NF", "CQ", "NO", "MU", "OC", "PK", "PS", "LQ", "PM", "PP", "PF", "PA", "PE", "RP", "PC", "PL", "PO", "RQ", "QA", "RO", "RS", "RW", "TB", "RN", "WS", "SM", "TP", "SA", "SG", "RI", "SE", "SL", "SN", "NN", "LO", "SI", "BP", "SO", "SF", "SX", "SP", "PG", "CE", "SH", "SC", "ST", "SB", "VC", "SU", "NS", "SV", "WZ", "SW", "SZ", "SY", "TW", "TI", "TZ", "TH", "TO", "TL", "TN", "TD", "TS", "TU", "TX", "TK", "TV", "UG", "UP", "AE", "UK", "UY", "UZ", "NH", "VE", "VM", "VQ", "WQ", "WF", "WI", "YM", "ZA", "ZI"])
+      return false unless mailing_country_validator.valid?(@mailing_country)
+      treaty_country_validator = EnumAttributeValidator.new('String', ["US", "AF", "AX", "AL", "AG", "AQ", "AN", "AO", "AV", "AY", "AC", "AR", "AM", "AA", "AT", "AS", "AU", "AJ", "BF", "BA", "FQ", "BG", "BB", "BO", "BE", "BH", "BN", "BD", "BT", "BL", "BK", "BC", "BV", "BR", "IO", "VI", "BX", "BU", "UV", "BM", "BY", "CB", "CM", "CA", "CV", "CJ", "CT", "CD", "CI", "CH", "KT", "IP", "CK", "CO", "CN", "CF", "CG", "CW", "CR", "CS", "IV", "HR", "CU", "UC", "CY", "EZ", "DA", "DX", "DJ", "DO", "DR", "TT", "EC", "EG", "ES", "EK", "ER", "EN", "ET", "FK", "FO", "FM", "FJ", "FI", "FR", "FP", "FS", "GB", "GA", "GG", "GM", "GH", "GI", "GR", "GL", "GJ", "GQ", "GT", "GK", "GV", "PU", "GY", "HA", "HM", "VT", "HO", "HK", "HQ", "HU", "IC", "IN", "ID", "IR", "IZ", "EI", "IS", "IT", "JM", "JN", "JA", "DQ", "JE", "JQ", "JO", "KZ", "KE", "KQ", "KR", "KN", "KS", "KV", "KU", "KG", "LA", "LG", "LE", "LT", "LI", "LY", "LS", "LH", "LU", "MC", "MK", "MA", "MI", "MY", "MV", "ML", "MT", "IM", "RM", "MR", "MP", "MX", "MQ", "MD", "MN", "MG", "MJ", "MH", "MO", "MZ", "WA", "NR", "BQ", "NP", "NL", "NC", "NZ", "NU", "NG", "NI", "NE", "NF", "CQ", "NO", "MU", "OC", "PK", "PS", "LQ", "PM", "PP", "PF", "PA", "PE", "RP", "PC", "PL", "PO", "RQ", "QA", "RO", "RS", "RW", "TB", "RN", "WS", "SM", "TP", "SA", "SG", "RI", "SE", "SL", "SN", "NN", "LO", "SI", "BP", "SO", "SF", "SX", "SP", "PG", "CE", "SH", "SC", "ST", "SB", "VC", "SU", "NS", "SV", "WZ", "SW", "SZ", "SY", "TW", "TI", "TZ", "TH", "TO", "TL", "TN", "TD", "TS", "TU", "TX", "TK", "TV", "UG", "UP", "AE", "UK", "UY", "UZ", "NH", "VE", "VM", "VQ", "WQ", "WF", "WI", "YM", "ZA", "ZI"])
+      return false unless treaty_country_validator.valid?(@treaty_country)
+      withholding_rate_validator = EnumAttributeValidator.new('String', ["0", "0.0", "0.00", "5", "5.5", "10", "12.50", "15", "20", "25", "30"])
+      return false unless withholding_rate_validator.valid?(@withholding_rate)
       true
     end
 
@@ -416,6 +430,76 @@ module AvalaraSdk::A1099::V2
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
       @type = type
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] citizenship_country Object to be assigned
+    def citizenship_country=(citizenship_country)
+      validator = EnumAttributeValidator.new('String', ["US", "AF", "AX", "AL", "AG", "AQ", "AN", "AO", "AV", "AY", "AC", "AR", "AM", "AA", "AT", "AS", "AU", "AJ", "BF", "BA", "FQ", "BG", "BB", "BO", "BE", "BH", "BN", "BD", "BT", "BL", "BK", "BC", "BV", "BR", "IO", "VI", "BX", "BU", "UV", "BM", "BY", "CB", "CM", "CA", "CV", "CJ", "CT", "CD", "CI", "CH", "KT", "IP", "CK", "CO", "CN", "CF", "CG", "CW", "CR", "CS", "IV", "HR", "CU", "UC", "CY", "EZ", "DA", "DX", "DJ", "DO", "DR", "TT", "EC", "EG", "ES", "EK", "ER", "EN", "ET", "FK", "FO", "FM", "FJ", "FI", "FR", "FP", "FS", "GB", "GA", "GG", "GM", "GH", "GI", "GR", "GL", "GJ", "GQ", "GT", "GK", "GV", "PU", "GY", "HA", "HM", "VT", "HO", "HK", "HQ", "HU", "IC", "IN", "ID", "IR", "IZ", "EI", "IS", "IT", "JM", "JN", "JA", "DQ", "JE", "JQ", "JO", "KZ", "KE", "KQ", "KR", "KN", "KS", "KV", "KU", "KG", "LA", "LG", "LE", "LT", "LI", "LY", "LS", "LH", "LU", "MC", "MK", "MA", "MI", "MY", "MV", "ML", "MT", "IM", "RM", "MR", "MP", "MX", "MQ", "MD", "MN", "MG", "MJ", "MH", "MO", "MZ", "WA", "NR", "BQ", "NP", "NL", "NC", "NZ", "NU", "NG", "NI", "NE", "NF", "CQ", "NO", "MU", "OC", "PK", "PS", "LQ", "PM", "PP", "PF", "PA", "PE", "RP", "PC", "PL", "PO", "RQ", "QA", "RO", "RS", "RW", "TB", "RN", "WS", "SM", "TP", "SA", "SG", "RI", "SE", "SL", "SN", "NN", "LO", "SI", "BP", "SO", "SF", "SX", "SP", "PG", "CE", "SH", "SC", "ST", "SB", "VC", "SU", "NS", "SV", "WZ", "SW", "SZ", "SY", "TW", "TI", "TZ", "TH", "TO", "TL", "TN", "TD", "TS", "TU", "TX", "TK", "TV", "UG", "UP", "AE", "UK", "UY", "UZ", "NH", "VE", "VM", "VQ", "WQ", "WF", "WI", "YM", "ZA", "ZI"])
+      unless validator.valid?(citizenship_country)
+        fail ArgumentError, "invalid value for \"citizenship_country\", must be one of #{validator.allowable_values}."
+      end
+      @citizenship_country = citizenship_country
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] residence_state Object to be assigned
+    def residence_state=(residence_state)
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
+      unless validator.valid?(residence_state)
+        fail ArgumentError, "invalid value for \"residence_state\", must be one of #{validator.allowable_values}."
+      end
+      @residence_state = residence_state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] residence_country Object to be assigned
+    def residence_country=(residence_country)
+      validator = EnumAttributeValidator.new('String', ["US", "AF", "AX", "AL", "AG", "AQ", "AN", "AO", "AV", "AY", "AC", "AR", "AM", "AA", "AT", "AS", "AU", "AJ", "BF", "BA", "FQ", "BG", "BB", "BO", "BE", "BH", "BN", "BD", "BT", "BL", "BK", "BC", "BV", "BR", "IO", "VI", "BX", "BU", "UV", "BM", "BY", "CB", "CM", "CA", "CV", "CJ", "CT", "CD", "CI", "CH", "KT", "IP", "CK", "CO", "CN", "CF", "CG", "CW", "CR", "CS", "IV", "HR", "CU", "UC", "CY", "EZ", "DA", "DX", "DJ", "DO", "DR", "TT", "EC", "EG", "ES", "EK", "ER", "EN", "ET", "FK", "FO", "FM", "FJ", "FI", "FR", "FP", "FS", "GB", "GA", "GG", "GM", "GH", "GI", "GR", "GL", "GJ", "GQ", "GT", "GK", "GV", "PU", "GY", "HA", "HM", "VT", "HO", "HK", "HQ", "HU", "IC", "IN", "ID", "IR", "IZ", "EI", "IS", "IT", "JM", "JN", "JA", "DQ", "JE", "JQ", "JO", "KZ", "KE", "KQ", "KR", "KN", "KS", "KV", "KU", "KG", "LA", "LG", "LE", "LT", "LI", "LY", "LS", "LH", "LU", "MC", "MK", "MA", "MI", "MY", "MV", "ML", "MT", "IM", "RM", "MR", "MP", "MX", "MQ", "MD", "MN", "MG", "MJ", "MH", "MO", "MZ", "WA", "NR", "BQ", "NP", "NL", "NC", "NZ", "NU", "NG", "NI", "NE", "NF", "CQ", "NO", "MU", "OC", "PK", "PS", "LQ", "PM", "PP", "PF", "PA", "PE", "RP", "PC", "PL", "PO", "RQ", "QA", "RO", "RS", "RW", "TB", "RN", "WS", "SM", "TP", "SA", "SG", "RI", "SE", "SL", "SN", "NN", "LO", "SI", "BP", "SO", "SF", "SX", "SP", "PG", "CE", "SH", "SC", "ST", "SB", "VC", "SU", "NS", "SV", "WZ", "SW", "SZ", "SY", "TW", "TI", "TZ", "TH", "TO", "TL", "TN", "TD", "TS", "TU", "TX", "TK", "TV", "UG", "UP", "AE", "UK", "UY", "UZ", "NH", "VE", "VM", "VQ", "WQ", "WF", "WI", "YM", "ZA", "ZI"])
+      unless validator.valid?(residence_country)
+        fail ArgumentError, "invalid value for \"residence_country\", must be one of #{validator.allowable_values}."
+      end
+      @residence_country = residence_country
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] mailing_state Object to be assigned
+    def mailing_state=(mailing_state)
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
+      unless validator.valid?(mailing_state)
+        fail ArgumentError, "invalid value for \"mailing_state\", must be one of #{validator.allowable_values}."
+      end
+      @mailing_state = mailing_state
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] mailing_country Object to be assigned
+    def mailing_country=(mailing_country)
+      validator = EnumAttributeValidator.new('String', ["US", "AF", "AX", "AL", "AG", "AQ", "AN", "AO", "AV", "AY", "AC", "AR", "AM", "AA", "AT", "AS", "AU", "AJ", "BF", "BA", "FQ", "BG", "BB", "BO", "BE", "BH", "BN", "BD", "BT", "BL", "BK", "BC", "BV", "BR", "IO", "VI", "BX", "BU", "UV", "BM", "BY", "CB", "CM", "CA", "CV", "CJ", "CT", "CD", "CI", "CH", "KT", "IP", "CK", "CO", "CN", "CF", "CG", "CW", "CR", "CS", "IV", "HR", "CU", "UC", "CY", "EZ", "DA", "DX", "DJ", "DO", "DR", "TT", "EC", "EG", "ES", "EK", "ER", "EN", "ET", "FK", "FO", "FM", "FJ", "FI", "FR", "FP", "FS", "GB", "GA", "GG", "GM", "GH", "GI", "GR", "GL", "GJ", "GQ", "GT", "GK", "GV", "PU", "GY", "HA", "HM", "VT", "HO", "HK", "HQ", "HU", "IC", "IN", "ID", "IR", "IZ", "EI", "IS", "IT", "JM", "JN", "JA", "DQ", "JE", "JQ", "JO", "KZ", "KE", "KQ", "KR", "KN", "KS", "KV", "KU", "KG", "LA", "LG", "LE", "LT", "LI", "LY", "LS", "LH", "LU", "MC", "MK", "MA", "MI", "MY", "MV", "ML", "MT", "IM", "RM", "MR", "MP", "MX", "MQ", "MD", "MN", "MG", "MJ", "MH", "MO", "MZ", "WA", "NR", "BQ", "NP", "NL", "NC", "NZ", "NU", "NG", "NI", "NE", "NF", "CQ", "NO", "MU", "OC", "PK", "PS", "LQ", "PM", "PP", "PF", "PA", "PE", "RP", "PC", "PL", "PO", "RQ", "QA", "RO", "RS", "RW", "TB", "RN", "WS", "SM", "TP", "SA", "SG", "RI", "SE", "SL", "SN", "NN", "LO", "SI", "BP", "SO", "SF", "SX", "SP", "PG", "CE", "SH", "SC", "ST", "SB", "VC", "SU", "NS", "SV", "WZ", "SW", "SZ", "SY", "TW", "TI", "TZ", "TH", "TO", "TL", "TN", "TD", "TS", "TU", "TX", "TK", "TV", "UG", "UP", "AE", "UK", "UY", "UZ", "NH", "VE", "VM", "VQ", "WQ", "WF", "WI", "YM", "ZA", "ZI"])
+      unless validator.valid?(mailing_country)
+        fail ArgumentError, "invalid value for \"mailing_country\", must be one of #{validator.allowable_values}."
+      end
+      @mailing_country = mailing_country
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] treaty_country Object to be assigned
+    def treaty_country=(treaty_country)
+      validator = EnumAttributeValidator.new('String', ["US", "AF", "AX", "AL", "AG", "AQ", "AN", "AO", "AV", "AY", "AC", "AR", "AM", "AA", "AT", "AS", "AU", "AJ", "BF", "BA", "FQ", "BG", "BB", "BO", "BE", "BH", "BN", "BD", "BT", "BL", "BK", "BC", "BV", "BR", "IO", "VI", "BX", "BU", "UV", "BM", "BY", "CB", "CM", "CA", "CV", "CJ", "CT", "CD", "CI", "CH", "KT", "IP", "CK", "CO", "CN", "CF", "CG", "CW", "CR", "CS", "IV", "HR", "CU", "UC", "CY", "EZ", "DA", "DX", "DJ", "DO", "DR", "TT", "EC", "EG", "ES", "EK", "ER", "EN", "ET", "FK", "FO", "FM", "FJ", "FI", "FR", "FP", "FS", "GB", "GA", "GG", "GM", "GH", "GI", "GR", "GL", "GJ", "GQ", "GT", "GK", "GV", "PU", "GY", "HA", "HM", "VT", "HO", "HK", "HQ", "HU", "IC", "IN", "ID", "IR", "IZ", "EI", "IS", "IT", "JM", "JN", "JA", "DQ", "JE", "JQ", "JO", "KZ", "KE", "KQ", "KR", "KN", "KS", "KV", "KU", "KG", "LA", "LG", "LE", "LT", "LI", "LY", "LS", "LH", "LU", "MC", "MK", "MA", "MI", "MY", "MV", "ML", "MT", "IM", "RM", "MR", "MP", "MX", "MQ", "MD", "MN", "MG", "MJ", "MH", "MO", "MZ", "WA", "NR", "BQ", "NP", "NL", "NC", "NZ", "NU", "NG", "NI", "NE", "NF", "CQ", "NO", "MU", "OC", "PK", "PS", "LQ", "PM", "PP", "PF", "PA", "PE", "RP", "PC", "PL", "PO", "RQ", "QA", "RO", "RS", "RW", "TB", "RN", "WS", "SM", "TP", "SA", "SG", "RI", "SE", "SL", "SN", "NN", "LO", "SI", "BP", "SO", "SF", "SX", "SP", "PG", "CE", "SH", "SC", "ST", "SB", "VC", "SU", "NS", "SV", "WZ", "SW", "SZ", "SY", "TW", "TI", "TZ", "TH", "TO", "TL", "TN", "TD", "TS", "TU", "TX", "TK", "TV", "UG", "UP", "AE", "UK", "UY", "UZ", "NH", "VE", "VM", "VQ", "WQ", "WF", "WI", "YM", "ZA", "ZI"])
+      unless validator.valid?(treaty_country)
+        fail ArgumentError, "invalid value for \"treaty_country\", must be one of #{validator.allowable_values}."
+      end
+      @treaty_country = treaty_country
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] withholding_rate Object to be assigned
+    def withholding_rate=(withholding_rate)
+      validator = EnumAttributeValidator.new('String', ["0", "0.0", "0.00", "5", "5.5", "10", "12.50", "15", "20", "25", "30"])
+      unless validator.valid?(withholding_rate)
+        fail ArgumentError, "invalid value for \"withholding_rate\", must be one of #{validator.allowable_values}."
+      end
+      @withholding_rate = withholding_rate
     end
 
     # Checks equality by comparing each attribute.
