@@ -17,12 +17,15 @@ module AvalaraSdk::A1099::V2
 
     attr_accessor :jurisdiction
 
+    attr_accessor :rejected_reason
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'status' => :'status',
         :'time' => :'time',
-        :'jurisdiction' => :'jurisdiction'
+        :'jurisdiction' => :'jurisdiction',
+        :'rejected_reason' => :'rejectedReason'
       }
     end
 
@@ -36,7 +39,8 @@ module AvalaraSdk::A1099::V2
       {
         :'status' => :'String',
         :'time' => :'String',
-        :'jurisdiction' => :'String'
+        :'jurisdiction' => :'String',
+        :'rejected_reason' => :'String'
       }
     end
 
@@ -45,7 +49,8 @@ module AvalaraSdk::A1099::V2
       Set.new([
         :'status',
         :'time',
-        :'jurisdiction'
+        :'jurisdiction',
+        :'rejected_reason'
       ])
     end
 
@@ -75,6 +80,10 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'jurisdiction')
         self.jurisdiction = attributes[:'jurisdiction']
       end
+
+      if attributes.key?(:'rejected_reason')
+        self.rejected_reason = attributes[:'rejected_reason']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -99,7 +108,8 @@ module AvalaraSdk::A1099::V2
       self.class == o.class &&
           status == o.status &&
           time == o.time &&
-          jurisdiction == o.jurisdiction
+          jurisdiction == o.jurisdiction &&
+          rejected_reason == o.rejected_reason
     end
 
     # @see the `==` method
@@ -111,7 +121,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [status, time, jurisdiction].hash
+      [status, time, jurisdiction, rejected_reason].hash
     end
 
     # Builds the object from hash
