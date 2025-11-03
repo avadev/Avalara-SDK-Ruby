@@ -18,6 +18,9 @@ module AvalaraSdk::A1099::V2
     # Payer made direct sales totaling $5,000 or more of consumer products to recipient for resale. Should be true if Nonemployee compensation is not provided.
     attr_accessor :direct_sales_indicator
 
+    # Excess golden parachute payments - Available only for tax year 2025 and later
+    attr_accessor :excess_golden_parachute_payments
+
     # Federal income tax withheld.
     attr_accessor :federal_income_tax_withheld
 
@@ -165,6 +168,7 @@ module AvalaraSdk::A1099::V2
       {
         :'nonemployee_compensation' => :'nonemployeeCompensation',
         :'direct_sales_indicator' => :'directSalesIndicator',
+        :'excess_golden_parachute_payments' => :'excessGoldenParachutePayments',
         :'federal_income_tax_withheld' => :'federalIncomeTaxWithheld',
         :'type' => :'type',
         :'id' => :'id',
@@ -218,6 +222,7 @@ module AvalaraSdk::A1099::V2
       {
         :'nonemployee_compensation' => :'Float',
         :'direct_sales_indicator' => :'Boolean',
+        :'excess_golden_parachute_payments' => :'Float',
         :'federal_income_tax_withheld' => :'Float',
         :'type' => :'String',
         :'id' => :'String',
@@ -266,6 +271,7 @@ module AvalaraSdk::A1099::V2
       Set.new([
         :'nonemployee_compensation',
         :'direct_sales_indicator',
+        :'excess_golden_parachute_payments',
         :'federal_income_tax_withheld',
         :'id',
         :'issuer_id',
@@ -336,6 +342,10 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'direct_sales_indicator')
         self.direct_sales_indicator = attributes[:'direct_sales_indicator']
+      end
+
+      if attributes.key?(:'excess_golden_parachute_payments')
+        self.excess_golden_parachute_payments = attributes[:'excess_golden_parachute_payments']
       end
 
       if attributes.key?(:'federal_income_tax_withheld')
@@ -564,6 +574,7 @@ module AvalaraSdk::A1099::V2
       self.class == o.class &&
           nonemployee_compensation == o.nonemployee_compensation &&
           direct_sales_indicator == o.direct_sales_indicator &&
+          excess_golden_parachute_payments == o.excess_golden_parachute_payments &&
           federal_income_tax_withheld == o.federal_income_tax_withheld &&
           type == o.type &&
           id == o.id &&
@@ -615,7 +626,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [nonemployee_compensation, direct_sales_indicator, federal_income_tax_withheld, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, no_tin, address_verification, state_and_local_withholding, second_tin_notice, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at].hash
+      [nonemployee_compensation, direct_sales_indicator, excess_golden_parachute_payments, federal_income_tax_withheld, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, no_tin, address_verification, state_and_local_withholding, second_tin_notice, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at].hash
     end
 
     # Builds the object from hash

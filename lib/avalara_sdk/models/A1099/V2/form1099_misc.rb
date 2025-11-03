@@ -48,7 +48,7 @@ module AvalaraSdk::A1099::V2
     # Section 409A deferrals
     attr_accessor :section409_a_deferrals
 
-    # (Legacy field) Excess golden parachute payments
+    # Excess golden parachute payments - Available only for tax year 2024 and earlier
     attr_accessor :excess_golden_parachute_payments
 
     # Nonqualified deferred compensation

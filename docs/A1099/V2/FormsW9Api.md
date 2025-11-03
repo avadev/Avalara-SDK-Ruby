@@ -43,7 +43,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'fa427ec8-fbb3-4e25-8c7e-2f81d68241ec', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'a31bfcd3-48f4-4459-86e7-2ce87c8eab6b', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   create_and_send_w9_form_email_request: AvalaraSdk::A1099::V2::W4FormMinimalRequest.new({email: 'email_example', employee_first_name: 'employee_first_name_example', employee_last_name: 'employee_last_name_example'}) # CreateAndSendW9FormEmailRequest | Form to be created
 }
@@ -126,7 +126,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '6bde16cf-bc27-448b-8abd-a3461599deff', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '4d4842c6-baeb-4f47-970e-dc9a9da6e8f4', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   create_w9_form_request: AvalaraSdk::A1099::V2::W4FormRequest.new({employee_first_name: 'employee_first_name_example', employee_last_name: 'employee_last_name_example', tin_type: 'tin_type_example', tin: 'tin_example'}) # CreateW9FormRequest | Form to be created
 }
@@ -210,7 +210,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | ID of the form to delete
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '4bc1a0f7-f202-4e27-ba6d-37645f4a839e', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'fc19f8c0-4c87-4387-8ab1-aa9d962df4eb', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -292,7 +292,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | ID of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '7dd6cb2c-d9ed-4fb7-8f97-67d35d09e59e', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'd24ad701-0869-495f-ad6e-234ea6b363b5', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -348,7 +348,7 @@ end
 
 ## get_w9_form_pdf
 
-> get_w9_form_pdf(id, avalara_version, opts)
+> File get_w9_form_pdf(id, avalara_version, opts)
 
 Download the PDF for a W9/W4/W8 form.
 
@@ -375,13 +375,14 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | Id of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '783194b6-5fc6-41c5-a5b4-1b02018e09dd', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '51c49fe8-a8d5-4e6c-93b2-271795eaa196', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
 begin
   # Download the PDF for a W9/W4/W8 form.
-  api_instance.get_w9_form_pdf(id, avalara_version, opts)
+  result = api_instance.get_w9_form_pdf(id, avalara_version, opts)
+  p result
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling FormsW9Api->get_w9_form_pdf: #{e}"
 end
@@ -389,9 +390,9 @@ end
 
 #### Using the get_w9_form_pdf_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> get_w9_form_pdf_with_http_info(id, avalara_version, opts)
+> <Array(File, Integer, Hash)> get_w9_form_pdf_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
@@ -399,7 +400,7 @@ begin
   data, status_code, headers = api_instance.get_w9_form_pdf_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => File
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling FormsW9Api->get_w9_form_pdf_with_http_info: #{e}"
 end
@@ -416,7 +417,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+**File**
 
 ### Authorization
 
@@ -462,7 +463,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: 'c1b56927-f8e5-4243-8fd5-b5d13f7c0c29', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '9bfb0cee-b6e0-4c22-a8a2-4be68535c83e', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -550,7 +551,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | The ID of the W9/W4/W8 form.
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'ef646026-89fe-420b-bea9-e29ec45d9557', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'a615b830-d8f7-4687-afe7-c9987a509eac', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -633,7 +634,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | ID of the form to update
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'ac8f162c-fbee-4c4d-b9fa-986df02c90e3', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'eb20e211-254b-4e5f-a1a5-7e6f596e378b', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   create_w9_form_request: AvalaraSdk::A1099::V2::W4FormRequest.new({employee_first_name: 'employee_first_name_example', employee_last_name: 'employee_last_name_example', tin_type: 'tin_type_example', tin: 'tin_example'}) # CreateW9FormRequest | Form to be updated
 }
@@ -718,7 +719,7 @@ api_instance = AvalaraSdk::A1099::V2::FormsW9Api.new api_client
 id = 'id_example' # String | Id of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'c332bc05-2179-4a35-bd1a-1d01a3d03e36', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'a757e3ef-d759-49bd-b130-28ef831f2126', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   file: File.new('/path/to/some/file') # File | 
 }

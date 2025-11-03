@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.10.1")
+        api_client.set_sdk_version("25.11.0")
         @api_client = api_client
       end
 
@@ -574,10 +574,10 @@ module AvalaraSdk::A1099
       # Download the PDF for a W9/W4/W8 form.
       # Returns the PDF file for a W9/W4/W8 form.
       # @param id [String] Id of the form      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-      # @return [nil]
+      # @return [File]
       def get_w9_form_pdf(request_parameters)
-        get_w9_form_pdf_with_http_info(request_parameters)
-        nil
+        data, _status_code, _headers = get_w9_form_pdf_with_http_info(request_parameters)
+        data
       end
 
       # Download the PDF for a W9/W4/W8 form.
@@ -587,7 +587,7 @@ module AvalaraSdk::A1099
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+      # @return [Array<(File, Integer, Hash)>] File data, response status code and response headers
       def get_w9_form_pdf_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -631,7 +631,7 @@ module AvalaraSdk::A1099
         post_body = {}
 
         # return_type
-        return_type = ''
+        return_type = 'File'
 
         # auth_names
         auth_names = ['bearer']
