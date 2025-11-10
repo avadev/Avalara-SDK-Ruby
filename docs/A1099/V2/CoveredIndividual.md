@@ -11,7 +11,6 @@
 | **name_suffix** | **String** | Covered individual&#39;s name suffix | [optional] |
 | **tin** | **String** | Covered individual&#39;s Federal Tax Identification Number (TIN).. SSN or ITIN. Required unless unavailable. | [optional] |
 | **birth_date** | **Date** | Covered individual&#39;s date of birth - Required when SSN is missing. | [optional] |
-| **covered_all_months** | **Boolean** | Coverage indicator for all 12 months | [optional] |
 | **covered_january** | **Boolean** | Coverage indicator for January | [optional] |
 | **covered_february** | **Boolean** | Coverage indicator for February | [optional] |
 | **covered_march** | **Boolean** | Coverage indicator for March | [optional] |
@@ -38,7 +37,6 @@ instance = AvalaraSdk::A1099::V2::CoveredIndividual.new(
   name_suffix: null,
   tin: null,
   birth_date: null,
-  covered_all_months: null,
   covered_january: null,
   covered_february: null,
   covered_march: null,

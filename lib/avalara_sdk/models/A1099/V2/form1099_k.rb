@@ -710,7 +710,7 @@ module AvalaraSdk::A1099::V2
       payment_type_validator = EnumAttributeValidator.new('String', ["PaymentCard", "ThirdPartyNetwork"])
       return false unless payment_type_validator.valid?(@payment_type)
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B", "Form1042S", "Form1095C", "Form1099Int"])
+      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-R"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
       return false unless tin_type_validator.valid?(@tin_type)
@@ -740,7 +740,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B", "Form1042S", "Form1095C", "Form1099Int"])
+      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-R"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

@@ -11,6 +11,7 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class Form1099ListRequest
+    # Available form types: * `1042-S` * `1095-B` * `1095-C` * `1099-DIV` * `1099-INT` * `1099-K` * `1099-MISC` * `1099-NEC` * `1099-R` 
     attr_accessor :type
 
     attr_accessor :forms
@@ -102,7 +103,7 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B", "Form1042S", "Form1095C", "Form1099Int"])
+      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-R"])
       return false unless type_validator.valid?(@type)
       true
     end
@@ -110,7 +111,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["Form1099Nec", "Form1099Misc", "Form1099Div", "Form1099R", "Form1099K", "Form1095B", "Form1042S", "Form1095C", "Form1099Int"])
+      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-R"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
