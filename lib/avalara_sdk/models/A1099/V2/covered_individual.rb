@@ -33,9 +33,6 @@ module AvalaraSdk::A1099::V2
     # Covered individual's date of birth - Required when SSN is missing.
     attr_accessor :birth_date
 
-    # Coverage indicator for all 12 months
-    attr_accessor :covered_all_months
-
     # Coverage indicator for January
     attr_accessor :covered_january
 
@@ -82,7 +79,6 @@ module AvalaraSdk::A1099::V2
         :'name_suffix' => :'nameSuffix',
         :'tin' => :'tin',
         :'birth_date' => :'birthDate',
-        :'covered_all_months' => :'coveredAllMonths',
         :'covered_january' => :'coveredJanuary',
         :'covered_february' => :'coveredFebruary',
         :'covered_march' => :'coveredMarch',
@@ -113,7 +109,6 @@ module AvalaraSdk::A1099::V2
         :'name_suffix' => :'String',
         :'tin' => :'String',
         :'birth_date' => :'Date',
-        :'covered_all_months' => :'Boolean',
         :'covered_january' => :'Boolean',
         :'covered_february' => :'Boolean',
         :'covered_march' => :'Boolean',
@@ -139,7 +134,6 @@ module AvalaraSdk::A1099::V2
         :'name_suffix',
         :'tin',
         :'birth_date',
-        :'covered_all_months',
         :'covered_january',
         :'covered_february',
         :'covered_march',
@@ -200,10 +194,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'birth_date')
         self.birth_date = attributes[:'birth_date']
-      end
-
-      if attributes.key?(:'covered_all_months')
-        self.covered_all_months = attributes[:'covered_all_months']
       end
 
       if attributes.key?(:'covered_january')
@@ -282,7 +272,6 @@ module AvalaraSdk::A1099::V2
           name_suffix == o.name_suffix &&
           tin == o.tin &&
           birth_date == o.birth_date &&
-          covered_all_months == o.covered_all_months &&
           covered_january == o.covered_january &&
           covered_february == o.covered_february &&
           covered_march == o.covered_march &&
@@ -306,7 +295,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, first_name, middle_name, last_name, name_suffix, tin, birth_date, covered_all_months, covered_january, covered_february, covered_march, covered_april, covered_may, covered_june, covered_july, covered_august, covered_september, covered_october, covered_november, covered_december].hash
+      [id, first_name, middle_name, last_name, name_suffix, tin, birth_date, covered_january, covered_february, covered_march, covered_april, covered_may, covered_june, covered_july, covered_august, covered_september, covered_october, covered_november, covered_december].hash
     end
 
     # Builds the object from hash
