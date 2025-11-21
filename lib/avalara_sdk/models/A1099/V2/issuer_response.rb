@@ -35,13 +35,13 @@ module AvalaraSdk::A1099::V2
     # Contact phone number (must contain at least 10 digits, max 15 characters). For recipient inquiries.
     attr_accessor :telephone
 
-    # Tax year for which the forms are being filed (e.g., 2024). Must be within current tax year and current tax year - 4.
+    # Tax year for which the forms are being filed (e.g., 2024). Must be within current tax year and current tax year - 4. It's only required on creation, and cannot be modified on update.
     attr_accessor :tax_year
 
     # Two-letter IRS country code (e.g., 'US', 'CA'), as defined at https://www.irs.gov/e-file-providers/country-codes. If there is a transfer agent, use the transfer agent's shipping address.
     attr_accessor :country_code
 
-    # Contact email address. For recipient inquiries.
+    # Contact email address. For recipient inquiries. Phone will be used on communications if you don't specify an email
     attr_accessor :email
 
     # Address.
@@ -205,12 +205,12 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'country_code')
         self.country_code = attributes[:'country_code']
+      else
+        self.country_code = nil
       end
 
       if attributes.key?(:'email')
         self.email = attributes[:'email']
-      else
-        self.email = nil
       end
 
       if attributes.key?(:'address')
