@@ -17,8 +17,8 @@ module AvalaraSdk::A1099::V2
     # US state
     attr_accessor :state
 
-    # State ID number of the entity issuing the form
-    attr_accessor :state_id_number
+    # State ID of the entity issuing the form
+    attr_accessor :state_id
 
     # Amount of state income
     attr_accessor :state_income
@@ -29,8 +29,8 @@ module AvalaraSdk::A1099::V2
     # Locality name
     attr_accessor :locality
 
-    # Locality ID number of the entity issuing the form
-    attr_accessor :locality_id_number
+    # Locality ID of the entity issuing the form
+    attr_accessor :locality_id
 
     # Amount of local income
     attr_accessor :local_income
@@ -40,11 +40,11 @@ module AvalaraSdk::A1099::V2
       {
         :'state_tax_withheld' => :'stateTaxWithheld',
         :'state' => :'state',
-        :'state_id_number' => :'stateIdNumber',
+        :'state_id' => :'stateId',
         :'state_income' => :'stateIncome',
         :'local_tax_withheld' => :'localTaxWithheld',
         :'locality' => :'locality',
-        :'locality_id_number' => :'localityIdNumber',
+        :'locality_id' => :'localityId',
         :'local_income' => :'localIncome'
       }
     end
@@ -59,11 +59,11 @@ module AvalaraSdk::A1099::V2
       {
         :'state_tax_withheld' => :'Float',
         :'state' => :'String',
-        :'state_id_number' => :'String',
+        :'state_id' => :'String',
         :'state_income' => :'Float',
         :'local_tax_withheld' => :'Float',
         :'locality' => :'String',
-        :'locality_id_number' => :'String',
+        :'locality_id' => :'String',
         :'local_income' => :'Float'
       }
     end
@@ -73,11 +73,11 @@ module AvalaraSdk::A1099::V2
       Set.new([
         :'state_tax_withheld',
         :'state',
-        :'state_id_number',
+        :'state_id',
         :'state_income',
         :'local_tax_withheld',
         :'locality',
-        :'locality_id_number',
+        :'locality_id',
         :'local_income'
       ])
     end
@@ -105,8 +105,8 @@ module AvalaraSdk::A1099::V2
         self.state = attributes[:'state']
       end
 
-      if attributes.key?(:'state_id_number')
-        self.state_id_number = attributes[:'state_id_number']
+      if attributes.key?(:'state_id')
+        self.state_id = attributes[:'state_id']
       end
 
       if attributes.key?(:'state_income')
@@ -121,8 +121,8 @@ module AvalaraSdk::A1099::V2
         self.locality = attributes[:'locality']
       end
 
-      if attributes.key?(:'locality_id_number')
-        self.locality_id_number = attributes[:'locality_id_number']
+      if attributes.key?(:'locality_id')
+        self.locality_id = attributes[:'locality_id']
       end
 
       if attributes.key?(:'local_income')
@@ -152,11 +152,11 @@ module AvalaraSdk::A1099::V2
       self.class == o.class &&
           state_tax_withheld == o.state_tax_withheld &&
           state == o.state &&
-          state_id_number == o.state_id_number &&
+          state_id == o.state_id &&
           state_income == o.state_income &&
           local_tax_withheld == o.local_tax_withheld &&
           locality == o.locality &&
-          locality_id_number == o.locality_id_number &&
+          locality_id == o.locality_id &&
           local_income == o.local_income
     end
 
@@ -169,7 +169,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [state_tax_withheld, state, state_id_number, state_income, local_tax_withheld, locality, locality_id_number, local_income].hash
+      [state_tax_withheld, state, state_id, state_income, local_tax_withheld, locality, locality_id, local_income].hash
     end
 
     # Builds the object from hash

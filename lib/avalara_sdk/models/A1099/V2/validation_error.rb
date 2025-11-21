@@ -17,11 +17,15 @@ module AvalaraSdk::A1099::V2
     # The list of error messages
     attr_accessor :errors
 
+    # The list of error codes (only present when api_error_codes flag is enabled)
+    attr_accessor :error_codes
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'field' => :'field',
-        :'errors' => :'errors'
+        :'errors' => :'errors',
+        :'error_codes' => :'errorCodes'
       }
     end
 
@@ -34,7 +38,8 @@ module AvalaraSdk::A1099::V2
     def self.openapi_types
       {
         :'field' => :'String',
-        :'errors' => :'Array<String>'
+        :'errors' => :'Array<String>',
+        :'error_codes' => :'Array<String>'
       }
     end
 
@@ -42,7 +47,8 @@ module AvalaraSdk::A1099::V2
     def self.openapi_nullable
       Set.new([
         :'field',
-        :'errors'
+        :'errors',
+        :'error_codes'
       ])
     end
 
@@ -70,6 +76,12 @@ module AvalaraSdk::A1099::V2
           self.errors = value
         end
       end
+
+      if attributes.key?(:'error_codes')
+        if (value = attributes[:'error_codes']).is_a?(Array)
+          self.error_codes = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -93,7 +105,8 @@ module AvalaraSdk::A1099::V2
       return true if self.equal?(o)
       self.class == o.class &&
           field == o.field &&
-          errors == o.errors
+          errors == o.errors &&
+          error_codes == o.error_codes
     end
 
     # @see the `==` method
@@ -105,7 +118,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [field, errors].hash
+      [field, errors, error_codes].hash
     end
 
     # Builds the object from hash
