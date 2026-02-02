@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency 'faraday', '~> 1.0', '>= 1.0.1'
 
-  s.add_development_dependency 'rspec', '~> 3.6', '>= 3.6.0'
+  s.add_development_dependency 'rspec', '~> 3.13', '>= 3.13.0'
 
   s.files         = `find *`.split("\n").uniq.sort.select { |f| !f.empty? }
   s.test_files    = `find spec/*`.split("\n")
