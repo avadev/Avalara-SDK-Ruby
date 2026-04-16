@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.11.2")
+        api_client.set_sdk_version("26.4.0")
         @api_client = api_client
       end
 
@@ -226,8 +226,8 @@ module AvalaraSdk::EInvoicing
       end
     
       # Returns the optionality of document fields for different country mandates
-      # This endpoint provides a list of required, conditional, and optional fields for each country mandate. You can use the <code>mandates</code> endpoint to retrieve all available country mandates. You can use the $filter query parameter to retrieve fields for a particular mandate
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering.      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param count [Boolean] When set to true, the count of the collection is also returned in the response body      # @param count_only [Boolean] When set to true, only the count of the collection is returned
+      # This endpoint returns a list of required, conditional, and optional fields for each country mandate. Use the mandates endpoint to retrieve all available country mandates. Use the $filter query parameter to retrieve fields for a specific mandate.
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).      # @param filter [String] Filter by field name and value. This filter supports only eq and contains. For more information, refer to the Avalara filtering guide.      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param count [Boolean] When set to true, the response body also includes the count of items in the collection.      # @param count_only [Boolean] When set to true, the response returns only the count of items in the collection.
       # @return [DataInputFieldsResponse]
       def get_data_input_fields(request_parameters)
         data, _status_code, _headers = get_data_input_fields_with_http_info(request_parameters)
@@ -235,15 +235,15 @@ module AvalaraSdk::EInvoicing
       end
 
       # Returns the optionality of document fields for different country mandates
-      # This endpoint provides a list of required, conditional, and optional fields for each country mandate. You can use the &lt;code&gt;mandates&lt;/code&gt; endpoint to retrieve all available country mandates. You can use the $filter query parameter to retrieve fields for a particular mandate
+      # This endpoint returns a list of required, conditional, and optional fields for each country mandate. Use the mandates endpoint to retrieve all available country mandates. Use the $filter query parameter to retrieve fields for a specific mandate.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
-      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering.    
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).    
+      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).    
+      # @param filter [String] Filter by field name and value. This filter supports only eq and contains. For more information, refer to the Avalara filtering guide.    
       # @param top [Integer] The number of items to include in the result.    
       # @param skip [Integer] The number of items to skip in the result.    
-      # @param count [Boolean] When set to true, the count of the collection is also returned in the response body    
-      # @param count_only [Boolean] When set to true, only the count of the collection is returned    
+      # @param count [Boolean] When set to true, the response body also includes the count of items in the collection.    
+      # @param count_only [Boolean] When set to true, the response returns only the count of items in the collection.    
       # @return [Array<(DataInputFieldsResponse, Integer, Hash)>] DataInputFieldsResponse data, response status code and response headers
       def get_data_input_fields_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -327,13 +327,13 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the GetDataInputFields API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
-    # @param  String $filter Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. (optional)
+    # @param  String $avalara_version Header that specifies the API version to use (for example \&quot;1.6\&quot;). (required)
+    # @param  String $x_avalara_client Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). (optional)
+    # @param  String $filter Filter by field name and value. This filter supports only eq and contains. For more information, refer to the Avalara filtering guide. (optional)
     # @param  Integer $top The number of items to include in the result. (optional)
     # @param  Integer $skip The number of items to skip in the result. (optional)
-    # @param  Boolean $count When set to true, the count of the collection is also returned in the response body (optional)
-    # @param  Boolean $count_only When set to true, only the count of the collection is returned (optional)
+    # @param  Boolean $count When set to true, the response body also includes the count of items in the collection. (optional)
+    # @param  Boolean $count_only When set to true, the response returns only the count of items in the collection. (optional)
     #
     class GetDataInputFieldsRequestSdk
         attr_accessor :avalara_version
@@ -354,7 +354,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.4'
+            return @avalara_version || '1.6'
         end
 
         def set_avalara_version(avalara_version)

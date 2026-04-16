@@ -8,6 +8,7 @@
 | **company_id** | **String** | Unique identifier that represents the company within the system. | [optional] |
 | **process_date_time** | **String** | The date and time when the document was processed, displayed in the format YYYY-MM-DDThh:mm:ss | [optional] |
 | **status** | **String** | The Document status | [optional] |
+| **business_status** | **String** | Represents the document&#39;s business lifecycle state based on responses from external actors (Tax Authority, PDP, or ERP), such as acceptance, rejection, or validation. | [optional] |
 | **supplier_name** | **String** | The name of the supplier in the transaction | [optional] |
 | **customer_name** | **String** | The name of the customer in the transaction | [optional] |
 | **document_type** | **String** | The document type | [optional] |
@@ -19,6 +20,9 @@
 | **country_mandate** | **String** | The e-invoicing mandate for the specified country | [optional] |
 | **interface** | **String** | The interface where the document is sent | [optional] |
 | **receiver** | **String** | The document recipient based on the interface | [optional] |
+| **events** | [**Array&lt;StatusEvent&gt;**](StatusEvent.md) | Array of status events associated with this document. Events are included in each document in the response only when the query parameter $include&#x3D;events is passed; otherwise the events array is not populated. | [optional] |
+| **created_at** | **String** | The date and time when the document was created in the system, displayed in ISO 8601 format with timezone | [optional] |
+| **last_updated_at** | **String** | The date and time when the document was last updated in the system, displayed in ISO 8601 format with timezone | [optional] |
 
 ## Example
 
@@ -30,6 +34,7 @@ instance = AvalaraSdk::EInvoicing::V1::DocumentSummary.new(
   company_id: a5869a7b-4d5d-4ec1-9b29-fd272aa58ab2,
   process_date_time: 2022-01-09T12:36:02,
   status: Complete,
+  business_status: Approved,
   supplier_name: Inposia GmbH,
   customer_name: Avalara Inc.,
   document_type: ubl-invoice,
@@ -40,7 +45,10 @@ instance = AvalaraSdk::EInvoicing::V1::DocumentSummary.new(
   country_code: DE,
   country_mandate: DE-B2G-XRECHNUNG,
   interface: PEPPOL,
-  receiver: 9930:AVALARATEST
+  receiver: 9930:AVALARATEST,
+  events: null,
+  created_at: 2025-01-09T12:36:02.000Z,
+  last_updated_at: 2025-01-09T14:22:15.000Z
 )
 ```
 

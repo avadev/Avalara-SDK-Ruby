@@ -50,6 +50,9 @@ module AvalaraSdk::EInvoicing::V1
     # Workflow ID list
     attr_accessor :workflow_ids
 
+    # List of document statuses defined by the mandate.
+    attr_accessor :supported_document_statuses
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -65,7 +68,8 @@ module AvalaraSdk::EInvoicing::V1
         :'supports_inbound_digital_document' => :'supportsInboundDigitalDocument',
         :'input_data_formats' => :'inputDataFormats',
         :'output_data_formats' => :'outputDataFormats',
-        :'workflow_ids' => :'workflowIds'
+        :'workflow_ids' => :'workflowIds',
+        :'supported_document_statuses' => :'supportedDocumentStatuses'
       }
     end
 
@@ -89,7 +93,8 @@ module AvalaraSdk::EInvoicing::V1
         :'supports_inbound_digital_document' => :'String',
         :'input_data_formats' => :'Array<InputDataFormats>',
         :'output_data_formats' => :'Array<OutputDataFormats>',
-        :'workflow_ids' => :'Array<WorkflowIds>'
+        :'workflow_ids' => :'Array<WorkflowIds>',
+        :'supported_document_statuses' => :'Array<SupportedDocumentStatuses>'
       }
     end
 
@@ -173,6 +178,12 @@ module AvalaraSdk::EInvoicing::V1
           self.workflow_ids = value
         end
       end
+
+      if attributes.key?(:'supported_document_statuses')
+        if (value = attributes[:'supported_document_statuses']).is_a?(Array)
+          self.supported_document_statuses = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -207,7 +218,8 @@ module AvalaraSdk::EInvoicing::V1
           supports_inbound_digital_document == o.supports_inbound_digital_document &&
           input_data_formats == o.input_data_formats &&
           output_data_formats == o.output_data_formats &&
-          workflow_ids == o.workflow_ids
+          workflow_ids == o.workflow_ids &&
+          supported_document_statuses == o.supported_document_statuses
     end
 
     # @see the `==` method
@@ -219,7 +231,7 @@ module AvalaraSdk::EInvoicing::V1
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [mandate_id, country_mandate, country_code, description, supported_by_elrapi, mandate_format, e_invoicing_flow, e_invoicing_flow_documentation_link, get_invoice_available_media_type, supports_inbound_digital_document, input_data_formats, output_data_formats, workflow_ids].hash
+      [mandate_id, country_mandate, country_code, description, supported_by_elrapi, mandate_format, e_invoicing_flow, e_invoicing_flow_documentation_link, get_invoice_available_media_type, supports_inbound_digital_document, input_data_formats, output_data_formats, workflow_ids, supported_document_statuses].hash
     end
 
     # Builds the object from hash

@@ -24,6 +24,9 @@ module AvalaraSdk::EInvoicing::V1
     # The Document status
     attr_accessor :status
 
+    # Represents the document's business lifecycle state based on responses from external actors (Tax Authority, PDP, or ERP), such as acceptance, rejection, or validation.
+    attr_accessor :business_status
+
     # The name of the supplier in the transaction
     attr_accessor :supplier_name
 
@@ -57,6 +60,15 @@ module AvalaraSdk::EInvoicing::V1
     # The document recipient based on the interface
     attr_accessor :receiver
 
+    # Array of status events associated with this document. Events are included in each document in the response only when the query parameter $include=events is passed; otherwise the events array is not populated.
+    attr_accessor :events
+
+    # The date and time when the document was created in the system, displayed in ISO 8601 format with timezone
+    attr_accessor :created_at
+
+    # The date and time when the document was last updated in the system, displayed in ISO 8601 format with timezone
+    attr_accessor :last_updated_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -64,6 +76,7 @@ module AvalaraSdk::EInvoicing::V1
         :'company_id' => :'companyId',
         :'process_date_time' => :'processDateTime',
         :'status' => :'status',
+        :'business_status' => :'businessStatus',
         :'supplier_name' => :'supplierName',
         :'customer_name' => :'customerName',
         :'document_type' => :'documentType',
@@ -74,7 +87,10 @@ module AvalaraSdk::EInvoicing::V1
         :'country_code' => :'countryCode',
         :'country_mandate' => :'countryMandate',
         :'interface' => :'interface',
-        :'receiver' => :'receiver'
+        :'receiver' => :'receiver',
+        :'events' => :'events',
+        :'created_at' => :'createdAt',
+        :'last_updated_at' => :'lastUpdatedAt'
       }
     end
 
@@ -90,6 +106,7 @@ module AvalaraSdk::EInvoicing::V1
         :'company_id' => :'String',
         :'process_date_time' => :'String',
         :'status' => :'String',
+        :'business_status' => :'String',
         :'supplier_name' => :'String',
         :'customer_name' => :'String',
         :'document_type' => :'String',
@@ -100,13 +117,17 @@ module AvalaraSdk::EInvoicing::V1
         :'country_code' => :'String',
         :'country_mandate' => :'String',
         :'interface' => :'String',
-        :'receiver' => :'String'
+        :'receiver' => :'String',
+        :'events' => :'Array<StatusEvent>',
+        :'created_at' => :'String',
+        :'last_updated_at' => :'String'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'events',
       ])
     end
 
@@ -139,6 +160,10 @@ module AvalaraSdk::EInvoicing::V1
 
       if attributes.key?(:'status')
         self.status = attributes[:'status']
+      end
+
+      if attributes.key?(:'business_status')
+        self.business_status = attributes[:'business_status']
       end
 
       if attributes.key?(:'supplier_name')
@@ -184,6 +209,20 @@ module AvalaraSdk::EInvoicing::V1
       if attributes.key?(:'receiver')
         self.receiver = attributes[:'receiver']
       end
+
+      if attributes.key?(:'events')
+        if (value = attributes[:'events']).is_a?(Array)
+          self.events = value
+        end
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'last_updated_at')
+        self.last_updated_at = attributes[:'last_updated_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -210,6 +249,7 @@ module AvalaraSdk::EInvoicing::V1
           company_id == o.company_id &&
           process_date_time == o.process_date_time &&
           status == o.status &&
+          business_status == o.business_status &&
           supplier_name == o.supplier_name &&
           customer_name == o.customer_name &&
           document_type == o.document_type &&
@@ -220,7 +260,10 @@ module AvalaraSdk::EInvoicing::V1
           country_code == o.country_code &&
           country_mandate == o.country_mandate &&
           interface == o.interface &&
-          receiver == o.receiver
+          receiver == o.receiver &&
+          events == o.events &&
+          created_at == o.created_at &&
+          last_updated_at == o.last_updated_at
     end
 
     # @see the `==` method
@@ -232,7 +275,7 @@ module AvalaraSdk::EInvoicing::V1
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, company_id, process_date_time, status, supplier_name, customer_name, document_type, document_version, document_number, document_date, flow, country_code, country_mandate, interface, receiver].hash
+      [id, company_id, process_date_time, status, business_status, supplier_name, customer_name, document_type, document_version, document_number, document_date, flow, country_code, country_mandate, interface, receiver, events, created_at, last_updated_at].hash
     end
 
     # Builds the object from hash

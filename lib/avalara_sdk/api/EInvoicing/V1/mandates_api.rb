@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.11.2")
+        api_client.set_sdk_version("26.4.0")
         @api_client = api_client
       end
 
@@ -227,7 +227,7 @@ module AvalaraSdk::EInvoicing
     
       # Returns document field information for a country mandate, a selected document type, and its version
       # This endpoint provides document field details and the optionality of fields (required, conditional, optional) of different documents supported by the country mandate. Use the GET <code>/mandates</code> endpoint to retrieve all available country mandates, their supported document types and supported versions. You can use the `documentType` and `documentVersion` query parameters to retrieve the input fields for a particular document type and document version.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param mandate_id [String] The unique ID for the mandate that was returned in the GET /einvoicing/mandates response body      # @param document_type [String] Select the documentType for which you wish to view the data-input-fields (You may obtain the supported documentTypes from the GET /mandates endpoint)      # @param document_version [String] Select the document version of the documentType (You may obtain the supported documentVersion from the GET /mandates endpoint)      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).      # @param mandate_id [String] Unique identifier of the mandate returned by the GET /mandates endpoint.      # @param document_type [String] Select the documentType for which you wish to view the data-input-fields (You may obtain the supported documentTypes from the GET /mandates endpoint)      # @param document_version [String] Select the document version of the documentType (You may obtain the supported documentVersion from the GET /mandates endpoint)      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).
       # @return [Array<MandateDataInputField>]
       def get_mandate_data_input_fields(request_parameters)
         data, _status_code, _headers = get_mandate_data_input_fields_with_http_info(request_parameters)
@@ -237,11 +237,11 @@ module AvalaraSdk::EInvoicing
       # Returns document field information for a country mandate, a selected document type, and its version
       # This endpoint provides document field details and the optionality of fields (required, conditional, optional) of different documents supported by the country mandate. Use the GET &lt;code&gt;/mandates&lt;/code&gt; endpoint to retrieve all available country mandates, their supported document types and supported versions. You can use the &#x60;documentType&#x60; and &#x60;documentVersion&#x60; query parameters to retrieve the input fields for a particular document type and document version.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param mandate_id [String] The unique ID for the mandate that was returned in the GET /einvoicing/mandates response body    
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).    
+      # @param mandate_id [String] Unique identifier of the mandate returned by the GET /mandates endpoint.    
       # @param document_type [String] Select the documentType for which you wish to view the data-input-fields (You may obtain the supported documentTypes from the GET /mandates endpoint)    
       # @param document_version [String] Select the document version of the documentType (You may obtain the supported documentVersion from the GET /mandates endpoint)    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
+      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).    
       # @return [Array<(Array<MandateDataInputField>, Integer, Hash)>] Array<MandateDataInputField> data, response status code and response headers
       def get_mandate_data_input_fields_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -326,7 +326,7 @@ module AvalaraSdk::EInvoicing
 
       # List country mandates that are supported by the Avalara E-Invoicing platform
       # This endpoint offers a list of country mandates supported by the Avalara E-Invoicing API.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering.      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param count [Boolean] When set to true, the count of the collection is also returned in the response body.      # @param count_only [Boolean] When set to true, only the count of the collection is returned
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).      # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering.      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param count [Boolean] When set to true, the count of the collection is also returned in the response body.      # @param count_only [Boolean] When set to true, only the count of the collection is returned.
       # @return [MandatesResponse]
       def get_mandates(request_parameters)
         data, _status_code, _headers = get_mandates_with_http_info(request_parameters)
@@ -336,13 +336,13 @@ module AvalaraSdk::EInvoicing
       # List country mandates that are supported by the Avalara E-Invoicing platform
       # This endpoint offers a list of country mandates supported by the Avalara E-Invoicing API.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.    
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).    
+      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).    
       # @param filter [String] Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering.    
       # @param top [Integer] The number of items to include in the result.    
       # @param skip [Integer] The number of items to skip in the result.    
       # @param count [Boolean] When set to true, the count of the collection is also returned in the response body.    
-      # @param count_only [Boolean] When set to true, only the count of the collection is returned    
+      # @param count_only [Boolean] When set to true, only the count of the collection is returned.    
       # @return [Array<(MandatesResponse, Integer, Hash)>] MandatesResponse data, response status code and response headers
       def get_mandates_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -426,11 +426,11 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the GetMandateDataInputFields API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  String $mandate_id The unique ID for the mandate that was returned in the GET /einvoicing/mandates response body (required)
+    # @param  String $avalara_version Header that specifies the API version to use (for example \&quot;1.6\&quot;). (required)
+    # @param  String $mandate_id Unique identifier of the mandate returned by the GET /mandates endpoint. (required)
     # @param  String $document_type Select the documentType for which you wish to view the data-input-fields (You may obtain the supported documentTypes from the GET /mandates endpoint) (required)
     # @param  String $document_version Select the document version of the documentType (You may obtain the supported documentVersion from the GET /mandates endpoint) (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
+    # @param  String $x_avalara_client Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). (optional)
     #
     class GetMandateDataInputFieldsRequestSdk
         attr_accessor :avalara_version
@@ -447,7 +447,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.4'
+            return @avalara_version || '1.6'
         end
 
         def set_avalara_version(avalara_version)
@@ -488,13 +488,13 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the GetMandates API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. (optional)
+    # @param  String $avalara_version Header that specifies the API version to use (for example \&quot;1.6\&quot;). (required)
+    # @param  String $x_avalara_client Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). (optional)
     # @param  String $filter Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; and &lt;code&gt;contains&lt;/code&gt;. Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. (optional)
     # @param  Integer $top The number of items to include in the result. (optional)
     # @param  Integer $skip The number of items to skip in the result. (optional)
     # @param  Boolean $count When set to true, the count of the collection is also returned in the response body. (optional)
-    # @param  Boolean $count_only When set to true, only the count of the collection is returned (optional)
+    # @param  Boolean $count_only When set to true, only the count of the collection is returned. (optional)
     #
     class GetMandatesRequestSdk
         attr_accessor :avalara_version
@@ -515,7 +515,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.4'
+            return @avalara_version || '1.6'
         end
 
         def set_avalara_version(avalara_version)

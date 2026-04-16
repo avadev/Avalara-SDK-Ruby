@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.11.2")
+        api_client.set_sdk_version("26.4.0")
         @api_client = api_client
       end
 
@@ -226,8 +226,8 @@ module AvalaraSdk::EInvoicing
       end
     
       # Submit a document
-      # This API used by the interoperability partners to submit a document to  their trading partners in Avalara on behalf of their customers. 
-      # @param document_type [String] Type of the document being uploaded. Partners will be configured in Avalara system to send only certain types of documents.      # @param interchange_type [String] Type of interchange (codes in Avalara system that uniquely identifies a type of interchange). Partners will be configured in Avalara system to send documents belonging to certain types of interchanges.      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.      # @param file_name [File] The file to be uploaded (e.g., UBL XML, CII XML).
+      # Upload documents on behalf of interoperability partners and submit them to trading partners through the Avalara platform.
+      # @param document_type [String] Type of the document being uploaded. Partners will be configured in Avalara system to send only certain types of documents.      # @param interchange_type [String] Type of interchange (codes in Avalara system that uniquely identifies a type of interchange). Partners will be configured in Avalara system to send documents belonging to certain types of interchanges.      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).      # @param file_name [File] The file to be uploaded (e.g., UBL XML, CII XML).
       # @return [SubmitInteropDocument202Response]
       def submit_interop_document(request_parameters)
         data, _status_code, _headers = submit_interop_document_with_http_info(request_parameters)
@@ -235,13 +235,13 @@ module AvalaraSdk::EInvoicing
       end
 
       # Submit a document
-      # This API used by the interoperability partners to submit a document to  their trading partners in Avalara on behalf of their customers. 
+      # Upload documents on behalf of interoperability partners and submit them to trading partners through the Avalara platform.
           
       # @param document_type [String] Type of the document being uploaded. Partners will be configured in Avalara system to send only certain types of documents.    
       # @param interchange_type [String] Type of interchange (codes in Avalara system that uniquely identifies a type of interchange). Partners will be configured in Avalara system to send documents belonging to certain types of interchanges.    
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;    
-      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).    
+      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).    
+      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).    
       # @param file_name [File] The file to be uploaded (e.g., UBL XML, CII XML).    
       # @return [Array<(SubmitInteropDocument202Response, Integer, Hash)>] SubmitInteropDocument202Response data, response status code and response headers
       def submit_interop_document_with_http_info(request_parameters)
@@ -347,9 +347,9 @@ module AvalaraSdk::EInvoicing
     #
     # @param  String $document_type Type of the document being uploaded. Partners will be configured in Avalara system to send only certain types of documents. (required)
     # @param  String $interchange_type Type of interchange (codes in Avalara system that uniquely identifies a type of interchange). Partners will be configured in Avalara system to send documents belonging to certain types of interchanges. (required)
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot; (optional)
-    # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
+    # @param  String $avalara_version Header that specifies the API version to use (for example \&quot;1.6\&quot;). (required)
+    # @param  String $x_avalara_client Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). (optional)
+    # @param  String $x_correlation_id Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). (optional)
     # @param  File $file_name The file to be uploaded (e.g., UBL XML, CII XML). (optional)
     #
     class SubmitInteropDocumentRequestSdk
@@ -385,7 +385,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.4'
+            return @avalara_version || '1.6'
         end
 
         def set_avalara_version(avalara_version)

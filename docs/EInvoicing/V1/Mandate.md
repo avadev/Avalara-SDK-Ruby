@@ -17,6 +17,7 @@
 | **input_data_formats** | [**Array&lt;InputDataFormats&gt;**](InputDataFormats.md) | Format and version used when inputting the data | [optional] |
 | **output_data_formats** | [**Array&lt;OutputDataFormats&gt;**](OutputDataFormats.md) | Lists the supported output document formats for the country mandate. For countries where specifying an output document format is required (e.g., France), this array will contain the applicable formats. For other countries where output format selection is not necessary, the array will be empty. | [optional] |
 | **workflow_ids** | [**Array&lt;WorkflowIds&gt;**](WorkflowIds.md) | Workflow ID list | [optional] |
+| **supported_document_statuses** | [**Array&lt;SupportedDocumentStatuses&gt;**](SupportedDocumentStatuses.md) | List of document statuses defined by the mandate. | [optional] |
 
 ## Example
 
@@ -36,7 +37,8 @@ instance = AvalaraSdk::EInvoicing::V1::Mandate.new(
   supports_inbound_digital_document: TRUE,
   input_data_formats: null,
   output_data_formats: null,
-  workflow_ids: null
+  workflow_ids: null,
+  supported_document_statuses: [{&quot;status&quot;:&quot;Approved&quot;,&quot;description&quot;:&quot;Approved by buyer(C4)&quot;},{&quot;status&quot;:&quot;Fully Paid&quot;,&quot;description&quot;:&quot;Payment transmitted to Seller fully from Buyer&quot;},{&quot;status&quot;:&quot;Taken Charge&quot;,&quot;description&quot;:&quot;Document has been taken in charge by the recipient (C4)&quot;}]
 )
 ```
 

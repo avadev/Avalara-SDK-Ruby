@@ -48,6 +48,8 @@ end
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*CodeListsApi* | [**get_code_list**](docs/EInvoicing/V1/CodeListsApi.md#get_code_list) | **GET** /codelists/{codelistId} | Retrieves a code list by ID for a specific country
+*CodeListsApi* | [**get_code_list_list**](docs/EInvoicing/V1/CodeListsApi.md#get_code_list_list) | **GET** /codelists | Returns a list of code lists for a specific country
 *DataInputFieldsApi* | [**get_data_input_fields**](docs/EInvoicing/V1/DataInputFieldsApi.md#get_data_input_fields) | **GET** /data-input-fields | Returns the optionality of document fields for different country mandates
 *DocumentsApi* | [**download_document**](docs/EInvoicing/V1/DocumentsApi.md#download_document) | **GET** /documents/{documentId}/$download | Returns a copy of the document
 *DocumentsApi* | [**fetch_documents**](docs/EInvoicing/V1/DocumentsApi.md#fetch_documents) | **POST** /documents/$fetch | Fetch the inbound document from a tax authority
@@ -57,11 +59,14 @@ Class | Method | HTTP request | Description
 *InteropApi* | [**submit_interop_document**](docs/EInvoicing/V1/InteropApi.md#submit_interop_document) | **POST** /interop/documents | Submit a document
 *MandatesApi* | [**get_mandate_data_input_fields**](docs/EInvoicing/V1/MandatesApi.md#get_mandate_data_input_fields) | **GET** /mandates/{mandateId}/data-input-fields | Returns document field information for a country mandate, a selected document type, and its version
 *MandatesApi* | [**get_mandates**](docs/EInvoicing/V1/MandatesApi.md#get_mandates) | **GET** /mandates | List country mandates that are supported by the Avalara E-Invoicing platform
+*ReportsApi* | [**download_report**](docs/EInvoicing/V1/ReportsApi.md#download_report) | **GET** /reports/{reportId}/$download | Returns a pre-signed download URL for a report
+*ReportsApi* | [**get_report_by_id**](docs/EInvoicing/V1/ReportsApi.md#get_report_by_id) | **GET** /reports/{reportId}/status | Retrieves a report by its unique ID
+*ReportsApi* | [**get_reports**](docs/EInvoicing/V1/ReportsApi.md#get_reports) | **GET** /reports | Returns a list of reports
 *SubscriptionsApi* | [**create_webhook_subscription**](docs/EInvoicing/V1/SubscriptionsApi.md#create_webhook_subscription) | **POST** /webhooks/subscriptions | Create a subscription to events
-*SubscriptionsApi* | [**delete_webhook_subscription**](docs/EInvoicing/V1/SubscriptionsApi.md#delete_webhook_subscription) | **DELETE** /webhooks/subscriptions/{subscription-id} | Unsubscribe from events
-*SubscriptionsApi* | [**get_webhook_subscription**](docs/EInvoicing/V1/SubscriptionsApi.md#get_webhook_subscription) | **GET** /webhooks/subscriptions/{subscription-id} | Get details of a subscription
+*SubscriptionsApi* | [**delete_webhook_subscription**](docs/EInvoicing/V1/SubscriptionsApi.md#delete_webhook_subscription) | **DELETE** /webhooks/subscriptions/{subscriptionId} | Unsubscribe from events
+*SubscriptionsApi* | [**get_webhook_subscription**](docs/EInvoicing/V1/SubscriptionsApi.md#get_webhook_subscription) | **GET** /webhooks/subscriptions/{subscriptionId} | Get details of a subscription
 *SubscriptionsApi* | [**list_webhook_subscriptions**](docs/EInvoicing/V1/SubscriptionsApi.md#list_webhook_subscriptions) | **GET** /webhooks/subscriptions | List all subscriptions
-*TaxIdentifiersApi* | [**tax_identifier_schema_by_country**](docs/EInvoicing/V1/TaxIdentifiersApi.md#tax_identifier_schema_by_country) | **GET** /tax-identifiers/schema | Returns the tax identifier request & response schema for a specific country.
+*TaxIdentifiersApi* | [**tax_identifier_schema_by_country**](docs/EInvoicing/V1/TaxIdentifiersApi.md#tax_identifier_schema_by_country) | **GET** /tax-identifiers/schema | Returns the tax identifier request and response schema for a specific country.
 *TaxIdentifiersApi* | [**validate_tax_identifier**](docs/EInvoicing/V1/TaxIdentifiersApi.md#validate_tax_identifier) | **POST** /tax-identifiers/validate | Validates a tax identifier.
 *TradingPartnersApi* | [**batch_search_participants**](docs/EInvoicing/V1/TradingPartnersApi.md#batch_search_participants) | **POST** /trading-partners/batch-searches | Handles batch search requests by uploading a file containing search parameters.
 *TradingPartnersApi* | [**create_trading_partner**](docs/EInvoicing/V1/TradingPartnersApi.md#create_trading_partner) | **POST** /trading-partners | Creates a new trading partner.
@@ -119,6 +124,11 @@ Class | Method | HTTP request | Description
  - [models.BatchSearch](docs/EInvoicing/V1/BatchSearch.md)
  - [models.BatchSearchListResponse](docs/EInvoicing/V1/BatchSearchListResponse.md)
  - [models.BatchSearchParticipants202Response](docs/EInvoicing/V1/BatchSearchParticipants202Response.md)
+ - [models.CodeListListResponse](docs/EInvoicing/V1/CodeListListResponse.md)
+ - [models.CodeListResponse](docs/EInvoicing/V1/CodeListResponse.md)
+ - [models.CodeListSummary](docs/EInvoicing/V1/CodeListSummary.md)
+ - [models.CodeListValue](docs/EInvoicing/V1/CodeListValue.md)
+ - [models.CodeListVersion](docs/EInvoicing/V1/CodeListVersion.md)
  - [models.ConditionalForField](docs/EInvoicing/V1/ConditionalForField.md)
  - [models.Consents](docs/EInvoicing/V1/Consents.md)
  - [models.CreateTradingPartner201Response](docs/EInvoicing/V1/CreateTradingPartner201Response.md)
@@ -160,6 +170,9 @@ Class | Method | HTTP request | Description
  - [models.NotUsedForField](docs/EInvoicing/V1/NotUsedForField.md)
  - [models.OutputDataFormats](docs/EInvoicing/V1/OutputDataFormats.md)
  - [models.Pagination](docs/EInvoicing/V1/Pagination.md)
+ - [models.ReportDownloadResponse](docs/EInvoicing/V1/ReportDownloadResponse.md)
+ - [models.ReportItem](docs/EInvoicing/V1/ReportItem.md)
+ - [models.ReportListResponse](docs/EInvoicing/V1/ReportListResponse.md)
  - [models.RequiredWhenField](docs/EInvoicing/V1/RequiredWhenField.md)
  - [models.SearchParticipants200Response](docs/EInvoicing/V1/SearchParticipants200Response.md)
  - [models.Signature](docs/EInvoicing/V1/Signature.md)
@@ -174,6 +187,7 @@ Class | Method | HTTP request | Description
  - [models.SubscriptionListResponse](docs/EInvoicing/V1/SubscriptionListResponse.md)
  - [models.SubscriptionRegistration](docs/EInvoicing/V1/SubscriptionRegistration.md)
  - [models.SuccessResponse](docs/EInvoicing/V1/SuccessResponse.md)
+ - [models.SupportedDocumentStatuses](docs/EInvoicing/V1/SupportedDocumentStatuses.md)
  - [models.SupportedDocumentTypes](docs/EInvoicing/V1/SupportedDocumentTypes.md)
  - [models.TaxIdentifierRequest](docs/EInvoicing/V1/TaxIdentifierRequest.md)
  - [models.TaxIdentifierResponse](docs/EInvoicing/V1/TaxIdentifierResponse.md)

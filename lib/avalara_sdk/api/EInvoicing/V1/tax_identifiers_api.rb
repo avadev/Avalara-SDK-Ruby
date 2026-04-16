@@ -17,7 +17,7 @@ module AvalaraSdk::EInvoicing
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("25.11.2")
+        api_client.set_sdk_version("26.4.0")
         @api_client = api_client
       end
 
@@ -225,23 +225,23 @@ module AvalaraSdk::EInvoicing
         end
       end
     
-      # Returns the tax identifier request & response schema for a specific country.
-      # This endpoint retrieves the request and response schema required to validate tax identifiers based on a specific country's requirements. This can include both standard fields and any additional parameters required by the respective country's tax authority.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param country_code [String] The two-letter ISO-3166 country code for which the schema should be retrieved.      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.      # @param type [String] Specifies whether to return the request or response schema.
+      # Returns the tax identifier request and response schema for a specific country.
+      # Returns the tax identifier request and response schema for a specific country.
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).      # @param country_code [String] Two-letter ISO 3166 country code for which to retrieve the schema (for example \&quot;DE\&quot;).      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).      # @param type [String] Specifies which schema to return: \&quot;request\&quot; to receive the request validation schema or \&quot;response\&quot; to receive the response validation schema.
       # @return [TaxIdentifierSchemaByCountry200Response]
       def tax_identifier_schema_by_country(request_parameters)
         data, _status_code, _headers = tax_identifier_schema_by_country_with_http_info(request_parameters)
         data
       end
 
-      # Returns the tax identifier request &amp; response schema for a specific country.
-      # This endpoint retrieves the request and response schema required to validate tax identifiers based on a specific country&#39;s requirements. This can include both standard fields and any additional parameters required by the respective country&#39;s tax authority.
+      # Returns the tax identifier request and response schema for a specific country.
+      # Returns the tax identifier request and response schema for a specific country.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
-      # @param country_code [String] The two-letter ISO-3166 country code for which the schema should be retrieved.    
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
-      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
-      # @param type [String] Specifies whether to return the request or response schema.    
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).    
+      # @param country_code [String] Two-letter ISO 3166 country code for which to retrieve the schema (for example \&quot;DE\&quot;).    
+      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).    
+      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).    
+      # @param type [String] Specifies which schema to return: \&quot;request\&quot; to receive the request validation schema or \&quot;response\&quot; to receive the response validation schema.    
       # @return [Array<(TaxIdentifierSchemaByCountry200Response, Integer, Hash)>] TaxIdentifierSchemaByCountry200Response data, response status code and response headers
       def tax_identifier_schema_by_country_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -325,7 +325,7 @@ module AvalaraSdk::EInvoicing
 
       # Validates a tax identifier.
       # This endpoint verifies whether a given tax identifier is valid and properly formatted according to the rules of the applicable country or tax system.
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.      # @param tax_identifier_request [TaxIdentifierRequest]       # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).      # @param tax_identifier_request [TaxIdentifierRequest]       # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).
       # @return [TaxIdentifierResponse]
       def validate_tax_identifier(request_parameters)
         data, _status_code, _headers = validate_tax_identifier_with_http_info(request_parameters)
@@ -335,10 +335,10 @@ module AvalaraSdk::EInvoicing
       # Validates a tax identifier.
       # This endpoint verifies whether a given tax identifier is valid and properly formatted according to the rules of the applicable country or tax system.
           
-      # @param avalara_version [String] The HTTP Header meant to specify the version of the API intended to be used.    
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).    
       # @param tax_identifier_request [TaxIdentifierRequest]     
-      # @param x_avalara_client [String] You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;.    
-      # @param x_correlation_id [String] The caller can use this as an identifier to use as a correlation id to trace the call.    
+      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).    
+      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).    
       # @return [Array<(TaxIdentifierResponse, Integer, Hash)>] TaxIdentifierResponse data, response status code and response headers
       def validate_tax_identifier_with_http_info(request_parameters)
         # OAuth2 Scopes
@@ -416,11 +416,11 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the TaxIdentifierSchemaByCountry API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
-    # @param  String $country_code The two-letter ISO-3166 country code for which the schema should be retrieved. (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
-    # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
-    # @param  String $type Specifies whether to return the request or response schema. (optional)
+    # @param  String $avalara_version Header that specifies the API version to use (for example \&quot;1.6\&quot;). (required)
+    # @param  String $country_code Two-letter ISO 3166 country code for which to retrieve the schema (for example \&quot;DE\&quot;). (required)
+    # @param  String $x_avalara_client Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). (optional)
+    # @param  String $x_correlation_id Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). (optional)
+    # @param  String $type Specifies which schema to return: \&quot;request\&quot; to receive the request validation schema or \&quot;response\&quot; to receive the response validation schema. (optional)
     #
     class TaxIdentifierSchemaByCountryRequestSdk
         attr_accessor :avalara_version
@@ -437,7 +437,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.4'
+            return @avalara_version || '1.6'
         end
 
         def set_avalara_version(avalara_version)
@@ -478,10 +478,10 @@ module AvalaraSdk::EInvoicing
     end
     # Represents the Request object for the ValidateTaxIdentifier API
     #
-    # @param  String $avalara_version The HTTP Header meant to specify the version of the API intended to be used. (required)
+    # @param  String $avalara_version Header that specifies the API version to use (for example \&quot;1.6\&quot;). (required)
     # @param  TaxIdentifierRequest $tax_identifier_request tax_identifier_request (required)
-    # @param  String $x_avalara_client You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. (optional)
-    # @param  String $x_correlation_id The caller can use this as an identifier to use as a correlation id to trace the call. (optional)
+    # @param  String $x_avalara_client Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). (optional)
+    # @param  String $x_correlation_id Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). (optional)
     #
     class ValidateTaxIdentifierRequestSdk
         attr_accessor :avalara_version
@@ -496,7 +496,7 @@ module AvalaraSdk::EInvoicing
         end
 
         def get_avalara_version()
-            return @avalara_version || '1.4'
+            return @avalara_version || '1.6'
         end
 
         def set_avalara_version(avalara_version)

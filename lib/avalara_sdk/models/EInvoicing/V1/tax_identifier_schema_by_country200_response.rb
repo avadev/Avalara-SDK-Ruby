@@ -14,6 +14,9 @@ module AvalaraSdk::EInvoicing::V1
     # The two-letter ISO-3166 country code of the tax identifier.
     attr_accessor :country_code
 
+    # The type of schema returned: \"request\" or \"response\".
+    attr_accessor :schema_type
+
     # The JSON Schema definition, following Draft-07 specification, used to validate tax identifier data.
     attr_accessor :schema
 
@@ -21,6 +24,7 @@ module AvalaraSdk::EInvoicing::V1
     def self.attribute_map
       {
         :'country_code' => :'countryCode',
+        :'schema_type' => :'schemaType',
         :'schema' => :'schema'
       }
     end
@@ -34,6 +38,7 @@ module AvalaraSdk::EInvoicing::V1
     def self.openapi_types
       {
         :'country_code' => :'String',
+        :'schema_type' => :'String',
         :'schema' => :'Object'
       }
     end
@@ -65,6 +70,12 @@ module AvalaraSdk::EInvoicing::V1
         self.country_code = nil
       end
 
+      if attributes.key?(:'schema_type')
+        self.schema_type = attributes[:'schema_type']
+      else
+        self.schema_type = nil
+      end
+
       if attributes.key?(:'schema')
         self.schema = attributes[:'schema']
       else
@@ -81,6 +92,10 @@ module AvalaraSdk::EInvoicing::V1
         invalid_properties.push('invalid value for "country_code", country_code cannot be nil.')
       end
 
+      if @schema_type.nil?
+        invalid_properties.push('invalid value for "schema_type", schema_type cannot be nil.')
+      end
+
       if @schema.nil?
         invalid_properties.push('invalid value for "schema", schema cannot be nil.')
       end
@@ -93,6 +108,7 @@ module AvalaraSdk::EInvoicing::V1
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @country_code.nil?
+      return false if @schema_type.nil?
       return false if @schema.nil?
       true
     end
@@ -103,6 +119,7 @@ module AvalaraSdk::EInvoicing::V1
       return true if self.equal?(o)
       self.class == o.class &&
           country_code == o.country_code &&
+          schema_type == o.schema_type &&
           schema == o.schema
     end
 
@@ -115,7 +132,7 @@ module AvalaraSdk::EInvoicing::V1
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [country_code, schema].hash
+      [country_code, schema_type, schema].hash
     end
 
     # Builds the object from hash

@@ -41,13 +41,13 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::TradingPartnersApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used.
-name = 'Automotive Companies in London Search' # String | A <b>human-readable</b> name for the batch search.
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
+name = 'Automotive Companies in London Search' # String | A human-readable name for the batch search.
 notification_email = 'user@example.com' # String | The email address to which a notification will be sent once the batch search is complete.
 file = File.new('/path/to/some/file') # File | CSV file containing search parameters.  Input Constraints: - Maximum file size: 1 MB - File Header: Must be less than 500 KB - Total number of lines (including header): Must be 101 or fewer
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\".
-  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | The caller can use this as an identifier to use as a correlation id to trace the call.
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | Optional correlation identifier provided by the caller to trace the call (for example \"f3f0d19a-01a1-4748-8a58-f000d0424f43\").
 }
 
 begin
@@ -81,12 +81,12 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used. |  |
-| **name** | **String** | A &lt;b&gt;human-readable&lt;/b&gt; name for the batch search. |  |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **name** | **String** | A human-readable name for the batch search. |  |
 | **notification_email** | **String** | The email address to which a notification will be sent once the batch search is complete. |  |
 | **file** | **File** | CSV file containing search parameters.  Input Constraints: - Maximum file size: 1 MB - File Header: Must be less than 500 KB - Total number of lines (including header): Must be 101 or fewer |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. | [optional] |
-| **x_correlation_id** | **String** | The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **x_correlation_id** | **String** | Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). | [optional] |
 
 ### Return type
 
@@ -128,11 +128,11 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::TradingPartnersApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used.
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
 trading_partner = AvalaraSdk::EInvoicing::V1::TradingPartner.new({name: 'name_example', identifiers: [AvalaraSdk::EInvoicing::V1::Identifier.new({name: 'name_example', value: 'value_example'})], addresses: [AvalaraSdk::EInvoicing::V1::Address.new({country: 'country_example'})], supported_document_types: [AvalaraSdk::EInvoicing::V1::SupportedDocumentTypes.new({value: 'value_example', supported_by_trading_partner: false})]}) # TradingPartner | 
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\".
-  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | The caller can use this as an identifier to use as a correlation id to trace the call.
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | Optional correlation identifier provided by the caller to trace the call (for example \"f3f0d19a-01a1-4748-8a58-f000d0424f43\").
 }
 
 begin
@@ -166,10 +166,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used. |  |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
 | **trading_partner** | [**TradingPartner**](TradingPartner.md) |  |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. | [optional] |
-| **x_correlation_id** | **String** | The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **x_correlation_id** | **String** | Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). | [optional] |
 
 ### Return type
 
@@ -191,7 +191,7 @@ end
 
 Creates a batch of multiple trading partners.
 
-This endpoint creates multiple trading partners in a single batch request. It accepts an array of trading partners and processes them synchronously. Supports a maximum of 100 records or 1 MB request payload. The batch is processed atomically and partial success is not allowed.
+This endpoint creates multiple trading partners in a single batch request. It accepts an array of trading partners and processes them synchronously. Supports a maximum of 100 records or a 1 MB request payload.
 
 ### Examples
 
@@ -211,11 +211,11 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::TradingPartnersApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used.
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
 create_trading_partners_batch_request = AvalaraSdk::EInvoicing::V1::CreateTradingPartnersBatchRequest.new # CreateTradingPartnersBatchRequest | 
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\".
-  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | The caller can use this as an identifier to use as a correlation id to trace the call.
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | Optional correlation identifier provided by the caller to trace the call (for example \"f3f0d19a-01a1-4748-8a58-f000d0424f43\").
 }
 
 begin
@@ -249,10 +249,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used. |  |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
 | **create_trading_partners_batch_request** | [**CreateTradingPartnersBatchRequest**](CreateTradingPartnersBatchRequest.md) |  |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. | [optional] |
-| **x_correlation_id** | **String** | The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **x_correlation_id** | **String** | Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). | [optional] |
 
 ### Return type
 
@@ -294,11 +294,11 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::TradingPartnersApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used.
-id = 'id_example' # String | The ID of the trading partner which is being deleted.
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
+id = 'id_example' # String | Unique identifier of the trading partner.
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\".
-  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | The caller can use this as an identifier to use as a correlation id to trace the call.
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | Optional correlation identifier provided by the caller to trace the call (for example \"f3f0d19a-01a1-4748-8a58-f000d0424f43\").
 }
 
 begin
@@ -331,10 +331,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used. |  |
-| **id** | **String** | The ID of the trading partner which is being deleted. |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. | [optional] |
-| **x_correlation_id** | **String** | The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **id** | **String** | Unique identifier of the trading partner. |  |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **x_correlation_id** | **String** | Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). | [optional] |
 
 ### Return type
 
@@ -376,11 +376,11 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::TradingPartnersApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used.
-id = '2f5ea4b5-4dae-445a-b3e4-9f65a61eaa99' # String | The ID of the batch search for which the report should be downloaded.
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
+id = '2f5ea4b5-4dae-445a-b3e4-9f65a61eaa99' # String | Unique identifier of the batch search for which to download the report.
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\".
-  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | The caller can use this as an identifier to use as a correlation id to trace the call.
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | Optional correlation identifier provided by the caller to trace the call (for example \"f3f0d19a-01a1-4748-8a58-f000d0424f43\").
 }
 
 begin
@@ -414,10 +414,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used. |  |
-| **id** | **String** | The ID of the batch search for which the report should be downloaded. |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. | [optional] |
-| **x_correlation_id** | **String** | The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **id** | **String** | Unique identifier of the batch search for which to download the report. |  |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **x_correlation_id** | **String** | Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). | [optional] |
 
 ### Return type
 
@@ -459,11 +459,11 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::TradingPartnersApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used.
-id = '2f5ea4b5-4dae-445a-b3e4-9f65a61eaa99' # String | The ID of the batch search that was submitted earlier.
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
+id = '2f5ea4b5-4dae-445a-b3e4-9f65a61eaa99' # String | Unique identifier of the batch search.
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\".
-  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | The caller can use this as an identifier to use as a correlation id to trace the call.
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | Optional correlation identifier provided by the caller to trace the call (for example \"f3f0d19a-01a1-4748-8a58-f000d0424f43\").
 }
 
 begin
@@ -497,10 +497,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used. |  |
-| **id** | **String** | The ID of the batch search that was submitted earlier. |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. | [optional] |
-| **x_correlation_id** | **String** | The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **id** | **String** | Unique identifier of the batch search. |  |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **x_correlation_id** | **String** | Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). | [optional] |
 
 ### Return type
 
@@ -542,15 +542,15 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::TradingPartnersApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used.
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\".
-  filter: 'name eq 'Batch_Search_Import_V4'', # String | Filters the results by field name. Only the <code>eq</code> operator and the name field is supported. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/).
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  filter: 'name eq 'Batch_Search_Import_V4'', # String | Filters the results by field name. Only the eq operator and the name field are supported. For more information, refer to the Avalara filtering guide.
   count: true, # Boolean | When set to <code>true</code>, returns the total count of matching records included as <code>@recordSetCount</code> in the response body.
   top: 56, # Integer | The number of items to include in the result.
   skip: 56, # Integer | The number of items to skip in the result.
   order_by: 'name desc', # String | The <code>$orderBy</code> query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.
-  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | The caller can use this as an identifier to use as a correlation id to trace the call.
+  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | Optional correlation identifier provided by the caller to trace the call (for example \"f3f0d19a-01a1-4748-8a58-f000d0424f43\").
 }
 
 begin
@@ -584,14 +584,14 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used. |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. | [optional] |
-| **filter** | **String** | Filters the results by field name. Only the &lt;code&gt;eq&lt;/code&gt; operator and the name field is supported. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/). | [optional] |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **filter** | **String** | Filters the results by field name. Only the eq operator and the name field are supported. For more information, refer to the Avalara filtering guide. | [optional] |
 | **count** | **Boolean** | When set to &lt;code&gt;true&lt;/code&gt;, returns the total count of matching records included as &lt;code&gt;@recordSetCount&lt;/code&gt; in the response body. | [optional] |
 | **top** | **Integer** | The number of items to include in the result. | [optional] |
 | **skip** | **Integer** | The number of items to skip in the result. | [optional] |
 | **order_by** | **String** | The &lt;code&gt;$orderBy&lt;/code&gt; query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space. | [optional] |
-| **x_correlation_id** | **String** | The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] |
+| **x_correlation_id** | **String** | Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). | [optional] |
 
 ### Return type
 
@@ -633,16 +633,16 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::TradingPartnersApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used.
-search = 'Acme and 7726627177 or BMW' # String | Search by value supports logical <code>AND</code> / <code>OR</code> operators. Search is performed only over the name and identifier value fields. For more information, refer to [Query options overview - OData.](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search).
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
+search = 'Acme AND 7726627177 OR BMW' # String | Search by value supports logical AND and OR operators (case-sensitive). Search is performed only over the name and identifier value fields. For more information, refer to the OData query options overview documentation.
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\".
-  count: true, # Boolean | When set to <code>true</code>, returns the total count of matching records included as <code>@recordSetCount</code> in the response body.
-  filter: 'network eq 'Peppol' and country eq 'Australia'', # String | Filters the results using the <code>eq</code> operator. Supported fields: <code>network</code>, <code>country</code>, <code>documentType</code>, <code>idType</code>. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/).
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  count: true, # Boolean | When set to true, returns the total count of matching records included as @recordSetCount in the response body.
+  filter: 'network eq 'Peppol' and country eq 'Australia'', # String | Filters the results using the eq operator. Supported fields include network, country, documentType, and idType. For more information, refer to the Avalara filtering guide.
   top: 56, # Integer | The number of items to include in the result.
   skip: 56, # Integer | The number of items to skip in the result.
-  order_by: 'name desc', # String | The <code>$orderBy</code> query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.
-  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | The caller can use this as an identifier to use as a correlation id to trace the call.
+  order_by: 'name desc', # String | The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space.
+  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | Optional correlation identifier provided by the caller to trace the call (for example \"f3f0d19a-01a1-4748-8a58-f000d0424f43\").
 }
 
 begin
@@ -676,15 +676,15 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used. |  |
-| **search** | **String** | Search by value supports logical &lt;code&gt;AND&lt;/code&gt; / &lt;code&gt;OR&lt;/code&gt; operators. Search is performed only over the name and identifier value fields. For more information, refer to [Query options overview - OData.](https://learn.microsoft.com/en-us/odata/concepts/queryoptions-overview#search). |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. | [optional] |
-| **count** | **Boolean** | When set to &lt;code&gt;true&lt;/code&gt;, returns the total count of matching records included as &lt;code&gt;@recordSetCount&lt;/code&gt; in the response body. | [optional] |
-| **filter** | **String** | Filters the results using the &lt;code&gt;eq&lt;/code&gt; operator. Supported fields: &lt;code&gt;network&lt;/code&gt;, &lt;code&gt;country&lt;/code&gt;, &lt;code&gt;documentType&lt;/code&gt;, &lt;code&gt;idType&lt;/code&gt;. For more information, refer to [AvaTax filtering guide](https://developer.avalara.com/avatax/filtering-in-rest/). | [optional] |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **search** | **String** | Search by value supports logical AND and OR operators (case-sensitive). Search is performed only over the name and identifier value fields. For more information, refer to the OData query options overview documentation. |  |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **count** | **Boolean** | When set to true, returns the total count of matching records included as @recordSetCount in the response body. | [optional] |
+| **filter** | **String** | Filters the results using the eq operator. Supported fields include network, country, documentType, and idType. For more information, refer to the Avalara filtering guide. | [optional] |
 | **top** | **Integer** | The number of items to include in the result. | [optional] |
 | **skip** | **Integer** | The number of items to skip in the result. | [optional] |
-| **order_by** | **String** | The &lt;code&gt;$orderBy&lt;/code&gt; query parameter specifies the field and sorting direction for ordering the result set. The value is a string that combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space. | [optional] |
-| **x_correlation_id** | **String** | The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] |
+| **order_by** | **String** | The $orderBy query parameter specifies the field and sorting direction for ordering the result set. The value combines a field name and a sorting direction (asc for ascending or desc for descending), separated by a space. | [optional] |
+| **x_correlation_id** | **String** | Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). | [optional] |
 
 ### Return type
 
@@ -726,12 +726,12 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::TradingPartnersApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used.
-id = 'id_example' # String | The ID of the trading partner which is being updated.
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
+id = 'id_example' # String | Unique identifier of the trading partner.
 trading_partner = AvalaraSdk::EInvoicing::V1::TradingPartner.new({name: 'name_example', identifiers: [AvalaraSdk::EInvoicing::V1::Identifier.new({name: 'name_example', value: 'value_example'})], addresses: [AvalaraSdk::EInvoicing::V1::Address.new({country: 'country_example'})], supported_document_types: [AvalaraSdk::EInvoicing::V1::SupportedDocumentTypes.new({value: 'value_example', supported_by_trading_partner: false})]}) # TradingPartner | 
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \"Fingerprint\".
-  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | The caller can use this as an identifier to use as a correlation id to trace the call.
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  x_correlation_id: 'f3f0d19a-01a1-4748-8a58-f000d0424f43' # String | Optional correlation identifier provided by the caller to trace the call (for example \"f3f0d19a-01a1-4748-8a58-f000d0424f43\").
 }
 
 begin
@@ -765,11 +765,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used. |  |
-| **id** | **String** | The ID of the trading partner which is being updated. |  |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **id** | **String** | Unique identifier of the trading partner. |  |
 | **trading_partner** | [**TradingPartner**](TradingPartner.md) |  |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a \&quot;Fingerprint\&quot;. | [optional] |
-| **x_correlation_id** | **String** | The caller can use this as an identifier to use as a correlation id to trace the call. | [optional] |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **x_correlation_id** | **String** | Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). | [optional] |
 
 ### Return type
 

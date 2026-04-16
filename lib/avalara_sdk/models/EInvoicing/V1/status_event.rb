@@ -12,7 +12,7 @@ require 'time'
 module AvalaraSdk::EInvoicing::V1
       # Displays when a status event occurred
   class StatusEvent
-    # The date and time when the status event occured, displayed in the format YYYY-MM-DDThh:mm:ss
+    # The date and time when the status event occurred, displayed in the format YYYY-MM-DDThh:mm:ss
     attr_accessor :event_date_time
 
     # A message describing the status event
@@ -24,13 +24,17 @@ module AvalaraSdk::EInvoicing::V1
     # The corresponding value associated with the response key. This value is provided by the tax authority in response to the event.
     attr_accessor :response_value
 
+    # Represents the functional area or process stage where the status event occurred. Useful for grouping related events such as document processing, transmission, or validation.
+    attr_accessor :category
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'event_date_time' => :'eventDateTime',
         :'message' => :'message',
         :'response_key' => :'responseKey',
-        :'response_value' => :'responseValue'
+        :'response_value' => :'responseValue',
+        :'category' => :'category'
       }
     end
 
@@ -45,7 +49,8 @@ module AvalaraSdk::EInvoicing::V1
         :'event_date_time' => :'String',
         :'message' => :'String',
         :'response_key' => :'String',
-        :'response_value' => :'String'
+        :'response_value' => :'String',
+        :'category' => :'String'
       }
     end
 
@@ -53,7 +58,8 @@ module AvalaraSdk::EInvoicing::V1
     def self.openapi_nullable
       Set.new([
         :'response_key',
-        :'response_value'
+        :'response_value',
+        :'category'
       ])
     end
 
@@ -87,6 +93,10 @@ module AvalaraSdk::EInvoicing::V1
       if attributes.key?(:'response_value')
         self.response_value = attributes[:'response_value']
       end
+
+      if attributes.key?(:'category')
+        self.category = attributes[:'category']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -112,7 +122,8 @@ module AvalaraSdk::EInvoicing::V1
           event_date_time == o.event_date_time &&
           message == o.message &&
           response_key == o.response_key &&
-          response_value == o.response_value
+          response_value == o.response_value &&
+          category == o.category
     end
 
     # @see the `==` method
@@ -124,7 +135,7 @@ module AvalaraSdk::EInvoicing::V1
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [event_date_time, message, response_key, response_value].hash
+      [event_date_time, message, response_key, response_value, category].hash
     end
 
     # Builds the object from hash

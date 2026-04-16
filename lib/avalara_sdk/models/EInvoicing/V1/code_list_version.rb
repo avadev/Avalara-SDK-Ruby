@@ -10,26 +10,31 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Returns the current document ID and status
-  class DocumentStatusResponse
-    # The unique ID for this document
-    attr_accessor :id
+      # Represents a versioned definition of a code list for a specific jurisdiction and date range
+  class CodeListVersion
+    # List of free-text reasons explaining why this version of the code list exists (for example, initial introduction, regulatory update, addition/deprecation of codes). Useful for audit and change tracking.
+    attr_accessor :version_reasons
 
-    # Document status. See the `supportedDocumentStatuses` field in the GET /mandates response for full status definitions.
-    attr_accessor :status
+    # Date from which this version of the code list becomes legally or operationally effective in the jurisdiction. Typically corresponds to a go-live, mandate, or release date.
+    attr_accessor :juris_effective_date
 
-    # Represents the document's business lifecycle state based on responses from external actors (Tax Authority, PDP, or ERP), such as acceptance, rejection, or validation.
-    attr_accessor :business_status
+    # Date after which this version of the code list must no longer be used in the jurisdiction. Use a far-future date (e.g., 9999-12-31) when the sunset is not yet known.
+    attr_accessor :juris_sunset_date
 
-    attr_accessor :events
+    # Language–region locale identifier indicating the language and regional variant for descriptions in this version of the code list. Follows BCP-47 format such as en-US, fr-FR, de-DE.
+    attr_accessor :locale
+
+    # Array of code entries defined in this version of the code list. Each entry contains the machine-readable code value and its human-readable description in the given locale.
+    attr_accessor :values
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'status' => :'status',
-        :'business_status' => :'businessStatus',
-        :'events' => :'events'
+        :'version_reasons' => :'versionReasons',
+        :'juris_effective_date' => :'jurisEffectiveDate',
+        :'juris_sunset_date' => :'jurisSunsetDate',
+        :'locale' => :'locale',
+        :'values' => :'values'
       }
     end
 
@@ -41,10 +46,11 @@ module AvalaraSdk::EInvoicing::V1
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'status' => :'String',
-        :'business_status' => :'String',
-        :'events' => :'Array<StatusEvent>'
+        :'version_reasons' => :'Array<String>',
+        :'juris_effective_date' => :'Date',
+        :'juris_sunset_date' => :'Date',
+        :'locale' => :'String',
+        :'values' => :'Array<CodeListValue>'
       }
     end
 
@@ -58,32 +64,38 @@ module AvalaraSdk::EInvoicing::V1
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::EInvoicing::V1::DocumentStatusResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::EInvoicing::V1::CodeListVersion` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::EInvoicing::V1::DocumentStatusResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::EInvoicing::V1::CodeListVersion`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'version_reasons')
+        if (value = attributes[:'version_reasons']).is_a?(Array)
+          self.version_reasons = value
+        end
       end
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'juris_effective_date')
+        self.juris_effective_date = attributes[:'juris_effective_date']
       end
 
-      if attributes.key?(:'business_status')
-        self.business_status = attributes[:'business_status']
+      if attributes.key?(:'juris_sunset_date')
+        self.juris_sunset_date = attributes[:'juris_sunset_date']
       end
 
-      if attributes.key?(:'events')
-        if (value = attributes[:'events']).is_a?(Array)
-          self.events = value
+      if attributes.key?(:'locale')
+        self.locale = attributes[:'locale']
+      end
+
+      if attributes.key?(:'values')
+        if (value = attributes[:'values']).is_a?(Array)
+          self.values = value
         end
       end
     end
@@ -108,10 +120,11 @@ module AvalaraSdk::EInvoicing::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          status == o.status &&
-          business_status == o.business_status &&
-          events == o.events
+          version_reasons == o.version_reasons &&
+          juris_effective_date == o.juris_effective_date &&
+          juris_sunset_date == o.juris_sunset_date &&
+          locale == o.locale &&
+          values == o.values
     end
 
     # @see the `==` method
@@ -123,7 +136,7 @@ module AvalaraSdk::EInvoicing::V1
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, status, business_status, events].hash
+      [version_reasons, juris_effective_date, juris_sunset_date, locale, values].hash
     end
 
     # Builds the object from hash
