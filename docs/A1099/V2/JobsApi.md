@@ -36,7 +36,7 @@ api_instance = AvalaraSdk::A1099::V2::JobsApi.new api_client
 id = 'id_example' # String | Job id obtained from other API responses, like `/1099/bulk-upsert`.
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '404add46-17ce-4740-8684-de29503d6500', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'a944f1ad-48d9-4ff0-b23f-69bf4ceffc12', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 

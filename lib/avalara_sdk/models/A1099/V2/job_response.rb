@@ -42,7 +42,7 @@ module AvalaraSdk::A1099::V2
     # Number of forms skipped because they would have updated a record already updated once in the request. Value can be 0 or another value based on what the job has available
     attr_accessor :skipped_duplicate
 
-    # Number of forms skipped because they would have made a form invalid and the form is already e-filed or scheduled for e-filing. Value can be 0 or another value based on what the job has available
+    # Number of forms skipped because they would have made a form invalid and the form is already e-filed or scheduled for e-filing, or because you do not have permission to update forms that have been scheduled. Value can be 0 or another value based on what the job has available
     attr_accessor :skipped_invalid
 
     # Number of forms skipped because they matched multiple forms. Value can be 0 or another value based on what the job has available
