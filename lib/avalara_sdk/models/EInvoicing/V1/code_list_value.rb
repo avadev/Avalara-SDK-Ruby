@@ -10,26 +10,23 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Returns the current document ID and status
-  class DocumentStatusResponse
-    # The unique ID for this document
-    attr_accessor :id
+      # Represents a single code entry in a code list version
+  class CodeListValue
+    # The actual code value used in documents or systems. This is typically what appears in the e-invoice payload, such as a numeric or alphanumeric code from the official code list.
+    attr_accessor :code
 
-    # Document status. See the `supportedDocumentStatuses` field in the GET /mandates response for full status definitions.
-    attr_accessor :status
+    # Human-readable label or name for the code, localized according to the locale field of the version.
+    attr_accessor :value
 
-    # Represents the document's business lifecycle state based on responses from external actors (Tax Authority, PDP, or ERP), such as acceptance, rejection, or validation.
-    attr_accessor :business_status
-
-    attr_accessor :events
+    # Detailed explanation of what the code represents, localized according to the locale field of the version.
+    attr_accessor :description
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'status' => :'status',
-        :'business_status' => :'businessStatus',
-        :'events' => :'events'
+        :'code' => :'code',
+        :'value' => :'value',
+        :'description' => :'description'
       }
     end
 
@@ -41,10 +38,9 @@ module AvalaraSdk::EInvoicing::V1
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'status' => :'String',
-        :'business_status' => :'String',
-        :'events' => :'Array<StatusEvent>'
+        :'code' => :'String',
+        :'value' => :'String',
+        :'description' => :'String'
       }
     end
 
@@ -58,33 +54,27 @@ module AvalaraSdk::EInvoicing::V1
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::EInvoicing::V1::DocumentStatusResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::EInvoicing::V1::CodeListValue` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::EInvoicing::V1::DocumentStatusResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::EInvoicing::V1::CodeListValue`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'code')
+        self.code = attributes[:'code']
       end
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'value')
+        self.value = attributes[:'value']
       end
 
-      if attributes.key?(:'business_status')
-        self.business_status = attributes[:'business_status']
-      end
-
-      if attributes.key?(:'events')
-        if (value = attributes[:'events']).is_a?(Array)
-          self.events = value
-        end
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
       end
     end
 
@@ -108,10 +98,9 @@ module AvalaraSdk::EInvoicing::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          status == o.status &&
-          business_status == o.business_status &&
-          events == o.events
+          code == o.code &&
+          value == o.value &&
+          description == o.description
     end
 
     # @see the `==` method
@@ -123,7 +112,7 @@ module AvalaraSdk::EInvoicing::V1
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, status, business_status, events].hash
+      [code, value, description].hash
     end
 
     # Builds the object from hash

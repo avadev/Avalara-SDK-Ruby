@@ -10,26 +10,35 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::EInvoicing::V1
-      # Returns the current document ID and status
-  class DocumentStatusResponse
-    # The unique ID for this document
-    attr_accessor :id
+      # Displays a summary of information about a code list
+  class CodeListSummary
+    # Two-letter ISO 3166-1 alpha-2 country code indicating the jurisdiction this code list applies to.
+    attr_accessor :country_code
 
-    # Document status. See the `supportedDocumentStatuses` field in the GET /mandates response for full status definitions.
-    attr_accessor :status
+    # System-generated unique identifier of the code list definition. Typically a UUID used to reference this code list internally or via APIs.
+    attr_accessor :code_list_id
 
-    # Represents the document's business lifecycle state based on responses from external actors (Tax Authority, PDP, or ERP), such as acceptance, rejection, or validation.
-    attr_accessor :business_status
+    # Human-readable name of the code list, usually describing what the codes represent (for example, document types, tax categories, currencies).
+    attr_accessor :code_list_name
 
-    attr_accessor :events
+    # Textual description of the code list, including what it is used for and whether it represents a global standard (e.g., UN/CEFACT, ISO, EN16931) or a jurisdiction-specific/local extension of that standard.
+    attr_accessor :description
+
+    # Identifier of the underlying standard or authoritative source for this code list. This may be a formal code list name (e.g., UNCL1001), a standard reference (e.g., EN16931), or an internal standard identifier.
+    attr_accessor :standard
+
+    # Array of versioned definitions of this code list for the given jurisdiction. Each entry represents a version that is valid for a specific effective/sunset date range, optionally per locale.
+    attr_accessor :versions
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'status' => :'status',
-        :'business_status' => :'businessStatus',
-        :'events' => :'events'
+        :'country_code' => :'countryCode',
+        :'code_list_id' => :'codeListId',
+        :'code_list_name' => :'codeListName',
+        :'description' => :'description',
+        :'standard' => :'standard',
+        :'versions' => :'versions'
       }
     end
 
@@ -41,10 +50,12 @@ module AvalaraSdk::EInvoicing::V1
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'status' => :'String',
-        :'business_status' => :'String',
-        :'events' => :'Array<StatusEvent>'
+        :'country_code' => :'String',
+        :'code_list_id' => :'String',
+        :'code_list_name' => :'String',
+        :'description' => :'String',
+        :'standard' => :'String',
+        :'versions' => :'Array<CodeListVersion>'
       }
     end
 
@@ -58,32 +69,40 @@ module AvalaraSdk::EInvoicing::V1
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::EInvoicing::V1::DocumentStatusResponse` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::EInvoicing::V1::CodeListSummary` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::EInvoicing::V1::DocumentStatusResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::EInvoicing::V1::CodeListSummary`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.key?(:'country_code')
+        self.country_code = attributes[:'country_code']
       end
 
-      if attributes.key?(:'status')
-        self.status = attributes[:'status']
+      if attributes.key?(:'code_list_id')
+        self.code_list_id = attributes[:'code_list_id']
       end
 
-      if attributes.key?(:'business_status')
-        self.business_status = attributes[:'business_status']
+      if attributes.key?(:'code_list_name')
+        self.code_list_name = attributes[:'code_list_name']
       end
 
-      if attributes.key?(:'events')
-        if (value = attributes[:'events']).is_a?(Array)
-          self.events = value
+      if attributes.key?(:'description')
+        self.description = attributes[:'description']
+      end
+
+      if attributes.key?(:'standard')
+        self.standard = attributes[:'standard']
+      end
+
+      if attributes.key?(:'versions')
+        if (value = attributes[:'versions']).is_a?(Array)
+          self.versions = value
         end
       end
     end
@@ -108,10 +127,12 @@ module AvalaraSdk::EInvoicing::V1
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          status == o.status &&
-          business_status == o.business_status &&
-          events == o.events
+          country_code == o.country_code &&
+          code_list_id == o.code_list_id &&
+          code_list_name == o.code_list_name &&
+          description == o.description &&
+          standard == o.standard &&
+          versions == o.versions
     end
 
     # @see the `==` method
@@ -123,7 +144,7 @@ module AvalaraSdk::EInvoicing::V1
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, status, business_status, events].hash
+      [country_code, code_list_id, code_list_name, description, standard, versions].hash
     end
 
     # Builds the object from hash

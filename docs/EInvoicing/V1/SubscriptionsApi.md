@@ -5,8 +5,8 @@ All URIs are relative to *https://api.sbx.avalara.com/einvoicing*
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
 | [**create_webhook_subscription**](SubscriptionsApi.md#create_webhook_subscription) | **POST** /webhooks/subscriptions | Create a subscription to events |
-| [**delete_webhook_subscription**](SubscriptionsApi.md#delete_webhook_subscription) | **DELETE** /webhooks/subscriptions/{subscription-id} | Unsubscribe from events |
-| [**get_webhook_subscription**](SubscriptionsApi.md#get_webhook_subscription) | **GET** /webhooks/subscriptions/{subscription-id} | Get details of a subscription |
+| [**delete_webhook_subscription**](SubscriptionsApi.md#delete_webhook_subscription) | **DELETE** /webhooks/subscriptions/{subscriptionId} | Unsubscribe from events |
+| [**get_webhook_subscription**](SubscriptionsApi.md#get_webhook_subscription) | **GET** /webhooks/subscriptions/{subscriptionId} | Get details of a subscription |
 | [**list_webhook_subscriptions**](SubscriptionsApi.md#list_webhook_subscriptions) | **GET** /webhooks/subscriptions | List all subscriptions |
 
 
@@ -16,7 +16,7 @@ All URIs are relative to *https://api.sbx.avalara.com/einvoicing*
 
 Create a subscription to events
 
-Create a subscription to events exposed by registered systems.
+Create a new webhook subscription and return the created subscription details.
 
 ### Examples
 
@@ -36,7 +36,7 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::SubscriptionsApi.new api_client
 
-avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.4\".
+avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.6\".
 subscription_registration = AvalaraSdk::EInvoicing::V1::SubscriptionRegistration.new({notification_url: 'https://webhook.example.com/notifications', signature: AvalaraSdk::EInvoicing::V1::SignatureSignature.new({type: 'none', key: 'key_example', algorithm: 'sha256'}), events: [AvalaraSdk::EInvoicing::V1::EventSubscription.new({event_name: 'document.complete'})]}) # SubscriptionRegistration | 
 opts = {
   x_correlation_id: 'x_correlation_id_example', # String | A unique identifier for tracking the request and its response
@@ -74,7 +74,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.4\&quot;. |  |
+| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.6\&quot;. |  |
 | **subscription_registration** | [**SubscriptionRegistration**](SubscriptionRegistration.md) |  |  |
 | **x_correlation_id** | **String** | A unique identifier for tracking the request and its response | [optional] |
 | **x_avalara_client** | **String** | Client application identification | [optional] |
@@ -99,7 +99,7 @@ end
 
 Unsubscribe from events
 
-Remove a subscription from the webhooks dispatch service. All events and subscriptions are also deleted.
+Delete the specified webhook subscription.
 
 ### Examples
 
@@ -119,8 +119,8 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::SubscriptionsApi.new api_client
 
-subscription_id = 'subscription_id_example' # String | 
-avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.4\".
+subscription_id = 'subscription_id_example' # String | Unique identifier of the subscription.
+avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.6\".
 opts = {
   x_correlation_id: 'x_correlation_id_example', # String | A unique identifier for tracking the request and its response
   x_avalara_client: 'x_avalara_client_example' # String | Client application identification
@@ -156,8 +156,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **subscription_id** | **String** |  |  |
-| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.4\&quot;. |  |
+| **subscription_id** | **String** | Unique identifier of the subscription. |  |
+| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.6\&quot;. |  |
 | **x_correlation_id** | **String** | A unique identifier for tracking the request and its response | [optional] |
 | **x_avalara_client** | **String** | Client application identification | [optional] |
 
@@ -201,8 +201,8 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::SubscriptionsApi.new api_client
 
-subscription_id = 'subscription_id_example' # String | 
-avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.4\".
+subscription_id = 'subscription_id_example' # String | Unique identifier of the subscription.
+avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.6\".
 opts = {
   x_correlation_id: 'x_correlation_id_example', # String | A unique identifier for tracking the request and its response
   x_avalara_client: 'x_avalara_client_example' # String | Client application identification
@@ -239,8 +239,8 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **subscription_id** | **String** |  |  |
-| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.4\&quot;. |  |
+| **subscription_id** | **String** | Unique identifier of the subscription. |  |
+| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.6\&quot;. |  |
 | **x_correlation_id** | **String** | A unique identifier for tracking the request and its response | [optional] |
 | **x_avalara_client** | **String** | Client application identification | [optional] |
 
@@ -264,7 +264,7 @@ end
 
 List all subscriptions
 
-Retrieve a list of all subscriptions.
+Retrieve a list of webhook subscriptions.
 
 ### Examples
 
@@ -284,7 +284,7 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::SubscriptionsApi.new api_client
 
-avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.4\".
+avalara_version = 'avalara_version_example' # String | The version of the API to use, e.g., \"1.6\".
 opts = {
   x_correlation_id: 'x_correlation_id_example', # String | A unique identifier for tracking the request and its response
   x_avalara_client: 'x_avalara_client_example', # String | Client application identification
@@ -325,7 +325,7 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.4\&quot;. |  |
+| **avalara_version** | **String** | The version of the API to use, e.g., \&quot;1.6\&quot;. |  |
 | **x_correlation_id** | **String** | A unique identifier for tracking the request and its response | [optional] |
 | **x_avalara_client** | **String** | Client application identification | [optional] |
 | **top** | **Integer** | The number of items to include in the result. | [optional] |

@@ -17,7 +17,7 @@ All URIs are relative to *https://api.sbx.avalara.com/einvoicing*
 
 Returns a copy of the document
 
-When the document is available, use this endpoint to download it as text, XML, or PDF. The output format needs to be specified in the Accept header, and it will vary depending on the mandate. If the file has not yet been created, then status code 404 (not found) is returned.
+Downloads the document when it is available. Specify the output format in the Accept header. Returns 404 if the file has not been created.
 
 ### Examples
 
@@ -37,11 +37,11 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
-accept = 'application/pdf' # String | This header indicates the MIME type of the document
-document_id = 'document_id_example' # String | The unique ID for this document that was returned in the POST /einvoicing/document response body
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
+accept = 'application/pdf' # String | Header that specifies the MIME type of the returned document.
+document_id = 'document_id_example' # String | The unique documentId returned in the POST /documents response body.
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client' # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
+  x_avalara_client: 'John's E-Invoicing-API Client' # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
 }
 
 begin
@@ -75,10 +75,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used |  |
-| **accept** | **String** | This header indicates the MIME type of the document |  |
-| **document_id** | **String** | The unique ID for this document that was returned in the POST /einvoicing/document response body |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **accept** | **String** | Header that specifies the MIME type of the returned document. |  |
+| **document_id** | **String** | The unique documentId returned in the POST /documents response body. |  |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
 
 ### Return type
 
@@ -100,7 +100,7 @@ end
 
 Fetch the inbound document from a tax authority
 
-This API allows you to retrieve an inbound document. Pass key-value pairs as parameters in the request, such as the confirmation number, supplier number, and buyer VAT number.
+Retrieves an inbound document. Provide key-value pairs as request parameters. Supported parameters vary by tax authority and country.
 
 ### Examples
 
@@ -120,10 +120,10 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
 fetch_documents_request = AvalaraSdk::EInvoicing::V1::FetchDocumentsRequest.new # FetchDocumentsRequest | 
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client' # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
+  x_avalara_client: 'John's E-Invoicing-API Client' # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
 }
 
 begin
@@ -157,9 +157,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used |  |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
 | **fetch_documents_request** | [**FetchDocumentsRequest**](FetchDocumentsRequest.md) |  |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
 
 ### Return type
 
@@ -181,7 +181,7 @@ end
 
 Returns a summary of documents for a date range
 
-Get a list of documents on the Avalara E-Invoicing platform that have a processing date within the specified date range.
+Returns a list of document summaries with a processing date within the specified date range.
 
 ### Examples
 
@@ -201,15 +201,16 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client', # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
-  start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Start date of documents to return. This defaults to the previous month.
-  end_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | End date of documents to return. This defaults to the current date.
-  flow: 'out', # String | Optionally filter by document direction, where issued = `out` and received = `in`
-  count: 'true', # String | When set to true, the count of the collection is also returned in the response body
-  count_only: 'false', # String | When set to true, only the count of the collection is returned
-  filter: 'id eq 52f60401-44d0-4667-ad47-4afe519abb53', # String | Filter by field name and value. This filter only supports <code>eq</code> . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed.
+  x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
+  start_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | Start date for documents to return. Defaults to the previous month. Format: \"YYYY-MM-DDThh:mm:ss\".
+  end_date: Time.parse('2013-10-20T19:20:30+01:00'), # Time | End date for documents to return. Defaults to the current date. Format: \"YYYY-MM-DDThh:mm:ss\".
+  flow: 'out', # String | Optional filter for document direction: issued uses \"out\" and received uses \"in\".
+  count: 'true', # String | When set to true, the response body also includes the count of items in the collection.
+  count_only: 'false', # String | When set to true, the response returns only the count of items in the collection.
+  filter: 'id eq 52f60401-44d0-4667-ad47-4afe519abb53', # String | Filter by field name and value. This filter supports only eq. For more information, refer to the Avalara filtering guide.
+  include: 'events', # String | When set to `events`, each document in the response includes its events array. Omit this parameter or use any other value to exclude events from the response.
   top: 56, # Integer | The number of items to include in the result.
   skip: 56 # Integer | The number of items to skip in the result.
 }
@@ -245,14 +246,15 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] |
-| **start_date** | **Time** | Start date of documents to return. This defaults to the previous month. | [optional] |
-| **end_date** | **Time** | End date of documents to return. This defaults to the current date. | [optional] |
-| **flow** | **String** | Optionally filter by document direction, where issued &#x3D; &#x60;out&#x60; and received &#x3D; &#x60;in&#x60; | [optional] |
-| **count** | **String** | When set to true, the count of the collection is also returned in the response body | [optional] |
-| **count_only** | **String** | When set to true, only the count of the collection is returned | [optional] |
-| **filter** | **String** | Filter by field name and value. This filter only supports &lt;code&gt;eq&lt;/code&gt; . Refer to [https://developer.avalara.com/avatax/filtering-in-rest/](https://developer.avalara.com/avatax/filtering-in-rest/) for more information on filtering. Filtering will be done over the provided startDate and endDate. If no startDate or endDate is provided, defaults will be assumed. | [optional] |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
+| **start_date** | **Time** | Start date for documents to return. Defaults to the previous month. Format: \&quot;YYYY-MM-DDThh:mm:ss\&quot;. | [optional] |
+| **end_date** | **Time** | End date for documents to return. Defaults to the current date. Format: \&quot;YYYY-MM-DDThh:mm:ss\&quot;. | [optional] |
+| **flow** | **String** | Optional filter for document direction: issued uses \&quot;out\&quot; and received uses \&quot;in\&quot;. | [optional] |
+| **count** | **String** | When set to true, the response body also includes the count of items in the collection. | [optional] |
+| **count_only** | **String** | When set to true, the response returns only the count of items in the collection. | [optional] |
+| **filter** | **String** | Filter by field name and value. This filter supports only eq. For more information, refer to the Avalara filtering guide. | [optional] |
+| **include** | **String** | When set to &#x60;events&#x60;, each document in the response includes its events array. Omit this parameter or use any other value to exclude events from the response. | [optional] |
 | **top** | **Integer** | The number of items to include in the result. | [optional] |
 | **skip** | **Integer** | The number of items to skip in the result. | [optional] |
 
@@ -276,7 +278,7 @@ end
 
 Checks the status of a document
 
-Using the unique ID from POST /einvoicing/documents response body, request the current status of a document.
+Uses the documentId from the POST /documents response body to return the current status of a document.
 
 ### Examples
 
@@ -296,10 +298,10 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
-document_id = 'document_id_example' # String | The unique ID for this document that was returned in the POST /einvoicing/documents response body
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
+document_id = 'document_id_example' # String | The unique documentId returned in the POST /documents response body.
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client' # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
+  x_avalara_client: 'John's E-Invoicing-API Client' # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
 }
 
 begin
@@ -333,9 +335,9 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used |  |
-| **document_id** | **String** | The unique ID for this document that was returned in the POST /einvoicing/documents response body |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
+| **document_id** | **String** | The unique documentId returned in the POST /documents response body. |  |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
 
 ### Return type
 
@@ -377,11 +379,11 @@ end
 api_client = AvalaraSdk::ApiClient.new config
 api_instance = AvalaraSdk::EInvoicing::V1::DocumentsApi.new api_client
 
-avalara_version = '1.4' # String | The HTTP Header meant to specify the version of the API intended to be used
+avalara_version = '1.6' # String | Header that specifies the API version to use (for example \"1.6\").
 metadata = AvalaraSdk::EInvoicing::V1::SubmitDocumentMetadata.new({workflow_id: 'partner-einvoicing', data_format: 'ubl-invoice', data_format_version: '2.1', country_code: 'SA', country_mandate: 'SA-Phase1-B2B'}) # SubmitDocumentMetadata | 
 data = { ... } # Object | The document to be submitted, as indicated by the metadata fields 'dataFormat' and 'dataFormatVersion'
 opts = {
-  x_avalara_client: 'John's E-Invoicing-API Client' # String | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint.
+  x_avalara_client: 'John's E-Invoicing-API Client' # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
 }
 
 begin
@@ -415,10 +417,10 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **avalara_version** | **String** | The HTTP Header meant to specify the version of the API intended to be used |  |
+| **avalara_version** | **String** | Header that specifies the API version to use (for example \&quot;1.6\&quot;). |  |
 | **metadata** | [**SubmitDocumentMetadata**](SubmitDocumentMetadata.md) |  |  |
 | **data** | [**Object**](Object.md) | The document to be submitted, as indicated by the metadata fields &#39;dataFormat&#39; and &#39;dataFormatVersion&#39; |  |
-| **x_avalara_client** | **String** | You can freely use any text you wish for this value. This feature can help you diagnose and solve problems with your software. The header can be treated like a fingerprint. | [optional] |
+| **x_avalara_client** | **String** | Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). | [optional] |
 
 ### Return type
 

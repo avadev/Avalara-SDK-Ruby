@@ -10,7 +10,7 @@ require 'cgi'
 
 module AvalaraSdk::EInvoicing
   module AvalaraSdk::EInvoicing::V1
-    class SubscriptionsApi
+    class ReportsApi
       attr_accessor :api_client
 
       def initialize(api_client)
@@ -225,132 +225,41 @@ module AvalaraSdk::EInvoicing
         end
       end
     
-      # Create a subscription to events
-      # Create a new webhook subscription and return the created subscription details.
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.6\&quot;.      # @param subscription_registration [SubscriptionRegistration]       # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification
-      # @return [SuccessResponse]
-      def create_webhook_subscription(request_parameters)
-        data, _status_code, _headers = create_webhook_subscription_with_http_info(request_parameters)
+      # Returns a pre-signed download URL for a report
+      # Returns a pre-signed URL to download the report file when it is available. If the report has not yet been generated, a 404 (not found) is returned.
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).      # @param report_id [String] The unique ID for this report as returned in a GET /reports response.      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).
+      # @return [ReportDownloadResponse]
+      def download_report(request_parameters)
+        data, _status_code, _headers = download_report_with_http_info(request_parameters)
         data
       end
 
-      # Create a subscription to events
-      # Create a new webhook subscription and return the created subscription details.
+      # Returns a pre-signed download URL for a report
+      # Returns a pre-signed URL to download the report file when it is available. If the report has not yet been generated, a 404 (not found) is returned.
           
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.6\&quot;.    
-      # @param subscription_registration [SubscriptionRegistration]     
-      # @param x_correlation_id [String] A unique identifier for tracking the request and its response    
-      # @param x_avalara_client [String] Client application identification    
-      # @return [Array<(SuccessResponse, Integer, Hash)>] SuccessResponse data, response status code and response headers
-      def create_webhook_subscription_with_http_info(request_parameters)
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).    
+      # @param report_id [String] The unique ID for this report as returned in a GET /reports response.    
+      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).    
+      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).    
+      # @return [Array<(ReportDownloadResponse, Integer, Hash)>] ReportDownloadResponse data, response status code and response headers
+      def download_report_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
-        subscription_registration = request_parameters.get_subscription_registration()
-        x_correlation_id = request_parameters.get_x_correlation_id()
+        report_id = request_parameters.get_report_id()
         x_avalara_client = request_parameters.get_x_avalara_client()
+        x_correlation_id = request_parameters.get_x_correlation_id()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
-          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling SubscriptionsApi.create_webhook_subscription"
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling ReportsApi.download_report"
         end
-        # verify the required parameter 'subscription_registration' is set
-        if @api_client.config.client_side_validation && subscription_registration.nil?
-          fail ArgumentError, "Missing the required parameter 'subscription_registration' when calling SubscriptionsApi.create_webhook_subscription"
-        end
-        # resource path
-        local_var_path = '/einvoicing/webhooks/subscriptions'
-
-        # query parameters
-        query_params = {}
-
-        # header parameters
-        header_params = {}
-        # HTTP header 'Accept' (if needed)
-        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-        # HTTP header 'Content-Type'
-        content_type = @api_client.select_header_content_type(['application/json'])
-        if !content_type.nil?
-            header_params['Content-Type'] = content_type
-        end
-        if !avalara_version.nil?
-          header_params[:'avalara-version'] = avalara_version
-        end
-        if !x_correlation_id.nil?
-          header_params[:'X-Correlation-ID'] = x_correlation_id
-        end
-        if !x_avalara_client.nil?
-          header_params[:'X-Avalara-Client'] = x_avalara_client
-        end
-
-        # form parameters
-        form_params = {}
-
-        # http body (model)
-        post_body =  @api_client.object_to_http_body(subscription_registration) || {}
-
-        # return_type
-        return_type = 'SuccessResponse'
-
-        # auth_names
-        auth_names = ['Bearer']
-
-        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
-
-        new_options = {
-          :operation => :"SubscriptionsApi.create_webhook_subscription",
-          :header_params => header_params,
-          :query_params => query_params,
-          :form_params => form_params,
-          :body => post_body,
-          :auth_names => auth_names,
-          :return_type => return_type
-        }
-
-        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes, false, :EInvoicing)
-        if new_options[:return_type]
-          data = deserialize(response, new_options[:return_type])
-        else
-          data = nil
-        end
-        return data, response.code, response.headers
-      end
-
-      # Unsubscribe from events
-      # Delete the specified webhook subscription.
-      # @param subscription_id [String] Unique identifier of the subscription.      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.6\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification
-      # @return [nil]
-      def delete_webhook_subscription(request_parameters)
-        delete_webhook_subscription_with_http_info(request_parameters)
-        nil
-      end
-
-      # Unsubscribe from events
-      # Delete the specified webhook subscription.
-          
-      # @param subscription_id [String] Unique identifier of the subscription.    
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.6\&quot;.    
-      # @param x_correlation_id [String] A unique identifier for tracking the request and its response    
-      # @param x_avalara_client [String] Client application identification    
-      # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
-      def delete_webhook_subscription_with_http_info(request_parameters)
-        # OAuth2 Scopes
-        required_scopes = ''
-        # Request Parameters
-        subscription_id = request_parameters.get_subscription_id()
-        avalara_version = request_parameters.get_avalara_version()
-        x_correlation_id = request_parameters.get_x_correlation_id()
-        x_avalara_client = request_parameters.get_x_avalara_client()
-        # verify the required parameter 'subscription_id' is set
-        if @api_client.config.client_side_validation && subscription_id.nil?
-          fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionsApi.delete_webhook_subscription"
-        end
-        # verify the required parameter 'avalara_version' is set
-        if @api_client.config.client_side_validation && avalara_version.nil?
-          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling SubscriptionsApi.delete_webhook_subscription"
+        # verify the required parameter 'report_id' is set
+        if @api_client.config.client_side_validation && report_id.nil?
+          fail ArgumentError, "Missing the required parameter 'report_id' when calling ReportsApi.download_report"
         end
         # resource path
-        local_var_path = '/einvoicing/webhooks/subscriptions/{subscriptionId}'.sub('{' + 'subscriptionId' + '}', CGI.escape(subscription_id.to_s))
+        local_var_path = '/einvoicing/reports/{reportId}/$download'.sub('{' + 'reportId' + '}', CGI.escape(report_id.to_s))
 
         # query parameters
         query_params = {}
@@ -362,11 +271,11 @@ module AvalaraSdk::EInvoicing
         if !avalara_version.nil?
           header_params[:'avalara-version'] = avalara_version
         end
-        if !x_correlation_id.nil?
-          header_params[:'X-Correlation-ID'] = x_correlation_id
-        end
         if !x_avalara_client.nil?
           header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-ID'] = x_correlation_id
         end
 
         # form parameters
@@ -376,7 +285,7 @@ module AvalaraSdk::EInvoicing
         post_body = {}
 
         # return_type
-        return_type = ''
+        return_type = 'ReportDownloadResponse'
 
         # auth_names
         auth_names = ['Bearer']
@@ -384,93 +293,7 @@ module AvalaraSdk::EInvoicing
         @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
 
         new_options = {
-          :operation => :"SubscriptionsApi.delete_webhook_subscription",
-          :header_params => header_params,
-          :query_params => query_params,
-          :form_params => form_params,
-          :body => post_body,
-          :auth_names => auth_names,
-          :return_type => return_type
-        }
-
-        response = @api_client.call_api(:DELETE, local_var_path, new_options, required_scopes, false, :EInvoicing)
-        if new_options[:return_type]
-          data = deserialize(response, new_options[:return_type])
-        else
-          data = nil
-        end
-        return data, response.code, response.headers
-      end
-
-      # Get details of a subscription
-      # Retrieve details of a specific subscription.
-      # @param subscription_id [String] Unique identifier of the subscription.      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.6\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification
-      # @return [SubscriptionDetail]
-      def get_webhook_subscription(request_parameters)
-        data, _status_code, _headers = get_webhook_subscription_with_http_info(request_parameters)
-        data
-      end
-
-      # Get details of a subscription
-      # Retrieve details of a specific subscription.
-          
-      # @param subscription_id [String] Unique identifier of the subscription.    
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.6\&quot;.    
-      # @param x_correlation_id [String] A unique identifier for tracking the request and its response    
-      # @param x_avalara_client [String] Client application identification    
-      # @return [Array<(SubscriptionDetail, Integer, Hash)>] SubscriptionDetail data, response status code and response headers
-      def get_webhook_subscription_with_http_info(request_parameters)
-        # OAuth2 Scopes
-        required_scopes = ''
-        # Request Parameters
-        subscription_id = request_parameters.get_subscription_id()
-        avalara_version = request_parameters.get_avalara_version()
-        x_correlation_id = request_parameters.get_x_correlation_id()
-        x_avalara_client = request_parameters.get_x_avalara_client()
-        # verify the required parameter 'subscription_id' is set
-        if @api_client.config.client_side_validation && subscription_id.nil?
-          fail ArgumentError, "Missing the required parameter 'subscription_id' when calling SubscriptionsApi.get_webhook_subscription"
-        end
-        # verify the required parameter 'avalara_version' is set
-        if @api_client.config.client_side_validation && avalara_version.nil?
-          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling SubscriptionsApi.get_webhook_subscription"
-        end
-        # resource path
-        local_var_path = '/einvoicing/webhooks/subscriptions/{subscriptionId}'.sub('{' + 'subscriptionId' + '}', CGI.escape(subscription_id.to_s))
-
-        # query parameters
-        query_params = {}
-
-        # header parameters
-        header_params = {}
-        # HTTP header 'Accept' (if needed)
-        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-        if !avalara_version.nil?
-          header_params[:'avalara-version'] = avalara_version
-        end
-        if !x_correlation_id.nil?
-          header_params[:'X-Correlation-ID'] = x_correlation_id
-        end
-        if !x_avalara_client.nil?
-          header_params[:'X-Avalara-Client'] = x_avalara_client
-        end
-
-        # form parameters
-        form_params = {}
-
-        # http body (model)
-        post_body = {}
-
-        # return_type
-        return_type = 'SubscriptionDetail'
-
-        # auth_names
-        auth_names = ['Bearer']
-
-        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
-
-        new_options = {
-          :operation => :"SubscriptionsApi.get_webhook_subscription",
+          :operation => :"ReportsApi.download_report",
           :header_params => header_params,
           :query_params => query_params,
           :form_params => form_params,
@@ -488,46 +311,139 @@ module AvalaraSdk::EInvoicing
         return data, response.code, response.headers
       end
 
-      # List all subscriptions
-      # Retrieve a list of webhook subscriptions.
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.6\&quot;.      # @param x_correlation_id [String] A unique identifier for tracking the request and its response      # @param x_avalara_client [String] Client application identification      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param count [Boolean] Whether to include the total count of records in the result.      # @param count_only [Boolean] Whether to return only the count of records, without the list of records.
-      # @return [SubscriptionListResponse]
-      def list_webhook_subscriptions(request_parameters)
-        data, _status_code, _headers = list_webhook_subscriptions_with_http_info(request_parameters)
+      # Retrieves a report by its unique ID
+      # Retrieves a specific report by its unique identifier. Returns complete report details including metadata, status, and associated information.
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).      # @param report_id [String] The unique ID for this report as returned in a GET /reports response.      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).
+      # @return [ReportItem]
+      def get_report_by_id(request_parameters)
+        data, _status_code, _headers = get_report_by_id_with_http_info(request_parameters)
         data
       end
 
-      # List all subscriptions
-      # Retrieve a list of webhook subscriptions.
+      # Retrieves a report by its unique ID
+      # Retrieves a specific report by its unique identifier. Returns complete report details including metadata, status, and associated information.
           
-      # @param avalara_version [String] The version of the API to use, e.g., \&quot;1.6\&quot;.    
-      # @param x_correlation_id [String] A unique identifier for tracking the request and its response    
-      # @param x_avalara_client [String] Client application identification    
-      # @param top [Integer] The number of items to include in the result.    
-      # @param skip [Integer] The number of items to skip in the result.    
-      # @param count [Boolean] Whether to include the total count of records in the result.    
-      # @param count_only [Boolean] Whether to return only the count of records, without the list of records.    
-      # @return [Array<(SubscriptionListResponse, Integer, Hash)>] SubscriptionListResponse data, response status code and response headers
-      def list_webhook_subscriptions_with_http_info(request_parameters)
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).    
+      # @param report_id [String] The unique ID for this report as returned in a GET /reports response.    
+      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).    
+      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).    
+      # @return [Array<(ReportItem, Integer, Hash)>] ReportItem data, response status code and response headers
+      def get_report_by_id_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
         # Request Parameters
         avalara_version = request_parameters.get_avalara_version()
-        x_correlation_id = request_parameters.get_x_correlation_id()
+        report_id = request_parameters.get_report_id()
         x_avalara_client = request_parameters.get_x_avalara_client()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling ReportsApi.get_report_by_id"
+        end
+        # verify the required parameter 'report_id' is set
+        if @api_client.config.client_side_validation && report_id.nil?
+          fail ArgumentError, "Missing the required parameter 'report_id' when calling ReportsApi.get_report_by_id"
+        end
+        # resource path
+        local_var_path = '/einvoicing/reports/{reportId}/status'.sub('{' + 'reportId' + '}', CGI.escape(report_id.to_s))
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-ID'] = x_correlation_id
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body = {}
+
+        # return_type
+        return_type = 'ReportItem'
+
+        # auth_names
+        auth_names = ['Bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"ReportsApi.get_report_by_id",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:GET, local_var_path, new_options, required_scopes, false, :EInvoicing)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
+      # Returns a list of reports
+      # Retrieves all reports with optional filtering, paging, and sorting. Results are filtered by tenant. Supports OData-style filtering using the $filter parameter. Use $top and $skip for paging; when more results exist, the response includes @nextLink to fetch the next page. Default sort order is by report generation date (descending).
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).      # @param filter [String] OData-style filter expression. Supports operators: eq, ne, gt, ge, lt, le, like, ilike, contains. Examples: status eq &#39;COMPLETED&#39;, reportGenerateDate gt &#39;2025-11-01&#39;, transactionIds contains &#39;TXN-2025-001&#39;      # @param top [Integer] The number of items to include in the result.      # @param skip [Integer] The number of items to skip in the result.      # @param count [String] When set to true, the response body also includes the count of items in the collection.      # @param count_only [String] When set to true, the response returns only the count of items in the collection.      # @param orderby [String] OData-style orderby expression. Format: &#39;field asc&#39; or &#39;field desc&#39;. Default: reportGenerateDate desc
+      # @return [ReportListResponse]
+      def get_reports(request_parameters)
+        data, _status_code, _headers = get_reports_with_http_info(request_parameters)
+        data
+      end
+
+      # Returns a list of reports
+      # Retrieves all reports with optional filtering, paging, and sorting. Results are filtered by tenant. Supports OData-style filtering using the $filter parameter. Use $top and $skip for paging; when more results exist, the response includes @nextLink to fetch the next page. Default sort order is by report generation date (descending).
+          
+      # @param avalara_version [String] Header that specifies the API version to use (for example \&quot;1.6\&quot;).    
+      # @param x_avalara_client [String] Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;).    
+      # @param x_correlation_id [String] Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;).    
+      # @param filter [String] OData-style filter expression. Supports operators: eq, ne, gt, ge, lt, le, like, ilike, contains. Examples: status eq &#39;COMPLETED&#39;, reportGenerateDate gt &#39;2025-11-01&#39;, transactionIds contains &#39;TXN-2025-001&#39;    
+      # @param top [Integer] The number of items to include in the result.    
+      # @param skip [Integer] The number of items to skip in the result.    
+      # @param count [String] When set to true, the response body also includes the count of items in the collection.    
+      # @param count_only [String] When set to true, the response returns only the count of items in the collection.    
+      # @param orderby [String] OData-style orderby expression. Format: &#39;field asc&#39; or &#39;field desc&#39;. Default: reportGenerateDate desc    
+      # @return [Array<(ReportListResponse, Integer, Hash)>] ReportListResponse data, response status code and response headers
+      def get_reports_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        avalara_version = request_parameters.get_avalara_version()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        filter = request_parameters.get_filter()
         top = request_parameters.get_top()
         skip = request_parameters.get_skip()
         count = request_parameters.get_count()
         count_only = request_parameters.get_count_only()
+        orderby = request_parameters.get_orderby()
         # verify the required parameter 'avalara_version' is set
         if @api_client.config.client_side_validation && avalara_version.nil?
-          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling SubscriptionsApi.list_webhook_subscriptions"
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling ReportsApi.get_reports"
         end
         # resource path
-        local_var_path = '/einvoicing/webhooks/subscriptions'
+        local_var_path = '/einvoicing/reports'
 
         # query parameters
         query_params = {}
+        if !filter.nil?
+          query_params[:'$filter'] = filter
+        end
         if !top.nil?
           query_params[:'$top'] = top
         end
@@ -535,10 +451,13 @@ module AvalaraSdk::EInvoicing
           query_params[:'$skip'] = skip
         end
         if !count.nil?
-          query_params[:'count'] = count
+          query_params[:'$count'] = count
         end
         if !count_only.nil?
-          query_params[:'countOnly'] = count_only
+          query_params[:'$countOnly'] = count_only
+        end
+        if !orderby.nil?
+          query_params[:'$orderby'] = orderby
         end
 
         # header parameters
@@ -548,11 +467,11 @@ module AvalaraSdk::EInvoicing
         if !avalara_version.nil?
           header_params[:'avalara-version'] = avalara_version
         end
-        if !x_correlation_id.nil?
-          header_params[:'X-Correlation-ID'] = x_correlation_id
-        end
         if !x_avalara_client.nil?
           header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-ID'] = x_correlation_id
         end
 
         # form parameters
@@ -562,7 +481,7 @@ module AvalaraSdk::EInvoicing
         post_body = {}
 
         # return_type
-        return_type = 'SubscriptionListResponse'
+        return_type = 'ReportListResponse'
 
         # auth_names
         auth_names = ['Bearer']
@@ -570,7 +489,7 @@ module AvalaraSdk::EInvoicing
         @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
 
         new_options = {
-          :operation => :"SubscriptionsApi.list_webhook_subscriptions",
+          :operation => :"ReportsApi.get_reports",
           :header_params => header_params,
           :query_params => query_params,
           :form_params => form_params,
@@ -588,21 +507,21 @@ module AvalaraSdk::EInvoicing
         return data, response.code, response.headers
       end
     end
-    # Represents the Request object for the CreateWebhookSubscription API
+    # Represents the Request object for the DownloadReport API
     #
-    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.6\&quot;. (required)
-    # @param  SubscriptionRegistration $subscription_registration subscription_registration (required)
-    # @param  String $x_correlation_id A unique identifier for tracking the request and its response (optional)
-    # @param  String $x_avalara_client Client application identification (optional)
+    # @param  String $avalara_version Header that specifies the API version to use (for example \&quot;1.6\&quot;). (required)
+    # @param  String $report_id The unique ID for this report as returned in a GET /reports response. (required)
+    # @param  String $x_avalara_client Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). (optional)
+    # @param  String $x_correlation_id Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). (optional)
     #
-    class CreateWebhookSubscriptionRequestSdk
+    class DownloadReportRequestSdk
         attr_accessor :avalara_version
 
-        attr_accessor :subscription_registration
-
-        attr_accessor :x_correlation_id
+        attr_accessor :report_id
 
         attr_accessor :x_avalara_client
+
+        attr_accessor :x_correlation_id
 
         def initialize()
         end
@@ -615,20 +534,12 @@ module AvalaraSdk::EInvoicing
             @avalara_version = avalara_version
         end
 
-        def get_subscription_registration()
-            return @subscription_registration
+        def get_report_id()
+            return @report_id
         end
 
-        def set_subscription_registration(subscription_registration)
-            @subscription_registration = subscription_registration
-        end
-
-        def get_x_correlation_id()
-            return @x_correlation_id
-        end
-
-        def set_x_correlation_id(x_correlation_id)
-            @x_correlation_id = x_correlation_id
+        def set_report_id(report_id)
+            @report_id = report_id
         end
 
         def get_x_avalara_client()
@@ -638,32 +549,32 @@ module AvalaraSdk::EInvoicing
         def set_x_avalara_client(x_avalara_client)
             @x_avalara_client = x_avalara_client
         end
-    end
-    # Represents the Request object for the DeleteWebhookSubscription API
-    #
-    # @param  String $subscription_id Unique identifier of the subscription. (required)
-    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.6\&quot;. (required)
-    # @param  String $x_correlation_id A unique identifier for tracking the request and its response (optional)
-    # @param  String $x_avalara_client Client application identification (optional)
-    #
-    class DeleteWebhookSubscriptionRequestSdk
-        attr_accessor :subscription_id
 
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+    end
+    # Represents the Request object for the GetReportById API
+    #
+    # @param  String $avalara_version Header that specifies the API version to use (for example \&quot;1.6\&quot;). (required)
+    # @param  String $report_id The unique ID for this report as returned in a GET /reports response. (required)
+    # @param  String $x_avalara_client Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). (optional)
+    # @param  String $x_correlation_id Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). (optional)
+    #
+    class GetReportByIdRequestSdk
         attr_accessor :avalara_version
 
-        attr_accessor :x_correlation_id
+        attr_accessor :report_id
 
         attr_accessor :x_avalara_client
 
+        attr_accessor :x_correlation_id
+
         def initialize()
-        end
-
-        def get_subscription_id()
-            return @subscription_id
-        end
-
-        def set_subscription_id(subscription_id)
-            @subscription_id = subscription_id
         end
 
         def get_avalara_version()
@@ -674,63 +585,12 @@ module AvalaraSdk::EInvoicing
             @avalara_version = avalara_version
         end
 
-        def get_x_correlation_id()
-            return @x_correlation_id
+        def get_report_id()
+            return @report_id
         end
 
-        def set_x_correlation_id(x_correlation_id)
-            @x_correlation_id = x_correlation_id
-        end
-
-        def get_x_avalara_client()
-            return @x_avalara_client
-        end
-
-        def set_x_avalara_client(x_avalara_client)
-            @x_avalara_client = x_avalara_client
-        end
-    end
-    # Represents the Request object for the GetWebhookSubscription API
-    #
-    # @param  String $subscription_id Unique identifier of the subscription. (required)
-    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.6\&quot;. (required)
-    # @param  String $x_correlation_id A unique identifier for tracking the request and its response (optional)
-    # @param  String $x_avalara_client Client application identification (optional)
-    #
-    class GetWebhookSubscriptionRequestSdk
-        attr_accessor :subscription_id
-
-        attr_accessor :avalara_version
-
-        attr_accessor :x_correlation_id
-
-        attr_accessor :x_avalara_client
-
-        def initialize()
-        end
-
-        def get_subscription_id()
-            return @subscription_id
-        end
-
-        def set_subscription_id(subscription_id)
-            @subscription_id = subscription_id
-        end
-
-        def get_avalara_version()
-            return @avalara_version || '1.6'
-        end
-
-        def set_avalara_version(avalara_version)
-            @avalara_version = avalara_version
-        end
-
-        def get_x_correlation_id()
-            return @x_correlation_id
-        end
-
-        def set_x_correlation_id(x_correlation_id)
-            @x_correlation_id = x_correlation_id
+        def set_report_id(report_id)
+            @report_id = report_id
         end
 
         def get_x_avalara_client()
@@ -740,23 +600,35 @@ module AvalaraSdk::EInvoicing
         def set_x_avalara_client(x_avalara_client)
             @x_avalara_client = x_avalara_client
         end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
     end
-    # Represents the Request object for the ListWebhookSubscriptions API
+    # Represents the Request object for the GetReports API
     #
-    # @param  String $avalara_version The version of the API to use, e.g., \&quot;1.6\&quot;. (required)
-    # @param  String $x_correlation_id A unique identifier for tracking the request and its response (optional)
-    # @param  String $x_avalara_client Client application identification (optional)
+    # @param  String $avalara_version Header that specifies the API version to use (for example \&quot;1.6\&quot;). (required)
+    # @param  String $x_avalara_client Optional header for a client identifier string used for diagnostics (for example \&quot;Fingerprint\&quot;). (optional)
+    # @param  String $x_correlation_id Optional correlation identifier provided by the caller to trace the call (for example \&quot;f3f0d19a-01a1-4748-8a58-f000d0424f43\&quot;). (optional)
+    # @param  String $filter OData-style filter expression. Supports operators: eq, ne, gt, ge, lt, le, like, ilike, contains. Examples: status eq &#39;COMPLETED&#39;, reportGenerateDate gt &#39;2025-11-01&#39;, transactionIds contains &#39;TXN-2025-001&#39; (optional)
     # @param  Integer $top The number of items to include in the result. (optional)
     # @param  Integer $skip The number of items to skip in the result. (optional)
-    # @param  Boolean $count Whether to include the total count of records in the result. (optional)
-    # @param  Boolean $count_only Whether to return only the count of records, without the list of records. (optional)
+    # @param  String $count When set to true, the response body also includes the count of items in the collection. (optional)
+    # @param  String $count_only When set to true, the response returns only the count of items in the collection. (optional)
+    # @param  String $orderby OData-style orderby expression. Format: &#39;field asc&#39; or &#39;field desc&#39;. Default: reportGenerateDate desc (optional, default to 'reportGenerateDate desc')
     #
-    class ListWebhookSubscriptionsRequestSdk
+    class GetReportsRequestSdk
         attr_accessor :avalara_version
+
+        attr_accessor :x_avalara_client
 
         attr_accessor :x_correlation_id
 
-        attr_accessor :x_avalara_client
+        attr_accessor :filter
 
         attr_accessor :top
 
@@ -766,6 +638,8 @@ module AvalaraSdk::EInvoicing
 
         attr_accessor :count_only
 
+        attr_accessor :orderby
+
         def initialize()
         end
 
@@ -777,6 +651,14 @@ module AvalaraSdk::EInvoicing
             @avalara_version = avalara_version
         end
 
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
         def get_x_correlation_id()
             return @x_correlation_id
         end
@@ -785,12 +667,12 @@ module AvalaraSdk::EInvoicing
             @x_correlation_id = x_correlation_id
         end
 
-        def get_x_avalara_client()
-            return @x_avalara_client
+        def get_filter()
+            return @filter
         end
 
-        def set_x_avalara_client(x_avalara_client)
-            @x_avalara_client = x_avalara_client
+        def set_filter(filter)
+            @filter = filter
         end
 
         def get_top()
@@ -823,6 +705,14 @@ module AvalaraSdk::EInvoicing
 
         def set_count_only(count_only)
             @count_only = count_only
+        end
+
+        def get_orderby()
+            return @orderby
+        end
+
+        def set_orderby(orderby)
+            @orderby = orderby
         end
     end
   end

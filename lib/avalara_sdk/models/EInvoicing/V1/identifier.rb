@@ -20,12 +20,16 @@ module AvalaraSdk::EInvoicing::V1
     # Value of the identifier.
     attr_accessor :value
 
+    # Optional array used to carry additional metadata or configuration values for the identifier.
+    attr_accessor :extensions
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'name' => :'name',
         :'display_name' => :'displayName',
-        :'value' => :'value'
+        :'value' => :'value',
+        :'extensions' => :'extensions'
       }
     end
 
@@ -39,7 +43,8 @@ module AvalaraSdk::EInvoicing::V1
       {
         :'name' => :'String',
         :'display_name' => :'String',
-        :'value' => :'String'
+        :'value' => :'String',
+        :'extensions' => :'Array<Extension>'
       }
     end
 
@@ -78,6 +83,12 @@ module AvalaraSdk::EInvoicing::V1
         self.value = attributes[:'value']
       else
         self.value = nil
+      end
+
+      if attributes.key?(:'extensions')
+        if (value = attributes[:'extensions']).is_a?(Array)
+          self.extensions = value
+        end
       end
     end
 
@@ -170,7 +181,8 @@ module AvalaraSdk::EInvoicing::V1
       self.class == o.class &&
           name == o.name &&
           display_name == o.display_name &&
-          value == o.value
+          value == o.value &&
+          extensions == o.extensions
     end
 
     # @see the `==` method
@@ -182,7 +194,7 @@ module AvalaraSdk::EInvoicing::V1
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, display_name, value].hash
+      [name, display_name, value, extensions].hash
     end
 
     # Builds the object from hash
