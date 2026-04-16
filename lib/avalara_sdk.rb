@@ -5,6 +5,10 @@ This is auto-generated class by sdk-generator
 =end
 
 # All files
+module AvalaraSdk; end
+module AvalaraSdk::EInvoicing; end
+module AvalaraSdk::A1099; end
+
 require File.expand_path( '../avalara_sdk/version.rb', __FILE__) 
 require File.expand_path( '../avalara_sdk/token_metadata.rb', __FILE__) 
 require File.expand_path( '../avalara_sdk/response_hash.rb', __FILE__) 
