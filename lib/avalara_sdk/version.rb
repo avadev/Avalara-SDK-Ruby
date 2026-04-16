@@ -9,5 +9,5 @@ SDK Version : 0.0.1
 =end
 
 module AvalaraSdk
-  VERSION = '25.11.2'
+  VERSION = '26.4.0'
 end
