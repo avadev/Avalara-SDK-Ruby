@@ -143,6 +143,7 @@ require File.expand_path( '../avalara_sdk/models/A1099/V2/issuer_base.rb', __FIL
 require File.expand_path( '../avalara_sdk/models/A1099/V2/irs_response.rb', __FILE__) 
 require File.expand_path( '../avalara_sdk/models/A1099/V2/intermediary_or_flow_through.rb', __FILE__) 
 require File.expand_path( '../avalara_sdk/models/A1099/V2/get1099_form200_response.rb', __FILE__) 
+require File.expand_path( '../avalara_sdk/models/A1099/V2/form1099_w2.rb', __FILE__) 
 require File.expand_path( '../avalara_sdk/models/A1099/V2/form1099_status_detail.rb', __FILE__) 
 require File.expand_path( '../avalara_sdk/models/A1099/V2/form1099_r.rb', __FILE__) 
 require File.expand_path( '../avalara_sdk/models/A1099/V2/form1099_nec.rb', __FILE__) 

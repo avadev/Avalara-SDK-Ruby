@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### 🔐 Authentication  Generate a **license key** from: *[Avalara Portal](https://www.avalara.com/us/en/signin.html) → Settings → License and API Keys*.  [More on authentication methods](https://developer.avalara.com/avatax-dm-combined-erp/common-setup/authentication/authentication-methods/)  [Test your credentials](https://developer.avalara.com/avatax/test-credentials/)  ## 📘 API & SDK Documentation  [Avalara SDK (.NET) on GitHub](https://github.com/avadev/Avalara-SDK-DotNet#avalarasdk--the-unified-c-library-for-next-gen-avalara-services)  [Code Examples – 1099 API](https://github.com/avadev/Avalara-SDK-DotNet/blob/main/docs/A1099/V2/Class1099IssuersApi.md#call1099issuersget)
+### Authentication  #### Step 1: Generate API Credentials  Generate a *client ID* and *client secret* from your [Avalara1099 account](https://sbx.track1099.com/api_tokens): *Your Profile → API*.  #### Step 2: Get an Identity Token  Send a `POST` request to the **Identity Token URL** with your *client ID* and *client secret* from Step 1 as form-encoded parameters:  ```http POST https://identity.avalara.com/connect/token Content-Type: application/x-www-form-urlencoded  grant_type=client_credentials client_id=<your client ID> client_secret=<your client secret> ```  **Body parameters** - `grant_type` — Always `client_credentials` - `client_id` — Your *client ID* from Step 1 - `client_secret` — Your *client secret* from Step 1  **Successful response**  ```json {   \"access_token\": \"eyJhbGci...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\" } ```  Use the `access_token` as a bearer token in the `Authorization` header on every A1099 API request:  ```http Authorization: Bearer <access_token> ```  ---  For more on authenticating requests, see the [A1099 authentication guide](https://developer.avalara.com/1099-and-w-9/kny2997001535374/).  ---  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
 
 
 =end
@@ -38,7 +38,7 @@ module AvalaraSdk::A1099::V2
     # The city of residence.
     attr_accessor :residence_city
 
-    # The state of residence.
+    # The state of residence.. Allowed values: AA, AE, AK, AL, AP, AR, AS, AZ, CA, CO (and 65 more)
     attr_accessor :residence_state
 
     # The ZIP code of the residence.
@@ -56,7 +56,7 @@ module AvalaraSdk::A1099::V2
     # The city of the mailing address.
     attr_accessor :mailing_city
 
-    # The state of the mailing address.
+    # The state of the mailing address.. Allowed values: AA, AE, AK, AL, AP, AR, AS, AZ, CA, CO (and 65 more)
     attr_accessor :mailing_state
 
     # The ZIP code of the mailing address.
@@ -89,7 +89,7 @@ module AvalaraSdk::A1099::V2
     # The city for disregarded entities.
     attr_accessor :disregarded_city
 
-    # The state for disregarded entities.
+    # The state for disregarded entities.. Allowed values: AA, AE, AK, AL, AP, AR, AS, AZ, CA, CO (and 65 more)
     attr_accessor :disregarded_state
 
     # The ZIP code for disregarded entities.
@@ -1131,14 +1131,14 @@ module AvalaraSdk::A1099::V2
       return false if @fatca_status.nil?
       fatca_status_validator = EnumAttributeValidator.new('String', ["NonparticipatingFFI", "ParticipatingFFI", "ReportingModel1FFI", "ReportingModel2FFI", "RegisteredDeemedCompliantFFI", "SponsoredFFIWithoutGIIN", "CertifiedDeemedCompliantNonregisteringLocalBank", "CertifiedDeemedCompliantFFIWithLowValueAccounts", "CertifiedDeemedCompliantSponsoredCloselyHeldInvestmentVehicle", "CertifiedDeemedCompliantLimitedLifeDebtInvestmentEntity", "CertainInvestmentEntitiesWithoutFinancialAccounts", "OwnerDocumentedFFI", "RestrictedDistributor", "NonreportingIGAFFI", "ForeignGovernmentOrUSPossessionOrForeignCentralBank", "InternationalOrganization", "ExemptRetirementPlans", "EntityWhollyOwnedByExemptBeneficialOwners", "TerritoryFinancialInstitution", "NonfinancialGroupEntity", "ExceptedNonfinancialStartUpCompany", "ExceptedNonfinancialEntityInLiquidationOrBankruptcy", "Organization501c", "NonprofitOrganization", "PubliclyTradedNFFEOrAffiliateOfPubliclyTradedCorporation", "ExceptedTerritoryNFFE", "ActiveNFFE", "PassiveNFFE", "ExceptedInterAffiliateFFI", "DirectReportingNFFE", "SponsoredDirectReportingNFFE", "AccountThatIsNotFinancialAccount"])
       return false unless fatca_status_validator.valid?(@fatca_status)
-      residence_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      residence_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
       return false unless residence_state_validator.valid?(@residence_state)
       return false if @residence_country.nil?
-      mailing_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      mailing_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
       return false unless mailing_state_validator.valid?(@mailing_state)
       disregarded_entity_fatca_status_validator = EnumAttributeValidator.new('String', ["BranchTreatedAsNonparticipatingFFI", "USBranch", "ParticipatingFFI", "ReportingModel1FFI", "ReportingModel2FFI"])
       return false unless disregarded_entity_fatca_status_validator.valid?(@disregarded_entity_fatca_status)
-      disregarded_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      disregarded_state_validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
       return false unless disregarded_state_validator.valid?(@disregarded_state)
       benefit_limitation_validator = EnumAttributeValidator.new('String', ["Government", "TaxExemptPensionTrustOrPensionFund", "OtherTaxExemptOrganization", "PubliclyTradedCorporation", "SubsidiaryOfPubliclyTradedCorporation", "CompanyThatMeetsOwnershipAndBaseErosionTest", "CompanyThatMeetsDerivativeBenefitsTest", "CompanyWithItemOfIncomeThatMeetsActiveTradeOrBusinessTest", "FavorableDiscretionaryDeterminationByUSCompetentAuthorityReceived", "Other", "NoLOBArticleInTreaty"])
       return false unless benefit_limitation_validator.valid?(@benefit_limitation)
@@ -1180,7 +1180,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] residence_state Object to be assigned
     def residence_state=(residence_state)
-      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
       unless validator.valid?(residence_state)
         fail ArgumentError, "invalid value for \"residence_state\", must be one of #{validator.allowable_values}."
       end
@@ -1190,7 +1190,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] mailing_state Object to be assigned
     def mailing_state=(mailing_state)
-      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
       unless validator.valid?(mailing_state)
         fail ArgumentError, "invalid value for \"mailing_state\", must be one of #{validator.allowable_values}."
       end
@@ -1210,7 +1210,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] disregarded_state Object to be assigned
     def disregarded_state=(disregarded_state)
-      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"])
+      validator = EnumAttributeValidator.new('String', ["AA", "AE", "AK", "AL", "AP", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "FM", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MH", "MI", "MN", "MO", "MP", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "PW", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY", "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT"])
       unless validator.valid?(disregarded_state)
         fail ArgumentError, "invalid value for \"disregarded_state\", must be one of #{validator.allowable_values}."
       end

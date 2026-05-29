@@ -10,19 +10,100 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      # Form 1099-NEC: Nonemployee Compensation
-  class Form1099Nec
-    # Nonemployee compensation. Required if DirectSalesIndicator is false.
-    attr_accessor :nonemployee_compensation
+      # Form W-2: Wage and Tax Statement.
+  class Form1099W2
+    # Employee first name (max 15 chars).
+    attr_accessor :employee_first_name
 
-    # Payer made direct sales totaling $5,000 or more of consumer products to recipient for resale. Should be true if Nonemployee compensation is not provided.
-    attr_accessor :direct_sales_indicator
+    # Employee middle name (max 15 chars, optional).
+    attr_accessor :employee_middle_name
 
-    # Excess golden parachute payments - Available only for tax year 2025 and later
-    attr_accessor :excess_golden_parachute_payments
+    # Employee last name (max 20 chars).
+    attr_accessor :employee_last_name
+
+    # Employee name suffix (Jr, Sr, III, etc — max 4 chars, optional).
+    attr_accessor :employee_name_suffix
+
+    # Wages, tips, other compensation.
+    attr_accessor :wages
 
     # Federal income tax withheld.
     attr_accessor :federal_income_tax_withheld
+
+    # Social security wages.
+    attr_accessor :social_security_wages
+
+    # Social security tax withheld.
+    attr_accessor :social_security_tax_withheld
+
+    # Medicare wages and tips.
+    attr_accessor :medicare_wages
+
+    # Medicare tax withheld.
+    attr_accessor :medicare_tax_withheld
+
+    # Social security tips.
+    attr_accessor :social_security_tips
+
+    # Allocated tips.
+    attr_accessor :allocated_tips
+
+    # Dependent care benefits.
+    attr_accessor :dependent_care_benefits
+
+    # Non-qualified plan Section 457 distributions or contributions.
+    attr_accessor :nonqualified_plans_section457
+
+    # Non-qualified plan NOT Section 457 distributions or contributions.
+    attr_accessor :nonqualified_plans_not_section457
+
+    # Letter code (A-Z, AA, BB, etc) for slot a.
+    attr_accessor :code12a
+
+    # Amount for slot a.
+    attr_accessor :amount12a
+
+    # Letter code for slot b.
+    attr_accessor :code12b
+
+    # Amount for slot b.
+    attr_accessor :amount12b
+
+    # Letter code for slot c.
+    attr_accessor :code12c
+
+    # Amount for slot c.
+    attr_accessor :amount12c
+
+    # Letter code for slot d.
+    attr_accessor :code12d
+
+    # Amount for slot d.
+    attr_accessor :amount12d
+
+    # Statutory employee indicator.
+    attr_accessor :statutory_employee_indicator
+
+    # Retirement plan indicator.
+    attr_accessor :retirement_plan_indicator
+
+    # Third-party sick pay indicator.
+    attr_accessor :third_party_sick_pay_indicator
+
+    # Third-party sick pay federal income tax withheld  (only effective when Avalara1099.Application.Forms1099.Models.Form1099W2.ThirdPartySickPayIndicator is true).
+    attr_accessor :third_party_sick_pay_withholding
+
+    # Other (max 30 chars) for slot a.
+    attr_accessor :other14a
+
+    # Other (max 30 chars) for slot b.
+    attr_accessor :other14b
+
+    # Other (max 30 chars) for slot c.
+    attr_accessor :other14c
+
+    # Secondary state and local withholding slot.
+    attr_accessor :state_and_local_withholding_secondary
 
     # Form type.
     attr_accessor :type
@@ -166,10 +247,37 @@ module AvalaraSdk::A1099::V2
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'nonemployee_compensation' => :'nonemployeeCompensation',
-        :'direct_sales_indicator' => :'directSalesIndicator',
-        :'excess_golden_parachute_payments' => :'excessGoldenParachutePayments',
+        :'employee_first_name' => :'employeeFirstName',
+        :'employee_middle_name' => :'employeeMiddleName',
+        :'employee_last_name' => :'employeeLastName',
+        :'employee_name_suffix' => :'employeeNameSuffix',
+        :'wages' => :'wages',
         :'federal_income_tax_withheld' => :'federalIncomeTaxWithheld',
+        :'social_security_wages' => :'socialSecurityWages',
+        :'social_security_tax_withheld' => :'socialSecurityTaxWithheld',
+        :'medicare_wages' => :'medicareWages',
+        :'medicare_tax_withheld' => :'medicareTaxWithheld',
+        :'social_security_tips' => :'socialSecurityTips',
+        :'allocated_tips' => :'allocatedTips',
+        :'dependent_care_benefits' => :'dependentCareBenefits',
+        :'nonqualified_plans_section457' => :'nonqualifiedPlansSection457',
+        :'nonqualified_plans_not_section457' => :'nonqualifiedPlansNotSection457',
+        :'code12a' => :'code12a',
+        :'amount12a' => :'amount12a',
+        :'code12b' => :'code12b',
+        :'amount12b' => :'amount12b',
+        :'code12c' => :'code12c',
+        :'amount12c' => :'amount12c',
+        :'code12d' => :'code12d',
+        :'amount12d' => :'amount12d',
+        :'statutory_employee_indicator' => :'statutoryEmployeeIndicator',
+        :'retirement_plan_indicator' => :'retirementPlanIndicator',
+        :'third_party_sick_pay_indicator' => :'thirdPartySickPayIndicator',
+        :'third_party_sick_pay_withholding' => :'thirdPartySickPayWithholding',
+        :'other14a' => :'other14a',
+        :'other14b' => :'other14b',
+        :'other14c' => :'other14c',
+        :'state_and_local_withholding_secondary' => :'stateAndLocalWithholdingSecondary',
         :'type' => :'type',
         :'id' => :'id',
         :'issuer_id' => :'issuerId',
@@ -220,10 +328,37 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'nonemployee_compensation' => :'Float',
-        :'direct_sales_indicator' => :'Boolean',
-        :'excess_golden_parachute_payments' => :'Float',
+        :'employee_first_name' => :'String',
+        :'employee_middle_name' => :'String',
+        :'employee_last_name' => :'String',
+        :'employee_name_suffix' => :'String',
+        :'wages' => :'Float',
         :'federal_income_tax_withheld' => :'Float',
+        :'social_security_wages' => :'Float',
+        :'social_security_tax_withheld' => :'Float',
+        :'medicare_wages' => :'Float',
+        :'medicare_tax_withheld' => :'Float',
+        :'social_security_tips' => :'Float',
+        :'allocated_tips' => :'Float',
+        :'dependent_care_benefits' => :'Float',
+        :'nonqualified_plans_section457' => :'Float',
+        :'nonqualified_plans_not_section457' => :'Float',
+        :'code12a' => :'String',
+        :'amount12a' => :'Float',
+        :'code12b' => :'String',
+        :'amount12b' => :'Float',
+        :'code12c' => :'String',
+        :'amount12c' => :'Float',
+        :'code12d' => :'String',
+        :'amount12d' => :'Float',
+        :'statutory_employee_indicator' => :'Boolean',
+        :'retirement_plan_indicator' => :'Boolean',
+        :'third_party_sick_pay_indicator' => :'Boolean',
+        :'third_party_sick_pay_withholding' => :'Float',
+        :'other14a' => :'String',
+        :'other14b' => :'String',
+        :'other14c' => :'String',
+        :'state_and_local_withholding_secondary' => :'StateAndLocalWithholding',
         :'type' => :'String',
         :'id' => :'String',
         :'issuer_id' => :'String',
@@ -269,10 +404,37 @@ module AvalaraSdk::A1099::V2
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'nonemployee_compensation',
-        :'direct_sales_indicator',
-        :'excess_golden_parachute_payments',
+        :'employee_first_name',
+        :'employee_middle_name',
+        :'employee_last_name',
+        :'employee_name_suffix',
+        :'wages',
         :'federal_income_tax_withheld',
+        :'social_security_wages',
+        :'social_security_tax_withheld',
+        :'medicare_wages',
+        :'medicare_tax_withheld',
+        :'social_security_tips',
+        :'allocated_tips',
+        :'dependent_care_benefits',
+        :'nonqualified_plans_section457',
+        :'nonqualified_plans_not_section457',
+        :'code12a',
+        :'amount12a',
+        :'code12b',
+        :'amount12b',
+        :'code12c',
+        :'amount12c',
+        :'code12d',
+        :'amount12d',
+        :'statutory_employee_indicator',
+        :'retirement_plan_indicator',
+        :'third_party_sick_pay_indicator',
+        :'third_party_sick_pay_withholding',
+        :'other14a',
+        :'other14b',
+        :'other14c',
+        :'state_and_local_withholding_secondary',
         :'id',
         :'issuer_id',
         :'issuer_reference_id',
@@ -323,33 +485,139 @@ module AvalaraSdk::A1099::V2
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::Form1099Nec` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::Form1099W2` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::Form1099Nec`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::Form1099W2`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'nonemployee_compensation')
-        self.nonemployee_compensation = attributes[:'nonemployee_compensation']
-      else
-        self.nonemployee_compensation = nil
+      if attributes.key?(:'employee_first_name')
+        self.employee_first_name = attributes[:'employee_first_name']
       end
 
-      if attributes.key?(:'direct_sales_indicator')
-        self.direct_sales_indicator = attributes[:'direct_sales_indicator']
+      if attributes.key?(:'employee_middle_name')
+        self.employee_middle_name = attributes[:'employee_middle_name']
       end
 
-      if attributes.key?(:'excess_golden_parachute_payments')
-        self.excess_golden_parachute_payments = attributes[:'excess_golden_parachute_payments']
+      if attributes.key?(:'employee_last_name')
+        self.employee_last_name = attributes[:'employee_last_name']
+      end
+
+      if attributes.key?(:'employee_name_suffix')
+        self.employee_name_suffix = attributes[:'employee_name_suffix']
+      end
+
+      if attributes.key?(:'wages')
+        self.wages = attributes[:'wages']
       end
 
       if attributes.key?(:'federal_income_tax_withheld')
         self.federal_income_tax_withheld = attributes[:'federal_income_tax_withheld']
+      end
+
+      if attributes.key?(:'social_security_wages')
+        self.social_security_wages = attributes[:'social_security_wages']
+      end
+
+      if attributes.key?(:'social_security_tax_withheld')
+        self.social_security_tax_withheld = attributes[:'social_security_tax_withheld']
+      end
+
+      if attributes.key?(:'medicare_wages')
+        self.medicare_wages = attributes[:'medicare_wages']
+      end
+
+      if attributes.key?(:'medicare_tax_withheld')
+        self.medicare_tax_withheld = attributes[:'medicare_tax_withheld']
+      end
+
+      if attributes.key?(:'social_security_tips')
+        self.social_security_tips = attributes[:'social_security_tips']
+      end
+
+      if attributes.key?(:'allocated_tips')
+        self.allocated_tips = attributes[:'allocated_tips']
+      end
+
+      if attributes.key?(:'dependent_care_benefits')
+        self.dependent_care_benefits = attributes[:'dependent_care_benefits']
+      end
+
+      if attributes.key?(:'nonqualified_plans_section457')
+        self.nonqualified_plans_section457 = attributes[:'nonqualified_plans_section457']
+      end
+
+      if attributes.key?(:'nonqualified_plans_not_section457')
+        self.nonqualified_plans_not_section457 = attributes[:'nonqualified_plans_not_section457']
+      end
+
+      if attributes.key?(:'code12a')
+        self.code12a = attributes[:'code12a']
+      end
+
+      if attributes.key?(:'amount12a')
+        self.amount12a = attributes[:'amount12a']
+      end
+
+      if attributes.key?(:'code12b')
+        self.code12b = attributes[:'code12b']
+      end
+
+      if attributes.key?(:'amount12b')
+        self.amount12b = attributes[:'amount12b']
+      end
+
+      if attributes.key?(:'code12c')
+        self.code12c = attributes[:'code12c']
+      end
+
+      if attributes.key?(:'amount12c')
+        self.amount12c = attributes[:'amount12c']
+      end
+
+      if attributes.key?(:'code12d')
+        self.code12d = attributes[:'code12d']
+      end
+
+      if attributes.key?(:'amount12d')
+        self.amount12d = attributes[:'amount12d']
+      end
+
+      if attributes.key?(:'statutory_employee_indicator')
+        self.statutory_employee_indicator = attributes[:'statutory_employee_indicator']
+      end
+
+      if attributes.key?(:'retirement_plan_indicator')
+        self.retirement_plan_indicator = attributes[:'retirement_plan_indicator']
+      end
+
+      if attributes.key?(:'third_party_sick_pay_indicator')
+        self.third_party_sick_pay_indicator = attributes[:'third_party_sick_pay_indicator']
+      end
+
+      if attributes.key?(:'third_party_sick_pay_withholding')
+        self.third_party_sick_pay_withholding = attributes[:'third_party_sick_pay_withholding']
+      end
+
+      if attributes.key?(:'other14a')
+        self.other14a = attributes[:'other14a']
+      end
+
+      if attributes.key?(:'other14b')
+        self.other14b = attributes[:'other14b']
+      end
+
+      if attributes.key?(:'other14c')
+        self.other14c = attributes[:'other14c']
+      end
+
+      if attributes.key?(:'state_and_local_withholding_secondary')
+        self.state_and_local_withholding_secondary = attributes[:'state_and_local_withholding_secondary']
       end
 
       if attributes.key?(:'type')
@@ -572,10 +840,37 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          nonemployee_compensation == o.nonemployee_compensation &&
-          direct_sales_indicator == o.direct_sales_indicator &&
-          excess_golden_parachute_payments == o.excess_golden_parachute_payments &&
+          employee_first_name == o.employee_first_name &&
+          employee_middle_name == o.employee_middle_name &&
+          employee_last_name == o.employee_last_name &&
+          employee_name_suffix == o.employee_name_suffix &&
+          wages == o.wages &&
           federal_income_tax_withheld == o.federal_income_tax_withheld &&
+          social_security_wages == o.social_security_wages &&
+          social_security_tax_withheld == o.social_security_tax_withheld &&
+          medicare_wages == o.medicare_wages &&
+          medicare_tax_withheld == o.medicare_tax_withheld &&
+          social_security_tips == o.social_security_tips &&
+          allocated_tips == o.allocated_tips &&
+          dependent_care_benefits == o.dependent_care_benefits &&
+          nonqualified_plans_section457 == o.nonqualified_plans_section457 &&
+          nonqualified_plans_not_section457 == o.nonqualified_plans_not_section457 &&
+          code12a == o.code12a &&
+          amount12a == o.amount12a &&
+          code12b == o.code12b &&
+          amount12b == o.amount12b &&
+          code12c == o.code12c &&
+          amount12c == o.amount12c &&
+          code12d == o.code12d &&
+          amount12d == o.amount12d &&
+          statutory_employee_indicator == o.statutory_employee_indicator &&
+          retirement_plan_indicator == o.retirement_plan_indicator &&
+          third_party_sick_pay_indicator == o.third_party_sick_pay_indicator &&
+          third_party_sick_pay_withholding == o.third_party_sick_pay_withholding &&
+          other14a == o.other14a &&
+          other14b == o.other14b &&
+          other14c == o.other14c &&
+          state_and_local_withholding_secondary == o.state_and_local_withholding_secondary &&
           type == o.type &&
           id == o.id &&
           issuer_id == o.issuer_id &&
@@ -626,7 +921,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [nonemployee_compensation, direct_sales_indicator, excess_golden_parachute_payments, federal_income_tax_withheld, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, no_tin, address_verification, state_and_local_withholding, second_tin_notice, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at].hash
+      [employee_first_name, employee_middle_name, employee_last_name, employee_name_suffix, wages, federal_income_tax_withheld, social_security_wages, social_security_tax_withheld, medicare_wages, medicare_tax_withheld, social_security_tips, allocated_tips, dependent_care_benefits, nonqualified_plans_section457, nonqualified_plans_not_section457, code12a, amount12a, code12b, amount12b, code12c, amount12c, code12d, amount12d, statutory_employee_indicator, retirement_plan_indicator, third_party_sick_pay_indicator, third_party_sick_pay_withholding, other14a, other14b, other14c, state_and_local_withholding_secondary, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, no_tin, address_verification, state_and_local_withholding, second_tin_notice, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at].hash
     end
 
     # Builds the object from hash
