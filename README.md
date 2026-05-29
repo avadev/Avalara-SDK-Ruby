@@ -227,6 +227,7 @@ Class | Method | HTTP request | Description
  - [models.Form1099Nec](docs/A1099/V2/Form1099Nec.md)
  - [models.Form1099R](docs/A1099/V2/Form1099R.md)
  - [models.Form1099StatusDetail](docs/A1099/V2/Form1099StatusDetail.md)
+ - [models.Form1099W2](docs/A1099/V2/Form1099W2.md)
  - [models.Get1099Form200Response](docs/A1099/V2/Get1099Form200Response.md)
  - [models.IntermediaryOrFlowThrough](docs/A1099/V2/IntermediaryOrFlowThrough.md)
  - [models.IrsResponse](docs/A1099/V2/IrsResponse.md)

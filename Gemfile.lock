@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    avalara_sdk (25.11.2)
+    avalara_sdk (26.4.0)
       faraday (~> 1.0, >= 1.0.1)
 
 GEM
@@ -17,7 +17,7 @@ GEM
     diff-lcs (1.6.2)
     dotenv (2.7.6)
     erb (5.0.1)
-    faraday (1.10.4)
+    faraday (1.10.5)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -39,7 +39,7 @@ GEM
     faraday-net_http_persistent (1.2.0)
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
-    faraday-retry (1.0.3)
+    faraday-retry (1.0.4)
     io-console (0.8.0)
     irb (1.15.2)
       pp (>= 0.6.0)

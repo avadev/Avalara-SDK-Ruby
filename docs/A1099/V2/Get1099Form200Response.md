@@ -22,8 +22,47 @@ AvalaraSdk::A1099::V2::Get1099Form200Response.openapi_one_of
 #   :'Form1099K',
 #   :'Form1099Misc',
 #   :'Form1099Nec',
-#   :'Form1099R'
+#   :'Form1099R',
+#   :'Form1099W2'
 # ]
+```
+
+### `openapi_discriminator_name`
+
+Returns the discriminator's property name.
+
+#### Example
+
+```ruby
+require 'avalara_sdk'
+
+AvalaraSdk::A1099::V2::Get1099Form200Response.openapi_discriminator_name
+# => :'type'
+```
+
+### `openapi_discriminator_name`
+
+Returns the discriminator's mapping.
+
+#### Example
+
+```ruby
+require 'avalara_sdk'
+
+AvalaraSdk::A1099::V2::Get1099Form200Response.openapi_discriminator_mapping
+# =>
+# {
+#   :'1042-S' => :'Form1042S',
+#   :'1095-B' => :'Form1095B',
+#   :'1095-C' => :'Form1095C',
+#   :'1099-DIV' => :'Form1099Div',
+#   :'1099-INT' => :'Form1099Int',
+#   :'1099-K' => :'Form1099K',
+#   :'1099-MISC' => :'Form1099Misc',
+#   :'1099-NEC' => :'Form1099Nec',
+#   :'1099-R' => :'Form1099R',
+#   :'W-2' => :'Form1099W2'
+# }
 ```
 
 ### build
@@ -59,5 +98,6 @@ AvalaraSdk::A1099::V2::Get1099Form200Response.build(data_that_doesnt_match)
 - `Form1099Misc`
 - `Form1099Nec`
 - `Form1099R`
+- `Form1099W2`
 - `nil` (if no type matches)
 
