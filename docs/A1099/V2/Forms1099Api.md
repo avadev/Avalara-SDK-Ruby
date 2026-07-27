@@ -42,7 +42,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 avalara_version = '2.0.0' # String | API version
 opts = {
   dry_run: true, # Boolean | defaults to false. If true, it will NOT change the DB. It will just return a report of what would've have been changed in the DB
-  x_correlation_id: 'fd02f159-f2af-48e4-92b1-8185bcf20f90', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'bc6ae99d-121d-45e1-8ae7-5b23204ddeca', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   form1099_list_request: AvalaraSdk::A1099::V2::Form1099ListRequest.new # Form1099ListRequest | 
 }
@@ -126,9 +126,9 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'b5153c6c-b731-4d1d-a3fb-d618e239d65c', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '6e319777-b79f-4edc-843e-76bbd4fec952', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: '1042-S', recipient_name: 'recipient_name_example', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
+  get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: '1042-S', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
 }
 
 begin
@@ -210,7 +210,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | The unique identifier of the desired form to delete.
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'e9de0484-cb5a-4d77-aeb0-06ed67420a2d', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'adbf84f5-5ba5-4103-bfee-f15269a30501', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -292,7 +292,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'f9e45fdc-29d9-456e-b5b6-ce3218225878', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'c2b1e922-bec2-4572-a812-726e8f94640e', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -376,7 +376,7 @@ id = 'id_example' # String | The ID of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
   mark_edelivered: true, # Boolean | Optional boolean that if set indicates that the form should be marked as having been successfully edelivered
-  x_correlation_id: '8c295caf-1568-4d0d-8e0c-7152a9204c11', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '69da777a-8451-4d0b-8cc9-d92110e38344', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -465,7 +465,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: '857d60b8-f4d6-4f00-bc39-3bcf1d8d72f6', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '14c51986-cabb-4d55-beee-12c78eaf3b3a', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -553,9 +553,9 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '0d0b68af-3130-4571-a05e-a21427cbf280', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'a28e6773-a4b8-4f81-ada3-b9b7a9d29da1', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: '1042-S', recipient_name: 'recipient_name_example', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
+  get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: '1042-S', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
 }
 
 begin

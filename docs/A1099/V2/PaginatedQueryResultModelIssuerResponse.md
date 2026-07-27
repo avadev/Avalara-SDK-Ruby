@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **recordset_count** | **Integer** |  | [optional] |
-| **value** | [**Array&lt;IssuerResponse&gt;**](IssuerResponse.md) |  | [optional] |
+| **value** | [**Array&lt;GetIssuer200Response&gt;**](GetIssuer200Response.md) |  | [optional] |
 | **next_link** | **String** |  | [optional] |
 
 ## Example

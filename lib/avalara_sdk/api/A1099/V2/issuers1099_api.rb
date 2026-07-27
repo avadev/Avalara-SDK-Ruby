@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### Authentication  #### Step 1: Generate API Credentials  Generate a *client ID* and *client secret* from your [Avalara1099 account](https://sbx.track1099.com/api_tokens): *Your Profile → API*.  #### Step 2: Get an Identity Token  Send a `POST` request to the **Identity Token URL** with your *client ID* and *client secret* from Step 1 as form-encoded parameters:  ```http POST https://identity.avalara.com/connect/token Content-Type: application/x-www-form-urlencoded  grant_type=client_credentials client_id=<your client ID> client_secret=<your client secret> ```  **Body parameters** - `grant_type` — Always `client_credentials` - `client_id` — Your *client ID* from Step 1 - `client_secret` — Your *client secret* from Step 1  **Successful response**  ```json {   \"access_token\": \"eyJhbGci...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\" } ```  Use the `access_token` as a bearer token in the `Authorization` header on every A1099 API request:  ```http Authorization: Bearer <access_token> ```  ---  For more on authenticating requests, see the [A1099 authentication guide](https://developer.avalara.com/1099-and-w-9/kny2997001535374/).  ---  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
+#> **Note:** You must have an active Avalara 1099 & W-9 subscription to authenticate and use these APIs. If you don't have a subscription, please contact our [Sales team](https://www.avalara.com/us/en/products/1099/request-a-demo.html).  ## Authentication  The Avalara 1099 & W-9 API uses **Bearer Token Authentication**. To authenticate, acquire a bearer token using a **Client ID** and **Client Secret** that you generate in the Avalara 1099 & W-9 web application.  The sample cURL commands below use **production** URLs. For **sandbox**, replace them with the sandbox URLs listed in the Sandbox Environment table.  ### Option 1 — Client ID and Client Secret (recommended)  **Step 1: Create API credentials in the Avalara 1099 & W-9 web app**  For a full walkthrough, see the [Avalara 1099 & W-9 integration guide](https://developer.avalara.com/products/avalara-1099-and-w9/integration-guides/1099-and-w-9/siu2796410674799/).  > **Note:** To enable credential creation you must first enter a valid company address in **Account Settings > Account** and enable two-factor authentication in **Account Settings > Security**.  1. In Avalara 1099 & W-9, open **Account Settings** (gear icon, top-right of any page) and select **API**. 2. Click **Create new credentials** (a valid company address and 2FA are required). 3. Copy your **Client Id** and **Client Secret** securely — they will not be shown again after you leave the screen.  **Step 2: Request a bearer token**  ```bash curl -X POST 'https://identity.avalara.com/connect/token' \\   --header 'Content-Type: application/x-www-form-urlencoded' \\   --data-urlencode 'grant_type=client_credentials' \\   --data-urlencode 'client_id={{client_id}}' \\   --data-urlencode 'client_secret={{client_secret}}' ```  ### Option 2 — Account ID and License Key  If your organization already uses other Avalara products (AvaTax, CertCapture) and has access to the logged-in area of Avalara.com, you can generate the bearer token using your **Account ID** and **License Key**.  > **Note:** If you already have a license key for other Avalara products you can reuse it. Generating a new key will reset any previously created key.  1. Log in to Avalara.com. 2. Go to **Settings → License and API Keys**. 3. Click **Generate New Key**. 4. Note your **Account ID** from the Account menu.  ```bash curl -X POST 'https://identity.avalara.com/connect/token' \\   --header 'Content-Type: application/x-www-form-urlencoded' \\   --data-urlencode 'grant_type=client_credentials' \\   --data-urlencode 'client_id={{accountId}}' \\   --data-urlencode 'client_secret={{licenseKey}}' ```  ### Using and renewing the bearer token  Include the token in the `Authorization` header on every request:  ```http Authorization: Bearer {access_token} ```  Tokens expire after the number of seconds in the `expires_in` field of the token response. Your integration must renew the token before it expires.  **Example token response**  ```json {   \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\",   \"scope\": \"avatax_api iam-ds\" } ```  ### Sandbox Environment  Use the same steps as production, replacing the base URLs:  | Purpose | Production | Sandbox | | --- | --- | --- | | Account & License Key management (web) | `https://www.avalara.com` | `https://sandbox.admin.avalara.com` | | Account & License Key management (API) | `https://rest.avatax.com` | `https://sandbox-rest.avatax.com` | | Token generation | `https://identity.avalara.com` | `https://ai-sbx.avlr.sh` |  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
 
 
 =end
@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("26.5.0")
+        api_client.set_sdk_version("26.7.0")
         @api_client = api_client
       end
 
@@ -228,7 +228,7 @@ module AvalaraSdk::A1099
       # Create an issuer
       # Create an issuer (also known as a Payer).
       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param issuer_request [IssuerRequest] The issuer to create
-      # @return [IssuerResponse]
+      # @return [IssuerWriteResponse]
       def create_issuer(request_parameters)
         data, _status_code, _headers = create_issuer_with_http_info(request_parameters)
         data
@@ -241,7 +241,7 @@ module AvalaraSdk::A1099
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param issuer_request [IssuerRequest] The issuer to create    
-      # @return [Array<(IssuerResponse, Integer, Hash)>] IssuerResponse data, response status code and response headers
+      # @return [Array<(IssuerWriteResponse, Integer, Hash)>] IssuerWriteResponse data, response status code and response headers
       def create_issuer_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -286,7 +286,7 @@ module AvalaraSdk::A1099
         post_body =  @api_client.object_to_http_body(issuer_request) || {}
 
         # return_type
-        return_type = 'IssuerResponse'
+        return_type = 'IssuerWriteResponse'
 
         # auth_names
         auth_names = ['bearer']
@@ -401,7 +401,7 @@ module AvalaraSdk::A1099
       # Retrieve an issuer
       # Retrieve an issuer (also known as a Payer).
       # @param id [String] Id of the issuer to retrieve      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-      # @return [IssuerResponse]
+      # @return [GetIssuer200Response]
       def get_issuer(request_parameters)
         data, _status_code, _headers = get_issuer_with_http_info(request_parameters)
         data
@@ -414,7 +414,7 @@ module AvalaraSdk::A1099
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @return [Array<(IssuerResponse, Integer, Hash)>] IssuerResponse data, response status code and response headers
+      # @return [Array<(GetIssuer200Response, Integer, Hash)>] GetIssuer200Response data, response status code and response headers
       def get_issuer_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -458,7 +458,7 @@ module AvalaraSdk::A1099
         post_body = {}
 
         # return_type
-        return_type = 'IssuerResponse'
+        return_type = 'GetIssuer200Response'
 
         # auth_names
         auth_names = ['bearer']
@@ -485,7 +485,7 @@ module AvalaraSdk::A1099
       end
 
       # List issuers
-      # List issuers (also known as Payers). Filterable fields are name, referenceId and taxYear.
+      # List issuers (also known as Payers). Filterable fields are businessName, businessName2, referenceId, taxYear, firstName, and lastName.
       # @param avalara_version [String] API version      # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] If true, return the global count of elements in the collection.      # @param count_only [Boolean] If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true.      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
       # @return [PaginatedQueryResultModelIssuerResponse]
       def get_issuers(request_parameters)
@@ -494,7 +494,7 @@ module AvalaraSdk::A1099
       end
 
       # List issuers
-      # List issuers (also known as Payers). Filterable fields are name, referenceId and taxYear.
+      # List issuers (also known as Payers). Filterable fields are businessName, businessName2, referenceId, taxYear, firstName, and lastName.
           
       # @param avalara_version [String] API version    
       # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    
@@ -595,23 +595,23 @@ module AvalaraSdk::A1099
       end
 
       # Update an issuer
-      # Update an issuer (also known as a Payer).
+      # Update an issuer (also known as a Payer). When the payload violates field-level business rules, the issuer is still persisted and the response body includes a `validationErrors[]` array describing each violation.
       # @param id [String] Id of the issuer to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param issuer_request [IssuerRequest] The issuer to update
-      # @return [nil]
+      # @return [IssuerWriteResponse]
       def update_issuer(request_parameters)
-        update_issuer_with_http_info(request_parameters)
-        nil
+        data, _status_code, _headers = update_issuer_with_http_info(request_parameters)
+        data
       end
 
       # Update an issuer
-      # Update an issuer (also known as a Payer).
+      # Update an issuer (also known as a Payer). When the payload violates field-level business rules, the issuer is still persisted and the response body includes a &#x60;validationErrors[]&#x60; array describing each violation.
           
       # @param id [String] Id of the issuer to update    
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
       # @param issuer_request [IssuerRequest] The issuer to update    
-      # @return [Array<(nil, Integer, Hash)>] nil, response status code and response headers
+      # @return [Array<(IssuerWriteResponse, Integer, Hash)>] IssuerWriteResponse data, response status code and response headers
       def update_issuer_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -661,7 +661,7 @@ module AvalaraSdk::A1099
         post_body =  @api_client.object_to_http_body(issuer_request) || {}
 
         # return_type
-        return_type = ''
+        return_type = 'IssuerWriteResponse'
 
         # auth_names
         auth_names = ['bearer']

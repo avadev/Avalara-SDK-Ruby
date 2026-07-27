@@ -21,7 +21,7 @@
 | **mailing_state** | **String** | The state of the mailing address. | [optional] |
 | **mailing_zip** | **String** | The ZIP code of the mailing address. | [optional] |
 | **mailing_country** | **String** | The country of the mailing address. | [optional] |
-| **tin_type** | **String** | Tax Identification Number (TIN) type.  Available values: - QI-EIN: Qualified Intermediary EIN - WP-EIN: Withholding Partnership EIN - WT-EIN: Withholding Trust EIN - EIN: Employer Identification Number | [optional] |
+| **tin_type** | **String** | Recipient classification.  The platform is transitioning from tax identifier classifications to recipient entity classifications. New values represent recipient entity types and should be preferred. Deprecated values represent identifier formats and remain supported for backward compatibility only.  Available values: - INDIVIDUAL: Recipient is an individual - BUSINESS: Recipient is a business - UNKNOWN: Recipient classification is unknown - EIN: (Deprecated - use BUSINESS) Employer Identification Number - SSN: (Deprecated - use INDIVIDUAL) Social Security Number - ITIN: (Deprecated - use INDIVIDUAL) Individual Taxpayer Identification Number - ATIN: (Deprecated - use INDIVIDUAL) Adoption Taxpayer Identification Number  Available values: - QI-EIN: Qualified Intermediary EIN - WP-EIN: Withholding Partnership EIN - WT-EIN: Withholding Trust EIN - EIN: Employer Identification Number | [optional] |
 | **tin** | **String** | The taxpayer identification number (TIN). | [optional] |
 | **giin** | **String** | The global intermediary identification number (GIIN). | [optional] |
 | **foreign_tin** | **String** | The foreign taxpayer identification number (TIN). | [optional] |
@@ -116,11 +116,11 @@
 | **sponsored_direct_reporting_nffe_certification** | **Boolean** | Certifies that the entity is a sponsored direct reporting NFFE. | [optional] |
 | **direct_reporting_nffe_sponsoring_entity** | **String** | The name of the entity that sponsors the direct reporting NFFE. | [optional] |
 | **signer_name** | **String** | The name of the signer. | [optional] |
-| **e_delivery_consented_at** | **Time** | The date when e-delivery was consented. | [optional] |
-| **signature** | **String** | The signature of the form. | [optional] |
 | **company_id** | **String** | The ID of the associated company. Required when creating a form. | [optional] |
 | **reference_id** | **String** | A reference identifier for the form. | [optional] |
 | **email** | **String** | The email address of the individual associated with the form. | [optional] |
+| **e_delivery_consented_at** | **Time** | The date when e-delivery was consented. | [optional] |
+| **signature** | **String** | The signature of the form. | [optional] |
 
 ## Example
 
@@ -240,11 +240,11 @@ instance = AvalaraSdk::A1099::V2::W8ImyFormRequest.new(
   sponsored_direct_reporting_nffe_certification: null,
   direct_reporting_nffe_sponsoring_entity: null,
   signer_name: null,
-  e_delivery_consented_at: null,
-  signature: null,
   company_id: null,
   reference_id: null,
-  email: null
+  email: null,
+  e_delivery_consented_at: null,
+  signature: null
 )
 ```
 

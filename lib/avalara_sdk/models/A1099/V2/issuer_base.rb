@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### Authentication  #### Step 1: Generate API Credentials  Generate a *client ID* and *client secret* from your [Avalara1099 account](https://sbx.track1099.com/api_tokens): *Your Profile → API*.  #### Step 2: Get an Identity Token  Send a `POST` request to the **Identity Token URL** with your *client ID* and *client secret* from Step 1 as form-encoded parameters:  ```http POST https://identity.avalara.com/connect/token Content-Type: application/x-www-form-urlencoded  grant_type=client_credentials client_id=<your client ID> client_secret=<your client secret> ```  **Body parameters** - `grant_type` — Always `client_credentials` - `client_id` — Your *client ID* from Step 1 - `client_secret` — Your *client secret* from Step 1  **Successful response**  ```json {   \"access_token\": \"eyJhbGci...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\" } ```  Use the `access_token` as a bearer token in the `Authorization` header on every A1099 API request:  ```http Authorization: Bearer <access_token> ```  ---  For more on authenticating requests, see the [A1099 authentication guide](https://developer.avalara.com/1099-and-w-9/kny2997001535374/).  ---  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
+#> **Note:** You must have an active Avalara 1099 & W-9 subscription to authenticate and use these APIs. If you don't have a subscription, please contact our [Sales team](https://www.avalara.com/us/en/products/1099/request-a-demo.html).  ## Authentication  The Avalara 1099 & W-9 API uses **Bearer Token Authentication**. To authenticate, acquire a bearer token using a **Client ID** and **Client Secret** that you generate in the Avalara 1099 & W-9 web application.  The sample cURL commands below use **production** URLs. For **sandbox**, replace them with the sandbox URLs listed in the Sandbox Environment table.  ### Option 1 — Client ID and Client Secret (recommended)  **Step 1: Create API credentials in the Avalara 1099 & W-9 web app**  For a full walkthrough, see the [Avalara 1099 & W-9 integration guide](https://developer.avalara.com/products/avalara-1099-and-w9/integration-guides/1099-and-w-9/siu2796410674799/).  > **Note:** To enable credential creation you must first enter a valid company address in **Account Settings > Account** and enable two-factor authentication in **Account Settings > Security**.  1. In Avalara 1099 & W-9, open **Account Settings** (gear icon, top-right of any page) and select **API**. 2. Click **Create new credentials** (a valid company address and 2FA are required). 3. Copy your **Client Id** and **Client Secret** securely — they will not be shown again after you leave the screen.  **Step 2: Request a bearer token**  ```bash curl -X POST 'https://identity.avalara.com/connect/token' \\   --header 'Content-Type: application/x-www-form-urlencoded' \\   --data-urlencode 'grant_type=client_credentials' \\   --data-urlencode 'client_id={{client_id}}' \\   --data-urlencode 'client_secret={{client_secret}}' ```  ### Option 2 — Account ID and License Key  If your organization already uses other Avalara products (AvaTax, CertCapture) and has access to the logged-in area of Avalara.com, you can generate the bearer token using your **Account ID** and **License Key**.  > **Note:** If you already have a license key for other Avalara products you can reuse it. Generating a new key will reset any previously created key.  1. Log in to Avalara.com. 2. Go to **Settings → License and API Keys**. 3. Click **Generate New Key**. 4. Note your **Account ID** from the Account menu.  ```bash curl -X POST 'https://identity.avalara.com/connect/token' \\   --header 'Content-Type: application/x-www-form-urlencoded' \\   --data-urlencode 'grant_type=client_credentials' \\   --data-urlencode 'client_id={{accountId}}' \\   --data-urlencode 'client_secret={{licenseKey}}' ```  ### Using and renewing the bearer token  Include the token in the `Authorization` header on every request:  ```http Authorization: Bearer {access_token} ```  Tokens expire after the number of seconds in the `expires_in` field of the token response. Your integration must renew the token before it expires.  **Example token response**  ```json {   \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\",   \"scope\": \"avatax_api iam-ds\" } ```  ### Sandbox Environment  Use the same steps as production, replacing the base URLs:  | Purpose | Production | Sandbox | | --- | --- | --- | | Account & License Key management (web) | `https://www.avalara.com` | `https://sandbox.admin.avalara.com` | | Account & License Key management (API) | `https://rest.avatax.com` | `https://sandbox-rest.avatax.com` | | Token generation | `https://identity.avalara.com` | `https://ai-sbx.avlr.sh` |  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
 
 
 =end
@@ -11,11 +11,32 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class IssuerBase
-    # Legal name. Not the DBA name.
+    # Business name. Required when the recipient of the form is a business; should only be used for businesses.
+    attr_accessor :business_name
+
+    # Business name line 2. Should only be used for businesses. Use either this or 'transferAgentName'.
+    attr_accessor :business_name2
+
+    # Legal name. Not the DBA name. Deprecated alias for 'businessName'.
     attr_accessor :name
 
-    # Doing Business As (DBA) name or continuation of a long legal name. Use either this or 'transferAgentName'.
+    # Doing Business As (DBA) name or continuation of a long legal name. Deprecated alias for 'businessName2'. Use either this or 'transferAgentName'.
     attr_accessor :dba_name
+
+    # Recipient classification.  The platform is transitioning from tax identifier classifications to recipient entity classifications. New values represent recipient entity types and should be preferred. Deprecated values represent identifier formats and remain supported for backward compatibility only.  Available values: - INDIVIDUAL: Recipient is an individual - BUSINESS: Recipient is a business - UNKNOWN: Recipient classification is unknown - EIN: (Deprecated - use BUSINESS) Employer Identification Number - SSN: (Deprecated - use INDIVIDUAL) Social Security Number - ITIN: (Deprecated - use INDIVIDUAL) Individual Taxpayer Identification Number - ATIN: (Deprecated - use INDIVIDUAL) Adoption Taxpayer Identification Number
+    attr_accessor :tin_type
+
+    # First name. Required when the recipient of the form is an individual; should only be used for individuals.
+    attr_accessor :first_name
+
+    # Middle name. Should only be used for individuals.
+    attr_accessor :middle_name
+
+    # Last name. Required when the recipient of the form is an individual; should only be used for individuals.
+    attr_accessor :last_name
+
+    # Suffix name. Should only be used for individuals.
+    attr_accessor :suffix
 
     # Federal Tax Identification Number (TIN).
     attr_accessor :tin
@@ -56,11 +77,40 @@ module AvalaraSdk::A1099::V2
     # Indicates if this is the issuer's final year filing.
     attr_accessor :last_filing
 
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'business_name' => :'businessName',
+        :'business_name2' => :'businessName2',
         :'name' => :'name',
         :'dba_name' => :'dbaName',
+        :'tin_type' => :'tinType',
+        :'first_name' => :'firstName',
+        :'middle_name' => :'middleName',
+        :'last_name' => :'lastName',
+        :'suffix' => :'suffix',
         :'tin' => :'tin',
         :'reference_id' => :'referenceId',
         :'telephone' => :'telephone',
@@ -85,8 +135,15 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'business_name' => :'String',
+        :'business_name2' => :'String',
         :'name' => :'String',
         :'dba_name' => :'String',
+        :'tin_type' => :'String',
+        :'first_name' => :'String',
+        :'middle_name' => :'String',
+        :'last_name' => :'String',
+        :'suffix' => :'String',
         :'tin' => :'String',
         :'reference_id' => :'String',
         :'telephone' => :'String',
@@ -106,8 +163,15 @@ module AvalaraSdk::A1099::V2
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'business_name',
+        :'business_name2',
         :'name',
         :'dba_name',
+        :'tin_type',
+        :'first_name',
+        :'middle_name',
+        :'last_name',
+        :'suffix',
         :'tin',
         :'reference_id',
         :'telephone',
@@ -139,14 +203,42 @@ module AvalaraSdk::A1099::V2
         h[k.to_sym] = v
       }
 
+      if attributes.key?(:'business_name')
+        self.business_name = attributes[:'business_name']
+      else
+        self.business_name = nil
+      end
+
+      if attributes.key?(:'business_name2')
+        self.business_name2 = attributes[:'business_name2']
+      end
+
       if attributes.key?(:'name')
         self.name = attributes[:'name']
-      else
-        self.name = nil
       end
 
       if attributes.key?(:'dba_name')
         self.dba_name = attributes[:'dba_name']
+      end
+
+      if attributes.key?(:'tin_type')
+        self.tin_type = attributes[:'tin_type']
+      end
+
+      if attributes.key?(:'first_name')
+        self.first_name = attributes[:'first_name']
+      end
+
+      if attributes.key?(:'middle_name')
+        self.middle_name = attributes[:'middle_name']
+      end
+
+      if attributes.key?(:'last_name')
+        self.last_name = attributes[:'last_name']
+      end
+
+      if attributes.key?(:'suffix')
+        self.suffix = attributes[:'suffix']
       end
 
       if attributes.key?(:'tin')
@@ -230,7 +322,19 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
+      tin_type_validator = EnumAttributeValidator.new('String', ["UNKNOWN", "INDIVIDUAL", "BUSINESS"])
+      return false unless tin_type_validator.valid?(@tin_type)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tin_type Object to be assigned
+    def tin_type=(tin_type)
+      validator = EnumAttributeValidator.new('String', ["UNKNOWN", "INDIVIDUAL", "BUSINESS"])
+      unless validator.valid?(tin_type)
+        fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
+      end
+      @tin_type = tin_type
     end
 
     # Checks equality by comparing each attribute.
@@ -238,8 +342,15 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          business_name == o.business_name &&
+          business_name2 == o.business_name2 &&
           name == o.name &&
           dba_name == o.dba_name &&
+          tin_type == o.tin_type &&
+          first_name == o.first_name &&
+          middle_name == o.middle_name &&
+          last_name == o.last_name &&
+          suffix == o.suffix &&
           tin == o.tin &&
           reference_id == o.reference_id &&
           telephone == o.telephone &&
@@ -264,7 +375,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [name, dba_name, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing].hash
+      [business_name, business_name2, name, dba_name, tin_type, first_name, middle_name, last_name, suffix, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing].hash
     end
 
     # Builds the object from hash
