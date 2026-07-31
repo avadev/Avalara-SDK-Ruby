@@ -36,7 +36,7 @@ module AvalaraSdk::A1099::V2
     def self.openapi_types
       {
         :'recordset_count' => :'Integer',
-        :'value' => :'Array<GetIssuer200Response>',
+        :'value' => :'Array<IssuerResponse>',
         :'next_link' => :'String'
       }
     end

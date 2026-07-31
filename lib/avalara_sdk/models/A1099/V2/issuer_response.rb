@@ -11,15 +11,6 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class IssuerResponse
-    # Unique identifier set when the record is created.
-    attr_accessor :id
-
-    # Date time when the record was created.
-    attr_accessor :created_at
-
-    # Date time when the record was last updated.
-    attr_accessor :updated_at
-
     # Business name. Required when the recipient of the form is a business; should only be used for businesses.
     attr_accessor :business_name
 
@@ -86,6 +77,15 @@ module AvalaraSdk::A1099::V2
     # Indicates if this is the issuer's final year filing.
     attr_accessor :last_filing
 
+    # Unique identifier set when the record is created.
+    attr_accessor :id
+
+    # Date time when the record was created.
+    attr_accessor :created_at
+
+    # Date time when the record was last updated.
+    attr_accessor :updated_at
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -111,9 +111,6 @@ module AvalaraSdk::A1099::V2
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt',
         :'business_name' => :'businessName',
         :'business_name2' => :'businessName2',
         :'name' => :'name',
@@ -135,7 +132,10 @@ module AvalaraSdk::A1099::V2
         :'zip' => :'zip',
         :'foreign_province' => :'foreignProvince',
         :'transfer_agent_name' => :'transferAgentName',
-        :'last_filing' => :'lastFiling'
+        :'last_filing' => :'lastFiling',
+        :'id' => :'id',
+        :'created_at' => :'createdAt',
+        :'updated_at' => :'updatedAt'
       }
     end
 
@@ -147,9 +147,6 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'created_at' => :'Time',
-        :'updated_at' => :'Time',
         :'business_name' => :'String',
         :'business_name2' => :'String',
         :'name' => :'String',
@@ -171,7 +168,10 @@ module AvalaraSdk::A1099::V2
         :'zip' => :'String',
         :'foreign_province' => :'String',
         :'transfer_agent_name' => :'String',
-        :'last_filing' => :'Boolean'
+        :'last_filing' => :'Boolean',
+        :'id' => :'String',
+        :'created_at' => :'Time',
+        :'updated_at' => :'Time'
       }
     end
 
@@ -199,15 +199,8 @@ module AvalaraSdk::A1099::V2
         :'zip',
         :'foreign_province',
         :'transfer_agent_name',
-        :'last_filing'
+        :'last_filing',
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'IssuerBase'
-      ]
     end
 
     # Initializes the object
@@ -224,18 +217,6 @@ module AvalaraSdk::A1099::V2
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
-      end
 
       if attributes.key?(:'business_name')
         self.business_name = attributes[:'business_name']
@@ -342,6 +323,18 @@ module AvalaraSdk::A1099::V2
       else
         self.last_filing = nil
       end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -376,9 +369,6 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          created_at == o.created_at &&
-          updated_at == o.updated_at &&
           business_name == o.business_name &&
           business_name2 == o.business_name2 &&
           name == o.name &&
@@ -400,7 +390,10 @@ module AvalaraSdk::A1099::V2
           zip == o.zip &&
           foreign_province == o.foreign_province &&
           transfer_agent_name == o.transfer_agent_name &&
-          last_filing == o.last_filing
+          last_filing == o.last_filing &&
+          id == o.id &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -412,7 +405,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, updated_at, business_name, business_name2, name, dba_name, tin_type, first_name, middle_name, last_name, suffix, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing].hash
+      [business_name, business_name2, name, dba_name, tin_type, first_name, middle_name, last_name, suffix, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing, id, created_at, updated_at].hash
     end
 
     # Builds the object from hash

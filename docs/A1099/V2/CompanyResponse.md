@@ -4,9 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **id** | **String** | Unique identifier set when the record is created. | [optional] |
-| **created_at** | **Time** | Date time when the record was created. | [optional] |
-| **updated_at** | **Time** | Date time when the record was last updated. | [optional] |
 | **name** | **String** | Legal name. Not the DBA name. |  |
 | **dba_name** | **String** | Doing Business As (DBA) name or continuation of a long legal name. | [optional] |
 | **email** | **String** | Contact email address. For inquiries by vendors/employees. |  |
@@ -24,6 +21,9 @@
 | **resend_requests** | **Boolean** | Boolean to enable automatic reminder emails (default: false). | [optional] |
 | **resend_interval_days** | **Integer** | Days between reminder emails (7-365, required if resendRequests is true). | [optional] |
 | **max_reminder_attempts** | **Integer** | Maximum number of reminder attempts (1-52, required if resendRequests is true). | [optional] |
+| **id** | **String** | Unique identifier set when the record is created. | [optional] |
+| **created_at** | **Time** | Date time when the record was created. | [optional] |
+| **updated_at** | **Time** | Date time when the record was last updated. | [optional] |
 
 ## Example
 
@@ -31,9 +31,6 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::CompanyResponse.new(
-  id: null,
-  created_at: null,
-  updated_at: null,
   name: null,
   dba_name: null,
   email: null,
@@ -50,7 +47,10 @@ instance = AvalaraSdk::A1099::V2::CompanyResponse.new(
   country_code: null,
   resend_requests: null,
   resend_interval_days: null,
-  max_reminder_attempts: null
+  max_reminder_attempts: null,
+  id: null,
+  created_at: null,
+  updated_at: null
 )
 ```
 

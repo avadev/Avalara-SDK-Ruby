@@ -206,7 +206,6 @@ Class | Method | HTTP request | Description
 <a name="documentation-for-A1099-V2-models"></a>
 ### A1099 V2 Model Documentation
 
- - [models.CompanyBase](docs/A1099/V2/CompanyBase.md)
  - [models.CompanyRequest](docs/A1099/V2/CompanyRequest.md)
  - [models.CompanyResponse](docs/A1099/V2/CompanyResponse.md)
  - [models.CoveredIndividual](docs/A1099/V2/CoveredIndividual.md)
@@ -230,11 +229,9 @@ Class | Method | HTTP request | Description
  - [models.Form1099StatusDetail](docs/A1099/V2/Form1099StatusDetail.md)
  - [models.Form1099W2](docs/A1099/V2/Form1099W2.md)
  - [models.Get1099Form200Response](docs/A1099/V2/Get1099Form200Response.md)
- - [models.GetIssuer200Response](docs/A1099/V2/GetIssuer200Response.md)
  - [models.IntermediaryOrFlowThrough](docs/A1099/V2/IntermediaryOrFlowThrough.md)
  - [models.IrisFormBase](docs/A1099/V2/IrisFormBase.md)
  - [models.IrsResponse](docs/A1099/V2/IrsResponse.md)
- - [models.IssuerBase](docs/A1099/V2/IssuerBase.md)
  - [models.IssuerRequest](docs/A1099/V2/IssuerRequest.md)
  - [models.IssuerResponse](docs/A1099/V2/IssuerResponse.md)
  - [models.IssuerWriteResponse](docs/A1099/V2/IssuerWriteResponse.md)

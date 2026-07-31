@@ -4,10 +4,6 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **validation_errors** | [**Array&lt;ValidationError&gt;**](ValidationError.md) | Field-level validation errors. Populated when a POST or PUT request violated business rules  but the issuer was still persisted. Each entry identifies the affected field and the issue.  Empty array when the payload was fully valid. | [optional][readonly] |
-| **id** | **String** | Unique identifier set when the record is created. | [optional] |
-| **created_at** | **Time** | Date time when the record was created. | [optional] |
-| **updated_at** | **Time** | Date time when the record was last updated. | [optional] |
 | **business_name** | **String** | Business name. Required when the recipient of the form is a business; should only be used for businesses. |  |
 | **business_name2** | **String** | Business name line 2. Should only be used for businesses. Use either this or &#39;transferAgentName&#39;. | [optional] |
 | **name** | **String** | Legal name. Not the DBA name. Deprecated alias for &#39;businessName&#39;. | [optional] |
@@ -30,6 +26,10 @@
 | **foreign_province** | **String** | Province or region for non-US/CA addresses. | [optional] |
 | **transfer_agent_name** | **String** | Name of the transfer agent, if applicable — optional; use either this or &#39;dbaName&#39;. | [optional] |
 | **last_filing** | **Boolean** | Indicates if this is the issuer&#39;s final year filing. |  |
+| **id** | **String** | Unique identifier set when the record is created. | [optional] |
+| **created_at** | **Time** | Date time when the record was created. | [optional] |
+| **updated_at** | **Time** | Date time when the record was last updated. | [optional] |
+| **validation_errors** | [**Array&lt;ValidationError&gt;**](ValidationError.md) | Field-level validation errors. Populated when a POST or PUT request violated business rules  but the issuer was still persisted. Each entry identifies the affected field and the issue.  Empty array when the payload was fully valid. | [optional][readonly] |
 
 ## Example
 
@@ -37,10 +37,6 @@
 require 'avalara_sdk'
 
 instance = AvalaraSdk::A1099::V2::IssuerWriteResponse.new(
-  validation_errors: null,
-  id: null,
-  created_at: null,
-  updated_at: null,
   business_name: null,
   business_name2: null,
   name: null,
@@ -62,7 +58,11 @@ instance = AvalaraSdk::A1099::V2::IssuerWriteResponse.new(
   zip: null,
   foreign_province: null,
   transfer_agent_name: null,
-  last_filing: null
+  last_filing: null,
+  id: null,
+  created_at: null,
+  updated_at: null,
+  validation_errors: null
 )
 ```
 

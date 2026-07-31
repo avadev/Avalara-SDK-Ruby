@@ -401,7 +401,7 @@ module AvalaraSdk::A1099
       # Retrieve an issuer
       # Retrieve an issuer (also known as a Payer).
       # @param id [String] Id of the issuer to retrieve      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-      # @return [GetIssuer200Response]
+      # @return [IssuerResponse]
       def get_issuer(request_parameters)
         data, _status_code, _headers = get_issuer_with_http_info(request_parameters)
         data
@@ -414,7 +414,7 @@ module AvalaraSdk::A1099
       # @param avalara_version [String] API version    
       # @param x_correlation_id [String] Unique correlation Id in a GUID format    
       # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
-      # @return [Array<(GetIssuer200Response, Integer, Hash)>] GetIssuer200Response data, response status code and response headers
+      # @return [Array<(IssuerResponse, Integer, Hash)>] IssuerResponse data, response status code and response headers
       def get_issuer_with_http_info(request_parameters)
         # OAuth2 Scopes
         required_scopes = ''
@@ -458,7 +458,7 @@ module AvalaraSdk::A1099
         post_body = {}
 
         # return_type
-        return_type = 'GetIssuer200Response'
+        return_type = 'IssuerResponse'
 
         # auth_names
         auth_names = ['bearer']

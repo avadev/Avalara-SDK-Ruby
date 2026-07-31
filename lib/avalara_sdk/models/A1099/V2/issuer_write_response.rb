@@ -11,18 +11,6 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class IssuerWriteResponse
-    # Field-level validation errors. Populated when a POST or PUT request violated business rules  but the issuer was still persisted. Each entry identifies the affected field and the issue.  Empty array when the payload was fully valid.
-    attr_accessor :validation_errors
-
-    # Unique identifier set when the record is created.
-    attr_accessor :id
-
-    # Date time when the record was created.
-    attr_accessor :created_at
-
-    # Date time when the record was last updated.
-    attr_accessor :updated_at
-
     # Business name. Required when the recipient of the form is a business; should only be used for businesses.
     attr_accessor :business_name
 
@@ -89,6 +77,18 @@ module AvalaraSdk::A1099::V2
     # Indicates if this is the issuer's final year filing.
     attr_accessor :last_filing
 
+    # Unique identifier set when the record is created.
+    attr_accessor :id
+
+    # Date time when the record was created.
+    attr_accessor :created_at
+
+    # Date time when the record was last updated.
+    attr_accessor :updated_at
+
+    # Field-level validation errors. Populated when a POST or PUT request violated business rules  but the issuer was still persisted. Each entry identifies the affected field and the issue.  Empty array when the payload was fully valid.
+    attr_accessor :validation_errors
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -114,10 +114,6 @@ module AvalaraSdk::A1099::V2
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'validation_errors' => :'validationErrors',
-        :'id' => :'id',
-        :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt',
         :'business_name' => :'businessName',
         :'business_name2' => :'businessName2',
         :'name' => :'name',
@@ -139,7 +135,11 @@ module AvalaraSdk::A1099::V2
         :'zip' => :'zip',
         :'foreign_province' => :'foreignProvince',
         :'transfer_agent_name' => :'transferAgentName',
-        :'last_filing' => :'lastFiling'
+        :'last_filing' => :'lastFiling',
+        :'id' => :'id',
+        :'created_at' => :'createdAt',
+        :'updated_at' => :'updatedAt',
+        :'validation_errors' => :'validationErrors'
       }
     end
 
@@ -151,10 +151,6 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'validation_errors' => :'Array<ValidationError>',
-        :'id' => :'String',
-        :'created_at' => :'Time',
-        :'updated_at' => :'Time',
         :'business_name' => :'String',
         :'business_name2' => :'String',
         :'name' => :'String',
@@ -176,14 +172,17 @@ module AvalaraSdk::A1099::V2
         :'zip' => :'String',
         :'foreign_province' => :'String',
         :'transfer_agent_name' => :'String',
-        :'last_filing' => :'Boolean'
+        :'last_filing' => :'Boolean',
+        :'id' => :'String',
+        :'created_at' => :'Time',
+        :'updated_at' => :'Time',
+        :'validation_errors' => :'Array<ValidationError>'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'validation_errors',
         :'business_name',
         :'business_name2',
         :'name',
@@ -205,15 +204,9 @@ module AvalaraSdk::A1099::V2
         :'zip',
         :'foreign_province',
         :'transfer_agent_name',
-        :'last_filing'
+        :'last_filing',
+        :'validation_errors'
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'IssuerResponse'
-      ]
     end
 
     # Initializes the object
@@ -230,24 +223,6 @@ module AvalaraSdk::A1099::V2
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'validation_errors')
-        if (value = attributes[:'validation_errors']).is_a?(Array)
-          self.validation_errors = value
-        end
-      end
-
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
-      end
 
       if attributes.key?(:'business_name')
         self.business_name = attributes[:'business_name']
@@ -354,6 +329,24 @@ module AvalaraSdk::A1099::V2
       else
         self.last_filing = nil
       end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
+
+      if attributes.key?(:'validation_errors')
+        if (value = attributes[:'validation_errors']).is_a?(Array)
+          self.validation_errors = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -388,10 +381,6 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          validation_errors == o.validation_errors &&
-          id == o.id &&
-          created_at == o.created_at &&
-          updated_at == o.updated_at &&
           business_name == o.business_name &&
           business_name2 == o.business_name2 &&
           name == o.name &&
@@ -413,7 +402,11 @@ module AvalaraSdk::A1099::V2
           zip == o.zip &&
           foreign_province == o.foreign_province &&
           transfer_agent_name == o.transfer_agent_name &&
-          last_filing == o.last_filing
+          last_filing == o.last_filing &&
+          id == o.id &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at &&
+          validation_errors == o.validation_errors
     end
 
     # @see the `==` method
@@ -425,7 +418,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [validation_errors, id, created_at, updated_at, business_name, business_name2, name, dba_name, tin_type, first_name, middle_name, last_name, suffix, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing].hash
+      [business_name, business_name2, name, dba_name, tin_type, first_name, middle_name, last_name, suffix, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing, id, created_at, updated_at, validation_errors].hash
     end
 
     # Builds the object from hash

@@ -11,15 +11,6 @@ require 'time'
 
 module AvalaraSdk::A1099::V2
       class CompanyResponse
-    # Unique identifier set when the record is created.
-    attr_accessor :id
-
-    # Date time when the record was created.
-    attr_accessor :created_at
-
-    # Date time when the record was last updated.
-    attr_accessor :updated_at
-
     # Legal name. Not the DBA name.
     attr_accessor :name
 
@@ -71,12 +62,18 @@ module AvalaraSdk::A1099::V2
     # Maximum number of reminder attempts (1-52, required if resendRequests is true).
     attr_accessor :max_reminder_attempts
 
+    # Unique identifier set when the record is created.
+    attr_accessor :id
+
+    # Date time when the record was created.
+    attr_accessor :created_at
+
+    # Date time when the record was last updated.
+    attr_accessor :updated_at
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt',
         :'name' => :'name',
         :'dba_name' => :'dbaName',
         :'email' => :'email',
@@ -93,7 +90,10 @@ module AvalaraSdk::A1099::V2
         :'country_code' => :'countryCode',
         :'resend_requests' => :'resendRequests',
         :'resend_interval_days' => :'resendIntervalDays',
-        :'max_reminder_attempts' => :'maxReminderAttempts'
+        :'max_reminder_attempts' => :'maxReminderAttempts',
+        :'id' => :'id',
+        :'created_at' => :'createdAt',
+        :'updated_at' => :'updatedAt'
       }
     end
 
@@ -105,9 +105,6 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'created_at' => :'Time',
-        :'updated_at' => :'Time',
         :'name' => :'String',
         :'dba_name' => :'String',
         :'email' => :'String',
@@ -124,7 +121,10 @@ module AvalaraSdk::A1099::V2
         :'country_code' => :'String',
         :'resend_requests' => :'Boolean',
         :'resend_interval_days' => :'Integer',
-        :'max_reminder_attempts' => :'Integer'
+        :'max_reminder_attempts' => :'Integer',
+        :'id' => :'String',
+        :'created_at' => :'Time',
+        :'updated_at' => :'Time'
       }
     end
 
@@ -147,15 +147,8 @@ module AvalaraSdk::A1099::V2
         :'country_code',
         :'resend_requests',
         :'resend_interval_days',
-        :'max_reminder_attempts'
+        :'max_reminder_attempts',
       ])
-    end
-
-    # List of class defined in allOf (OpenAPI v3)
-    def self.openapi_all_of
-      [
-      :'CompanyBase'
-      ]
     end
 
     # Initializes the object
@@ -172,18 +165,6 @@ module AvalaraSdk::A1099::V2
         end
         h[k.to_sym] = v
       }
-
-      if attributes.key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.key?(:'created_at')
-        self.created_at = attributes[:'created_at']
-      end
-
-      if attributes.key?(:'updated_at')
-        self.updated_at = attributes[:'updated_at']
-      end
 
       if attributes.key?(:'name')
         self.name = attributes[:'name']
@@ -268,6 +249,18 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'max_reminder_attempts')
         self.max_reminder_attempts = attributes[:'max_reminder_attempts']
       end
+
+      if attributes.key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.key?(:'created_at')
+        self.created_at = attributes[:'created_at']
+      end
+
+      if attributes.key?(:'updated_at')
+        self.updated_at = attributes[:'updated_at']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -290,9 +283,6 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          created_at == o.created_at &&
-          updated_at == o.updated_at &&
           name == o.name &&
           dba_name == o.dba_name &&
           email == o.email &&
@@ -309,7 +299,10 @@ module AvalaraSdk::A1099::V2
           country_code == o.country_code &&
           resend_requests == o.resend_requests &&
           resend_interval_days == o.resend_interval_days &&
-          max_reminder_attempts == o.max_reminder_attempts
+          max_reminder_attempts == o.max_reminder_attempts &&
+          id == o.id &&
+          created_at == o.created_at &&
+          updated_at == o.updated_at
     end
 
     # @see the `==` method
@@ -321,7 +314,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [id, created_at, updated_at, name, dba_name, email, address, city, state, zip, telephone, tin, reference_id, do_tin_match, group_name, foreign_province, country_code, resend_requests, resend_interval_days, max_reminder_attempts].hash
+      [name, dba_name, email, address, city, state, zip, telephone, tin, reference_id, do_tin_match, group_name, foreign_province, country_code, resend_requests, resend_interval_days, max_reminder_attempts, id, created_at, updated_at].hash
     end
 
     # Builds the object from hash

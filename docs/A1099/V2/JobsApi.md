@@ -1,6 +1,6 @@
 # AvalaraSdk::A1099::V2::JobsApi
 
-All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
+All URIs are relative to *https://api-ava1099.edge.qa.us-east-1.aws.avalara.io/avalara1099*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -36,7 +36,7 @@ api_instance = AvalaraSdk::A1099::V2::JobsApi.new api_client
 id = 'id_example' # String | Job id obtained from other API responses, like `/1099/bulk-upsert`.
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '7caee3cb-0cc1-4834-9e98-f57cd76efcc8', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '010a01be-bbf4-407e-afff-6151b0580377', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
