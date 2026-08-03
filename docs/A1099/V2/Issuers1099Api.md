@@ -1,6 +1,6 @@
 # AvalaraSdk::A1099::V2::Issuers1099Api
 
-All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
+All URIs are relative to *https://api-ava1099.edge.qa.us-east-1.aws.avalara.io/avalara1099*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -13,7 +13,7 @@ All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
 
 ## create_issuer
 
-> <IssuerResponse> create_issuer(avalara_version, opts)
+> <IssuerWriteResponse> create_issuer(avalara_version, opts)
 
 Create an issuer
 
@@ -39,9 +39,9 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'deb4448e-a364-4e99-b30c-9e876743be1f', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '14e92c5a-0e21-4dcd-8e3f-59111c335ba3', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  issuer_request: AvalaraSdk::A1099::V2::IssuerRequest.new({name: 'name_example', telephone: 'telephone_example', tax_year: 37, country_code: 'country_code_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # IssuerRequest | The issuer to create
+  issuer_request: AvalaraSdk::A1099::V2::IssuerRequest.new({business_name: 'business_name_example', telephone: 'telephone_example', tax_year: 37, country_code: 'country_code_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # IssuerRequest | The issuer to create
 }
 
 begin
@@ -57,7 +57,7 @@ end
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<IssuerResponse>, Integer, Hash)> create_issuer_with_http_info(avalara_version, opts)
+> <Array(<IssuerWriteResponse>, Integer, Hash)> create_issuer_with_http_info(avalara_version, opts)
 
 ```ruby
 begin
@@ -65,7 +65,7 @@ begin
   data, status_code, headers = api_instance.create_issuer_with_http_info(avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <IssuerResponse>
+  p data # => <IssuerWriteResponse>
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling Issuers1099Api->create_issuer_with_http_info: #{e}"
 end
@@ -82,7 +82,7 @@ end
 
 ### Return type
 
-[**IssuerResponse**](IssuerResponse.md)
+[**IssuerWriteResponse**](IssuerWriteResponse.md)
 
 ### Authorization
 
@@ -123,7 +123,7 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 id = 'id_example' # String | Id of the issuer to delete
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'fbe6b0c6-506b-4d42-951d-dfbd382b2223', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'cc721fe4-7f1e-4228-87d2-9351c780d9e9', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -205,7 +205,7 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 id = 'id_example' # String | Id of the issuer to retrieve
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '9b9f0e80-4a47-4390-ae04-cedb799f6f0c', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '1c49f829-d029-4e67-8d87-c87a83033413', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -265,7 +265,7 @@ end
 
 List issuers
 
-List issuers (also known as Payers). Filterable fields are name, referenceId and taxYear.
+List issuers (also known as Payers). Filterable fields are businessName, businessName2, referenceId, taxYear, firstName, and lastName.
 
 ### Examples
 
@@ -293,7 +293,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: '81488870-629b-4a05-8d4c-673e5db15454', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '7845d8ad-09ab-4ba4-a644-bc06bcb806b0', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -354,11 +354,11 @@ end
 
 ## update_issuer
 
-> update_issuer(id, avalara_version, opts)
+> <IssuerWriteResponse> update_issuer(id, avalara_version, opts)
 
 Update an issuer
 
-Update an issuer (also known as a Payer).
+Update an issuer (also known as a Payer). When the payload violates field-level business rules, the issuer is still persisted and the response body includes a `validationErrors[]` array describing each violation.
 
 ### Examples
 
@@ -381,14 +381,15 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 id = 'id_example' # String | Id of the issuer to update
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '0c9b920f-cb85-4332-a9f6-bc06014dab8e', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '484d0024-b885-4e06-aac7-bf3ab4daba3b', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
-  issuer_request: AvalaraSdk::A1099::V2::IssuerRequest.new({name: 'name_example', telephone: 'telephone_example', tax_year: 37, country_code: 'country_code_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # IssuerRequest | The issuer to update
+  issuer_request: AvalaraSdk::A1099::V2::IssuerRequest.new({business_name: 'business_name_example', telephone: 'telephone_example', tax_year: 37, country_code: 'country_code_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # IssuerRequest | The issuer to update
 }
 
 begin
   # Update an issuer
-  api_instance.update_issuer(id, avalara_version, opts)
+  result = api_instance.update_issuer(id, avalara_version, opts)
+  p result
 rescue AvalaraSdk::ApiError => e
   puts "Error when calling Issuers1099Api->update_issuer: #{e}"
 end
@@ -396,9 +397,9 @@ end
 
 #### Using the update_issuer_with_http_info variant
 
-This returns an Array which contains the response data (`nil` in this case), status code and headers.
+This returns an Array which contains the response data, status code and headers.
 
-> <Array(nil, Integer, Hash)> update_issuer_with_http_info(id, avalara_version, opts)
+> <Array(<IssuerWriteResponse>, Integer, Hash)> update_issuer_with_http_info(id, avalara_version, opts)
 
 ```ruby
 begin
@@ -406,7 +407,7 @@ begin
   data, status_code, headers = api_instance.update_issuer_with_http_info(id, avalara_version, opts)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => nil
+  p data # => <IssuerWriteResponse>
 rescue AvalaraSdk::A1099::V2::ApiError => e
   puts "Error when calling Issuers1099Api->update_issuer_with_http_info: #{e}"
 end
@@ -424,7 +425,7 @@ end
 
 ### Return type
 
-nil (empty response body)
+[**IssuerWriteResponse**](IssuerWriteResponse.md)
 
 ### Authorization
 

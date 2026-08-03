@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### Authentication  #### Step 1: Generate API Credentials  Generate a *client ID* and *client secret* from your [Avalara1099 account](https://sbx.track1099.com/api_tokens): *Your Profile → API*.  #### Step 2: Get an Identity Token  Send a `POST` request to the **Identity Token URL** with your *client ID* and *client secret* from Step 1 as form-encoded parameters:  ```http POST https://identity.avalara.com/connect/token Content-Type: application/x-www-form-urlencoded  grant_type=client_credentials client_id=<your client ID> client_secret=<your client secret> ```  **Body parameters** - `grant_type` — Always `client_credentials` - `client_id` — Your *client ID* from Step 1 - `client_secret` — Your *client secret* from Step 1  **Successful response**  ```json {   \"access_token\": \"eyJhbGci...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\" } ```  Use the `access_token` as a bearer token in the `Authorization` header on every A1099 API request:  ```http Authorization: Bearer <access_token> ```  ---  For more on authenticating requests, see the [A1099 authentication guide](https://developer.avalara.com/1099-and-w-9/kny2997001535374/).  ---  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
+#> **Note:** You must have an active Avalara 1099 & W-9 subscription to authenticate and use these APIs. If you don't have a subscription, please contact our [Sales team](https://www.avalara.com/us/en/products/1099/request-a-demo.html).  ## Authentication  The Avalara 1099 & W-9 API uses **Bearer Token Authentication**. To authenticate, acquire a bearer token using a **Client ID** and **Client Secret** that you generate in the Avalara 1099 & W-9 web application.  The sample cURL commands below use **production** URLs. For **sandbox**, replace them with the sandbox URLs listed in the Sandbox Environment table.  ### Option 1 — Client ID and Client Secret (recommended)  **Step 1: Create API credentials in the Avalara 1099 & W-9 web app**  For a full walkthrough, see the [Avalara 1099 & W-9 integration guide](https://developer.avalara.com/products/avalara-1099-and-w9/integration-guides/1099-and-w-9/siu2796410674799/).  > **Note:** To enable credential creation you must first enter a valid company address in **Account Settings > Account** and enable two-factor authentication in **Account Settings > Security**.  1. In Avalara 1099 & W-9, open **Account Settings** (gear icon, top-right of any page) and select **API**. 2. Click **Create new credentials** (a valid company address and 2FA are required). 3. Copy your **Client Id** and **Client Secret** securely — they will not be shown again after you leave the screen.  **Step 2: Request a bearer token**  ```bash curl -X POST 'https://identity.avalara.com/connect/token' \\   --header 'Content-Type: application/x-www-form-urlencoded' \\   --data-urlencode 'grant_type=client_credentials' \\   --data-urlencode 'client_id={{client_id}}' \\   --data-urlencode 'client_secret={{client_secret}}' ```  ### Option 2 — Account ID and License Key  If your organization already uses other Avalara products (AvaTax, CertCapture) and has access to the logged-in area of Avalara.com, you can generate the bearer token using your **Account ID** and **License Key**.  > **Note:** If you already have a license key for other Avalara products you can reuse it. Generating a new key will reset any previously created key.  1. Log in to Avalara.com. 2. Go to **Settings → License and API Keys**. 3. Click **Generate New Key**. 4. Note your **Account ID** from the Account menu.  ```bash curl -X POST 'https://identity.avalara.com/connect/token' \\   --header 'Content-Type: application/x-www-form-urlencoded' \\   --data-urlencode 'grant_type=client_credentials' \\   --data-urlencode 'client_id={{accountId}}' \\   --data-urlencode 'client_secret={{licenseKey}}' ```  ### Using and renewing the bearer token  Include the token in the `Authorization` header on every request:  ```http Authorization: Bearer {access_token} ```  Tokens expire after the number of seconds in the `expires_in` field of the token response. Your integration must renew the token before it expires.  **Example token response**  ```json {   \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\",   \"scope\": \"avatax_api iam-ds\" } ```  ### Sandbox Environment  Use the same steps as production, replacing the base URLs:  | Purpose | Production | Sandbox | | --- | --- | --- | | Account & License Key management (web) | `https://www.avalara.com` | `https://sandbox.admin.avalara.com` | | Account & License Key management (API) | `https://rest.avatax.com` | `https://sandbox-rest.avatax.com` | | Token generation | `https://identity.avalara.com` | `https://ai-sbx.avlr.sh` |  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
 
 
 =end
@@ -57,13 +57,10 @@ module AvalaraSdk::A1099::V2
     # Recipient's Federal Tax Identification Number (TIN).
     attr_accessor :tin
 
-    # Recipient name
+    # DEPRECATED: Use `businessName` for businesses; use `firstName`, `middleName`, `lastName`, and `suffixName` for individuals.
     attr_accessor :recipient_name
 
-    # Tax Identification Number (TIN) type.  Available values: - EIN: Employer Identification Number - SSN: Social Security Number - ITIN: Individual Taxpayer Identification Number - ATIN: Adoption Taxpayer Identification Number
-    attr_accessor :tin_type
-
-    # Recipient second name
+    # DEPRECATED: Use `businessName2` instead.
     attr_accessor :recipient_second_name
 
     # Address.
@@ -83,12 +80,6 @@ module AvalaraSdk::A1099::V2
 
     # Recipient's Contact email address.
     attr_accessor :email
-
-    # Account number
-    attr_accessor :account_number
-
-    # Office code
-    attr_accessor :office_code
 
     # Province or region for non-US/CA addresses.
     attr_accessor :non_us_province
@@ -111,17 +102,11 @@ module AvalaraSdk::A1099::V2
     # Boolean indicating that TIN Matching should be scheduled for this form
     attr_accessor :tin_match
 
-    # No TIN indicator
-    attr_accessor :no_tin
-
     # Boolean indicating that address verification should be scheduled for this form
     attr_accessor :address_verification
 
     # State and local withholding information
     attr_accessor :state_and_local_withholding
-
-    # Second TIN notice
-    attr_accessor :second_tin_notice
 
     # Federal e-file status.  Available values:  - unscheduled: Form has not been scheduled for federal e-filing  - scheduled: Form is scheduled for federal e-filing  - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - sent: Form has been sent to the IRS  - accepted: Form was accepted by the IRS  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - corrected: A correction has been sent to the IRS  - corrected_accepted: Correction was accepted by the IRS  - rejected: Form was rejected by the IRS  - corrected_rejected: Correction was rejected by the IRS  - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
     attr_accessor :federal_efile_status
@@ -191,7 +176,6 @@ module AvalaraSdk::A1099::V2
         :'reference_id' => :'referenceId',
         :'tin' => :'tin',
         :'recipient_name' => :'recipientName',
-        :'tin_type' => :'tinType',
         :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
         :'address2' => :'address2',
@@ -199,8 +183,6 @@ module AvalaraSdk::A1099::V2
         :'state' => :'state',
         :'zip' => :'zip',
         :'email' => :'email',
-        :'account_number' => :'accountNumber',
-        :'office_code' => :'officeCode',
         :'non_us_province' => :'nonUsProvince',
         :'country_code' => :'countryCode',
         :'federal_efile_date' => :'federalEfileDate',
@@ -208,10 +190,8 @@ module AvalaraSdk::A1099::V2
         :'state_efile_date' => :'stateEfileDate',
         :'recipient_edelivery_date' => :'recipientEdeliveryDate',
         :'tin_match' => :'tinMatch',
-        :'no_tin' => :'noTin',
         :'address_verification' => :'addressVerification',
         :'state_and_local_withholding' => :'stateAndLocalWithholding',
-        :'second_tin_notice' => :'secondTinNotice',
         :'federal_efile_status' => :'federalEfileStatus',
         :'state_efile_status' => :'stateEfileStatus',
         :'postal_mail_status' => :'postalMailStatus',
@@ -248,7 +228,6 @@ module AvalaraSdk::A1099::V2
         :'reference_id' => :'String',
         :'tin' => :'String',
         :'recipient_name' => :'String',
-        :'tin_type' => :'String',
         :'recipient_second_name' => :'String',
         :'address' => :'String',
         :'address2' => :'String',
@@ -256,8 +235,6 @@ module AvalaraSdk::A1099::V2
         :'state' => :'String',
         :'zip' => :'String',
         :'email' => :'String',
-        :'account_number' => :'String',
-        :'office_code' => :'String',
         :'non_us_province' => :'String',
         :'country_code' => :'String',
         :'federal_efile_date' => :'Date',
@@ -265,10 +242,8 @@ module AvalaraSdk::A1099::V2
         :'state_efile_date' => :'Date',
         :'recipient_edelivery_date' => :'Date',
         :'tin_match' => :'Boolean',
-        :'no_tin' => :'Boolean',
         :'address_verification' => :'Boolean',
         :'state_and_local_withholding' => :'StateAndLocalWithholding',
-        :'second_tin_notice' => :'Boolean',
         :'federal_efile_status' => :'Form1099StatusDetail',
         :'state_efile_status' => :'Array<StateEfileStatusDetail>',
         :'postal_mail_status' => :'Form1099StatusDetail',
@@ -298,7 +273,6 @@ module AvalaraSdk::A1099::V2
         :'reference_id',
         :'tin',
         :'recipient_name',
-        :'tin_type',
         :'recipient_second_name',
         :'address',
         :'address2',
@@ -306,8 +280,6 @@ module AvalaraSdk::A1099::V2
         :'state',
         :'zip',
         :'email',
-        :'account_number',
-        :'office_code',
         :'non_us_province',
         :'country_code',
         :'federal_efile_date',
@@ -315,10 +287,8 @@ module AvalaraSdk::A1099::V2
         :'state_efile_date',
         :'recipient_edelivery_date',
         :'tin_match',
-        :'no_tin',
         :'address_verification',
         :'state_and_local_withholding',
-        :'second_tin_notice',
         :'federal_efile_status',
         :'state_efile_status',
         :'postal_mail_status',
@@ -423,12 +393,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'recipient_name')
         self.recipient_name = attributes[:'recipient_name']
-      else
-        self.recipient_name = nil
-      end
-
-      if attributes.key?(:'tin_type')
-        self.tin_type = attributes[:'tin_type']
       end
 
       if attributes.key?(:'recipient_second_name')
@@ -463,14 +427,6 @@ module AvalaraSdk::A1099::V2
         self.email = attributes[:'email']
       end
 
-      if attributes.key?(:'account_number')
-        self.account_number = attributes[:'account_number']
-      end
-
-      if attributes.key?(:'office_code')
-        self.office_code = attributes[:'office_code']
-      end
-
       if attributes.key?(:'non_us_province')
         self.non_us_province = attributes[:'non_us_province']
       end
@@ -501,20 +457,12 @@ module AvalaraSdk::A1099::V2
         self.tin_match = attributes[:'tin_match']
       end
 
-      if attributes.key?(:'no_tin')
-        self.no_tin = attributes[:'no_tin']
-      end
-
       if attributes.key?(:'address_verification')
         self.address_verification = attributes[:'address_verification']
       end
 
       if attributes.key?(:'state_and_local_withholding')
         self.state_and_local_withholding = attributes[:'state_and_local_withholding']
-      end
-
-      if attributes.key?(:'second_tin_notice')
-        self.second_tin_notice = attributes[:'second_tin_notice']
       end
 
       if attributes.key?(:'federal_efile_status')
@@ -579,8 +527,6 @@ module AvalaraSdk::A1099::V2
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-R", "W-2"])
       return false unless type_validator.valid?(@type)
-      tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
-      return false unless tin_type_validator.valid?(@tin_type)
       true
     end
 
@@ -604,16 +550,6 @@ module AvalaraSdk::A1099::V2
       @type = type
     end
 
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] tin_type Object to be assigned
-    def tin_type=(tin_type)
-      validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN"])
-      unless validator.valid?(tin_type)
-        fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
-      end
-      @tin_type = tin_type
-    end
-
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -635,7 +571,6 @@ module AvalaraSdk::A1099::V2
           reference_id == o.reference_id &&
           tin == o.tin &&
           recipient_name == o.recipient_name &&
-          tin_type == o.tin_type &&
           recipient_second_name == o.recipient_second_name &&
           address == o.address &&
           address2 == o.address2 &&
@@ -643,8 +578,6 @@ module AvalaraSdk::A1099::V2
           state == o.state &&
           zip == o.zip &&
           email == o.email &&
-          account_number == o.account_number &&
-          office_code == o.office_code &&
           non_us_province == o.non_us_province &&
           country_code == o.country_code &&
           federal_efile_date == o.federal_efile_date &&
@@ -652,10 +585,8 @@ module AvalaraSdk::A1099::V2
           state_efile_date == o.state_efile_date &&
           recipient_edelivery_date == o.recipient_edelivery_date &&
           tin_match == o.tin_match &&
-          no_tin == o.no_tin &&
           address_verification == o.address_verification &&
           state_and_local_withholding == o.state_and_local_withholding &&
-          second_tin_notice == o.second_tin_notice &&
           federal_efile_status == o.federal_efile_status &&
           state_efile_status == o.state_efile_status &&
           postal_mail_status == o.postal_mail_status &&
@@ -676,7 +607,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [employee_first_name, employee_middle_name, employee_last_name, employee_name_suffix, employee_date_of_birth, origin_of_health_coverage_code, covered_individuals, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, tin_type, recipient_second_name, address, address2, city, state, zip, email, account_number, office_code, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, no_tin, address_verification, state_and_local_withholding, second_tin_notice, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at].hash
+      [employee_first_name, employee_middle_name, employee_last_name, employee_name_suffix, employee_date_of_birth, origin_of_health_coverage_code, covered_individuals, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, recipient_second_name, address, address2, city, state, zip, email, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, address_verification, state_and_local_withholding, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at].hash
     end
 
     # Builds the object from hash

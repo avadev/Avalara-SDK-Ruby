@@ -1,7 +1,7 @@
 =begin
 #Avalara 1099 & W-9 API Definition
 
-### Authentication  #### Step 1: Generate API Credentials  Generate a *client ID* and *client secret* from your [Avalara1099 account](https://sbx.track1099.com/api_tokens): *Your Profile → API*.  #### Step 2: Get an Identity Token  Send a `POST` request to the **Identity Token URL** with your *client ID* and *client secret* from Step 1 as form-encoded parameters:  ```http POST https://identity.avalara.com/connect/token Content-Type: application/x-www-form-urlencoded  grant_type=client_credentials client_id=<your client ID> client_secret=<your client secret> ```  **Body parameters** - `grant_type` — Always `client_credentials` - `client_id` — Your *client ID* from Step 1 - `client_secret` — Your *client secret* from Step 1  **Successful response**  ```json {   \"access_token\": \"eyJhbGci...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\" } ```  Use the `access_token` as a bearer token in the `Authorization` header on every A1099 API request:  ```http Authorization: Bearer <access_token> ```  ---  For more on authenticating requests, see the [A1099 authentication guide](https://developer.avalara.com/1099-and-w-9/kny2997001535374/).  ---  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
+#> **Note:** You must have an active Avalara 1099 & W-9 subscription to authenticate and use these APIs. If you don't have a subscription, please contact our [Sales team](https://www.avalara.com/us/en/products/1099/request-a-demo.html).  ## Authentication  The Avalara 1099 & W-9 API uses **Bearer Token Authentication**. To authenticate, acquire a bearer token using a **Client ID** and **Client Secret** that you generate in the Avalara 1099 & W-9 web application.  The sample cURL commands below use **production** URLs. For **sandbox**, replace them with the sandbox URLs listed in the Sandbox Environment table.  ### Option 1 — Client ID and Client Secret (recommended)  **Step 1: Create API credentials in the Avalara 1099 & W-9 web app**  For a full walkthrough, see the [Avalara 1099 & W-9 integration guide](https://developer.avalara.com/products/avalara-1099-and-w9/integration-guides/1099-and-w-9/siu2796410674799/).  > **Note:** To enable credential creation you must first enter a valid company address in **Account Settings > Account** and enable two-factor authentication in **Account Settings > Security**.  1. In Avalara 1099 & W-9, open **Account Settings** (gear icon, top-right of any page) and select **API**. 2. Click **Create new credentials** (a valid company address and 2FA are required). 3. Copy your **Client Id** and **Client Secret** securely — they will not be shown again after you leave the screen.  **Step 2: Request a bearer token**  ```bash curl -X POST 'https://identity.avalara.com/connect/token' \\   --header 'Content-Type: application/x-www-form-urlencoded' \\   --data-urlencode 'grant_type=client_credentials' \\   --data-urlencode 'client_id={{client_id}}' \\   --data-urlencode 'client_secret={{client_secret}}' ```  ### Option 2 — Account ID and License Key  If your organization already uses other Avalara products (AvaTax, CertCapture) and has access to the logged-in area of Avalara.com, you can generate the bearer token using your **Account ID** and **License Key**.  > **Note:** If you already have a license key for other Avalara products you can reuse it. Generating a new key will reset any previously created key.  1. Log in to Avalara.com. 2. Go to **Settings → License and API Keys**. 3. Click **Generate New Key**. 4. Note your **Account ID** from the Account menu.  ```bash curl -X POST 'https://identity.avalara.com/connect/token' \\   --header 'Content-Type: application/x-www-form-urlencoded' \\   --data-urlencode 'grant_type=client_credentials' \\   --data-urlencode 'client_id={{accountId}}' \\   --data-urlencode 'client_secret={{licenseKey}}' ```  ### Using and renewing the bearer token  Include the token in the `Authorization` header on every request:  ```http Authorization: Bearer {access_token} ```  Tokens expire after the number of seconds in the `expires_in` field of the token response. Your integration must renew the token before it expires.  **Example token response**  ```json {   \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI...\",   \"expires_in\": 3600,   \"token_type\": \"Bearer\",   \"scope\": \"avatax_api iam-ds\" } ```  ### Sandbox Environment  Use the same steps as production, replacing the base URLs:  | Purpose | Production | Sandbox | | --- | --- | --- | | Account & License Key management (web) | `https://www.avalara.com` | `https://sandbox.admin.avalara.com` | | Account & License Key management (API) | `https://rest.avatax.com` | `https://sandbox-rest.avatax.com` | | Token generation | `https://identity.avalara.com` | `https://ai-sbx.avlr.sh` |  ## Environments  #### Production - **Avalara 1099 API URL:** [`https://api.avalara.com/avalara1099`](https://api.avalara.com/avalara1099) - **Identity Token URL:** [`https://identity.avalara.com/connect/token`](https://identity.avalara.com/connect/token)  #### Sandbox - **Avalara 1099 API URL:** [`https://api.sbx.avalara.com/avalara1099`](https://api.sbx.avalara.com/avalara1099) - **Identity Token URL:** [`https://ai-sbx.avlr.sh/connect/token`](https://ai-sbx.avlr.sh/connect/token)  ---  ## API & SDK Documentation  [Avalara 1099 API Reference](https://developer.avalara.com/api-reference/avalara1099/avalara1099/)  [Avalara SDKs](https://developer.avalara.com/sdk/)  [Swagger](https://api.avalara.com/avalara1099/swagger/index.html?api-version=2.0)
 
 
 =end
@@ -299,12 +299,6 @@ module AvalaraSdk::A1099::V2
     # Certifies signer has the capacity to sign for the beneficial owner.
     attr_accessor :capacity_to_sign_certification
 
-    # The date when e-delivery was consented.
-    attr_accessor :e_delivery_consented_at
-
-    # The signature of the form.
-    attr_accessor :signature
-
     # The ID of the associated company. Required when creating a form.
     attr_accessor :company_id
 
@@ -313,6 +307,12 @@ module AvalaraSdk::A1099::V2
 
     # The email address of the individual associated with the form.
     attr_accessor :email
+
+    # The date when e-delivery was consented.
+    attr_accessor :e_delivery_consented_at
+
+    # The signature of the form.
+    attr_accessor :signature
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -435,11 +435,11 @@ module AvalaraSdk::A1099::V2
         :'substantial_us_owners' => :'substantialUsOwners',
         :'signer_name' => :'signerName',
         :'capacity_to_sign_certification' => :'capacityToSignCertification',
-        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
-        :'signature' => :'signature',
         :'company_id' => :'companyId',
         :'reference_id' => :'referenceId',
-        :'email' => :'email'
+        :'email' => :'email',
+        :'e_delivery_consented_at' => :'eDeliveryConsentedAt',
+        :'signature' => :'signature'
       }
     end
 
@@ -547,11 +547,11 @@ module AvalaraSdk::A1099::V2
         :'substantial_us_owners' => :'Array<SubstantialUsOwnerRequest>',
         :'signer_name' => :'String',
         :'capacity_to_sign_certification' => :'Boolean',
-        :'e_delivery_consented_at' => :'Time',
-        :'signature' => :'String',
         :'company_id' => :'String',
         :'reference_id' => :'String',
-        :'email' => :'String'
+        :'email' => :'String',
+        :'e_delivery_consented_at' => :'Time',
+        :'signature' => :'String'
       }
     end
 
@@ -643,10 +643,10 @@ module AvalaraSdk::A1099::V2
         :'direct_reporting_nffe_sponsoring_entity',
         :'signer_name',
         :'capacity_to_sign_certification',
-        :'e_delivery_consented_at',
-        :'signature',
         :'reference_id',
-        :'email'
+        :'email',
+        :'e_delivery_consented_at',
+        :'signature'
       ])
     end
 
@@ -1068,14 +1068,6 @@ module AvalaraSdk::A1099::V2
         self.capacity_to_sign_certification = attributes[:'capacity_to_sign_certification']
       end
 
-      if attributes.key?(:'e_delivery_consented_at')
-        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
-      end
-
-      if attributes.key?(:'signature')
-        self.signature = attributes[:'signature']
-      end
-
       if attributes.key?(:'company_id')
         self.company_id = attributes[:'company_id']
       end
@@ -1086,6 +1078,14 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'email')
         self.email = attributes[:'email']
+      end
+
+      if attributes.key?(:'e_delivery_consented_at')
+        self.e_delivery_consented_at = attributes[:'e_delivery_consented_at']
+      end
+
+      if attributes.key?(:'signature')
+        self.signature = attributes[:'signature']
       end
     end
 
@@ -1338,11 +1338,11 @@ module AvalaraSdk::A1099::V2
           substantial_us_owners == o.substantial_us_owners &&
           signer_name == o.signer_name &&
           capacity_to_sign_certification == o.capacity_to_sign_certification &&
-          e_delivery_consented_at == o.e_delivery_consented_at &&
-          signature == o.signature &&
           company_id == o.company_id &&
           reference_id == o.reference_id &&
-          email == o.email
+          email == o.email &&
+          e_delivery_consented_at == o.e_delivery_consented_at &&
+          signature == o.signature
     end
 
     # @see the `==` method
@@ -1354,7 +1354,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, name, citizenship_country, disregarded_entity, entity_type, making_treaty_claim, fatca_status, residence_address, residence_city, residence_state, residence_zip, residence_country, residence_is_mailing, mailing_address, mailing_city, mailing_state, mailing_zip, mailing_country, tin, giin, foreign_tin_not_required, foreign_tin, reference_number, disregarded_entity_fatca_status, disregarded_address, disregarded_city, disregarded_state, disregarded_zip, disregarded_country, disregarded_entity_giin, treaty_country_certification, treaty_country, benefit_limitation_certification, benefit_limitation, qualified_resident_status_certification, treaty_article, withholding_rate, income_type, treaty_reasons, ffi_sponsoring_entity, investment_entity_certification, controlled_foreign_corporation_certification, compliant_nonregistering_local_bank_certification, compliant_ffi_low_value_accounts_certification, sponsored_closely_held_entity_sponsoring_entity, sponsored_closely_held_investment_vehicle_certification, compliant_limited_life_debt_entity_certification, investment_entity_no_financial_accounts_certification, owner_documented_ffi_certification, owner_documented_ffi_reporting_statement_certification, owner_documented_ffi_auditor_letter_certification, owner_documented_ffi_trust_beneficiaries_certification, restricted_distributor_certification, restricted_distributor_agreement_certification, restricted_distributor_preexisting_sales_compliance_certification, nonreporting_iga_ffi_certification, iga_country, iga_model, iga_legal_status_treatment, iga_ffi_trustee_or_sponsor, iga_ffi_trustee_is_foreign, non_commercial_financial_activity_certification, internation_organization_certification, intergovernmental_organization_certification, treaty_qualified_pension_fund_certification, qualified_retirement_fund_certification, narrow_participation_retirement_fund_certification, section401_a_equivalent_pension_plan_certification, investment_entity_for_retirement_funds_certification, exempt_beneficial_owner_sponsored_retirement_fund_certification, exempt_beneficial_owner_owned_investment_entity_certification, territory_financial_institution_certification, excepted_nonfinancial_group_entity_certification, excepted_nonfinancial_start_up_certification, startup_formation_or_resolution_date, excepted_nonfinancial_entity_in_liquidation_or_bankruptcy_certification, nonfinancial_entity_filing_date, section501_c_organization_certification, determination_letter_date, nonprofit_organization_certification, publicly_traded_nffe_certification, publicly_traded_nffe_securities_market, nffe_affiliate_of_publicly_traded_entity_certification, publicly_traded_entity, nffe_affiliate_of_publicly_traded_entity_securities_market, excepted_territory_nffe_certification, active_nffe_certification, passive_nffe_certification, passive_nffe_no_substantial_us_owners_certification, passive_nffe_substantial_us_owners_provided_certification, excepted_inter_affiliate_ffi_certification, sponsored_direct_reporting_nffe_certification, direct_reporting_nffe_sponsoring_entity, substantial_us_owners, signer_name, capacity_to_sign_certification, e_delivery_consented_at, signature, company_id, reference_id, email].hash
+      [type, name, citizenship_country, disregarded_entity, entity_type, making_treaty_claim, fatca_status, residence_address, residence_city, residence_state, residence_zip, residence_country, residence_is_mailing, mailing_address, mailing_city, mailing_state, mailing_zip, mailing_country, tin, giin, foreign_tin_not_required, foreign_tin, reference_number, disregarded_entity_fatca_status, disregarded_address, disregarded_city, disregarded_state, disregarded_zip, disregarded_country, disregarded_entity_giin, treaty_country_certification, treaty_country, benefit_limitation_certification, benefit_limitation, qualified_resident_status_certification, treaty_article, withholding_rate, income_type, treaty_reasons, ffi_sponsoring_entity, investment_entity_certification, controlled_foreign_corporation_certification, compliant_nonregistering_local_bank_certification, compliant_ffi_low_value_accounts_certification, sponsored_closely_held_entity_sponsoring_entity, sponsored_closely_held_investment_vehicle_certification, compliant_limited_life_debt_entity_certification, investment_entity_no_financial_accounts_certification, owner_documented_ffi_certification, owner_documented_ffi_reporting_statement_certification, owner_documented_ffi_auditor_letter_certification, owner_documented_ffi_trust_beneficiaries_certification, restricted_distributor_certification, restricted_distributor_agreement_certification, restricted_distributor_preexisting_sales_compliance_certification, nonreporting_iga_ffi_certification, iga_country, iga_model, iga_legal_status_treatment, iga_ffi_trustee_or_sponsor, iga_ffi_trustee_is_foreign, non_commercial_financial_activity_certification, internation_organization_certification, intergovernmental_organization_certification, treaty_qualified_pension_fund_certification, qualified_retirement_fund_certification, narrow_participation_retirement_fund_certification, section401_a_equivalent_pension_plan_certification, investment_entity_for_retirement_funds_certification, exempt_beneficial_owner_sponsored_retirement_fund_certification, exempt_beneficial_owner_owned_investment_entity_certification, territory_financial_institution_certification, excepted_nonfinancial_group_entity_certification, excepted_nonfinancial_start_up_certification, startup_formation_or_resolution_date, excepted_nonfinancial_entity_in_liquidation_or_bankruptcy_certification, nonfinancial_entity_filing_date, section501_c_organization_certification, determination_letter_date, nonprofit_organization_certification, publicly_traded_nffe_certification, publicly_traded_nffe_securities_market, nffe_affiliate_of_publicly_traded_entity_certification, publicly_traded_entity, nffe_affiliate_of_publicly_traded_entity_securities_market, excepted_territory_nffe_certification, active_nffe_certification, passive_nffe_certification, passive_nffe_no_substantial_us_owners_certification, passive_nffe_substantial_us_owners_provided_certification, excepted_inter_affiliate_ffi_certification, sponsored_direct_reporting_nffe_certification, direct_reporting_nffe_sponsoring_entity, substantial_us_owners, signer_name, capacity_to_sign_certification, company_id, reference_id, email, e_delivery_consented_at, signature].hash
     end
 
     # Builds the object from hash

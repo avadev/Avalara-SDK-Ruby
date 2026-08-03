@@ -9,7 +9,7 @@
 | **employee_middle_name** | **String** | The middle name of the employee. | [optional] |
 | **employee_last_name** | **String** | The last name of the employee. |  |
 | **employee_name_suffix** | **String** | The name suffix of the employee. | [optional] |
-| **tin_type** | **String** | Tax Identification Number (TIN) type. |  |
+| **tin_type** | **String** | Recipient classification.  The platform is transitioning from tax identifier classifications to recipient entity classifications. New values represent recipient entity types and should be preferred. Deprecated values represent identifier formats and remain supported for backward compatibility only.  Available values: - INDIVIDUAL: Recipient is an individual - BUSINESS: Recipient is a business - UNKNOWN: Recipient classification is unknown - EIN: (Deprecated - use BUSINESS) Employer Identification Number - SSN: (Deprecated - use INDIVIDUAL) Social Security Number - ITIN: (Deprecated - use INDIVIDUAL) Individual Taxpayer Identification Number - ATIN: (Deprecated - use INDIVIDUAL) Adoption Taxpayer Identification Number |  |
 | **tin** | **String** | The taxpayer identification number (TIN). |  |
 | **address** | **String** | The address of the employee. Required unless exempt. | [optional] |
 | **city** | **String** | The city of residence of the employee. Required unless exempt. | [optional] |
@@ -24,11 +24,11 @@
 | **additional_withheld** | **Float** | The additional amount withheld. | [optional] |
 | **exempt_from_withholding** | **Boolean** | Indicates whether the employee is exempt from withholding. | [optional] |
 | **office_code** | **String** | The office code associated with the form. | [optional] |
-| **e_delivery_consented_at** | **Time** | The date when e-delivery was consented. | [optional] |
-| **signature** | **String** | The signature of the form. | [optional] |
 | **company_id** | **String** | The ID of the associated company. Required when creating a form. | [optional] |
 | **reference_id** | **String** | A reference identifier for the form. | [optional] |
 | **email** | **String** | The email address of the individual associated with the form. | [optional] |
+| **e_delivery_consented_at** | **Time** | The date when e-delivery was consented. | [optional] |
+| **signature** | **String** | The signature of the form. | [optional] |
 
 ## Example
 
@@ -56,11 +56,11 @@ instance = AvalaraSdk::A1099::V2::W4FormRequest.new(
   additional_withheld: null,
   exempt_from_withholding: null,
   office_code: null,
-  e_delivery_consented_at: null,
-  signature: null,
   company_id: null,
   reference_id: null,
-  email: null
+  email: null,
+  e_delivery_consented_at: null,
+  signature: null
 )
 ```
 

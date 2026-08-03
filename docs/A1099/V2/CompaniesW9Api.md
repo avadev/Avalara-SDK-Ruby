@@ -1,6 +1,6 @@
 # AvalaraSdk::A1099::V2::CompaniesW9Api
 
-All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
+All URIs are relative to *https://api-ava1099.edge.qa.us-east-1.aws.avalara.io/avalara1099*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
@@ -39,7 +39,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'd8a91153-a928-4bb1-9bdf-3108ec7a303d', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '445307e1-57a7-46d0-93bd-99c9cc698790', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   company_request: AvalaraSdk::A1099::V2::CompanyRequest.new({name: 'name_example', email: 'email_example', address: 'address_example', city: 'city_example', zip: 'zip_example', telephone: 'telephone_example', tin: 'tin_example', country_code: 'country_code_example'}) # CompanyRequest | The company to create
 }
@@ -123,7 +123,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 id = 'id_example' # String | The company to delete
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '0f8143df-fd6a-47a4-9612-f0b1def1d6b0', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '983bdd19-d944-400f-a332-6dbed9977702', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -210,7 +210,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: '0f6ead76-1245-4eb9-9f7c-925733e9d4a7', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'c02a5d8b-6916-4d0c-9d97-e31bfc2020e1', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -298,7 +298,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 id = 'id_example' # String | Id of the company
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '5d11a039-7f81-4ec9-b32f-b665ffe488e5', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'ccf63d6b-d313-44b9-bc14-86486a6c1b19', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -381,7 +381,7 @@ api_instance = AvalaraSdk::A1099::V2::CompaniesW9Api.new api_client
 id = 'id_example' # String | The ID of the company to update
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '8e190a86-7ec8-4984-9126-c2d48e2ccdfc', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '57991ce4-31f7-41c8-8517-e363058bc302', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   company_request: AvalaraSdk::A1099::V2::CompanyRequest.new({name: 'name_example', email: 'email_example', address: 'address_example', city: 'city_example', zip: 'zip_example', telephone: 'telephone_example', tin: 'tin_example', country_code: 'country_code_example'}) # CompanyRequest | The updated company data
 }
