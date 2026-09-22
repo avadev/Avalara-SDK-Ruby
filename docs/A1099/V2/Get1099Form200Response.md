@@ -22,6 +22,7 @@ AvalaraSdk::A1099::V2::Get1099Form200Response.openapi_one_of
 #   :'Form1099K',
 #   :'Form1099Misc',
 #   :'Form1099Nec',
+#   :'Form1099Patr',
 #   :'Form1099R',
 #   :'Form1099W2'
 # ]
@@ -60,6 +61,7 @@ AvalaraSdk::A1099::V2::Get1099Form200Response.openapi_discriminator_mapping
 #   :'1099-K' => :'Form1099K',
 #   :'1099-MISC' => :'Form1099Misc',
 #   :'1099-NEC' => :'Form1099Nec',
+#   :'1099-PATR' => :'Form1099Patr',
 #   :'1099-R' => :'Form1099R',
 #   :'W-2' => :'Form1099W2'
 # }
@@ -97,6 +99,7 @@ AvalaraSdk::A1099::V2::Get1099Form200Response.build(data_that_doesnt_match)
 - `Form1099K`
 - `Form1099Misc`
 - `Form1099Nec`
+- `Form1099Patr`
 - `Form1099R`
 - `Form1099W2`
 - `nil` (if no type matches)
