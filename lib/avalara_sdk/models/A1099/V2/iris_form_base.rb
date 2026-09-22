@@ -548,7 +548,7 @@ module AvalaraSdk::A1099::V2
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-R", "W-2"])
+      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "W-2"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN", "INDIVIDUAL", "BUSINESS", "UNKNOWN"])
       return false unless tin_type_validator.valid?(@tin_type)
@@ -558,7 +558,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-R", "W-2"])
+      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "W-2"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

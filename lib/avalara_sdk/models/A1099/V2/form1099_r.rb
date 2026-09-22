@@ -762,7 +762,7 @@ module AvalaraSdk::A1099::V2
       second_distribution_code_validator = EnumAttributeValidator.new('String', ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "W"])
       return false unless second_distribution_code_validator.valid?(@second_distribution_code)
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-R", "W-2"])
+      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "W-2"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN", "INDIVIDUAL", "BUSINESS", "UNKNOWN"])
       return false unless tin_type_validator.valid?(@tin_type)
@@ -792,7 +792,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-R", "W-2"])
+      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "W-2"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end

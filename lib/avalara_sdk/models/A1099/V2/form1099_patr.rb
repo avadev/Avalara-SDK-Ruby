@@ -10,34 +10,46 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      # Form 1095-C: Employer-Provided Health Insurance Offer and Coverage
-  class Form1095C
-    # Employee's first name
-    attr_accessor :employee_first_name
+      # Form 1099-PATR: Taxable Distributions Received From Cooperatives                *At least one of the following amounts must be greater than zero:*  Patronage Dividends, Nonpatronage Distributions, Per-Unit Retain Allocations, or Redeemed Nonqualified Notices.                Federal Income Tax Withheld, when provided, must be less than the total of those four amounts.                Specified Cooperative may only be set when at least one of Qualified Payments,  Section 199A(a) Qualified Items, or Section 199A(a) SSTB Items is provided.                Form 1099-PATR has no state or local withholding boxes. `stateAndLocalWithholding` is not supported for this  form type on any endpoint: a supplied value is discarded rather than stored, and the field always reads back  as `null`.
+  class Form1099Patr
+    # Patronage dividends
+    attr_accessor :patronage_dividends
 
-    # Employee's middle name
-    attr_accessor :employee_middle_name
+    # Nonpatronage distributions
+    attr_accessor :nonpatronage_distributions
 
-    # Employee's last name
-    attr_accessor :employee_last_name
+    # Per-unit retain allocations
+    attr_accessor :per_unit_retain_allocations
 
-    # Employee's name suffix
-    attr_accessor :employee_name_suffix
+    # Federal income tax withheld
+    attr_accessor :federal_income_tax_withheld
 
-    # Recipient's date of birth
-    attr_accessor :recipient_date_of_birth
+    # Redeemed nonqualified notices
+    attr_accessor :redeemed_nonqualified_notices
 
-    # Plan start month.  The calendar month during which the plan year begins of the health plan in which the employee is offered coverage (or would be offered coverage if the employee were eligible to participate in the plan).  Available values:  - 00: None  - 01: January  - 02: February  - 03: March  - 04: April  - 05: May  - 06: June  - 07: July  - 08: August  - 09: September  - 10: October  - 11: November  - 12: December
-    attr_accessor :plan_start_month
+    # Section 199A(g) deduction
+    attr_accessor :section199_ag_deduction
 
-    # Employer provided self-insured coverage
-    attr_accessor :employer_provided_si_coverage
+    # Qualified payments (Section 199A(b)(7))
+    attr_accessor :qualified_payments
 
-    # Offer and coverage information
-    attr_accessor :offer_and_coverages
+    # Section 199A(a) qualified items
+    attr_accessor :section199_aa_qualified_items
 
-    # Covered individuals information
-    attr_accessor :covered_individuals
+    # Section 199A(a) SSTB items
+    attr_accessor :section199_aa_sstb_items
+
+    # Investment credit
+    attr_accessor :investment_credit
+
+    # Work opportunity credit
+    attr_accessor :work_opportunity_credit
+
+    # Other credits and deductions
+    attr_accessor :other_credits_and_deductions
+
+    # Indicates the payer is a specified agricultural or horticultural cooperative
+    attr_accessor :specified_cooperative_indicator
 
     # Form type.
     attr_accessor :type
@@ -65,9 +77,6 @@ module AvalaraSdk::A1099::V2
 
     # DEPRECATED: Use `businessName` for businesses; use `firstName`, `middleName`, `lastName`, and `suffixName` for individuals.
     attr_accessor :recipient_name
-
-    # DEPRECATED: Use `businessName2` instead.
-    attr_accessor :recipient_second_name
 
     # Address.
     attr_accessor :address
@@ -141,6 +150,42 @@ module AvalaraSdk::A1099::V2
     # Date time when the record was last updated.
     attr_accessor :updated_at
 
+    # Recipient classification.  The platform is transitioning from tax identifier classifications to recipient entity classifications. New values represent recipient entity types and should be preferred. Deprecated values represent identifier formats and remain supported for backward compatibility only.  Available values: - INDIVIDUAL: Recipient is an individual - BUSINESS: Recipient is a business - UNKNOWN: Recipient classification is unknown - EIN: (Deprecated - use BUSINESS) Employer Identification Number - SSN: (Deprecated - use INDIVIDUAL) Social Security Number - ITIN: (Deprecated - use INDIVIDUAL) Individual Taxpayer Identification Number - ATIN: (Deprecated - use INDIVIDUAL) Adoption Taxpayer Identification Number
+    attr_accessor :tin_type
+
+    # Business name. Required when the recipient of the form is a business; should only be used for businesses.
+    attr_accessor :business_name
+
+    # Business name line 2. Should only be used for businesses.
+    attr_accessor :business_name2
+
+    # First name. Required when the recipient of the form is an individual; should only be used for individuals.
+    attr_accessor :first_name
+
+    # Middle name. Should only be used for individuals.
+    attr_accessor :middle_name
+
+    # Last name. Required when the recipient of the form is an individual; should only be used for individuals.
+    attr_accessor :last_name
+
+    # Suffix name. Should only be used for individuals.
+    attr_accessor :suffix_name
+
+    # DEPRECATED: Use `businessName2` instead.
+    attr_accessor :recipient_second_name
+
+    # Account number
+    attr_accessor :account_number
+
+    # Office code
+    attr_accessor :office_code
+
+    # No TIN indicator
+    attr_accessor :no_tin
+
+    # Second TIN notice
+    attr_accessor :second_tin_notice
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -166,15 +211,19 @@ module AvalaraSdk::A1099::V2
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'employee_first_name' => :'employeeFirstName',
-        :'employee_middle_name' => :'employeeMiddleName',
-        :'employee_last_name' => :'employeeLastName',
-        :'employee_name_suffix' => :'employeeNameSuffix',
-        :'recipient_date_of_birth' => :'recipientDateOfBirth',
-        :'plan_start_month' => :'planStartMonth',
-        :'employer_provided_si_coverage' => :'employerProvidedSiCoverage',
-        :'offer_and_coverages' => :'offerAndCoverages',
-        :'covered_individuals' => :'coveredIndividuals',
+        :'patronage_dividends' => :'patronageDividends',
+        :'nonpatronage_distributions' => :'nonpatronageDistributions',
+        :'per_unit_retain_allocations' => :'perUnitRetainAllocations',
+        :'federal_income_tax_withheld' => :'federalIncomeTaxWithheld',
+        :'redeemed_nonqualified_notices' => :'redeemedNonqualifiedNotices',
+        :'section199_ag_deduction' => :'section199AgDeduction',
+        :'qualified_payments' => :'qualifiedPayments',
+        :'section199_aa_qualified_items' => :'section199AaQualifiedItems',
+        :'section199_aa_sstb_items' => :'section199AaSstbItems',
+        :'investment_credit' => :'investmentCredit',
+        :'work_opportunity_credit' => :'workOpportunityCredit',
+        :'other_credits_and_deductions' => :'otherCreditsAndDeductions',
+        :'specified_cooperative_indicator' => :'specifiedCooperativeIndicator',
         :'type' => :'type',
         :'id' => :'id',
         :'issuer_id' => :'issuerId',
@@ -184,7 +233,6 @@ module AvalaraSdk::A1099::V2
         :'reference_id' => :'referenceId',
         :'tin' => :'tin',
         :'recipient_name' => :'recipientName',
-        :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
         :'address2' => :'address2',
         :'city' => :'city',
@@ -208,7 +256,19 @@ module AvalaraSdk::A1099::V2
         :'e_delivery_status' => :'eDeliveryStatus',
         :'validation_errors' => :'validationErrors',
         :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt'
+        :'updated_at' => :'updatedAt',
+        :'tin_type' => :'tinType',
+        :'business_name' => :'businessName',
+        :'business_name2' => :'businessName2',
+        :'first_name' => :'firstName',
+        :'middle_name' => :'middleName',
+        :'last_name' => :'lastName',
+        :'suffix_name' => :'suffixName',
+        :'recipient_second_name' => :'recipientSecondName',
+        :'account_number' => :'accountNumber',
+        :'office_code' => :'officeCode',
+        :'no_tin' => :'noTin',
+        :'second_tin_notice' => :'secondTinNotice'
       }
     end
 
@@ -220,15 +280,19 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'employee_first_name' => :'String',
-        :'employee_middle_name' => :'String',
-        :'employee_last_name' => :'String',
-        :'employee_name_suffix' => :'String',
-        :'recipient_date_of_birth' => :'Date',
-        :'plan_start_month' => :'String',
-        :'employer_provided_si_coverage' => :'Boolean',
-        :'offer_and_coverages' => :'Array<OfferAndCoverage>',
-        :'covered_individuals' => :'Array<CoveredIndividual>',
+        :'patronage_dividends' => :'Float',
+        :'nonpatronage_distributions' => :'Float',
+        :'per_unit_retain_allocations' => :'Float',
+        :'federal_income_tax_withheld' => :'Float',
+        :'redeemed_nonqualified_notices' => :'Float',
+        :'section199_ag_deduction' => :'Float',
+        :'qualified_payments' => :'Float',
+        :'section199_aa_qualified_items' => :'Float',
+        :'section199_aa_sstb_items' => :'Float',
+        :'investment_credit' => :'Float',
+        :'work_opportunity_credit' => :'Float',
+        :'other_credits_and_deductions' => :'Float',
+        :'specified_cooperative_indicator' => :'Boolean',
         :'type' => :'String',
         :'id' => :'String',
         :'issuer_id' => :'String',
@@ -238,7 +302,6 @@ module AvalaraSdk::A1099::V2
         :'reference_id' => :'String',
         :'tin' => :'String',
         :'recipient_name' => :'String',
-        :'recipient_second_name' => :'String',
         :'address' => :'String',
         :'address2' => :'String',
         :'city' => :'String',
@@ -262,20 +325,38 @@ module AvalaraSdk::A1099::V2
         :'e_delivery_status' => :'Form1099StatusDetail',
         :'validation_errors' => :'Array<ValidationError>',
         :'created_at' => :'Time',
-        :'updated_at' => :'Time'
+        :'updated_at' => :'Time',
+        :'tin_type' => :'String',
+        :'business_name' => :'String',
+        :'business_name2' => :'String',
+        :'first_name' => :'String',
+        :'middle_name' => :'String',
+        :'last_name' => :'String',
+        :'suffix_name' => :'String',
+        :'recipient_second_name' => :'String',
+        :'account_number' => :'String',
+        :'office_code' => :'String',
+        :'no_tin' => :'Boolean',
+        :'second_tin_notice' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'employee_first_name',
-        :'employee_middle_name',
-        :'employee_last_name',
-        :'employee_name_suffix',
-        :'recipient_date_of_birth',
-        :'plan_start_month',
-        :'employer_provided_si_coverage',
+        :'patronage_dividends',
+        :'nonpatronage_distributions',
+        :'per_unit_retain_allocations',
+        :'federal_income_tax_withheld',
+        :'redeemed_nonqualified_notices',
+        :'section199_ag_deduction',
+        :'qualified_payments',
+        :'section199_aa_qualified_items',
+        :'section199_aa_sstb_items',
+        :'investment_credit',
+        :'work_opportunity_credit',
+        :'other_credits_and_deductions',
+        :'specified_cooperative_indicator',
         :'id',
         :'issuer_id',
         :'issuer_reference_id',
@@ -284,7 +365,6 @@ module AvalaraSdk::A1099::V2
         :'reference_id',
         :'tin',
         :'recipient_name',
-        :'recipient_second_name',
         :'address',
         :'address2',
         :'city',
@@ -307,13 +387,25 @@ module AvalaraSdk::A1099::V2
         :'address_verification_status',
         :'e_delivery_status',
         :'validation_errors',
+        :'tin_type',
+        :'business_name',
+        :'business_name2',
+        :'first_name',
+        :'middle_name',
+        :'last_name',
+        :'suffix_name',
+        :'recipient_second_name',
+        :'account_number',
+        :'office_code',
+        :'no_tin',
+        :'second_tin_notice'
       ])
     end
 
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
-      :'Form1099Base'
+      :'IrisFormBase'
       ]
     end
 
@@ -321,63 +413,67 @@ module AvalaraSdk::A1099::V2
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::Form1095C` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::Form1099Patr` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::Form1095C`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::Form1099Patr`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'employee_first_name')
-        self.employee_first_name = attributes[:'employee_first_name']
-      else
-        self.employee_first_name = nil
+      if attributes.key?(:'patronage_dividends')
+        self.patronage_dividends = attributes[:'patronage_dividends']
       end
 
-      if attributes.key?(:'employee_middle_name')
-        self.employee_middle_name = attributes[:'employee_middle_name']
+      if attributes.key?(:'nonpatronage_distributions')
+        self.nonpatronage_distributions = attributes[:'nonpatronage_distributions']
       end
 
-      if attributes.key?(:'employee_last_name')
-        self.employee_last_name = attributes[:'employee_last_name']
-      else
-        self.employee_last_name = nil
+      if attributes.key?(:'per_unit_retain_allocations')
+        self.per_unit_retain_allocations = attributes[:'per_unit_retain_allocations']
       end
 
-      if attributes.key?(:'employee_name_suffix')
-        self.employee_name_suffix = attributes[:'employee_name_suffix']
+      if attributes.key?(:'federal_income_tax_withheld')
+        self.federal_income_tax_withheld = attributes[:'federal_income_tax_withheld']
       end
 
-      if attributes.key?(:'recipient_date_of_birth')
-        self.recipient_date_of_birth = attributes[:'recipient_date_of_birth']
+      if attributes.key?(:'redeemed_nonqualified_notices')
+        self.redeemed_nonqualified_notices = attributes[:'redeemed_nonqualified_notices']
       end
 
-      if attributes.key?(:'plan_start_month')
-        self.plan_start_month = attributes[:'plan_start_month']
-      else
-        self.plan_start_month = nil
+      if attributes.key?(:'section199_ag_deduction')
+        self.section199_ag_deduction = attributes[:'section199_ag_deduction']
       end
 
-      if attributes.key?(:'employer_provided_si_coverage')
-        self.employer_provided_si_coverage = attributes[:'employer_provided_si_coverage']
+      if attributes.key?(:'qualified_payments')
+        self.qualified_payments = attributes[:'qualified_payments']
       end
 
-      if attributes.key?(:'offer_and_coverages')
-        if (value = attributes[:'offer_and_coverages']).is_a?(Array)
-          self.offer_and_coverages = value
-        end
-      else
-        self.offer_and_coverages = nil
+      if attributes.key?(:'section199_aa_qualified_items')
+        self.section199_aa_qualified_items = attributes[:'section199_aa_qualified_items']
       end
 
-      if attributes.key?(:'covered_individuals')
-        if (value = attributes[:'covered_individuals']).is_a?(Array)
-          self.covered_individuals = value
-        end
+      if attributes.key?(:'section199_aa_sstb_items')
+        self.section199_aa_sstb_items = attributes[:'section199_aa_sstb_items']
+      end
+
+      if attributes.key?(:'investment_credit')
+        self.investment_credit = attributes[:'investment_credit']
+      end
+
+      if attributes.key?(:'work_opportunity_credit')
+        self.work_opportunity_credit = attributes[:'work_opportunity_credit']
+      end
+
+      if attributes.key?(:'other_credits_and_deductions')
+        self.other_credits_and_deductions = attributes[:'other_credits_and_deductions']
+      end
+
+      if attributes.key?(:'specified_cooperative_indicator')
+        self.specified_cooperative_indicator = attributes[:'specified_cooperative_indicator']
       end
 
       if attributes.key?(:'type')
@@ -416,10 +512,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'recipient_name')
         self.recipient_name = attributes[:'recipient_name']
-      end
-
-      if attributes.key?(:'recipient_second_name')
-        self.recipient_second_name = attributes[:'recipient_second_name']
       end
 
       if attributes.key?(:'address')
@@ -527,6 +619,54 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
       end
+
+      if attributes.key?(:'tin_type')
+        self.tin_type = attributes[:'tin_type']
+      end
+
+      if attributes.key?(:'business_name')
+        self.business_name = attributes[:'business_name']
+      end
+
+      if attributes.key?(:'business_name2')
+        self.business_name2 = attributes[:'business_name2']
+      end
+
+      if attributes.key?(:'first_name')
+        self.first_name = attributes[:'first_name']
+      end
+
+      if attributes.key?(:'middle_name')
+        self.middle_name = attributes[:'middle_name']
+      end
+
+      if attributes.key?(:'last_name')
+        self.last_name = attributes[:'last_name']
+      end
+
+      if attributes.key?(:'suffix_name')
+        self.suffix_name = attributes[:'suffix_name']
+      end
+
+      if attributes.key?(:'recipient_second_name')
+        self.recipient_second_name = attributes[:'recipient_second_name']
+      end
+
+      if attributes.key?(:'account_number')
+        self.account_number = attributes[:'account_number']
+      end
+
+      if attributes.key?(:'office_code')
+        self.office_code = attributes[:'office_code']
+      end
+
+      if attributes.key?(:'no_tin')
+        self.no_tin = attributes[:'no_tin']
+      end
+
+      if attributes.key?(:'second_tin_notice')
+        self.second_tin_notice = attributes[:'second_tin_notice']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -534,10 +674,6 @@ module AvalaraSdk::A1099::V2
     def list_invalid_properties
       warn '[DEPRECATED] the `list_invalid_properties` method is obsolete'
       invalid_properties = Array.new
-      if @offer_and_coverages.nil?
-        invalid_properties.push('invalid value for "offer_and_coverages", offer_and_coverages cannot be nil.')
-      end
-
       if @type.nil?
         invalid_properties.push('invalid value for "type", type cannot be nil.')
       end
@@ -549,23 +685,12 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      plan_start_month_validator = EnumAttributeValidator.new('String', ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"])
-      return false unless plan_start_month_validator.valid?(@plan_start_month)
-      return false if @offer_and_coverages.nil?
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "W-2"])
       return false unless type_validator.valid?(@type)
+      tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN", "INDIVIDUAL", "BUSINESS", "UNKNOWN"])
+      return false unless tin_type_validator.valid?(@tin_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] plan_start_month Object to be assigned
-    def plan_start_month=(plan_start_month)
-      validator = EnumAttributeValidator.new('String', ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"])
-      unless validator.valid?(plan_start_month)
-        fail ArgumentError, "invalid value for \"plan_start_month\", must be one of #{validator.allowable_values}."
-      end
-      @plan_start_month = plan_start_month
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -578,20 +703,34 @@ module AvalaraSdk::A1099::V2
       @type = type
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tin_type Object to be assigned
+    def tin_type=(tin_type)
+      validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN", "INDIVIDUAL", "BUSINESS", "UNKNOWN"])
+      unless validator.valid?(tin_type)
+        fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
+      end
+      @tin_type = tin_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          employee_first_name == o.employee_first_name &&
-          employee_middle_name == o.employee_middle_name &&
-          employee_last_name == o.employee_last_name &&
-          employee_name_suffix == o.employee_name_suffix &&
-          recipient_date_of_birth == o.recipient_date_of_birth &&
-          plan_start_month == o.plan_start_month &&
-          employer_provided_si_coverage == o.employer_provided_si_coverage &&
-          offer_and_coverages == o.offer_and_coverages &&
-          covered_individuals == o.covered_individuals &&
+          patronage_dividends == o.patronage_dividends &&
+          nonpatronage_distributions == o.nonpatronage_distributions &&
+          per_unit_retain_allocations == o.per_unit_retain_allocations &&
+          federal_income_tax_withheld == o.federal_income_tax_withheld &&
+          redeemed_nonqualified_notices == o.redeemed_nonqualified_notices &&
+          section199_ag_deduction == o.section199_ag_deduction &&
+          qualified_payments == o.qualified_payments &&
+          section199_aa_qualified_items == o.section199_aa_qualified_items &&
+          section199_aa_sstb_items == o.section199_aa_sstb_items &&
+          investment_credit == o.investment_credit &&
+          work_opportunity_credit == o.work_opportunity_credit &&
+          other_credits_and_deductions == o.other_credits_and_deductions &&
+          specified_cooperative_indicator == o.specified_cooperative_indicator &&
           type == o.type &&
           id == o.id &&
           issuer_id == o.issuer_id &&
@@ -601,7 +740,6 @@ module AvalaraSdk::A1099::V2
           reference_id == o.reference_id &&
           tin == o.tin &&
           recipient_name == o.recipient_name &&
-          recipient_second_name == o.recipient_second_name &&
           address == o.address &&
           address2 == o.address2 &&
           city == o.city &&
@@ -625,7 +763,19 @@ module AvalaraSdk::A1099::V2
           e_delivery_status == o.e_delivery_status &&
           validation_errors == o.validation_errors &&
           created_at == o.created_at &&
-          updated_at == o.updated_at
+          updated_at == o.updated_at &&
+          tin_type == o.tin_type &&
+          business_name == o.business_name &&
+          business_name2 == o.business_name2 &&
+          first_name == o.first_name &&
+          middle_name == o.middle_name &&
+          last_name == o.last_name &&
+          suffix_name == o.suffix_name &&
+          recipient_second_name == o.recipient_second_name &&
+          account_number == o.account_number &&
+          office_code == o.office_code &&
+          no_tin == o.no_tin &&
+          second_tin_notice == o.second_tin_notice
     end
 
     # @see the `==` method
@@ -637,7 +787,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [employee_first_name, employee_middle_name, employee_last_name, employee_name_suffix, recipient_date_of_birth, plan_start_month, employer_provided_si_coverage, offer_and_coverages, covered_individuals, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, recipient_second_name, address, address2, city, state, zip, email, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, address_verification, state_and_local_withholding, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at].hash
+      [patronage_dividends, nonpatronage_distributions, per_unit_retain_allocations, federal_income_tax_withheld, redeemed_nonqualified_notices, section199_ag_deduction, qualified_payments, section199_aa_qualified_items, section199_aa_sstb_items, investment_credit, work_opportunity_credit, other_credits_and_deductions, specified_cooperative_indicator, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, address, address2, city, state, zip, email, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, address_verification, state_and_local_withholding, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at, tin_type, business_name, business_name2, first_name, middle_name, last_name, suffix_name, recipient_second_name, account_number, office_code, no_tin, second_tin_notice].hash
     end
 
     # Builds the object from hash
