@@ -19,7 +19,7 @@ All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
 
 Create or update multiple 1099/1095/W2/1042S forms
 
-This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**    If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.
+This endpoint allows you to create or update multiple 1099/1095/W2/1042S forms.  Maximum of 5000 forms can be processed in a single bulk request.    **Date Scheduling Rules:**                If federalEfileDate, stateEfileDate, or recipientEdeliveryDate are between current date and beginning of blackout period, scheduled to that date.  If dates are in the past or blackout period, scheduled to next available date.  For blackout period information, see https://www.track1099.com/info/IRS_info.  StateEfileDate must be on or after federalEfileDate.  Set dates to null to leave unscheduled.                **Recipient Name Splitting:**                When the account's \"Split individual recipient names\" opt-in setting is enabled (Account Settings page), this only applies to the deprecated identifier-format tinType values (SSN/ITIN/ATIN/EIN):  - For the deprecated individual-type values (SSN/ITIN/ATIN) where only the legacy `recipientName` is provided, the API automatically splits `recipientName` into `firstName`, `middleName`, `lastName`, and `suffixName` before persisting.  - For the deprecated `EIN` value, `recipientName` is not split and is routed directly to `businessName`.                To enable or disable this behavior, the account owner can toggle \"Split individual recipient names on API submissions\" on the Account Settings page.
 
 ### Examples
 
@@ -42,7 +42,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 avalara_version = '2.0.0' # String | API version
 opts = {
   dry_run: true, # Boolean | defaults to false. If true, it will NOT change the DB. It will just return a report of what would've have been changed in the DB
-  x_correlation_id: '6627a0c7-bb12-4635-a6c1-4ed0a47025b2', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'b2de6e01-aadd-47fd-8444-2b3e2e1d5364', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   form1099_list_request: AvalaraSdk::A1099::V2::Form1099ListRequest.new # Form1099ListRequest | 
 }
@@ -126,7 +126,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'b7ae861c-748e-4beb-905a-23aa9a8de53b', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'd83705fa-e06e-473d-a99b-18e1c24e1ade', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: '1042-S', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
 }
@@ -210,7 +210,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | The unique identifier of the desired form to delete.
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '4d3d01b9-704d-4ece-b9e4-e8a08f0e4632', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '3b67737d-1e33-4b9c-b91a-a346ef3ff731', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -292,7 +292,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '5c54b9db-a216-4b2f-b99a-d462ed919919', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '59489a73-7ddd-4b4c-aa87-e18e1042713f', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -376,7 +376,7 @@ id = 'id_example' # String | The ID of the form
 avalara_version = '2.0.0' # String | API version
 opts = {
   mark_edelivered: true, # Boolean | Optional boolean that if set indicates that the form should be marked as having been successfully edelivered
-  x_correlation_id: '47a1d2f5-fa5a-4f7f-8666-898ec3187379', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '85a9b19b-0ed5-476c-bb11-e365b8b14794', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -465,7 +465,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: 'a6799653-d5d4-41a1-bc1c-e57835067aa4', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '13e97284-a7a9-4e94-92e4-cd3e69c6b967', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -553,7 +553,7 @@ api_instance = AvalaraSdk::A1099::V2::Forms1099Api.new api_client
 id = 'id_example' # String | 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '4bea2d70-6fa5-4abd-9806-092513a95c09', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'd5ff1333-2e20-4ba6-b169-c1bac004c84d', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   get1099_form200_response: AvalaraSdk::A1099::V2::Form1042S.new({unique_form_id: 'unique_form_id_example', income_code: '01', gross_income: 3.56, withholding_indicator: '3', tax_country_code: 'tax_country_code_example', type: '1042-S', address: 'address_example', city: 'city_example', country_code: 'country_code_example'}) # Get1099Form200Response | 
 }
