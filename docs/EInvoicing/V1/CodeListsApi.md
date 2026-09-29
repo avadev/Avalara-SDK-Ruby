@@ -39,8 +39,8 @@ codelist_id = 'ab123343-3432-423c-ac3f-53453scs9999' # String | System-generated
 country_code = 'FR' # String | Two-letter ISO 3166-1 alpha-2 country code indicating the jurisdiction this code list applies to.
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
-  effective_date: Date.parse('Tue Dec 31 16:00:00 PST 2024'), # Date | Filter code list versions by effective date. Returns versions that are effective on or before this date. Format: YYYY-MM-DD (ISO 8601). If not specified, defaults to the current date. sunsetDate is required when effectiveDate is provided.
-  sunset_date: Date.parse('Wed Dec 30 16:00:00 PST 2026') # Date | Filter code list versions by sunset date. Returns versions that have not yet sunset on or before this date. Format: YYYY-MM-DD (ISO 8601). If not specified, only non-expired versions are returned.
+  effective_date: Date.parse('Wed Jan 01 00:00:00 UTC 2025'), # Date | Filter code list versions by effective date. Returns versions that are effective on or before this date. Format: YYYY-MM-DD (ISO 8601). If not specified, defaults to the current date. sunsetDate is required when effectiveDate is provided.
+  sunset_date: Date.parse('Thu Dec 31 00:00:00 UTC 2026') # Date | Filter code list versions by sunset date. Returns versions that have not yet sunset on or before this date. Format: YYYY-MM-DD (ISO 8601). If not specified, only non-expired versions are returned.
 }
 
 begin
@@ -125,8 +125,8 @@ avalara_version = '1.6' # String | Header that specifies the API version to use 
 country_code = 'FR' # String | Two-letter ISO 3166-1 alpha-2 country code indicating the jurisdiction for which code lists should be returned.
 opts = {
   x_avalara_client: 'John's E-Invoicing-API Client', # String | Optional header for a client identifier string used for diagnostics (for example \"Fingerprint\").
-  effective_date: Date.parse('Tue Dec 31 16:00:00 PST 2024'), # Date | Filter code lists by effective date. Returns code lists that are effective on or before this date. Format: YYYY-MM-DD (ISO 8601). If not specified, defaults to the current date. sunsetDate is required when effectiveDate is provided.
-  sunset_date: Date.parse('Wed Dec 30 16:00:00 PST 2026'), # Date | Filter code lists by sunset date. Returns code lists that have not yet sunset on or before this date. Format: YYYY-MM-DD (ISO 8601). If not specified, only non-expired code lists are returned.
+  effective_date: Date.parse('Wed Jan 01 00:00:00 UTC 2025'), # Date | Filter code lists by effective date. Returns code lists that are effective on or before this date. Format: YYYY-MM-DD (ISO 8601). If not specified, defaults to the current date. sunsetDate is required when effectiveDate is provided.
+  sunset_date: Date.parse('Thu Dec 31 00:00:00 UTC 2026'), # Date | Filter code lists by sunset date. Returns code lists that have not yet sunset on or before this date. Format: YYYY-MM-DD (ISO 8601). If not specified, only non-expired code lists are returned.
   count: 'true', # String | When set to true, the response body also includes the count of items in the collection.
   count_only: 'false', # String | When set to true, the response returns only the count of items in the collection.
   top: 56, # Integer | The number of items to include in the result.

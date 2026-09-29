@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("26.9.0")
+        api_client.set_sdk_version("26.9.1")
         @api_client = api_client
       end
 
@@ -225,6 +225,204 @@ module AvalaraSdk::A1099
         end
       end
     
+      # Get bulk TIN match details
+      # @param id [String] The bulk ID      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # @return [BulkTinMatchResponse]
+      def get_bulk_tin_match(request_parameters)
+        data, _status_code, _headers = get_bulk_tin_match_with_http_info(request_parameters)
+        data
+      end
+
+      # Get bulk TIN match details
+    
+      # @param id [String] The bulk ID    
+      # @param avalara_version [String] API version    
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
+      # @return [Array<(BulkTinMatchResponse, Integer, Hash)>] BulkTinMatchResponse data, response status code and response headers
+      def get_bulk_tin_match_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        id = request_parameters.get_id()
+        avalara_version = request_parameters.get_avalara_version()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        # verify the required parameter 'id' is set
+        if @api_client.config.client_side_validation && id.nil?
+          fail ArgumentError, "Missing the required parameter 'id' when calling TINMatchesApi.get_bulk_tin_match"
+        end
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling TINMatchesApi.get_bulk_tin_match"
+        end
+        # resource path
+        local_var_path = '/tin-matches/$bulk/{id}'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body = {}
+
+        # return_type
+        return_type = 'BulkTinMatchResponse'
+
+        # auth_names
+        auth_names = ['bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"TINMatchesApi.get_bulk_tin_match",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:GET, local_var_path, new_options, required_scopes, false, :A1099)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
+      # List bulk TIN match results
+      # @param id [String] The bulk ID      # @param avalara_version [String] API version      # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.      # @param top [Integer] If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.      # @param count [Boolean] If true, return the global count of elements in the collection.      # @param count_only [Boolean] If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true.      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # @return [PaginatedQueryResultModelBulkTinMatchResultItemResponse]
+      def get_bulk_tin_match_results(request_parameters)
+        data, _status_code, _headers = get_bulk_tin_match_results_with_http_info(request_parameters)
+        data
+      end
+
+      # List bulk TIN match results
+    
+      # @param id [String] The bulk ID    
+      # @param avalara_version [String] API version    
+      # @param filter [String] A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;.    
+      # @param top [Integer] If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets.    
+      # @param skip [Integer] If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets.    
+      # @param order_by [String] A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.    
+      # @param count [Boolean] If true, return the global count of elements in the collection.    
+      # @param count_only [Boolean] If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true.    
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
+      # @return [Array<(PaginatedQueryResultModelBulkTinMatchResultItemResponse, Integer, Hash)>] PaginatedQueryResultModelBulkTinMatchResultItemResponse data, response status code and response headers
+      def get_bulk_tin_match_results_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        id = request_parameters.get_id()
+        avalara_version = request_parameters.get_avalara_version()
+        filter = request_parameters.get_filter()
+        top = request_parameters.get_top()
+        skip = request_parameters.get_skip()
+        order_by = request_parameters.get_order_by()
+        count = request_parameters.get_count()
+        count_only = request_parameters.get_count_only()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        # verify the required parameter 'id' is set
+        if @api_client.config.client_side_validation && id.nil?
+          fail ArgumentError, "Missing the required parameter 'id' when calling TINMatchesApi.get_bulk_tin_match_results"
+        end
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling TINMatchesApi.get_bulk_tin_match_results"
+        end
+        # resource path
+        local_var_path = '/tin-matches/$bulk/{id}/results'.sub('{' + 'id' + '}', CGI.escape(id.to_s))
+
+        # query parameters
+        query_params = {}
+        if !filter.nil?
+          query_params[:'$filter'] = filter
+        end
+        if !top.nil?
+          query_params[:'$top'] = top
+        end
+        if !skip.nil?
+          query_params[:'$skip'] = skip
+        end
+        if !order_by.nil?
+          query_params[:'$orderBy'] = order_by
+        end
+        if !count.nil?
+          query_params[:'count'] = count
+        end
+        if !count_only.nil?
+          query_params[:'countOnly'] = count_only
+        end
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body = {}
+
+        # return_type
+        return_type = 'PaginatedQueryResultModelBulkTinMatchResultItemResponse'
+
+        # auth_names
+        auth_names = ['bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"TINMatchesApi.get_bulk_tin_match_results",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:GET, local_var_path, new_options, required_scopes, false, :A1099)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
       # Perform real time TIN Match
       # Perform real time TIN Match.
       # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param real_time_tin_match_request [RealTimeTinMatchRequest] Required data to perform TIN match
@@ -311,6 +509,259 @@ module AvalaraSdk::A1099
         end
         return data, response.code, response.headers
       end
+
+      # Submit bulk TIN match
+      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param bulk_tin_match_request [BulkTinMatchRequest] Required TIN collection to perform bulk TIN match
+      # @return [BulkTinMatchAcceptedResponse]
+      def submit_bulk_tin_match(request_parameters)
+        data, _status_code, _headers = submit_bulk_tin_match_with_http_info(request_parameters)
+        data
+      end
+
+      # Submit bulk TIN match
+    
+      # @param avalara_version [String] API version    
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
+      # @param bulk_tin_match_request [BulkTinMatchRequest] Required TIN collection to perform bulk TIN match    
+      # @return [Array<(BulkTinMatchAcceptedResponse, Integer, Hash)>] BulkTinMatchAcceptedResponse data, response status code and response headers
+      def submit_bulk_tin_match_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        avalara_version = request_parameters.get_avalara_version()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        bulk_tin_match_request = request_parameters.get_bulk_tin_match_request()
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling TINMatchesApi.submit_bulk_tin_match"
+        end
+        # resource path
+        local_var_path = '/tin-matches/$bulk'
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        # HTTP header 'Content-Type'
+        content_type = @api_client.select_header_content_type(['application/json', 'text/json', 'application/*+json'])
+        if !content_type.nil?
+            header_params['Content-Type'] = content_type
+        end
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body =  @api_client.object_to_http_body(bulk_tin_match_request) || {}
+
+        # return_type
+        return_type = 'BulkTinMatchAcceptedResponse'
+
+        # auth_names
+        auth_names = ['bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"TINMatchesApi.submit_bulk_tin_match",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes, false, :A1099)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+    end
+    # Represents the Request object for the GetBulkTinMatch API
+    #
+    # @param  String $id The bulk ID (required)
+    # @param  String $avalara_version API version (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
+    #
+    class GetBulkTinMatchRequestSdk
+        attr_accessor :id
+
+        attr_accessor :avalara_version
+
+        attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
+
+        def initialize()
+        end
+
+        def get_id()
+            return @id
+        end
+
+        def set_id(id)
+            @id = id
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '2.0'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+    end
+    # Represents the Request object for the GetBulkTinMatchResults API
+    #
+    # @param  String $id The bulk ID (required)
+    # @param  String $avalara_version API version (required)
+    # @param  String $filter A filter statement to identify specific records to retrieve.  For more information on filtering, see &lt;a href&#x3D;\&quot;https://developer.avalara.com/avatax/filtering-in-rest/\&quot;&gt;Filtering in REST&lt;/a&gt;. (optional)
+    # @param  Integer $top If zero or greater than 1000, return at most 1000 results.  Otherwise, return this number of results.  Used with skip to provide pagination for large datasets. (optional)
+    # @param  Integer $skip If nonzero, skip this number of results before returning data. Used with top to provide pagination for large datasets. (optional)
+    # @param  String $order_by A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC. (optional)
+    # @param  Boolean $count If true, return the global count of elements in the collection. (optional)
+    # @param  Boolean $count_only If true, return ONLY the global count of elements in the collection.  It only applies when count&#x3D;true. (optional)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
+    #
+    class GetBulkTinMatchResultsRequestSdk
+        attr_accessor :id
+
+        attr_accessor :avalara_version
+
+        attr_accessor :filter
+
+        attr_accessor :top
+
+        attr_accessor :skip
+
+        attr_accessor :order_by
+
+        attr_accessor :count
+
+        attr_accessor :count_only
+
+        attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
+
+        def initialize()
+        end
+
+        def get_id()
+            return @id
+        end
+
+        def set_id(id)
+            @id = id
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '2.0'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_filter()
+            return @filter
+        end
+
+        def set_filter(filter)
+            @filter = filter
+        end
+
+        def get_top()
+            return @top
+        end
+
+        def set_top(top)
+            @top = top
+        end
+
+        def get_skip()
+            return @skip
+        end
+
+        def set_skip(skip)
+            @skip = skip
+        end
+
+        def get_order_by()
+            return @order_by
+        end
+
+        def set_order_by(order_by)
+            @order_by = order_by
+        end
+
+        def get_count()
+            return @count
+        end
+
+        def set_count(count)
+            @count = count
+        end
+
+        def get_count_only()
+            return @count_only
+        end
+
+        def set_count_only(count_only)
+            @count_only = count_only
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
     end
     # Represents the Request object for the PerformRealTimeTinMatch API
     #
@@ -361,6 +812,57 @@ module AvalaraSdk::A1099
 
         def set_real_time_tin_match_request(real_time_tin_match_request)
             @real_time_tin_match_request = real_time_tin_match_request
+        end
+    end
+    # Represents the Request object for the SubmitBulkTinMatch API
+    #
+    # @param  String $avalara_version API version (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
+    # @param  BulkTinMatchRequest $bulk_tin_match_request Required TIN collection to perform bulk TIN match (optional)
+    #
+    class SubmitBulkTinMatchRequestSdk
+        attr_accessor :avalara_version
+
+        attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
+
+        attr_accessor :bulk_tin_match_request
+
+        def initialize()
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '2.0'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+
+        def get_bulk_tin_match_request()
+            return @bulk_tin_match_request
+        end
+
+        def set_bulk_tin_match_request(bulk_tin_match_request)
+            @bulk_tin_match_request = bulk_tin_match_request
         end
     end
   end

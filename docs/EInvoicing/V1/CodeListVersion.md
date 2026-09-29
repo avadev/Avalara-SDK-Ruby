@@ -17,8 +17,8 @@ require 'avalara_sdk'
 
 instance = AvalaraSdk::EInvoicing::V1::CodeListVersion.new(
   version_reasons: [&quot;Initial adoption of EN16931 document type codes&quot;,&quot;Alignment with French e-invoicing mandate 2026&quot;],
-  juris_effective_date: Tue Dec 31 16:00:00 PST 2024,
-  juris_sunset_date: Thu Dec 30 16:00:00 PST 9999,
+  juris_effective_date: Wed Jan 01 00:00:00 UTC 2025,
+  juris_sunset_date: Fri Dec 31 00:00:00 UTC 9999,
   locale: fr-FR,
   values: null
 )
