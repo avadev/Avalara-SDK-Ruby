@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("26.9.1")
+        api_client.set_sdk_version("26.10.0")
         @api_client = api_client
       end
 
@@ -594,6 +594,92 @@ module AvalaraSdk::A1099
         return data, response.code, response.headers
       end
 
+      # Request a replacement submission for an issuer's rejected forms
+      # Mirrors the UI's \"Resubmit Rejected Forms\" action: schedules a replacement submission for every one  of the issuer's forms currently in Rejected or RejectedWithErrors status, in a single action. There  is no per-form or per-submission selection. This call only schedules the resubmission — actual  transmission to the IRS remains asynchronous and batch-driven.
+      # @param issuer_id [Integer] Id of the issuer whose rejected forms should be resubmitted      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+      # @return [ResubmitRejectedFormsResponse]
+      def resubmit_rejected_forms(request_parameters)
+        data, _status_code, _headers = resubmit_rejected_forms_with_http_info(request_parameters)
+        data
+      end
+
+      # Request a replacement submission for an issuer&#39;s rejected forms
+      # Mirrors the UI&#39;s \&quot;Resubmit Rejected Forms\&quot; action: schedules a replacement submission for every one  of the issuer&#39;s forms currently in Rejected or RejectedWithErrors status, in a single action. There  is no per-form or per-submission selection. This call only schedules the resubmission — actual  transmission to the IRS remains asynchronous and batch-driven.
+          
+      # @param issuer_id [Integer] Id of the issuer whose rejected forms should be resubmitted    
+      # @param avalara_version [String] API version    
+      # @param x_correlation_id [String] Unique correlation Id in a GUID format    
+      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .    
+      # @return [Array<(ResubmitRejectedFormsResponse, Integer, Hash)>] ResubmitRejectedFormsResponse data, response status code and response headers
+      def resubmit_rejected_forms_with_http_info(request_parameters)
+        # OAuth2 Scopes
+        required_scopes = ''
+        # Request Parameters
+        issuer_id = request_parameters.get_issuer_id()
+        avalara_version = request_parameters.get_avalara_version()
+        x_correlation_id = request_parameters.get_x_correlation_id()
+        x_avalara_client = request_parameters.get_x_avalara_client()
+        # verify the required parameter 'issuer_id' is set
+        if @api_client.config.client_side_validation && issuer_id.nil?
+          fail ArgumentError, "Missing the required parameter 'issuer_id' when calling Issuers1099Api.resubmit_rejected_forms"
+        end
+        # verify the required parameter 'avalara_version' is set
+        if @api_client.config.client_side_validation && avalara_version.nil?
+          fail ArgumentError, "Missing the required parameter 'avalara_version' when calling Issuers1099Api.resubmit_rejected_forms"
+        end
+        # resource path
+        local_var_path = '/1099/issuers/{issuerId}/$resubmit-rejected-forms'.sub('{' + 'issuerId' + '}', CGI.escape(issuer_id.to_s))
+
+        # query parameters
+        query_params = {}
+
+        # header parameters
+        header_params = {}
+        # HTTP header 'Accept' (if needed)
+        header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+        if !avalara_version.nil?
+          header_params[:'avalara-version'] = avalara_version
+        end
+        if !x_correlation_id.nil?
+          header_params[:'X-Correlation-Id'] = x_correlation_id
+        end
+        if !x_avalara_client.nil?
+          header_params[:'X-Avalara-Client'] = x_avalara_client
+        end
+
+        # form parameters
+        form_params = {}
+
+        # http body (model)
+        post_body = {}
+
+        # return_type
+        return_type = 'ResubmitRejectedFormsResponse'
+
+        # auth_names
+        auth_names = ['bearer']
+
+        @api_client.apply_auth_to_request!(header_params, auth_names, required_scopes)
+
+        new_options = {
+          :operation => :"Issuers1099Api.resubmit_rejected_forms",
+          :header_params => header_params,
+          :query_params => query_params,
+          :form_params => form_params,
+          :body => post_body,
+          :auth_names => auth_names,
+          :return_type => return_type
+        }
+
+        response = @api_client.call_api(:POST, local_var_path, new_options, required_scopes, false, :A1099)
+        if new_options[:return_type]
+          data = deserialize(response, new_options[:return_type])
+        else
+          data = nil
+        end
+        return data, response.code, response.headers
+      end
+
       # Update an issuer
       # Update an issuer (also known as a Payer). When the payload violates field-level business rules, the issuer is still persisted and the response body includes a `validationErrors[]` array describing each violation.
       # @param id [String] Id of the issuer to update      # @param avalara_version [String] API version      # @param x_correlation_id [String] Unique correlation Id in a GUID format      # @param x_avalara_client [String] Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .      # @param issuer_request [IssuerRequest] The issuer to update
@@ -928,6 +1014,57 @@ module AvalaraSdk::A1099
 
         def set_count_only(count_only)
             @count_only = count_only
+        end
+
+        def get_x_correlation_id()
+            return @x_correlation_id
+        end
+
+        def set_x_correlation_id(x_correlation_id)
+            @x_correlation_id = x_correlation_id
+        end
+
+        def get_x_avalara_client()
+            return @x_avalara_client
+        end
+
+        def set_x_avalara_client(x_avalara_client)
+            @x_avalara_client = x_avalara_client
+        end
+    end
+    # Represents the Request object for the ResubmitRejectedForms API
+    #
+    # @param  Integer $issuer_id Id of the issuer whose rejected forms should be resubmitted (required)
+    # @param  String $avalara_version API version (required)
+    # @param  String $x_correlation_id Unique correlation Id in a GUID format (optional)
+    # @param  String $x_avalara_client Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . (optional)
+    #
+    class ResubmitRejectedFormsRequestSdk
+        attr_accessor :issuer_id
+
+        attr_accessor :avalara_version
+
+        attr_accessor :x_correlation_id
+
+        attr_accessor :x_avalara_client
+
+        def initialize()
+        end
+
+        def get_issuer_id()
+            return @issuer_id
+        end
+
+        def set_issuer_id(issuer_id)
+            @issuer_id = issuer_id
+        end
+
+        def get_avalara_version()
+            return @avalara_version || '2.0'
+        end
+
+        def set_avalara_version(avalara_version)
+            @avalara_version = avalara_version
         end
 
         def get_x_correlation_id()

@@ -8,6 +8,7 @@ All URIs are relative to *https://api.sbx.avalara.com/avalara1099*
 | [**delete_issuer**](Issuers1099Api.md#delete_issuer) | **DELETE** /1099/issuers/{id} | Delete an issuer |
 | [**get_issuer**](Issuers1099Api.md#get_issuer) | **GET** /1099/issuers/{id} | Retrieve an issuer |
 | [**get_issuers**](Issuers1099Api.md#get_issuers) | **GET** /1099/issuers | List issuers |
+| [**resubmit_rejected_forms**](Issuers1099Api.md#resubmit_rejected_forms) | **POST** /1099/issuers/{issuerId}/$resubmit-rejected-forms | Request a replacement submission for an issuer&#39;s rejected forms |
 | [**update_issuer**](Issuers1099Api.md#update_issuer) | **PUT** /1099/issuers/{id} | Update an issuer |
 
 
@@ -39,7 +40,7 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '020085b2-ced8-4d4e-8d8e-aac8901ba664', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '5ae71043-1efc-47f3-931c-194f239999b9', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   issuer_request: AvalaraSdk::A1099::V2::IssuerRequest.new({business_name: 'business_name_example', telephone: 'telephone_example', tax_year: 37, country_code: 'country_code_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # IssuerRequest | The issuer to create
 }
@@ -123,7 +124,7 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 id = 'id_example' # String | Id of the issuer to delete
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: 'eeca9729-5b2f-4ba1-a3c7-bf49c3705b52', # String | Unique correlation Id in a GUID format
+  x_correlation_id: 'f7a15738-d958-4708-aad8-eac25b686d81', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -205,7 +206,7 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 id = 'id_example' # String | Id of the issuer to retrieve
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '1ba68926-014a-4e57-ac33-5120f7d67ad5', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '27ab9711-3475-41e4-b82a-2b7ce52ca884', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -293,7 +294,7 @@ opts = {
   order_by: 'order_by_example', # String | A comma separated list of sort statements in the format (fieldname) [ASC|DESC], for example id ASC.
   count: true, # Boolean | If true, return the global count of elements in the collection.
   count_only: true, # Boolean | If true, return ONLY the global count of elements in the collection.  It only applies when count=true.
-  x_correlation_id: '0b7d8a8b-c34a-48e3-bf9e-86c475547496', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '1dbcdaf4-7ea0-46e9-b83c-b663e6178568', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
 }
 
@@ -352,6 +353,89 @@ end
 - **Accept**: application/json
 
 
+## resubmit_rejected_forms
+
+> <ResubmitRejectedFormsResponse> resubmit_rejected_forms(issuer_id, avalara_version, opts)
+
+Request a replacement submission for an issuer's rejected forms
+
+Mirrors the UI's \"Resubmit Rejected Forms\" action: schedules a replacement submission for every one  of the issuer's forms currently in Rejected or RejectedWithErrors status, in a single action. There  is no per-form or per-submission selection. This call only schedules the resubmission — actual  transmission to the IRS remains asynchronous and batch-driven.
+
+### Examples
+
+```ruby
+require 'time'
+require 'avalara_sdk'
+# setup authorization
+AvalaraSdk::A1099::V2.configure do |config|
+  # See Documentation for Authorization section in main README.md for more auth examples.
+  config.bearer_token='<Your Avalara Identity Access Token>'
+  config.environment='sandbox'
+  config.app_name='testApp'
+  config.app_version='1.2.3'
+  config.machine_name='testMachine'
+end
+
+api_client = AvalaraSdk::ApiClient.new config
+api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
+
+issuer_id = 789 # Integer | Id of the issuer whose rejected forms should be resubmitted
+avalara_version = '2.0.0' # String | API version
+opts = {
+  x_correlation_id: '0520f85b-11b0-4246-953f-e06f87029486', # String | Unique correlation Id in a GUID format
+  x_avalara_client: 'Swagger UI; 22.1.0' # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
+}
+
+begin
+  # Request a replacement submission for an issuer's rejected forms
+  result = api_instance.resubmit_rejected_forms(issuer_id, avalara_version, opts)
+  p result
+rescue AvalaraSdk::ApiError => e
+  puts "Error when calling Issuers1099Api->resubmit_rejected_forms: #{e}"
+end
+```
+
+#### Using the resubmit_rejected_forms_with_http_info variant
+
+This returns an Array which contains the response data, status code and headers.
+
+> <Array(<ResubmitRejectedFormsResponse>, Integer, Hash)> resubmit_rejected_forms_with_http_info(issuer_id, avalara_version, opts)
+
+```ruby
+begin
+  # Request a replacement submission for an issuer's rejected forms
+  data, status_code, headers = api_instance.resubmit_rejected_forms_with_http_info(issuer_id, avalara_version, opts)
+  p status_code # => 2xx
+  p headers # => { ... }
+  p data # => <ResubmitRejectedFormsResponse>
+rescue AvalaraSdk::A1099::V2::ApiError => e
+  puts "Error when calling Issuers1099Api->resubmit_rejected_forms_with_http_info: #{e}"
+end
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **issuer_id** | **Integer** | Id of the issuer whose rejected forms should be resubmitted |  |
+| **avalara_version** | **String** | API version |  |
+| **x_correlation_id** | **String** | Unique correlation Id in a GUID format | [optional] |
+| **x_avalara_client** | **String** | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) . | [optional] |
+
+### Return type
+
+[**ResubmitRejectedFormsResponse**](ResubmitRejectedFormsResponse.md)
+
+### Authorization
+
+[bearer](../../../README.md#documentation-for-authorization)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
 ## update_issuer
 
 > <IssuerWriteResponse> update_issuer(id, avalara_version, opts)
@@ -381,7 +465,7 @@ api_instance = AvalaraSdk::A1099::V2::Issuers1099Api.new api_client
 id = 'id_example' # String | Id of the issuer to update
 avalara_version = '2.0.0' # String | API version
 opts = {
-  x_correlation_id: '5dcb2f2c-e12d-4e11-aeaa-dfbd23bbe954', # String | Unique correlation Id in a GUID format
+  x_correlation_id: '542fb8dd-e4ec-49c2-aef5-f9159dd46aaf', # String | Unique correlation Id in a GUID format
   x_avalara_client: 'Swagger UI; 22.1.0', # String | Identifies the software you are using to call this API. For more information on the client header, see [Client Headers](https://developer.avalara.com/avatax/client-headers/) .
   issuer_request: AvalaraSdk::A1099::V2::IssuerRequest.new({business_name: 'business_name_example', telephone: 'telephone_example', tax_year: 37, country_code: 'country_code_example', address: 'address_example', city: 'city_example', state: 'state_example', zip: 'zip_example', last_filing: false}) # IssuerRequest | The issuer to update
 }
