@@ -10,28 +10,31 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      # Form 1095-B: Health Coverage
-  class Form1095B
-    # Employee's first name
-    attr_accessor :employee_first_name
+      # Form 1098-T: Tuition Statement                The recipient is the student and the issuer is the filer (eligible educational institution or insurer).                *Required:* at least one amount above zero (Boxes 1, 4, 5, 6 or 10). Amounts can't be negative; Boxes 4 and 6 are  reductions of prior-year amounts, entered as positive numbers. Boxes 2 and 3 are reserved by the IRS.                Form 1098-T has no state or local boxes, so `stateAndLocalWithholding` is discarded and reads back as `null`.
+  class Form1098T
+    # Payments received for qualified tuition and related expenses
+    attr_accessor :payments_received_for_qualified_tuition_and_related_expenses
 
-    # Employee's middle name
-    attr_accessor :employee_middle_name
+    # Adjustments made for a prior year
+    attr_accessor :adjustments_made_for_prior_year
 
-    # Employee's last name
-    attr_accessor :employee_last_name
+    # Scholarships or grants
+    attr_accessor :scholarships_or_grants
 
-    # Employee's name suffix
-    attr_accessor :employee_name_suffix
+    # Adjustments to scholarships or grants for a prior year
+    attr_accessor :adjustments_to_scholarships_or_grants_for_prior_year
 
-    # Employee's date of birth
-    attr_accessor :employee_date_of_birth
+    # If checked, the amount in Box 1 includes amounts for an academic period beginning January through March of the  next year
+    attr_accessor :includes_amounts_for_academic_period_beginning_next_year_indicator
 
-    # Origin of health coverage code.    Available values:  - A: Small Business Health Options Program (SHOP)  - B: Employer-sponsored coverage  - C: Government-sponsored program  - D: Individual market insurance  - E: Multiemployer plan  - F: Other designated minimum essential coverage  - G: Employer-sponsored coverage that is an individual coverage HRA (valid for tax years 2020 and later)
-    attr_accessor :origin_of_health_coverage_code
+    # If checked, the student was at least a half-time student during any academic period that began in the tax year
+    attr_accessor :at_least_half_time_student_indicator
 
-    # Covered individuals information - At least one month of coverage must be entered if it's not a correction.
-    attr_accessor :covered_individuals
+    # If checked, the student was enrolled in a program leading to a graduate degree, certificate or credential
+    attr_accessor :graduate_student_indicator
+
+    # Insurance contract reimbursements or refunds (insurers only)
+    attr_accessor :insurance_contract_reimbursements_or_refunds
 
     # Form type.
     attr_accessor :type
@@ -59,9 +62,6 @@ module AvalaraSdk::A1099::V2
 
     # DEPRECATED: Use `businessName` for businesses; use `firstName`, `middleName`, `lastName`, and `suffixName` for individuals.
     attr_accessor :recipient_name
-
-    # DEPRECATED: Use `businessName2` instead.
-    attr_accessor :recipient_second_name
 
     # Address.
     attr_accessor :address
@@ -135,6 +135,42 @@ module AvalaraSdk::A1099::V2
     # Date time when the record was last updated.
     attr_accessor :updated_at
 
+    # Recipient classification.  The platform is transitioning from tax identifier classifications to recipient entity classifications. New values represent recipient entity types and should be preferred. Deprecated values represent identifier formats and remain supported for backward compatibility only.  Available values: - INDIVIDUAL: Recipient is an individual - BUSINESS: Recipient is a business - UNKNOWN: Recipient classification is unknown - EIN: (Deprecated - use BUSINESS) Employer Identification Number - SSN: (Deprecated - use INDIVIDUAL) Social Security Number - ITIN: (Deprecated - use INDIVIDUAL) Individual Taxpayer Identification Number - ATIN: (Deprecated - use INDIVIDUAL) Adoption Taxpayer Identification Number
+    attr_accessor :tin_type
+
+    # Business name. Required when the recipient of the form is a business; should only be used for businesses.
+    attr_accessor :business_name
+
+    # Business name line 2. Should only be used for businesses.
+    attr_accessor :business_name2
+
+    # First name. Required when the recipient of the form is an individual; should only be used for individuals.
+    attr_accessor :first_name
+
+    # Middle name. Should only be used for individuals.
+    attr_accessor :middle_name
+
+    # Last name. Required when the recipient of the form is an individual; should only be used for individuals.
+    attr_accessor :last_name
+
+    # Suffix name. Should only be used for individuals.
+    attr_accessor :suffix_name
+
+    # DEPRECATED: Use `businessName2` instead.
+    attr_accessor :recipient_second_name
+
+    # Account number
+    attr_accessor :account_number
+
+    # Office code
+    attr_accessor :office_code
+
+    # No TIN indicator
+    attr_accessor :no_tin
+
+    # Second TIN notice
+    attr_accessor :second_tin_notice
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -160,13 +196,14 @@ module AvalaraSdk::A1099::V2
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'employee_first_name' => :'employeeFirstName',
-        :'employee_middle_name' => :'employeeMiddleName',
-        :'employee_last_name' => :'employeeLastName',
-        :'employee_name_suffix' => :'employeeNameSuffix',
-        :'employee_date_of_birth' => :'employeeDateOfBirth',
-        :'origin_of_health_coverage_code' => :'originOfHealthCoverageCode',
-        :'covered_individuals' => :'coveredIndividuals',
+        :'payments_received_for_qualified_tuition_and_related_expenses' => :'paymentsReceivedForQualifiedTuitionAndRelatedExpenses',
+        :'adjustments_made_for_prior_year' => :'adjustmentsMadeForPriorYear',
+        :'scholarships_or_grants' => :'scholarshipsOrGrants',
+        :'adjustments_to_scholarships_or_grants_for_prior_year' => :'adjustmentsToScholarshipsOrGrantsForPriorYear',
+        :'includes_amounts_for_academic_period_beginning_next_year_indicator' => :'includesAmountsForAcademicPeriodBeginningNextYearIndicator',
+        :'at_least_half_time_student_indicator' => :'atLeastHalfTimeStudentIndicator',
+        :'graduate_student_indicator' => :'graduateStudentIndicator',
+        :'insurance_contract_reimbursements_or_refunds' => :'insuranceContractReimbursementsOrRefunds',
         :'type' => :'type',
         :'id' => :'id',
         :'issuer_id' => :'issuerId',
@@ -176,7 +213,6 @@ module AvalaraSdk::A1099::V2
         :'reference_id' => :'referenceId',
         :'tin' => :'tin',
         :'recipient_name' => :'recipientName',
-        :'recipient_second_name' => :'recipientSecondName',
         :'address' => :'address',
         :'address2' => :'address2',
         :'city' => :'city',
@@ -200,7 +236,19 @@ module AvalaraSdk::A1099::V2
         :'e_delivery_status' => :'eDeliveryStatus',
         :'validation_errors' => :'validationErrors',
         :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt'
+        :'updated_at' => :'updatedAt',
+        :'tin_type' => :'tinType',
+        :'business_name' => :'businessName',
+        :'business_name2' => :'businessName2',
+        :'first_name' => :'firstName',
+        :'middle_name' => :'middleName',
+        :'last_name' => :'lastName',
+        :'suffix_name' => :'suffixName',
+        :'recipient_second_name' => :'recipientSecondName',
+        :'account_number' => :'accountNumber',
+        :'office_code' => :'officeCode',
+        :'no_tin' => :'noTin',
+        :'second_tin_notice' => :'secondTinNotice'
       }
     end
 
@@ -212,13 +260,14 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'employee_first_name' => :'String',
-        :'employee_middle_name' => :'String',
-        :'employee_last_name' => :'String',
-        :'employee_name_suffix' => :'String',
-        :'employee_date_of_birth' => :'Date',
-        :'origin_of_health_coverage_code' => :'String',
-        :'covered_individuals' => :'Array<CoveredIndividual>',
+        :'payments_received_for_qualified_tuition_and_related_expenses' => :'Float',
+        :'adjustments_made_for_prior_year' => :'Float',
+        :'scholarships_or_grants' => :'Float',
+        :'adjustments_to_scholarships_or_grants_for_prior_year' => :'Float',
+        :'includes_amounts_for_academic_period_beginning_next_year_indicator' => :'Boolean',
+        :'at_least_half_time_student_indicator' => :'Boolean',
+        :'graduate_student_indicator' => :'Boolean',
+        :'insurance_contract_reimbursements_or_refunds' => :'Float',
         :'type' => :'String',
         :'id' => :'String',
         :'issuer_id' => :'String',
@@ -228,7 +277,6 @@ module AvalaraSdk::A1099::V2
         :'reference_id' => :'String',
         :'tin' => :'String',
         :'recipient_name' => :'String',
-        :'recipient_second_name' => :'String',
         :'address' => :'String',
         :'address2' => :'String',
         :'city' => :'String',
@@ -252,19 +300,33 @@ module AvalaraSdk::A1099::V2
         :'e_delivery_status' => :'Form1099StatusDetail',
         :'validation_errors' => :'Array<ValidationError>',
         :'created_at' => :'Time',
-        :'updated_at' => :'Time'
+        :'updated_at' => :'Time',
+        :'tin_type' => :'String',
+        :'business_name' => :'String',
+        :'business_name2' => :'String',
+        :'first_name' => :'String',
+        :'middle_name' => :'String',
+        :'last_name' => :'String',
+        :'suffix_name' => :'String',
+        :'recipient_second_name' => :'String',
+        :'account_number' => :'String',
+        :'office_code' => :'String',
+        :'no_tin' => :'Boolean',
+        :'second_tin_notice' => :'Boolean'
       }
     end
 
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
-        :'employee_first_name',
-        :'employee_middle_name',
-        :'employee_last_name',
-        :'employee_name_suffix',
-        :'employee_date_of_birth',
-        :'origin_of_health_coverage_code',
+        :'payments_received_for_qualified_tuition_and_related_expenses',
+        :'adjustments_made_for_prior_year',
+        :'scholarships_or_grants',
+        :'adjustments_to_scholarships_or_grants_for_prior_year',
+        :'includes_amounts_for_academic_period_beginning_next_year_indicator',
+        :'at_least_half_time_student_indicator',
+        :'graduate_student_indicator',
+        :'insurance_contract_reimbursements_or_refunds',
         :'id',
         :'issuer_id',
         :'issuer_reference_id',
@@ -273,7 +335,6 @@ module AvalaraSdk::A1099::V2
         :'reference_id',
         :'tin',
         :'recipient_name',
-        :'recipient_second_name',
         :'address',
         :'address2',
         :'city',
@@ -297,14 +358,26 @@ module AvalaraSdk::A1099::V2
         :'e_delivery_status',
         :'validation_errors',
         :'created_at',
-        :'updated_at'
+        :'updated_at',
+        :'tin_type',
+        :'business_name',
+        :'business_name2',
+        :'first_name',
+        :'middle_name',
+        :'last_name',
+        :'suffix_name',
+        :'recipient_second_name',
+        :'account_number',
+        :'office_code',
+        :'no_tin',
+        :'second_tin_notice'
       ])
     end
 
     # List of class defined in allOf (OpenAPI v3)
     def self.openapi_all_of
       [
-      :'Form1099Base'
+      :'IrisFormBase'
       ]
     end
 
@@ -312,51 +385,47 @@ module AvalaraSdk::A1099::V2
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::Form1095B` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::Form1098T` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::Form1095B`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::Form1098T`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'employee_first_name')
-        self.employee_first_name = attributes[:'employee_first_name']
-      else
-        self.employee_first_name = nil
+      if attributes.key?(:'payments_received_for_qualified_tuition_and_related_expenses')
+        self.payments_received_for_qualified_tuition_and_related_expenses = attributes[:'payments_received_for_qualified_tuition_and_related_expenses']
       end
 
-      if attributes.key?(:'employee_middle_name')
-        self.employee_middle_name = attributes[:'employee_middle_name']
+      if attributes.key?(:'adjustments_made_for_prior_year')
+        self.adjustments_made_for_prior_year = attributes[:'adjustments_made_for_prior_year']
       end
 
-      if attributes.key?(:'employee_last_name')
-        self.employee_last_name = attributes[:'employee_last_name']
-      else
-        self.employee_last_name = nil
+      if attributes.key?(:'scholarships_or_grants')
+        self.scholarships_or_grants = attributes[:'scholarships_or_grants']
       end
 
-      if attributes.key?(:'employee_name_suffix')
-        self.employee_name_suffix = attributes[:'employee_name_suffix']
+      if attributes.key?(:'adjustments_to_scholarships_or_grants_for_prior_year')
+        self.adjustments_to_scholarships_or_grants_for_prior_year = attributes[:'adjustments_to_scholarships_or_grants_for_prior_year']
       end
 
-      if attributes.key?(:'employee_date_of_birth')
-        self.employee_date_of_birth = attributes[:'employee_date_of_birth']
+      if attributes.key?(:'includes_amounts_for_academic_period_beginning_next_year_indicator')
+        self.includes_amounts_for_academic_period_beginning_next_year_indicator = attributes[:'includes_amounts_for_academic_period_beginning_next_year_indicator']
       end
 
-      if attributes.key?(:'origin_of_health_coverage_code')
-        self.origin_of_health_coverage_code = attributes[:'origin_of_health_coverage_code']
-      else
-        self.origin_of_health_coverage_code = nil
+      if attributes.key?(:'at_least_half_time_student_indicator')
+        self.at_least_half_time_student_indicator = attributes[:'at_least_half_time_student_indicator']
       end
 
-      if attributes.key?(:'covered_individuals')
-        if (value = attributes[:'covered_individuals']).is_a?(Array)
-          self.covered_individuals = value
-        end
+      if attributes.key?(:'graduate_student_indicator')
+        self.graduate_student_indicator = attributes[:'graduate_student_indicator']
+      end
+
+      if attributes.key?(:'insurance_contract_reimbursements_or_refunds')
+        self.insurance_contract_reimbursements_or_refunds = attributes[:'insurance_contract_reimbursements_or_refunds']
       end
 
       if attributes.key?(:'type')
@@ -395,10 +464,6 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'recipient_name')
         self.recipient_name = attributes[:'recipient_name']
-      end
-
-      if attributes.key?(:'recipient_second_name')
-        self.recipient_second_name = attributes[:'recipient_second_name']
       end
 
       if attributes.key?(:'address')
@@ -506,6 +571,54 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
       end
+
+      if attributes.key?(:'tin_type')
+        self.tin_type = attributes[:'tin_type']
+      end
+
+      if attributes.key?(:'business_name')
+        self.business_name = attributes[:'business_name']
+      end
+
+      if attributes.key?(:'business_name2')
+        self.business_name2 = attributes[:'business_name2']
+      end
+
+      if attributes.key?(:'first_name')
+        self.first_name = attributes[:'first_name']
+      end
+
+      if attributes.key?(:'middle_name')
+        self.middle_name = attributes[:'middle_name']
+      end
+
+      if attributes.key?(:'last_name')
+        self.last_name = attributes[:'last_name']
+      end
+
+      if attributes.key?(:'suffix_name')
+        self.suffix_name = attributes[:'suffix_name']
+      end
+
+      if attributes.key?(:'recipient_second_name')
+        self.recipient_second_name = attributes[:'recipient_second_name']
+      end
+
+      if attributes.key?(:'account_number')
+        self.account_number = attributes[:'account_number']
+      end
+
+      if attributes.key?(:'office_code')
+        self.office_code = attributes[:'office_code']
+      end
+
+      if attributes.key?(:'no_tin')
+        self.no_tin = attributes[:'no_tin']
+      end
+
+      if attributes.key?(:'second_tin_notice')
+        self.second_tin_notice = attributes[:'second_tin_notice']
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -524,22 +637,12 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      origin_of_health_coverage_code_validator = EnumAttributeValidator.new('String', ["A", "B", "C", "D", "E", "F", "G"])
-      return false unless origin_of_health_coverage_code_validator.valid?(@origin_of_health_coverage_code)
       return false if @type.nil?
       type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-T", "1099-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "W-2"])
       return false unless type_validator.valid?(@type)
+      tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN", "INDIVIDUAL", "BUSINESS", "UNKNOWN"])
+      return false unless tin_type_validator.valid?(@tin_type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] origin_of_health_coverage_code Object to be assigned
-    def origin_of_health_coverage_code=(origin_of_health_coverage_code)
-      validator = EnumAttributeValidator.new('String', ["A", "B", "C", "D", "E", "F", "G"])
-      unless validator.valid?(origin_of_health_coverage_code)
-        fail ArgumentError, "invalid value for \"origin_of_health_coverage_code\", must be one of #{validator.allowable_values}."
-      end
-      @origin_of_health_coverage_code = origin_of_health_coverage_code
     end
 
     # Custom attribute writer method checking allowed values (enum).
@@ -552,18 +655,29 @@ module AvalaraSdk::A1099::V2
       @type = type
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] tin_type Object to be assigned
+    def tin_type=(tin_type)
+      validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN", "INDIVIDUAL", "BUSINESS", "UNKNOWN"])
+      unless validator.valid?(tin_type)
+        fail ArgumentError, "invalid value for \"tin_type\", must be one of #{validator.allowable_values}."
+      end
+      @tin_type = tin_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          employee_first_name == o.employee_first_name &&
-          employee_middle_name == o.employee_middle_name &&
-          employee_last_name == o.employee_last_name &&
-          employee_name_suffix == o.employee_name_suffix &&
-          employee_date_of_birth == o.employee_date_of_birth &&
-          origin_of_health_coverage_code == o.origin_of_health_coverage_code &&
-          covered_individuals == o.covered_individuals &&
+          payments_received_for_qualified_tuition_and_related_expenses == o.payments_received_for_qualified_tuition_and_related_expenses &&
+          adjustments_made_for_prior_year == o.adjustments_made_for_prior_year &&
+          scholarships_or_grants == o.scholarships_or_grants &&
+          adjustments_to_scholarships_or_grants_for_prior_year == o.adjustments_to_scholarships_or_grants_for_prior_year &&
+          includes_amounts_for_academic_period_beginning_next_year_indicator == o.includes_amounts_for_academic_period_beginning_next_year_indicator &&
+          at_least_half_time_student_indicator == o.at_least_half_time_student_indicator &&
+          graduate_student_indicator == o.graduate_student_indicator &&
+          insurance_contract_reimbursements_or_refunds == o.insurance_contract_reimbursements_or_refunds &&
           type == o.type &&
           id == o.id &&
           issuer_id == o.issuer_id &&
@@ -573,7 +687,6 @@ module AvalaraSdk::A1099::V2
           reference_id == o.reference_id &&
           tin == o.tin &&
           recipient_name == o.recipient_name &&
-          recipient_second_name == o.recipient_second_name &&
           address == o.address &&
           address2 == o.address2 &&
           city == o.city &&
@@ -597,7 +710,19 @@ module AvalaraSdk::A1099::V2
           e_delivery_status == o.e_delivery_status &&
           validation_errors == o.validation_errors &&
           created_at == o.created_at &&
-          updated_at == o.updated_at
+          updated_at == o.updated_at &&
+          tin_type == o.tin_type &&
+          business_name == o.business_name &&
+          business_name2 == o.business_name2 &&
+          first_name == o.first_name &&
+          middle_name == o.middle_name &&
+          last_name == o.last_name &&
+          suffix_name == o.suffix_name &&
+          recipient_second_name == o.recipient_second_name &&
+          account_number == o.account_number &&
+          office_code == o.office_code &&
+          no_tin == o.no_tin &&
+          second_tin_notice == o.second_tin_notice
     end
 
     # @see the `==` method
@@ -609,7 +734,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [employee_first_name, employee_middle_name, employee_last_name, employee_name_suffix, employee_date_of_birth, origin_of_health_coverage_code, covered_individuals, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, recipient_second_name, address, address2, city, state, zip, email, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, address_verification, state_and_local_withholding, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at].hash
+      [payments_received_for_qualified_tuition_and_related_expenses, adjustments_made_for_prior_year, scholarships_or_grants, adjustments_to_scholarships_or_grants_for_prior_year, includes_amounts_for_academic_period_beginning_next_year_indicator, at_least_half_time_student_indicator, graduate_student_indicator, insurance_contract_reimbursements_or_refunds, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, address, address2, city, state, zip, email, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, address_verification, state_and_local_withholding, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at, tin_type, business_name, business_name2, first_name, middle_name, last_name, suffix_name, recipient_second_name, account_number, office_code, no_tin, second_tin_notice].hash
     end
 
     # Builds the object from hash

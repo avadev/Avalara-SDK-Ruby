@@ -10,39 +10,14 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      class Form1099ListRequest
-    # Available form types: * `1042-S` * `1095-B` * `1095-C` * `1098` * `1098-T` * `1099-C` * `1099-DIV` * `1099-INT` * `1099-K` * `1099-MISC` * `1099-NEC` * `1099-PATR` * `1099-R` * `1099-S` * `1099-SA` * `W-2` 
-    attr_accessor :type
-
-    attr_accessor :forms
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+      class ResubmitRejectedFormsResponse
+    # Number of forms scheduled for replacement submission.
+    attr_accessor :resubmitted_forms_count
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'type' => :'type',
-        :'forms' => :'forms'
+        :'resubmitted_forms_count' => :'resubmittedFormsCount'
       }
     end
 
@@ -54,8 +29,7 @@ module AvalaraSdk::A1099::V2
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'type' => :'String',
-        :'forms' => :'Array<Get1099Form200Response>'
+        :'resubmitted_forms_count' => :'Integer'
       }
     end
 
@@ -69,25 +43,19 @@ module AvalaraSdk::A1099::V2
     # @param [Hash] attributes Model attributes in the form of hash
     def initialize(attributes = {})
       if (!attributes.is_a?(Hash))
-        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::Form1099ListRequest` initialize method"
+        fail ArgumentError, "The input argument (attributes) must be a hash in `AvalaraSdk::A1099::V2::ResubmitRejectedFormsResponse` initialize method"
       end
 
       # check to see if the attribute exists and convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h|
         if (!self.class.attribute_map.key?(k.to_sym))
-          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::Form1099ListRequest`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
+          fail ArgumentError, "`#{k}` is not a valid attribute in `AvalaraSdk::A1099::V2::ResubmitRejectedFormsResponse`. Please check the name to make sure it's valid. List of attributes: " + self.class.attribute_map.keys.inspect
         end
         h[k.to_sym] = v
       }
 
-      if attributes.key?(:'type')
-        self.type = attributes[:'type']
-      end
-
-      if attributes.key?(:'forms')
-        if (value = attributes[:'forms']).is_a?(Array)
-          self.forms = value
-        end
+      if attributes.key?(:'resubmitted_forms_count')
+        self.resubmitted_forms_count = attributes[:'resubmitted_forms_count']
       end
     end
 
@@ -103,19 +71,7 @@ module AvalaraSdk::A1099::V2
     # @return true if the model is valid
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
-      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-T", "1099-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "W-2"])
-      return false unless type_validator.valid?(@type)
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] type Object to be assigned
-    def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-T", "1099-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "W-2"])
-      unless validator.valid?(type)
-        fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
-      end
-      @type = type
     end
 
     # Checks equality by comparing each attribute.
@@ -123,8 +79,7 @@ module AvalaraSdk::A1099::V2
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          type == o.type &&
-          forms == o.forms
+          resubmitted_forms_count == o.resubmitted_forms_count
     end
 
     # @see the `==` method
@@ -136,7 +91,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, forms].hash
+      [resubmitted_forms_count].hash
     end
 
     # Builds the object from hash
