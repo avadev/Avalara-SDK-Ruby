@@ -17,7 +17,7 @@ module AvalaraSdk::A1099
         if (api_client.nil?)
           fail  ArgumentError,'api_client is nil'
         end
-        api_client.set_sdk_version("26.10.0")
+        api_client.set_sdk_version("26.11.0")
         @api_client = api_client
       end
 
@@ -613,7 +613,7 @@ module AvalaraSdk::A1099
         # header parameters
         header_params = {}
         # HTTP header 'Accept' (if needed)
-        header_params['Accept'] = @api_client.select_header_accept(['application/pdf', 'application/json'])
+        header_params['Accept'] = @api_client.select_header_accept(['application/json', 'application/pdf'])
         if !avalara_version.nil?
           header_params[:'avalara-version'] = avalara_version
         end

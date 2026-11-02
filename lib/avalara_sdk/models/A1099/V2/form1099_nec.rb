@@ -12,8 +12,20 @@ require 'time'
 module AvalaraSdk::A1099::V2
       # Form 1099-NEC: Nonemployee Compensation
   class Form1099Nec
-    # Nonemployee compensation. Required if DirectSalesIndicator is false.
+    # Box 1a. Nonemployee compensation. Required if DirectSalesIndicator is false. Named \"Box 1\" on revisions of the form before the December 2026 revision.
     attr_accessor :nonemployee_compensation
+
+    # Box 1b. Cash tips, including tips paid in cash or charged by customers - Available only for tax year 2026 and later.  This amount is already included in NonemployeeCompensation (Box 1a) and is not added to it, so it may not exceed NonemployeeCompensation.
+    attr_accessor :cash_tips
+
+    # Box 1c. Treasury Tipped Occupation Code (TTOC) for the recipient's tipped occupation - Available only for tax year 2026 and later.  A three-digit, zero-padded code from the IRS enumeration: 000 (tips received in a nonqualifying occupation), 101-110, 201-211, 301-304,  401-409, 501-508, 601-611, 701-706, or 801-809. The form accepts up to two codes - see TreasuryTippedOccupationCode2 for the second.  Send the code exactly as three characters (\"001\", not \"1\"); leading zeros are not restored for you. Watch for spreadsheet software  that strips leading zeros when a code is exported to CSV and re-imported.
+    attr_accessor :treasury_tipped_occupation_code
+
+    # Box 1c. Second Treasury Tipped Occupation Code (TTOC) - Available only for tax year 2026 and later.  Same three-digit code list and formatting rules as TreasuryTippedOccupationCode, and must differ from it.
+    attr_accessor :treasury_tipped_occupation_code2
+
+    # Box 1d. Qualified overtime compensation - Available only for tax year 2026 and later.  This amount is already included in NonemployeeCompensation (Box 1a) and is not added to it, so it may not exceed NonemployeeCompensation.
+    attr_accessor :overtime_compensation
 
     # Payer made direct sales totaling $5,000 or more of consumer products to recipient for resale. Should be true if Nonemployee compensation is not provided.
     attr_accessor :direct_sales_indicator
@@ -96,7 +108,7 @@ module AvalaraSdk::A1099::V2
     # State and local withholding information
     attr_accessor :state_and_local_withholding
 
-    # Federal e-file status.  Available values:  - unscheduled: Form has not been scheduled for federal e-filing  - scheduled: Form is scheduled for federal e-filing  - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - sent: Form has been sent to the IRS  - accepted: Form was accepted by the IRS  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - corrected: A correction has been sent to the IRS  - corrected_accepted: Correction was accepted by the IRS  - rejected: Form was rejected by the IRS  - corrected_rejected: Correction was rejected by the IRS  - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
+    # Federal e-file status.  Available values:  - unscheduled: Form has not been scheduled for federal e-filing  - scheduled: Form is scheduled for federal e-filing  - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - sent: Form has been sent to the IRS  - accepted: Form was accepted by the IRS  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - corrected: A correction has been sent to the IRS  - corrected_accepted: Correction was accepted by the IRS  - rejected: Form was rejected by the IRS  - corrected_rejected: Correction was rejected by the IRS  - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)  When the form's most recent IRIS filing was rejected or accepted with errors, `errors` lists what the IRS reported.
     attr_accessor :federal_efile_status
 
     # State e-file status.  Available values:  - unscheduled: Form has not been scheduled for state e-filing  - scheduled: Form is scheduled for state e-filing  - airlocked: Form is in process of being uploaded to the state  - sent: Form has been sent to the state  - rejected: Form was rejected by the state  - accepted: Form was accepted by the state  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlocked: Correction is in process of being uploaded to the state  - corrected_sent: Correction has been sent to the state  - corrected_rejected: Correction was rejected by the state  - corrected_accepted: Correction was accepted by the state
@@ -185,6 +197,10 @@ module AvalaraSdk::A1099::V2
     def self.attribute_map
       {
         :'nonemployee_compensation' => :'nonemployeeCompensation',
+        :'cash_tips' => :'cashTips',
+        :'treasury_tipped_occupation_code' => :'treasuryTippedOccupationCode',
+        :'treasury_tipped_occupation_code2' => :'treasuryTippedOccupationCode2',
+        :'overtime_compensation' => :'overtimeCompensation',
         :'direct_sales_indicator' => :'directSalesIndicator',
         :'excess_golden_parachute_payments' => :'excessGoldenParachutePayments',
         :'federal_income_tax_withheld' => :'federalIncomeTaxWithheld',
@@ -245,6 +261,10 @@ module AvalaraSdk::A1099::V2
     def self.openapi_types
       {
         :'nonemployee_compensation' => :'Float',
+        :'cash_tips' => :'Float',
+        :'treasury_tipped_occupation_code' => :'String',
+        :'treasury_tipped_occupation_code2' => :'String',
+        :'overtime_compensation' => :'Float',
         :'direct_sales_indicator' => :'Boolean',
         :'excess_golden_parachute_payments' => :'Float',
         :'federal_income_tax_withheld' => :'Float',
@@ -272,7 +292,7 @@ module AvalaraSdk::A1099::V2
         :'tin_match' => :'Boolean',
         :'address_verification' => :'Boolean',
         :'state_and_local_withholding' => :'StateAndLocalWithholding',
-        :'federal_efile_status' => :'Form1099StatusDetail',
+        :'federal_efile_status' => :'FederalEfileStatusDetail',
         :'state_efile_status' => :'Array<StateEfileStatusDetail>',
         :'postal_mail_status' => :'Form1099StatusDetail',
         :'tin_match_status' => :'Form1099StatusDetail',
@@ -300,6 +320,10 @@ module AvalaraSdk::A1099::V2
     def self.openapi_nullable
       Set.new([
         :'nonemployee_compensation',
+        :'cash_tips',
+        :'treasury_tipped_occupation_code',
+        :'treasury_tipped_occupation_code2',
+        :'overtime_compensation',
         :'direct_sales_indicator',
         :'excess_golden_parachute_payments',
         :'federal_income_tax_withheld',
@@ -376,6 +400,22 @@ module AvalaraSdk::A1099::V2
         self.nonemployee_compensation = attributes[:'nonemployee_compensation']
       else
         self.nonemployee_compensation = nil
+      end
+
+      if attributes.key?(:'cash_tips')
+        self.cash_tips = attributes[:'cash_tips']
+      end
+
+      if attributes.key?(:'treasury_tipped_occupation_code')
+        self.treasury_tipped_occupation_code = attributes[:'treasury_tipped_occupation_code']
+      end
+
+      if attributes.key?(:'treasury_tipped_occupation_code2')
+        self.treasury_tipped_occupation_code2 = attributes[:'treasury_tipped_occupation_code2']
+      end
+
+      if attributes.key?(:'overtime_compensation')
+        self.overtime_compensation = attributes[:'overtime_compensation']
       end
 
       if attributes.key?(:'direct_sales_indicator')
@@ -600,7 +640,7 @@ module AvalaraSdk::A1099::V2
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-T", "1099-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "W-2"])
+      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-E", "1098-T", "1099-B", "1099-C", "1099-DIV", "1099-G", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "5498", "W-2", "W-2G"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN", "INDIVIDUAL", "BUSINESS", "UNKNOWN"])
       return false unless tin_type_validator.valid?(@tin_type)
@@ -610,7 +650,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-T", "1099-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "W-2"])
+      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-E", "1098-T", "1099-B", "1099-C", "1099-DIV", "1099-G", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "5498", "W-2", "W-2G"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -633,6 +673,10 @@ module AvalaraSdk::A1099::V2
       return true if self.equal?(o)
       self.class == o.class &&
           nonemployee_compensation == o.nonemployee_compensation &&
+          cash_tips == o.cash_tips &&
+          treasury_tipped_occupation_code == o.treasury_tipped_occupation_code &&
+          treasury_tipped_occupation_code2 == o.treasury_tipped_occupation_code2 &&
+          overtime_compensation == o.overtime_compensation &&
           direct_sales_indicator == o.direct_sales_indicator &&
           excess_golden_parachute_payments == o.excess_golden_parachute_payments &&
           federal_income_tax_withheld == o.federal_income_tax_withheld &&
@@ -692,7 +736,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [nonemployee_compensation, direct_sales_indicator, excess_golden_parachute_payments, federal_income_tax_withheld, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, address, address2, city, state, zip, email, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, address_verification, state_and_local_withholding, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at, tin_type, business_name, business_name2, first_name, middle_name, last_name, suffix_name, recipient_second_name, account_number, office_code, no_tin, second_tin_notice].hash
+      [nonemployee_compensation, cash_tips, treasury_tipped_occupation_code, treasury_tipped_occupation_code2, overtime_compensation, direct_sales_indicator, excess_golden_parachute_payments, federal_income_tax_withheld, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, address, address2, city, state, zip, email, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, address_verification, state_and_local_withholding, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at, tin_type, business_name, business_name2, first_name, middle_name, last_name, suffix_name, recipient_second_name, account_number, office_code, no_tin, second_tin_notice].hash
     end
 
     # Builds the object from hash

@@ -17,8 +17,23 @@ module AvalaraSdk::A1099::V2
     # The name of the individual or entity associated with the form.
     attr_accessor :name
 
-    # The name of the business associated with the form.
+    # Individual first name.
+    attr_accessor :first_name
+
+    # Individual middle name.
+    attr_accessor :middle_name
+
+    # Individual last name.
+    attr_accessor :last_name
+
+    # Individual name suffix.
+    attr_accessor :suffix_name
+
+    # DEPRECATED: The name of the business associated with the form. Use `name2` instead.
     attr_accessor :business_name
+
+    # The name of the business associated with the form. Replaces the deprecated `businessName` field.
+    attr_accessor :name2
 
     # The classification of the business.
     attr_accessor :business_classification
@@ -137,7 +152,12 @@ module AvalaraSdk::A1099::V2
       {
         :'type' => :'type',
         :'name' => :'name',
+        :'first_name' => :'firstName',
+        :'middle_name' => :'middleName',
+        :'last_name' => :'lastName',
+        :'suffix_name' => :'suffixName',
         :'business_name' => :'businessName',
+        :'name2' => :'name2',
         :'business_classification' => :'businessClassification',
         :'business_other' => :'businessOther',
         :'foreign_partner_owner_or_beneficiary' => :'foreignPartnerOwnerOrBeneficiary',
@@ -181,7 +201,12 @@ module AvalaraSdk::A1099::V2
       {
         :'type' => :'String',
         :'name' => :'String',
+        :'first_name' => :'String',
+        :'middle_name' => :'String',
+        :'last_name' => :'String',
+        :'suffix_name' => :'String',
         :'business_name' => :'String',
+        :'name2' => :'String',
         :'business_classification' => :'String',
         :'business_other' => :'String',
         :'foreign_partner_owner_or_beneficiary' => :'Boolean',
@@ -218,7 +243,13 @@ module AvalaraSdk::A1099::V2
     # List of attributes with nullable: true
     def self.openapi_nullable
       Set.new([
+        :'name',
+        :'first_name',
+        :'middle_name',
+        :'last_name',
+        :'suffix_name',
         :'business_name',
+        :'name2',
         :'business_other',
         :'exempt_payee_code',
         :'exempt_fatca_code',
@@ -266,8 +297,28 @@ module AvalaraSdk::A1099::V2
         self.name = attributes[:'name']
       end
 
+      if attributes.key?(:'first_name')
+        self.first_name = attributes[:'first_name']
+      end
+
+      if attributes.key?(:'middle_name')
+        self.middle_name = attributes[:'middle_name']
+      end
+
+      if attributes.key?(:'last_name')
+        self.last_name = attributes[:'last_name']
+      end
+
+      if attributes.key?(:'suffix_name')
+        self.suffix_name = attributes[:'suffix_name']
+      end
+
       if attributes.key?(:'business_name')
         self.business_name = attributes[:'business_name']
+      end
+
+      if attributes.key?(:'name2')
+        self.name2 = attributes[:'name2']
       end
 
       if attributes.key?(:'business_classification')
@@ -425,7 +476,12 @@ module AvalaraSdk::A1099::V2
       self.class == o.class &&
           type == o.type &&
           name == o.name &&
+          first_name == o.first_name &&
+          middle_name == o.middle_name &&
+          last_name == o.last_name &&
+          suffix_name == o.suffix_name &&
           business_name == o.business_name &&
+          name2 == o.name2 &&
           business_classification == o.business_classification &&
           business_other == o.business_other &&
           foreign_partner_owner_or_beneficiary == o.foreign_partner_owner_or_beneficiary &&
@@ -467,7 +523,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [type, name, business_name, business_classification, business_other, foreign_partner_owner_or_beneficiary, exempt_payee_code, exempt_fatca_code, foreign_country_indicator, address, foreign_address, city, state, zip, account_number, tin_type, tin, backup_withholding, is1099able, tin_match_status, id, entry_status, reference_id, company_id, display_name, email, archived, ancestor_id, signature, signed_date, e_delivery_consented_at, created_at, updated_at].hash
+      [type, name, first_name, middle_name, last_name, suffix_name, business_name, name2, business_classification, business_other, foreign_partner_owner_or_beneficiary, exempt_payee_code, exempt_fatca_code, foreign_country_indicator, address, foreign_address, city, state, zip, account_number, tin_type, tin, backup_withholding, is1099able, tin_match_status, id, entry_status, reference_id, company_id, display_name, email, archived, ancestor_id, signature, signed_date, e_delivery_consented_at, created_at, updated_at].hash
     end
 
     # Builds the object from hash

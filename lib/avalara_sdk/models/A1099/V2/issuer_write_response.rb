@@ -86,6 +86,9 @@ module AvalaraSdk::A1099::V2
     # Date time when the record was last updated.
     attr_accessor :updated_at
 
+    # Issuer-level IRS/IRIS rejection errors from the federal filing submissions of the issuer's forms that are still rejected and awaiting resubmission.
+    attr_accessor :federal_efile_errors
+
     # Field-level validation errors. Populated when a POST or PUT request violated business rules  but the issuer was still persisted. Each entry identifies the affected field and the issue.  Empty array when the payload was fully valid.
     attr_accessor :validation_errors
 
@@ -139,6 +142,7 @@ module AvalaraSdk::A1099::V2
         :'id' => :'id',
         :'created_at' => :'createdAt',
         :'updated_at' => :'updatedAt',
+        :'federal_efile_errors' => :'federalEfileErrors',
         :'validation_errors' => :'validationErrors'
       }
     end
@@ -176,6 +180,7 @@ module AvalaraSdk::A1099::V2
         :'id' => :'String',
         :'created_at' => :'Time',
         :'updated_at' => :'Time',
+        :'federal_efile_errors' => :'Array<FederalEfileErrorResponse>',
         :'validation_errors' => :'Array<ValidationError>'
       }
     end
@@ -342,6 +347,12 @@ module AvalaraSdk::A1099::V2
         self.updated_at = attributes[:'updated_at']
       end
 
+      if attributes.key?(:'federal_efile_errors')
+        if (value = attributes[:'federal_efile_errors']).is_a?(Array)
+          self.federal_efile_errors = value
+        end
+      end
+
       if attributes.key?(:'validation_errors')
         if (value = attributes[:'validation_errors']).is_a?(Array)
           self.validation_errors = value
@@ -406,6 +417,7 @@ module AvalaraSdk::A1099::V2
           id == o.id &&
           created_at == o.created_at &&
           updated_at == o.updated_at &&
+          federal_efile_errors == o.federal_efile_errors &&
           validation_errors == o.validation_errors
     end
 
@@ -418,7 +430,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [business_name, business_name2, name, dba_name, tin_type, first_name, middle_name, last_name, suffix, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing, id, created_at, updated_at, validation_errors].hash
+      [business_name, business_name2, name, dba_name, tin_type, first_name, middle_name, last_name, suffix, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing, id, created_at, updated_at, federal_efile_errors, validation_errors].hash
     end
 
     # Builds the object from hash

@@ -29,6 +29,7 @@
 | **id** | **String** | Unique identifier set when the record is created. | [optional] |
 | **created_at** | **Time** | Date time when the record was created. | [optional] |
 | **updated_at** | **Time** | Date time when the record was last updated. | [optional] |
+| **federal_efile_errors** | [**Array&lt;FederalEfileErrorResponse&gt;**](FederalEfileErrorResponse.md) | Issuer-level IRS/IRIS rejection errors from the federal filing submissions of the issuer&#39;s forms that are still rejected and awaiting resubmission. | [optional][readonly] |
 
 ## Example
 
@@ -60,7 +61,8 @@ instance = AvalaraSdk::A1099::V2::IssuerResponse.new(
   last_filing: null,
   id: null,
   created_at: null,
-  updated_at: null
+  updated_at: null,
+  federal_efile_errors: null
 )
 ```
 

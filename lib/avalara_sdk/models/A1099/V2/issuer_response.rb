@@ -86,6 +86,9 @@ module AvalaraSdk::A1099::V2
     # Date time when the record was last updated.
     attr_accessor :updated_at
 
+    # Issuer-level IRS/IRIS rejection errors from the federal filing submissions of the issuer's forms that are still rejected and awaiting resubmission.
+    attr_accessor :federal_efile_errors
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -135,7 +138,8 @@ module AvalaraSdk::A1099::V2
         :'last_filing' => :'lastFiling',
         :'id' => :'id',
         :'created_at' => :'createdAt',
-        :'updated_at' => :'updatedAt'
+        :'updated_at' => :'updatedAt',
+        :'federal_efile_errors' => :'federalEfileErrors'
       }
     end
 
@@ -171,7 +175,8 @@ module AvalaraSdk::A1099::V2
         :'last_filing' => :'Boolean',
         :'id' => :'String',
         :'created_at' => :'Time',
-        :'updated_at' => :'Time'
+        :'updated_at' => :'Time',
+        :'federal_efile_errors' => :'Array<FederalEfileErrorResponse>'
       }
     end
 
@@ -335,6 +340,12 @@ module AvalaraSdk::A1099::V2
       if attributes.key?(:'updated_at')
         self.updated_at = attributes[:'updated_at']
       end
+
+      if attributes.key?(:'federal_efile_errors')
+        if (value = attributes[:'federal_efile_errors']).is_a?(Array)
+          self.federal_efile_errors = value
+        end
+      end
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -393,7 +404,8 @@ module AvalaraSdk::A1099::V2
           last_filing == o.last_filing &&
           id == o.id &&
           created_at == o.created_at &&
-          updated_at == o.updated_at
+          updated_at == o.updated_at &&
+          federal_efile_errors == o.federal_efile_errors
     end
 
     # @see the `==` method
@@ -405,7 +417,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [business_name, business_name2, name, dba_name, tin_type, first_name, middle_name, last_name, suffix, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing, id, created_at, updated_at].hash
+      [business_name, business_name2, name, dba_name, tin_type, first_name, middle_name, last_name, suffix, tin, reference_id, telephone, tax_year, country_code, email, address, city, state, zip, foreign_province, transfer_agent_name, last_filing, id, created_at, updated_at, federal_efile_errors].hash
     end
 
     # Builds the object from hash
