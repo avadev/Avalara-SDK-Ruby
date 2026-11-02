@@ -36,22 +36,28 @@ module AvalaraSdk::A1099::V2
     # Net unrealized appreciation in employer's securities
     attr_accessor :net_unrealized_appreciation_in_employer_securities
 
-    # Distribution code.    Available values:  - 1: Early distribution, no known exception (in most cases, under age 59½)  - 2: Early distribution, exception applies (under age 59½)  - 3: Disability  - 4: Death  - 5: Prohibited transaction  - 6: Section 1035 exchange (a tax-free exchange of life insurance, annuity, qualified long-term care insurance, or endowment contracts)  - 7: Normal distribution  - 8: Excess contributions plus earnings/excess deferrals (and/or earnings) taxable in payment year  - 9: Cost of current life insurance protection (premiums paid by a trustee or custodian for current insurance protection)  - A: May be eligible for 10-year tax option  - B: Designated Roth account distribution  - C: Reportable Death Benefits Under Section 6050Y(c)  - D: Annuity payments from nonqualified annuity payments and distributions from life insurance contracts that may be subject to tax under section 1411  - E: Distribution under Employee Plans Compliance Resolution System (EPCRS)  - F: Charitable gift annuity  - G: Direct rollover and rollover contribution  - H: Direct rollover of distribution from a designated Roth account to a Roth IRA  - J: Early distribution from a Roth IRA (This code may be used with a Code 8 or P)  - K: Distribution of IRA Assets Not Having A Readily Available FMV  - L: Loans treated as deemed distributions under section 72(p)  - M: Qualified Plan Loan Offsets  - N: Recharacterized IRA contribution made for year following payment year  - P: Excess contributions plus earnings/excess deferrals taxable for year prior to payment year  - Q: Qualified distribution from a Roth IRA (Distribution from a Roth IRA when the 5-year holding period has been met, and the recipient has reached 59½, has died, or is disabled)  - R: Recharacterized IRA contribution made for year prior to payment year  - S: Early distribution from a SIMPLE IRA in first 2 years no known exceptions  - T: Roth IRA distribution exception applies because participant has reached 59½, died or is disabled, but it is unknown if the 5-year period has been met  - U: Distribution from ESOP under Section 404(k)  - W: Charges or payments for purchasing qualified long-term care insurance contracts under combined arrangements  - Y: Qualified charitable distribution (QCD) claimed under section 408(d)(8) (Available for 2025 on)
+    # Box 7a. Distribution code.    Available values:  - 1: Early distribution, no known exception (in most cases, under age 59½)  - 2: Early distribution, exception applies (under age 59½)  - 3: Disability  - 4: Death  - 5: Prohibited transaction  - 6: Section 1035 exchange (a tax-free exchange of life insurance, annuity, qualified long-term care insurance, or endowment contracts)  - 7: Normal distribution  - 8: Excess contributions plus earnings/excess deferrals (and/or earnings) taxable in payment year  - 9: Cost of current life insurance protection (premiums paid by a trustee or custodian for current insurance protection)  - A: May be eligible for 10-year tax option  - B: Designated Roth account distribution  - C: Reportable Death Benefits Under Section 6050Y(c)  - D: Annuity payments from nonqualified annuity payments and distributions from life insurance contracts that may be subject to tax under section 1411  - E: Distribution under Employee Plans Compliance Resolution System (EPCRS)  - F: Charitable gift annuity  - G: Direct rollover and rollover contribution  - H: Direct rollover of distribution from a designated Roth account to a Roth IRA  - J: Early distribution from a Roth IRA (This code may be used with a Code 8 or P)  - K: Distribution of IRA Assets Not Having A Readily Available FMV  - L: Loans treated as deemed distributions under section 72(p)  - M: Qualified Plan Loan Offsets  - N: Recharacterized IRA contribution made for year following payment year  - P: Excess contributions plus earnings/excess deferrals taxable for year prior to payment year  - Q: Qualified distribution from a Roth IRA (Distribution from a Roth IRA when the 5-year holding period has been met, and the recipient has reached 59½, has died, or is disabled)  - R: Recharacterized IRA contribution made for year prior to payment year  - S: Early distribution from a SIMPLE IRA in first 2 years no known exceptions  - T: Roth IRA distribution exception applies because participant has reached 59½, died or is disabled, but it is unknown if the 5-year period has been met  - U: Distribution from ESOP under Section 404(k)  - W: Charges or payments for purchasing qualified long-term care insurance contracts under combined arrangements  - Y: Qualified charitable distribution (QCD) claimed under section 408(d)(8) (Available for 2025 on)
     attr_accessor :distribution_code
 
-    # Second distribution code. Must be a valid combination with the first distribution code.  See DistributionCode property documentation for code descriptions.    Valid combinations based on first distribution code:  - 1: _, 8, B, D, K, L, M, P  - 2: _, 8, B, D, K, L, M, P  - 3: _, D  - 4: _, 8, A, B, D, G, H, K, L, M, P  - 5: _  - 6: _, W  - 7: _, A, B, D, K, L, M  - 8: _, 1, 2, 4, B, J, K  - 9: _  - A: 4, 7  - B: _, 1, 2, 4, 7, 8, G, L, M, P, U  - C: _, D  - D: 1, 2, 3, 4, 7, C  - E: _  - F: _  - G: _, 4, B, K  - H: _, 4  - J: _, 8, P  - K: 1, 2, 4, 7, 8, G  - L: _, 1, 2, 4, 7, B  - M: _, 1, 2, 4, 7, B  - N: _  - P: _, 1, 2, 4, B, J  - Q: _  - R: _  - S: _  - T: _  - U: _, B  - W: _, 6  - Y: 4, 7, K                (_ indicates no second distribution code)    (format: firstDistributionCode: availableSecondDistributionCodes)
+    # Box 7a. Second distribution code. Must be a valid combination with the first distribution code.  See DistributionCode property documentation for code descriptions.    Valid combinations based on first distribution code:  - 1: _, 8, B, D, K, L, M, P  - 2: _, 8, B, D, K, L, M, P  - 3: _, D  - 4: _, 8, A, B, D, G, H, K, L, M, P  - 5: _  - 6: _, W  - 7: _, A, B, D, K, L, M  - 8: _, 1, 2, 4, B, J, K  - 9: _  - A: 4, 7  - B: _, 1, 2, 4, 7, 8, G, L, M, P, U  - C: _, D  - D: 1, 2, 3, 4, 7, C  - E: _  - F: _  - G: _, 4, B, K  - H: _, 4  - J: _, 8, P  - K: 1, 2, 4, 7, 8, G  - L: _, 1, 2, 4, 7, B  - M: _, 1, 2, 4, 7, B  - N: _  - P: _, 1, 2, 4, B, J  - Q: _  - R: _  - S: _  - T: _  - U: _, B  - W: _, 6  - Y: 4, 7, K                (_ indicates no second distribution code)    (format: firstDistributionCode: availableSecondDistributionCodes)
     attr_accessor :second_distribution_code
 
-    # IRA/SEP/SIMPLE
+    # Box 7b. IRA/SEP/SIMPLE
     attr_accessor :ira_sep_simple
+
+    # Box 7c. Trump account checkbox - Available only for tax year 2026 and later.
+    attr_accessor :trump_account_indicator
+
+    # Box 7d. Earnings on excess contributions - Available only for tax year 2026 and later.  Enter 0 when the excess contributions had losses.
+    attr_accessor :excess_contributions_earnings
 
     # Traditional IRA/SEP/SIMPLE or Roth conversion amount
     attr_accessor :traditional_ira_sep_simple_or_roth_conversion_amount
 
-    # Other amount
+    # Box 8a. Other amount
     attr_accessor :other_amount
 
-    # Other percentage
+    # Box 8b. Other percentage
     attr_accessor :other_percentage
 
     # Total distribution percentage
@@ -144,7 +150,7 @@ module AvalaraSdk::A1099::V2
     # State and local withholding information
     attr_accessor :state_and_local_withholding
 
-    # Federal e-file status.  Available values:  - unscheduled: Form has not been scheduled for federal e-filing  - scheduled: Form is scheduled for federal e-filing  - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - sent: Form has been sent to the IRS  - accepted: Form was accepted by the IRS  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - corrected: A correction has been sent to the IRS  - corrected_accepted: Correction was accepted by the IRS  - rejected: Form was rejected by the IRS  - corrected_rejected: Correction was rejected by the IRS  - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
+    # Federal e-file status.  Available values:  - unscheduled: Form has not been scheduled for federal e-filing  - scheduled: Form is scheduled for federal e-filing  - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - sent: Form has been sent to the IRS  - accepted: Form was accepted by the IRS  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - corrected: A correction has been sent to the IRS  - corrected_accepted: Correction was accepted by the IRS  - rejected: Form was rejected by the IRS  - corrected_rejected: Correction was rejected by the IRS  - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)  When the form's most recent IRIS filing was rejected or accepted with errors, `errors` lists what the IRS reported.
     attr_accessor :federal_efile_status
 
     # State e-file status.  Available values:  - unscheduled: Form has not been scheduled for state e-filing  - scheduled: Form is scheduled for state e-filing  - airlocked: Form is in process of being uploaded to the state  - sent: Form has been sent to the state  - rejected: Form was rejected by the state  - accepted: Form was accepted by the state  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlocked: Correction is in process of being uploaded to the state  - corrected_sent: Correction has been sent to the state  - corrected_rejected: Correction was rejected by the state  - corrected_accepted: Correction was accepted by the state
@@ -243,6 +249,8 @@ module AvalaraSdk::A1099::V2
         :'distribution_code' => :'distributionCode',
         :'second_distribution_code' => :'secondDistributionCode',
         :'ira_sep_simple' => :'iraSepSimple',
+        :'trump_account_indicator' => :'trumpAccountIndicator',
+        :'excess_contributions_earnings' => :'excessContributionsEarnings',
         :'traditional_ira_sep_simple_or_roth_conversion_amount' => :'traditionalIraSepSimpleOrRothConversionAmount',
         :'other_amount' => :'otherAmount',
         :'other_percentage' => :'otherPercentage',
@@ -319,6 +327,8 @@ module AvalaraSdk::A1099::V2
         :'distribution_code' => :'String',
         :'second_distribution_code' => :'String',
         :'ira_sep_simple' => :'Boolean',
+        :'trump_account_indicator' => :'Boolean',
+        :'excess_contributions_earnings' => :'Float',
         :'traditional_ira_sep_simple_or_roth_conversion_amount' => :'Float',
         :'other_amount' => :'Float',
         :'other_percentage' => :'String',
@@ -352,7 +362,7 @@ module AvalaraSdk::A1099::V2
         :'tin_match' => :'Boolean',
         :'address_verification' => :'Boolean',
         :'state_and_local_withholding' => :'StateAndLocalWithholding',
-        :'federal_efile_status' => :'Form1099StatusDetail',
+        :'federal_efile_status' => :'FederalEfileStatusDetail',
         :'state_efile_status' => :'Array<StateEfileStatusDetail>',
         :'postal_mail_status' => :'Form1099StatusDetail',
         :'tin_match_status' => :'Form1099StatusDetail',
@@ -390,6 +400,8 @@ module AvalaraSdk::A1099::V2
         :'distribution_code',
         :'second_distribution_code',
         :'ira_sep_simple',
+        :'trump_account_indicator',
+        :'excess_contributions_earnings',
         :'traditional_ira_sep_simple_or_roth_conversion_amount',
         :'other_amount',
         :'other_percentage',
@@ -512,6 +524,14 @@ module AvalaraSdk::A1099::V2
 
       if attributes.key?(:'ira_sep_simple')
         self.ira_sep_simple = attributes[:'ira_sep_simple']
+      end
+
+      if attributes.key?(:'trump_account_indicator')
+        self.trump_account_indicator = attributes[:'trump_account_indicator']
+      end
+
+      if attributes.key?(:'excess_contributions_earnings')
+        self.excess_contributions_earnings = attributes[:'excess_contributions_earnings']
       end
 
       if attributes.key?(:'traditional_ira_sep_simple_or_roth_conversion_amount')
@@ -764,7 +784,7 @@ module AvalaraSdk::A1099::V2
       second_distribution_code_validator = EnumAttributeValidator.new('String', ["1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "U", "W"])
       return false unless second_distribution_code_validator.valid?(@second_distribution_code)
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-T", "1099-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "W-2"])
+      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-E", "1098-T", "1099-B", "1099-C", "1099-DIV", "1099-G", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "5498", "W-2", "W-2G"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN", "INDIVIDUAL", "BUSINESS", "UNKNOWN"])
       return false unless tin_type_validator.valid?(@tin_type)
@@ -794,7 +814,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-T", "1099-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "W-2"])
+      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-E", "1098-T", "1099-B", "1099-C", "1099-DIV", "1099-G", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "5498", "W-2", "W-2G"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
@@ -827,6 +847,8 @@ module AvalaraSdk::A1099::V2
           distribution_code == o.distribution_code &&
           second_distribution_code == o.second_distribution_code &&
           ira_sep_simple == o.ira_sep_simple &&
+          trump_account_indicator == o.trump_account_indicator &&
+          excess_contributions_earnings == o.excess_contributions_earnings &&
           traditional_ira_sep_simple_or_roth_conversion_amount == o.traditional_ira_sep_simple_or_roth_conversion_amount &&
           other_amount == o.other_amount &&
           other_percentage == o.other_percentage &&
@@ -892,7 +914,7 @@ module AvalaraSdk::A1099::V2
     # Calculates hash code according to all attributes.
     # @return [Integer] Hash code
     def hash
-      [gross_distribution, taxable_amount, taxable_amount_not_determined, total_distribution_determined, capital_gain, federal_income_tax_withheld, employee_contributions_or_designated_roth_or_insurance_premiums, net_unrealized_appreciation_in_employer_securities, distribution_code, second_distribution_code, ira_sep_simple, traditional_ira_sep_simple_or_roth_conversion_amount, other_amount, other_percentage, total_distribution_percentage, total_employee_contributions, amount_allocable_to_irr_within5_years, first_year_of_designated_roth_contribution, date_of_payment, fatca_filing_requirement, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, address, address2, city, state, zip, email, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, address_verification, state_and_local_withholding, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at, tin_type, business_name, business_name2, first_name, middle_name, last_name, suffix_name, recipient_second_name, account_number, office_code, no_tin, second_tin_notice].hash
+      [gross_distribution, taxable_amount, taxable_amount_not_determined, total_distribution_determined, capital_gain, federal_income_tax_withheld, employee_contributions_or_designated_roth_or_insurance_premiums, net_unrealized_appreciation_in_employer_securities, distribution_code, second_distribution_code, ira_sep_simple, trump_account_indicator, excess_contributions_earnings, traditional_ira_sep_simple_or_roth_conversion_amount, other_amount, other_percentage, total_distribution_percentage, total_employee_contributions, amount_allocable_to_irr_within5_years, first_year_of_designated_roth_contribution, date_of_payment, fatca_filing_requirement, type, id, issuer_id, issuer_reference_id, issuer_tin, tax_year, reference_id, tin, recipient_name, address, address2, city, state, zip, email, non_us_province, country_code, federal_efile_date, postal_mail, state_efile_date, recipient_edelivery_date, tin_match, address_verification, state_and_local_withholding, federal_efile_status, state_efile_status, postal_mail_status, tin_match_status, address_verification_status, e_delivery_status, validation_errors, created_at, updated_at, tin_type, business_name, business_name2, first_name, middle_name, last_name, suffix_name, recipient_second_name, account_number, office_code, no_tin, second_tin_notice].hash
     end
 
     # Builds the object from hash

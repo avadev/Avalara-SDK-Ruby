@@ -19,9 +19,12 @@ module AvalaraSdk::A1099::V2
           :'Form1095B',
           :'Form1095C',
           :'Form1098',
+          :'Form1098E',
           :'Form1098T',
+          :'Form1099B',
           :'Form1099C',
           :'Form1099Div',
+          :'Form1099G',
           :'Form1099Int',
           :'Form1099K',
           :'Form1099Misc',
@@ -30,7 +33,9 @@ module AvalaraSdk::A1099::V2
           :'Form1099R',
           :'Form1099S',
           :'Form1099Sa',
-          :'Form1099W2'
+          :'Form1099W2',
+          :'Form5498',
+          :'FormW2G'
         ]
       end
 
@@ -46,9 +51,12 @@ module AvalaraSdk::A1099::V2
           :'1095-B' => :'Form1095B',
           :'1095-C' => :'Form1095C',
           :'1098' => :'Form1098',
+          :'1098-E' => :'Form1098E',
           :'1098-T' => :'Form1098T',
+          :'1099-B' => :'Form1099B',
           :'1099-C' => :'Form1099C',
           :'1099-DIV' => :'Form1099Div',
+          :'1099-G' => :'Form1099G',
           :'1099-INT' => :'Form1099Int',
           :'1099-K' => :'Form1099K',
           :'1099-MISC' => :'Form1099Misc',
@@ -57,7 +65,9 @@ module AvalaraSdk::A1099::V2
           :'1099-R' => :'Form1099R',
           :'1099-S' => :'Form1099S',
           :'1099-SA' => :'Form1099Sa',
-          :'W-2' => :'Form1099W2'
+          :'5498' => :'Form5498',
+          :'W-2' => :'Form1099W2',
+          :'W-2G' => :'FormW2G'
         }
       end
 

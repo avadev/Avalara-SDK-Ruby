@@ -6,7 +6,12 @@
 | ---- | ---- | ----------- | ----- |
 | **type** | **String** | The form type (always \&quot;W9\&quot; for this model). | [optional][readonly] |
 | **name** | **String** | The name of the individual or entity associated with the form. | [optional] |
-| **business_name** | **String** | The name of the business associated with the form. | [optional] |
+| **first_name** | **String** | Individual first name. | [optional] |
+| **middle_name** | **String** | Individual middle name. | [optional] |
+| **last_name** | **String** | Individual last name. | [optional] |
+| **suffix_name** | **String** | Individual name suffix. | [optional] |
+| **business_name** | **String** | DEPRECATED: The name of the business associated with the form. Use &#x60;name2&#x60; instead. | [optional] |
+| **name2** | **String** | The name of the business associated with the form. Replaces the deprecated &#x60;businessName&#x60; field. | [optional] |
 | **business_classification** | **String** | The classification of the business. | [optional] |
 | **business_other** | **String** | The classification description when \&quot;businessClassification\&quot; is \&quot;Other\&quot;. | [optional] |
 | **foreign_partner_owner_or_beneficiary** | **Boolean** | Indicates whether the individual is a foreign partner, owner, or beneficiary. | [optional] |
@@ -46,7 +51,12 @@ require 'avalara_sdk'
 instance = AvalaraSdk::A1099::V2::W9FormResponse.new(
   type: null,
   name: null,
+  first_name: null,
+  middle_name: null,
+  last_name: null,
+  suffix_name: null,
   business_name: null,
+  name2: null,
   business_classification: null,
   business_other: null,
   foreign_partner_owner_or_beneficiary: null,

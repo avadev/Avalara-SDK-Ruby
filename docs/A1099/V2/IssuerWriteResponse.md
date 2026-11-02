@@ -29,6 +29,7 @@
 | **id** | **String** | Unique identifier set when the record is created. | [optional] |
 | **created_at** | **Time** | Date time when the record was created. | [optional] |
 | **updated_at** | **Time** | Date time when the record was last updated. | [optional] |
+| **federal_efile_errors** | [**Array&lt;FederalEfileErrorResponse&gt;**](FederalEfileErrorResponse.md) | Issuer-level IRS/IRIS rejection errors from the federal filing submissions of the issuer&#39;s forms that are still rejected and awaiting resubmission. | [optional][readonly] |
 | **validation_errors** | [**Array&lt;ValidationError&gt;**](ValidationError.md) | Field-level validation errors. Populated when a POST or PUT request violated business rules  but the issuer was still persisted. Each entry identifies the affected field and the issue.  Empty array when the payload was fully valid. | [optional][readonly] |
 
 ## Example
@@ -62,6 +63,7 @@ instance = AvalaraSdk::A1099::V2::IssuerWriteResponse.new(
   id: null,
   created_at: null,
   updated_at: null,
+  federal_efile_errors: null,
   validation_errors: null
 )
 ```

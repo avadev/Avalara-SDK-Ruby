@@ -5,8 +5,13 @@
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **type** | **String** | The form type (always \&quot;w9\&quot; for this model). | [optional][readonly] |
-| **name** | **String** | The name of the individual or entity associated with the form. |  |
-| **business_name** | **String** | The name of the business associated with the form. | [optional] |
+| **name** | **String** | The name of the individual or entity associated with the form. Required when neither firstName/lastName  nor businessName/name2 are provided. Up to 40 characters. | [optional] |
+| **first_name** | **String** | Individual first name. Must be sent together with lastName; should only be used for individuals. Up to 40 characters. | [optional] |
+| **middle_name** | **String** | Individual middle name. Should only be used for individuals. Up to 40 characters. | [optional] |
+| **last_name** | **String** | Individual last name. Must be sent together with firstName; should only be used for individuals. Up to 40 characters. | [optional] |
+| **suffix_name** | **String** | Individual name suffix (e.g. Jr., Sr.). Should only be used for individuals. Up to 10 characters. | [optional] |
+| **business_name** | **String** | DEPRECATED: The name of the business associated with the form. Use &#x60;name2&#x60; instead. | [optional] |
+| **name2** | **String** | The name of the business associated with the form. Replaces the deprecated &#x60;businessName&#x60; field.  When both &#x60;businessName&#x60; and &#x60;name2&#x60; are provided, &#x60;businessName&#x60; takes precedence. | [optional] |
 | **business_classification** | **String** | The classification of the business.  Available values:  - Individual: Individual/sole proprietor  - C Corporation: C Corporation  - S Corporation: S Corporation  - Partnership: Partnership  - Trust/estate: Trust/estate  - LLC-C: Limited liability company (C Corporation)  - LLC-S: Limited liability company (S Corporation)  - LLC-P: Limited liability company (Partnership)  - Other: Other (requires BusinessOther field to be populated) |  |
 | **business_other** | **String** | The classification description when \&quot;businessClassification\&quot; is \&quot;Other\&quot;. | [optional] |
 | **foreign_partner_owner_or_beneficiary** | **Boolean** | Indicates whether the individual is a foreign partner, owner, or beneficiary. | [optional] |
@@ -37,7 +42,12 @@ require 'avalara_sdk'
 instance = AvalaraSdk::A1099::V2::W9FormRequest.new(
   type: null,
   name: null,
+  first_name: null,
+  middle_name: null,
+  last_name: null,
+  suffix_name: null,
   business_name: null,
+  name2: null,
   business_classification: null,
   business_other: null,
   foreign_partner_owner_or_beneficiary: null,

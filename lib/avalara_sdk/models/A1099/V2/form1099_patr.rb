@@ -10,7 +10,7 @@ require 'date'
 require 'time'
 
 module AvalaraSdk::A1099::V2
-      # Form 1099-PATR: Taxable Distributions Received From Cooperatives                *At least one of the following amounts must be greater than zero:*  Patronage Dividends, Nonpatronage Distributions, Per-Unit Retain Allocations, or Redeemed Nonqualified Notices.                Federal Income Tax Withheld, when provided, must be less than the total of those four amounts.                Specified Cooperative may only be set when at least one of Qualified Payments,  Section 199A(a) Qualified Items, or Section 199A(a) SSTB Items is provided.                Form 1099-PATR has no state or local withholding boxes. `stateAndLocalWithholding` is not supported for this  form type on any endpoint: a supplied value is discarded rather than stored, and the field always reads back  as `null`.
+      # Form 1099-PATR: Taxable Distributions Received From Cooperatives                *At least one of the following amounts must be greater than zero:*  Patronage Dividends, Nonpatronage Distributions, Per-Unit Retain Allocations, or Redeemed Nonqualified Notices.                Federal Income Tax Withheld, when provided, must be less than the total of those four amounts.  The Section 199A(g) deduction cannot exceed 9% of Qualified Payments.  Other credits and deductions (Box 12), when greater than zero, must be itemized under the  specific credit or deduction. This API does not expose those itemized fields, so a non-zero  Box 12 is rejected downstream.                Specified Cooperative may only be set when at least one of Qualified Payments,  Section 199A(a) Qualified Items, or Section 199A(a) SSTB Items is provided.                Form 1099-PATR has no state or local withholding boxes. `stateAndLocalWithholding` is not supported for this  form type on any endpoint: a supplied value is discarded rather than stored, and the field always reads back  as `null`.
   class Form1099Patr
     # Patronage dividends
     attr_accessor :patronage_dividends
@@ -45,7 +45,7 @@ module AvalaraSdk::A1099::V2
     # Work opportunity credit
     attr_accessor :work_opportunity_credit
 
-    # Other credits and deductions
+    # Other credits and deductions (Box 12). Leave at zero unless the amount is itemized  downstream under the specific credit or deduction it belongs to.
     attr_accessor :other_credits_and_deductions
 
     # Indicates the payer is a specified agricultural or horticultural cooperative
@@ -123,7 +123,7 @@ module AvalaraSdk::A1099::V2
     # State and local withholding information
     attr_accessor :state_and_local_withholding
 
-    # Federal e-file status.  Available values:  - unscheduled: Form has not been scheduled for federal e-filing  - scheduled: Form is scheduled for federal e-filing  - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - sent: Form has been sent to the IRS  - accepted: Form was accepted by the IRS  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - corrected: A correction has been sent to the IRS  - corrected_accepted: Correction was accepted by the IRS  - rejected: Form was rejected by the IRS  - corrected_rejected: Correction was rejected by the IRS  - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)
+    # Federal e-file status.  Available values:  - unscheduled: Form has not been scheduled for federal e-filing  - scheduled: Form is scheduled for federal e-filing  - airlock: Form is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - sent: Form has been sent to the IRS  - accepted: Form was accepted by the IRS  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlock: Correction is in process of being uploaded to the IRS (forms exist in this state for a very short period and cannot be updated while in this state)  - corrected: A correction has been sent to the IRS  - corrected_accepted: Correction was accepted by the IRS  - rejected: Form was rejected by the IRS  - corrected_rejected: Correction was rejected by the IRS  - held: Form is held and will not be submitted to IRS (used for certain forms submitted only to states)  When the form's most recent IRIS filing was rejected or accepted with errors, `errors` lists what the IRS reported.
     attr_accessor :federal_efile_status
 
     # State e-file status.  Available values:  - unscheduled: Form has not been scheduled for state e-filing  - scheduled: Form is scheduled for state e-filing  - airlocked: Form is in process of being uploaded to the state  - sent: Form has been sent to the state  - rejected: Form was rejected by the state  - accepted: Form was accepted by the state  - corrected_scheduled: Correction is scheduled to be sent  - corrected_airlocked: Correction is in process of being uploaded to the state  - corrected_sent: Correction has been sent to the state  - corrected_rejected: Correction was rejected by the state  - corrected_accepted: Correction was accepted by the state
@@ -317,7 +317,7 @@ module AvalaraSdk::A1099::V2
         :'tin_match' => :'Boolean',
         :'address_verification' => :'Boolean',
         :'state_and_local_withholding' => :'StateAndLocalWithholding',
-        :'federal_efile_status' => :'Form1099StatusDetail',
+        :'federal_efile_status' => :'FederalEfileStatusDetail',
         :'state_efile_status' => :'Array<StateEfileStatusDetail>',
         :'postal_mail_status' => :'Form1099StatusDetail',
         :'tin_match_status' => :'Form1099StatusDetail',
@@ -688,7 +688,7 @@ module AvalaraSdk::A1099::V2
     def valid?
       warn '[DEPRECATED] the `valid?` method is obsolete'
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-T", "1099-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "W-2"])
+      type_validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-E", "1098-T", "1099-B", "1099-C", "1099-DIV", "1099-G", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "5498", "W-2", "W-2G"])
       return false unless type_validator.valid?(@type)
       tin_type_validator = EnumAttributeValidator.new('String', ["EIN", "SSN", "ITIN", "ATIN", "INDIVIDUAL", "BUSINESS", "UNKNOWN"])
       return false unless tin_type_validator.valid?(@tin_type)
@@ -698,7 +698,7 @@ module AvalaraSdk::A1099::V2
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-T", "1099-C", "1099-DIV", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "W-2"])
+      validator = EnumAttributeValidator.new('String', ["1042-S", "1095-B", "1095-C", "1098", "1098-E", "1098-T", "1099-B", "1099-C", "1099-DIV", "1099-G", "1099-INT", "1099-K", "1099-MISC", "1099-NEC", "1099-PATR", "1099-R", "1099-S", "1099-SA", "5498", "W-2", "W-2G"])
       unless validator.valid?(type)
         fail ArgumentError, "invalid value for \"type\", must be one of #{validator.allowable_values}."
       end
